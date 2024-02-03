@@ -1,0 +1,200 @@
+
+
+.fbox{
+    background-color:  #2A303C;
+    align-items: center;
+    
+}
+
+
+  
+@media (min-width: 320px) and (max-width: 576px){
+    .fbox{
+        background-color:  #2A303C;
+        align-items: center;
+        overflow-x: hidden;
+        
+    }
+    
+    .rme {
+        color: aliceblue;
+        font-size:15px ;
+        padding: 20px 20px 0px 20px;
+        align-items: center;
+        margin-bottom: 20px;
+     }
+     .rme .in1{
+         width: 200px;
+         height: 20px;
+         padding: 15px 0px 15px 5px;
+         border-radius: 5px;
+         background-color: antiquewhite;
+     }
+     .rme .in2{
+         width: 220px;
+         height: 70px;
+         padding: 5px 0px 30px 5px;
+         border-radius: 5px;
+         background-color: antiquewhite;
+     }
+      .seb{
+         background-color: #1D8DDE;
+         border-radius: 5px;
+         color: aliceblue;
+         padding: 3px 10px 3px 10px;
+         cursor: pointer;
+     }
+     
+     .lme{
+         color: aliceblue;
+        font-size:15px ;
+        padding: 20px 20px 0px 20px;
+        align-items: center;
+        margin-bottom: 20px;
+     }
+     .lme  img{
+         width: 20px;
+         height: 20px;
+     }
+     .lme  h3{
+         font-size: 15px;
+         position: relative;
+         left: 45px;
+         bottom: 20px;
+     }
+     
+     .lme  h2{
+         margin-bottom: 20px;
+     }
+     
+     .line{
+         width: 80%;
+         height: 2px;
+         background-color: white;
+         margin: 10px 0px 20px 20px;
+        
+     }
+     .li h4{
+         padding: 5px  20px 20px 20px;
+         color: wheat;
+     }
+     .logo3 img{
+          width: 50px;
+          height: 50px;
+          margin-left: 20px;
+          margin-bottom: 20px;
+     }
+
+    }
+
+  
+     
+
+     @media (min-width: 576px) {
+
+        .Footer{
+            background-color: #2A303C;
+            overflow-y: hidden;
+            
+        }
+        .rme {
+           color: aliceblue;
+           font-size:15px ;
+           margin: 20px;
+          
+        }
+        .rme .in1{
+            width: 200px;
+            height: 20px;
+            border-radius: 5px;
+            background-color: antiquewhite;
+            padding: 15px 0px 15px 5px;
+            margin-left: 20px;
+        }
+        .rme .in2{
+            width: 220px;
+            height: 70px;
+            border-radius: 5px;
+            background-color: antiquewhite;
+            padding: 5px 0px 30px 5px;
+            margin-left: 20px;
+        }
+         .seb{
+            background-color: #1D8DDE;
+            border-radius: 5px;
+            color: aliceblue;
+            cursor: pointer;
+            padding: 3px 10px 3px 10px;
+            margin-left: 20px;
+        }
+        
+        .lme{
+            color: aliceblue;
+            font-size:15px ;
+            position: relative;
+            margin: 20px;
+            float: right;
+            bottom: 225px;
+            padding-right: 50px;
+           
+        }
+        .lme h2{
+            margin-bottom: 20px;
+        }
+        .lme  img{
+            width: 20px;
+            height: 20px;
+        }
+        .lme  h3{
+            font-size: 15px;
+            position: relative;
+            left: 45px;
+            bottom: 20px;
+        }
+        
+        
+        
+        .line{
+            width: 95%;
+            height: 2px;
+            background-color: white;
+            margin: 30px 10px 20px 30px;
+            
+           
+           
+        }
+        .li h4{
+           
+            color: wheat;
+            margin: 20px;
+            margin-left: 80px;
+        }
+        .logo3{
+        
+             float: right;
+             margin-right: -140px;
+             
+             
+            
+        }
+        .logo3 img{
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+            position: relative;
+            left: 100px;
+            bottom: 40px;
+            margin-bottom: 20px;
+        }
+         .li h4{
+            color: aliceblue;
+            position: relative;
+            top: 10px;
+         }
+        
+
+     }
+
+  
+
+ 
