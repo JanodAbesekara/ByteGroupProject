@@ -101,6 +101,8 @@
            color: aliceblue;
            font-size:15px ;
            margin: 20px;
+           margin-left:30px;
+
           
         }
         .rme .in1{
@@ -134,8 +136,8 @@
             position: relative;
             margin: 20px;
             float: right;
-            bottom: 225px;
-            padding-right: 50px;
+            bottom: 245px;
+            padding-right: 80px;
            
         }
         .lme h2{
