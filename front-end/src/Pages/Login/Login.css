@@ -1,0 +1,198 @@
+.login_m2 {
+    background-color: rgb(151, 139, 139);
+    width: 100%;
+    height: 40px;
+  }
+  
+  body > div.MuiDialog-root.MuiModal-root.css-fworwv-MuiModal-root-MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper.css-hz1bth-MuiDialog-container > div
+  {
+    overflow: hidden;
+    width: 33%;
+    
+  }
+  .login_h3 {
+    position: relative;
+    top: 40px;
+    width: 160px;
+    color: black;
+    background-color: rgb(202, 190, 175);
+    height: 60px;
+    float: left;
+    margin-left: 20px;
+    text-align: center;
+    margin-left: 60px;
+    opacity: 0.5;
+    border-radius: 5px;
+  }
+  
+  .login_h3 h2 {
+    align-items: center;
+    font-size: 25px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    position: relative;
+    top: 12px;
+  }
+  
+  .login_label {
+    margin-left: 100px;
+    margin-top: 100px;
+    position: relative;
+    top: 80px;
+  }
+  .login_label label {
+    font-size: 20px;
+    padding-top: 5px;
+  }
+  
+  .login_label input {
+    width: 500px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 2px 0px 2px 8px;
+    font-size: 16px;
+  }
+  
+  .log_rem {
+    margin-top: 200px;
+    position: relative;
+    margin-bottom: 120px;
+  }
+  .log_rem .checkB1 {
+    width: 15px;
+    position: relative;
+    bottom: 55px;
+  }
+  
+  .log_rem h3 {
+    float: right;
+    margin-left: 50px;
+    font-size: 15px;
+    position: relative;
+    bottom: 50px;
+    right: 95px;
+  }
+  .log_rem input {
+    float: right;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    bottom: 2px;
+    right: 50px;
+  }
+  
+  .log_rem button {
+    padding: 5px 10px 5px 10px;
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    bottom: 180px;
+    background-color: rgb(10, 130, 223);
+    box-shadow: 2px black;
+    border-color: antiquewhite;
+    margin-right: 40px;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .log_rem button {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .log_rem button link:hover {
+    font-size: 20px;
+  }
+  
+  .log_rem h2 {
+    float: right;
+    font-size: 15px;
+    position: relative;
+    bottom: 100px;
+    margin-right: 5px;
+  }
+  .log_rem h4 {
+    float: right;
+    margin-right: 40px;
+    position: relative;
+    bottom: 100px;
+    padding: 5px;
+    margin-right: 50px;
+    font-size: 15px;
+  }
+  
+  @media (min-width: 620px) {
+    .log_rem h2 {
+      position: relative;
+      right: 50px;
+    }
+  }
+  
+  @media (min-width: 553px) and (max-width: 620px) {
+    .log_rem .checkB1 {
+      position: relative;
+      bottom: 60px;
+    }
+    .log_rem h2 {
+      position: relative;
+      right: 50px;
+      font-size: 14px;
+    }
+    .log_rem h4 {
+      position: relative;
+      right: 0px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (min-width: 403px) and (max-width: 620px) {
+    .login_label input {
+      width: 200px;
+      height: 30px;
+    } 
+    .log_rem h2 {
+      position: relative;
+      left: -20px;
+      font-size: 13px;
+    }
+    .log_rem h4 {
+      font-size: 13px;
+      position: relative;
+      left: 30px;
+    }
+    
+  }
+  
+  @media (min-width: 320px) and (max-width: 403px) {
+    .login_label input {
+      width: 200px;
+      height: 40px;
+    }
+    .log_rem {
+      font-size: 12px;
+      padding-top: 10px;
+    }
+    .log_rem .checkB1 {
+      position: relative;
+      bottom: 32px;
+    }
+    .log_rem h3 {
+      position: relative;
+      bottom: 15px;
+      font-size: 10px;
+    }
+    .log_rem h2 {
+      padding-top: 10px;
+      font-size: 12px;
+      position: relative;
+      right: 10px;
+    }
+    .log_rem h4 {
+      position: relative;
+      bottom: 100px;
+      left: 40px;
+      font-size: 12px;
+    }
+  }
