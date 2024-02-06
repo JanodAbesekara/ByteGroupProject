@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+.sidebar {
+  width: 15rem;
+  height: 100%;
+  background-color:#001529;
+  padding: 1rem;
+  transition: all 0.3s linear;
+  position: relative;
+  padding-bottom:100px;
+}
+.sidebar_Wrapper{
+  height: 100%;
+}
+.sidebar_list {
+  margin-top: 40px;
+  list-style: none;
+}
+
+.sidebar_link {
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: rgba(238, 222, 222, 0.679);
+  padding: 0.8rem 1rem;
+  display: flex;
+  background-color: #001529;
+  margin-bottom: 1rem;
+  border-radius: 0.8rem;
+}
+
+
+
+.sidebar_icon {
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+.sidebar_name {
+  margin-left: 0.5rem;
+}
+
+
+.sidebar_link:hover {
+  color: whitesmoke;
+  background-color: #1890ff;;
+}
+
+
+[data-callapse = "true"]{
+  width: 5.3rem;
+  transition: 0.4s;
+}
+
+[data-callapse = "true"] .sidebar_name{
+  display: none;
+  transition: 0.4s;
+}
+
+
+.btn{
+  position: absolute;
+  right:0;
+  top: 1.5rem;
+  background-color: aliceblue;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgb(8, 5, 1);
+  border-radius: 50%;
+  font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(50%);
+  font-size: 1.1rem;
+}
+
+.logout_icon{
+  position: absolute;
+  bottom:0;
+}
