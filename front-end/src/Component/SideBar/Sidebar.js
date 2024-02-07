@@ -13,7 +13,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
-import "../Style/Tsidebar.css";
+import  './Sidebar.css';
 
 const sidebarItems = [
   {

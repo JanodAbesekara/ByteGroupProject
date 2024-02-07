@@ -10,14 +10,15 @@ import { FaBuysellads } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { MdQuiz } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
-import { MdOutlineKeyboardDoubleArrowLeft, MdLogout } from "react-icons/md";
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
-import "./SideBar.css";
+import "./Sidebar.css";
 
 const sidebarItems = [
   {
     name: "Dashboard",
-    href: "/Dashboard",
+    href: "/Dashbord",
     icon: RxDashboard,
     Title: "Dashboard",
   },
@@ -27,9 +28,10 @@ const sidebarItems = [
     icon: CgProfile,
     Title: "My Profile",
   },
+
   {
     name: "Classes",
-    href: "/Classes",
+    href: "/TClasses",
     icon: SiGoogleclassroom,
     Title: "Classes",
   },
@@ -59,7 +61,7 @@ const sidebarItems = [
   },
   {
     name: "Payment Details",
-    href: "/PaymentDetails",
+    href: "/PaymentDeat",
     icon: MdPayment,
     Title: "Payment Details",
   },
@@ -77,7 +79,7 @@ const sidebarItems = [
   },
 ];
 
-const Ssidebar = () => {
+export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false);
 
   const toggleSidebarCollapseHandler = () => {
@@ -94,7 +96,10 @@ const Ssidebar = () => {
           {sidebarItems.map(({ name, href, Title, icon: Icon }) => (
             <li className="sidebar_item" key={name}>
               <Link className="sidebar_link" to={href}>
-                <Tooltip title={Title} placement="right">
+                <Tooltip
+                  title={Title}
+                  placement="right"
+                >
                   <span className="sidebar_icon">
                     <Icon />
                   </span>
@@ -115,6 +120,4 @@ const Ssidebar = () => {
       </aside>
     </div>
   );
-};
-
-export default Ssidebar;
+}
