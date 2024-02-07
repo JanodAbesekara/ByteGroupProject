@@ -102,7 +102,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
             </BootstrapDialog>
             <br></br>
             <h4>
-              New ?<Link to="/Registrationform">Create An Account </Link>
+              New ?<Link to="/CreateAccount">Create An Account </Link>
             </h4>
           </div>
         </form>
