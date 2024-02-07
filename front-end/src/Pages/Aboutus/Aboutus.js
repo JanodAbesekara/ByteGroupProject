@@ -1,8 +1,11 @@
 import React from 'react'
 import './Aboutus.css';
+import SideBar from "../TeachersPages/TeacherSidebar/SideBar/Sidebar";
 
 export default function Aboutus() {
   return (
-    <div>Aboutus</div>
+    <div>
+     <SideBar/>
+    </div>
   )
 }

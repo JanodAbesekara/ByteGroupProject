@@ -40,9 +40,9 @@ export default function Library() {
             0
           }
         >
-          <Option value="Maths">Jack</Option>
-          <Option value="Chemistry">Lucy</Option>
-          <Option value="Physics">Tom</Option>
+          <Option value="Maths">Maths</Option>
+          <Option value="Chemistry">Chemistry</Option>
+          <Option value="Physics">Physics</Option>
         </Select>
         <div className="selectset">
           <label>Media</label>
