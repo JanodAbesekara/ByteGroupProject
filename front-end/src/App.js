@@ -18,6 +18,7 @@ import Quizzes from "./Pages/TeachersPages/Quizzes/Quizzes";
 import Students from "./Pages/TeachersPages/Students/Students";
 import TClasses from "./Pages/TeachersPages/TClasses/TClasses";
 import UserProfile from "./Pages/TeachersPages/UserProfile/UserProfile";
+import Registrationform from "./Pages/Registrationform/Registrationform";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Library" element={<Library />} />
           <Route path="/Classes" element={<Classes />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Registrationform" element={<Registrationform/>} />
           <Route path="/Assignments" element={<Assignments />} />
           <Route path="/Dashbord" element={<Dashbord />} />
           <Route path="/Feedback" element={<Feedback />} />

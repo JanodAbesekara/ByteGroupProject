@@ -80,7 +80,7 @@ const sidebarItems = [
 ];
 
 export default function Ssidebar() {
-  const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false);
+  const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
 
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);

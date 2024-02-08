@@ -15,6 +15,7 @@ import { MdLogout } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
 import  './Sidebar.css';
 
+
 const sidebarItems = [
   {
     name: "Dashboard",
@@ -80,7 +81,7 @@ const sidebarItems = [
 ];
 
 export default function Ssidebar() {
-  const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false);
+  const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
 
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
@@ -109,13 +110,13 @@ export default function Ssidebar() {
             </li>
           ))}
         </ul>
-        <Link className="sidebar_link logout_icon">
+        <Link className="sidebar_link logout_icon" to="/Login">
           <Tooltip title="Logout" placement="right">
-            <span className="sidebar_icon">
+            <span className="sidebar_icon" href ='/Login'>
               <MdLogout />
             </span>
           </Tooltip>
-          <span className="sidebar_name">Logout</span>
+          <span className="sidebar_name" href ='/Login'>Logout</span>
         </Link>
       </aside>
     </div>
