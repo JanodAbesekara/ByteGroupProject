@@ -20,6 +20,7 @@ import TClasses from "./Pages/TeachersPages/TClasses/TClasses";
 import UserProfile from "./Pages/TeachersPages/UserProfile/UserProfile";
 import Registrationform from "./Pages/Registrationform/Registrationform";
 
+
 function App() {
   return (
     <>

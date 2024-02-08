@@ -3,6 +3,9 @@ import axios from "axios";
 import "./Registrationform.css";
 import { Input, Space } from "antd";
 
+
+
+
 export default function TeachersRegister() {
   const [firstname, setfirstname] = React.useState("");
   const [lastname, setlastname] = React.useState("");
