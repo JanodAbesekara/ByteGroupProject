@@ -1,49 +1,92 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import './Login.css';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Forgetpassword from "../Forgetpassword/Forgetpassword";
+import axios from "axios";
+
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
+  overflow: "hidden",
+  "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
     overflow: "hidden",
   },
-  '& .MuiDialogActions-root': {
+  "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
     overflow: "hidden",
   },
-  '& .MuiPaper-root': {
-    overflowY: "hidden"
-  }
+  "& .MuiPaper-root-MuiDialog-paper": {
+    "overflow-y": "hidden",
+  },
 }));
 
 export default function Login({ setUser, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      email,
-      password,
-    };
-    
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [email, setusername] = React.useState("");
+  const [password, setpassword] = React.useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      email,
+      password,
+    };
+
+    axios
+      .post(`/api/auth/login`, data)
+      .then((response) => {
+        if (response.data) {
+          window.alert(response.data.msg);
+          const token = response.data.token;
+          localStorage.setItem("MERN_AUTH_TOKEN", JSON.stringify(token));
+          const decodedToken = jwtDecode(token);
+          setUser(decodedToken);
+          setIsLoggedIn(true);
+
+          const jobRole = decodedToken.role;
+
+          if (jobRole === "Lecture") {
+            navigate("/TDashbord");
+          } else if (jobRole === "Student") {
+            navigate("/StudentDashbord");
+          } else {
+            navigate("/AdminDashbord");
+          }
+        } else {
+          console.error("Unexpected response format:", response);
+        }
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.success === false
+        ) {
+          window.alert(error.response.data.msg);
+        } else {
+          console.error("Unexpected error format:", error);
+        }
+      });
+  };
+
 
   return (
     <div>
@@ -60,7 +103,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
             className='Name'
             type="email"
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setusername(e.target.value)}
             placeholder="Enter your Username"
             required
             value={email}
@@ -73,7 +116,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
             name="password"
             value={password}
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setpassword(e.target.value)}
             placeholder="Enter your password"
           />
           <div className="log_rem">

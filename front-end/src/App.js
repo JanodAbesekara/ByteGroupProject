@@ -1,4 +1,6 @@
 import "./App.css";
+import React, { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import Footer from "./Component/Footer/Footer";
 import Navbar from "./Component/Navbar/Navbar";
 import Login from "./Pages/Login/Login";
@@ -9,7 +11,7 @@ import Contactus from "./Pages/Contactus/Contactus";
 import Library from "./Pages/Library/Library";
 import Classes from "./Pages/Classes/Classes";
 import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
-import Dashbord from "./Pages/TeachersPages/Dashbord/Dashbord";
+import TDashbord from "./Pages/TeachersPages/Dashbord/Dashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
 import MyAds from "./Pages/TeachersPages/MyAds/MyAds";
@@ -19,9 +21,43 @@ import Students from "./Pages/TeachersPages/Students/Students";
 import TClasses from "./Pages/TeachersPages/TClasses/TClasses";
 import UserProfile from "./Pages/TeachersPages/UserProfile/UserProfile";
 import Registrationform from "./Pages/Registrationform/Registrationform";
+import SDashbord from "./Pages/StudentPages/SDashbord/SDashbord";
+import ADashbord from "./Pages/AdminPages/ADashbord/ADashbord";
 
 
 function App() {
+
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState();
+
+  const navigate = useNavigate();
+
+  const logoutuser = () => {
+    setUser(null);
+    setIsLoggedIn(false);
+    navigate("/Login");
+  };
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      if (decodedToken.exp * 100 < Date.now()) {
+        setUser(null);
+        setIsLoggedIn(false);
+        navigate("/Login");
+      } else {
+        setUser(decodedToken);
+        setIsLoggedIn(true);
+      }
+    }
+  }, []);
+
+
+
   return (
     <>
       <div>
@@ -32,10 +68,12 @@ function App() {
           <Route path="/Contactus" element={<Contactus />} />
           <Route path="/Library" element={<Library />} />
           <Route path="/Classes" element={<Classes />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={<Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/Registrationform" element={<Registrationform/>} />
           <Route path="/Assignments" element={<Assignments />} />
-          <Route path="/Dashbord" element={<Dashbord />} />
+          <Route path="/TDashbord" element={<TDashbord  logoutuser={logoutuser}
+                isLoggedIn={isLoggedIn}
+                user={user} />} />
           <Route path="/Feedback" element={<Feedback />} />
           <Route path="/Grades" element={<Grades />} />
           <Route path="/MyAds" element={<MyAds />} />
@@ -44,6 +82,12 @@ function App() {
           <Route path="/Students" element={<Students />} />
           <Route path="/TClasses" element={<TClasses />} />
           <Route path="/UserProfile" element={<UserProfile />} />
+          <Route path="/SDashbord" element={<SDashbord  logoutuser={logoutuser}
+                isLoggedIn={isLoggedIn}
+                user={user} />} />
+          <Route path="/ADashbord" element={<ADashbord   logoutuser={logoutuser}
+                isLoggedIn={isLoggedIn}
+                user={user} />} />
         </Routes>
         <Footer />
       </div>

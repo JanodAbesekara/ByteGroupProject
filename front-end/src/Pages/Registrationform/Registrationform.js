@@ -3,9 +3,6 @@ import axios from "axios";
 import "./Registrationform.css";
 import { Input, Space } from "antd";
 
-
-
-
 export default function TeachersRegister() {
   const [firstname, setfirstname] = React.useState("");
   const [lastname, setlastname] = React.useState("");
@@ -27,6 +24,19 @@ export default function TeachersRegister() {
         role,
         password,
       };
+
+      axios
+        .post(`/api/auth/register`, data)
+        .then((response) => {
+          console.log(response.data);
+          window.alert(response.data.msg);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.data.success === false) {
+            window.alert(error.response.data.msg);
+          }
+        });
     } else {
       window.alert("Password donot match");
     }
