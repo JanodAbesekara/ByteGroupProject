@@ -3,6 +3,8 @@ import "./Library.css";
 import { Select, Radio, Input } from "antd";
 import { Row, Col } from "antd";
 import { BiSolidFilePdf } from "react-icons/bi";
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
 
 export default function Library() {
   const { Option } = Select;
@@ -25,6 +27,7 @@ export default function Library() {
 
   return (
     <div>
+      <Navbar/>
       <div className="L_label">
         <h2>e - LIBRARY </h2>
       </div>
@@ -86,6 +89,7 @@ export default function Library() {
           <h5 style={{marginLeft:"190px"}}>Animal Scaience</h5>
         </Col>
       </Row>
+      <Footer/>
     </div>
   );
 }

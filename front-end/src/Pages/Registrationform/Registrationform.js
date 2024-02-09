@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Registrationform.css";
 import { Input, Space } from "antd";
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
 
 export default function TeachersRegister() {
   const [firstname, setfirstname] = React.useState("");
@@ -44,6 +46,7 @@ export default function TeachersRegister() {
 
   return (
     <div>
+      <Navbar/>
       <div className="Teacher_main">
         <h2> Registration Form</h2>
 
@@ -199,6 +202,7 @@ export default function TeachersRegister() {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

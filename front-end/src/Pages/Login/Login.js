@@ -1,17 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import './Login.css';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import "./Login.css";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import Forgetpassword from "../Forgetpassword/Forgetpassword";
 import axios from "axios";
-
-
-
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
@@ -66,9 +65,9 @@ export default function Login({ setUser, setIsLoggedIn }) {
           if (jobRole === "Lecture") {
             navigate("/TDashbord");
           } else if (jobRole === "Student") {
-            navigate("/StudentDashbord");
+            navigate("/SDashbord");
           } else {
-            navigate("/AdminDashbord");
+            navigate("/ADashbord");
           }
         } else {
           console.error("Unexpected response format:", response);
@@ -87,10 +86,9 @@ export default function Login({ setUser, setIsLoggedIn }) {
       });
   };
 
-
   return (
     <div>
-    
+      <Navbar />
       <div className="login_main">
         <div className="login_m2"> </div>
         <div className="login_h3">
@@ -100,7 +98,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
           <label htmlFor="Username_or_Email">Username</label>
           <br></br>
           <input
-            className='Name'
+            className="Name"
             type="email"
             name="email"
             onChange={(e) => setusername(e.target.value)}
@@ -112,7 +110,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
           <label htmlFor="password">password</label>
           <br></br>
           <input
-            type='password'
+            type="password"
             name="password"
             value={password}
             required
@@ -120,25 +118,32 @@ export default function Login({ setUser, setIsLoggedIn }) {
             placeholder="Enter your password"
           />
           <div className="log_rem">
-            <button type="submit" value="Login">Login</button>
+            <button type="submit" value="Login">
+              Login
+            </button>
             <br></br>
             <br></br>
             <h2>
-              Forgot password? <Link variant="outlined" onClick={handleClickOpen}>Click here to reset</Link>
+              Forgot password?{" "}
+              <Link variant="outlined" onClick={handleClickOpen}>
+                Click here to reset
+              </Link>
             </h2>
             <BootstrapDialog
               onClose={handleClose}
               aria-labelledby="customized-dialog-title"
-              open={open}>
+              open={open}
+            >
               <IconButton
                 aria-label="close"
                 onClick={handleClose}
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   right: 8,
                   top: 8,
                   color: (theme) => theme.palette.grey[500],
-                }}>
+                }}
+              >
                 <CloseIcon />
               </IconButton>
               <Forgetpassword />
@@ -150,7 +155,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
           </div>
         </form>
       </div>
-
+      <Footer />
     </div>
   );
 }

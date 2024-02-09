@@ -1,8 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import Footer from "./Component/Footer/Footer";
-import Navbar from "./Component/Navbar/Navbar";
 import Login from "./Pages/Login/Login";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
@@ -23,6 +21,8 @@ import UserProfile from "./Pages/TeachersPages/UserProfile/UserProfile";
 import Registrationform from "./Pages/Registrationform/Registrationform";
 import SDashbord from "./Pages/StudentPages/SDashbord/SDashbord";
 import ADashbord from "./Pages/AdminPages/ADashbord/ADashbord";
+import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
+import Resetpassword from "./Pages/Resetpassword/Resetpassword";
 
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
   return (
     <>
       <div>
-        <Navbar />
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/abouus" element={<Aboutus />} />
@@ -71,6 +71,8 @@ function App() {
           <Route path="/Login" element={<Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/Registrationform" element={<Registrationform/>} />
           <Route path="/Assignments" element={<Assignments />} />
+          <Route path="/Resetpassword" element={<Resetpassword />}/>
+          <Route path="/VerifyEmail" element={<VerifyEmail />}/>
           <Route path="/TDashbord" element={<TDashbord  logoutuser={logoutuser}
                 isLoggedIn={isLoggedIn}
                 user={user} />} />
@@ -89,7 +91,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 user={user} />} />
         </Routes>
-        <Footer />
+        
       </div>
     </>
   );

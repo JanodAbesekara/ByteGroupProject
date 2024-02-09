@@ -40,22 +40,28 @@
 
 
 .new1{
-    width: auto;
-    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
     background-color: rgb(21, 153, 153);
    
 }
 
-.new1 .nlg img{
-    margin-top: 200px;
-    margin-bottom: 200px;
+.new1  img{
     display:inline-block;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     mix-blend-mode:color-burn;
-    margin-left: 150px;
     cursor: pointer;
- 
+    margin: 0 100px;
+    
+}
+
+.new1  img:hover{
+    width: 120px;
+    height: 120px;
 }
 
 
@@ -70,7 +76,7 @@
 
 
 
-@media (min-width: 320px) and (max-width: 400px){
+@media (min-width: 320px) and (max-width: 480px){
 
 
     .imj{
@@ -93,13 +99,18 @@
        
         
     }
-    
-    .new1 .nlg img{
-       width: 50px;
-       height: 50px;
-       display:inline-block;
-       margin: 50px 10px 50px 20px;
-       
+    .new1 {
+        height: 80px;
+    }
+    .new1  img{
+     width: 40px;
+     height: 40px;
+     margin: 0 18px;  
+    }
+
+    .new1  img:hover{
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -117,13 +128,7 @@
         padding-left: 10%;
          
     }
-    .new1 .nlg img{
-       width: 55px;
-       height: 55px;
-       display:inline-block;
-       margin: 80px 10px 80px 35px;
-       
-    }
+
 }
 
 @media (min-width:481px) and (max-Width:520px){
@@ -143,13 +148,19 @@
        
     }
      
-    .new1 .nlg img{
+    .new1 {
+        height: 100px;
+    }
+    .new1  img{
         width: 60px;
         height: 60px;
-        display:inline-block;
-        margin: 100px 10px 100px 50px;
+       margin: 20px;
         
      }
+     .new1  img:hover{
+        width: 75px;
+        height: 75px;
+    }
 }
 @media (min-width:520px) and (max-Width:620px){
 
@@ -168,13 +179,21 @@
        
        
     }
-    .new1 .nlg img{
+    .new1 {
+        height: 100px;
+    }
+    .new1  img{
         width: 60px;
         height: 60px;
-        display:inline-block;
-        margin: 110px 10px 110px 60px;
+       margin:  0 30px;
         
      }
+
+     .new1  img:hover{
+        width: 80px;
+        height: 80px;
+    }
+ 
  
 }
 @media (min-width:620px) and (max-Width:768px){
@@ -190,44 +209,62 @@
         top: 60px;
         font-size: 12px; 
     }
-    .new1 .nlg img{
-        width: 80px;
-        height: 80px;
-        display:inline-block;
-        margin: 120px 10px 120px 65px;
+    .new1 {
+        height: 120px;
+    }
+    .new1  img{
+        width: 70px;
+        height: 70px;
+        margin: 0 40px;
         
      }
+     .new1  img:hover{
+        width: 80px;
+        height: 80px;
+    }
+ 
 }
 
 @media (min-width:769px) and (max-Width:869px){
-    .new1 .nlg img {
+    .new1  img {
         width: 80px;
         height: 80px;
         display:inline-block;
         margin: 120px 10px 120px 100px;
         
      }
+     .new1 {
+        height: 150px;
+    }
+    .new1  img{
+        width: 80px;
+        height: 80px;
+        margin: 0 50px;
+        
+     }
+     .new1  img:hover{
+        width: 90px;
+        height: 90px;
+    }
      
 }
 
-@media (min-width:869px) and (max-Width:969px){
-    .new1 .nlg img{
-        width: 100px;
-        height: 100px;
-        display:inline-block;
-        margin: 130px 10px 130px 100px;
+@media (min-width:869px) and (max-Width:1024px){
+    .new1 {
+        height: 170px;
+    }
+    .new1  img{
+        width: 85px;
+        height: 85px;
+        margin: 0 60px;
         
      }
-}
-@media (min-width:969px) and (max-Width:1024px){
-    .new1 .nlg img{
+     .new1  img:hover{
         width: 100px;
         height: 100px;
-        display:inline-block;
-        margin: 140px 10px 140px 130px;
-        
-     }
+    }
 }
+
 @media (min-width:769px) and (max-Width:1024px){
 
         .imj h2{
@@ -260,18 +297,6 @@
         position: relative;
         top: 60px;
     }
-    .new1 .nlg{
-        margin-right: 120px;
-    }
-    .new1 .nlg img{
-        width: 150px;
-        height: 150px;
-        display:inline-block;
-        margin: 10px 10px 10px 150px;
-        margin-top: 200px;
-        margin-bottom: 200px;
-     
-     }
     
 }
 

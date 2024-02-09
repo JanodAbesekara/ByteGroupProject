@@ -13,8 +13,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
-import  './Sidebar.css';
-
+import "./Sidebar.css";
 
 const sidebarItems = [
   {
@@ -110,13 +109,13 @@ export default function Ssidebar() {
             </li>
           ))}
         </ul>
-        <Link className="sidebar_link logout_icon" to="/Login">
+        <Link className="sidebar_link logout_icon">
           <Tooltip title="Logout" placement="right">
-            <span className="sidebar_icon" href ='/Login'>
+            <span className="sidebar_icon">
               <MdLogout />
             </span>
           </Tooltip>
-          <span className="sidebar_name" href ='/Login'>Logout</span>
+          <span className="sidebar_name">Logout</span>
         </Link>
       </aside>
     </div>

@@ -66,6 +66,7 @@
     height: 40px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   }
   
   .Teacher_form form .clear {

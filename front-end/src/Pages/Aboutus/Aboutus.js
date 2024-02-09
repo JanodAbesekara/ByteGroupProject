@@ -2,10 +2,13 @@ import React from "react";
 import "./Aboutus.css";
 import SideBar from "../TeachersPages/TeacherSidebar/SideBar/Sidebar";
 import { Grid, Box } from "@mui/material";
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
 
 export default function Aboutus() {
   return (
     <div>
+      <Navbar/>
       <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
           <SideBar />
@@ -16,6 +19,7 @@ export default function Aboutus() {
           ></Box>
         </Grid>
       </Grid>
+      <Footer/>
     </div>
   );
 }

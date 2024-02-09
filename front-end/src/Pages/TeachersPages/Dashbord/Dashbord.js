@@ -2,10 +2,13 @@ import React from 'react'
 import './Dashbord.css';
 import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Navbar from '../../../Component/Navbar/Navbar';
+import Footer from '../../../Component/Footer/Footer';
 
 export default function Dashbord() {
   return (
     <div>
+      <Navbar/>
       <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
           <Sidebar />
@@ -16,6 +19,7 @@ export default function Dashbord() {
           ></Box>
         </Grid>
       </Grid>
+      <Footer/>
     </div>
   )
 }
