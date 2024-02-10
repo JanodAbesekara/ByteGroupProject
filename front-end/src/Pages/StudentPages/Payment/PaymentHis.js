@@ -1,12 +1,10 @@
-import React from 'react'
-import './Classes.css';
-import Navbar from '../../Component/Navbar/Navbar';
-import Footer from '../../Component/Footer/Footer';
+import React from "react";
 import { Grid, Box } from "@mui/material";
-import Ssidebar from "../../Component/SSidebar/Ssidebar";
+import Navbar from "../../../Component/Navbar/Navbar";
+import Footer from "../../../Component/Footer/Footer";
+import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 
-
-export default function Classes() {
+function PaymentHis() {
   return (
     <div>
       <Navbar />
@@ -19,6 +17,8 @@ export default function Classes() {
         </Grid>
       </Grid>
       <Footer />
-      </div>
-  )
+    </div>
+  );
 }
+
+export default PaymentHis;
