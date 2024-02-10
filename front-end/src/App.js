@@ -29,6 +29,13 @@ import AAnnouncement from "./Pages/AdminPages/AAnnounceent/AAnnounceent";
 import Afeedacks from "./Pages/AdminPages/Afeedbackmanager/Afeedbackmanager";
 import Astudent from "./Pages/AdminPages/Astudent/Astudent";
 import Ateacher from "./Pages/AdminPages/Ateachers/Ateachers";
+import Payment from "./Pages/StudentPages/Payment/PaymentHis";
+import SAssignment from "./Pages/StudentPages/SAssignment/SAssignment";
+import SGrades from "./Pages/StudentPages/SGrades/SGrades";
+import SProfile from "./Pages/StudentPages/SProfile/SProfile";
+import SQuizzes from "./Pages/StudentPages/SQuizzes/SQuizzes";
+import SSubject from "./Pages/StudentPages/SSubject/SSubject";
+import STeachers from "./Pages/StudentPages/STeachers/STeachers"; 
 
 
 function App() {
@@ -102,6 +109,13 @@ function App() {
           <Route path="/Afeedacks" element={<Afeedacks/>}/>
           <Route path="/Astudent" element={<Astudent/>}/>
           <Route path="/Ateacher" element={<Ateacher/>}/>
+          <Route path="/Payment" element={<Payment/>}/>
+          <Route path="/SAssignment" element={<SAssignment/>}/>
+          <Route path="/SGrades" element={<SGrades/>}/>
+          <Route path="/SProfile" element={<SProfile/>}/>
+          <Route path="/SQuizzes" element={<SQuizzes/>}/>
+          <Route path="/SSubject" element={<SSubject/>}/>
+          <Route path="/STeachers" element={<STeachers/>}/>
         </Routes>
         
       </div>
