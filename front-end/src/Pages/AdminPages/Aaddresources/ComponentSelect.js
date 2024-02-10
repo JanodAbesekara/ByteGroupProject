@@ -1,4 +1,5 @@
 import React from 'react'
+import { MdOutlineFileUpload } from "react-icons/md";
 
 function ComponentSelect() {
   return (
@@ -32,7 +33,37 @@ function ComponentSelect() {
 
 
         
-            
+            <button
+                      style={{
+                        position: "relative",
+                        left: "115px",
+                        padding: "5px 10px",
+                        backgroundColor: "#2387E8",
+                        color: "white",
+                        borderBlockColor: "#2387E8",
+                        border: "none",
+                        cursor: "pointer",
+                        marginBottom: "20px",
+                        bottom: "20px",
+                      }}
+                    >
+                      ChooseFiles
+                    </button>
+                    <button
+                      style={{
+                        position: "relative",
+                        top: "50px",
+                        padding: "4px 40px 4px 40px",
+                        fontSize: "25px",
+                        right: "60px",
+                        backgroundColor: "#001B79",
+                        color: "white",
+                        cursor: "pointer",
+                        marginBottom:"20px"
+                      }}
+                    >
+                      <MdOutlineFileUpload />
+                    </button>
     </div>
   )
 }

@@ -6,7 +6,9 @@ import ASideBar from "../../../Component/ASideBar/ASidebar";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import "./Aaddresources.css";
+import { MdOutlineFileUpload } from "react-icons/md";
 import ComponentSelect from "./ComponentSelect";
+
 
 //samithamahedhs@gmail.com 12345678
 
@@ -21,83 +23,160 @@ const Item = styled(Paper)(({ theme }) => ({
 function Aaddresources() {
   return (
     <div>
-      <Navbar />
-      <Grid container>
-        <Grid item md={0.75} sm={1.5} xs={2.2}>
+     <Navbar/>
+      <Grid container >
+        <Grid item md={0.75} sm={1.5} xs={2.2} >
           <ASideBar />
+          
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box sx={{ width: "100%", height: "1000px" }}>
-            <h2>File upload</h2>
+            <h1>File upload</h1>
             <div className="Resourses">
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={4}>
-                  <div className="pdf" style={{ backgroundColor: "skyblue" }}>
-                    <h3 style={{ marginBottom: "50px", paddingTop: "20px" }}>
+                  <div className="pdf" >
+                    <h3 >
                       PDF
                     </h3>
-                    <ComponentSelect  />
-                    <button
-                      style={{
-                        position: "relative",
-                        left: "62px",
-                        padding: "5px 10px",
-                        backgroundColor: "#2387E8",
-                        color: "white",
-                        borderBlockColor: "#2387E8",
-                        border: "none",
-                        cursor: "pointer",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      ChooseFiles
-                    </button>
+                    <h4 for="subject" >Subject</h4>
+          
+          <select name="class" className="select" style={{}}>
+             <option value="">subject</option>
+             <option value="Mathematics">Mathematics</option>
+             <option value="Science">Science</option>
+             <option value="Agriculture">Agriculture</option>
+             <option value="English Literature">English Literature</option>
+             <option value="English">English</option>
+             <option value="ICT">ICT</option>
+             <option value="Chemistry">Chemistry</option>
+             <option value="Combined Mathematics">Combined Mathematics</option>
+             <option value="Physics">Physics</option>
+             <option value="Biology">Biologye</option>
+             <option value="Business Studies">Business Studies</option>
+             <option value="Accounting">Accounting</option>
+             <option value="Economics">Economics</option>
+             <option value="Logic and Scientific Method">Logic and Scientific Method</option>
+             <option value="Political Science">Political Science</option>
+             <option value="Engineering Technology">Engineering Technology</option>
+             <option value="Bio Systems Technology">Bio Systems Technology</option>
+             <option value="Science for Technology">Science for Technology</option>
+          </select>
+        
+        <h5>Discription</h5>
+        <textarea placeholder='Enter some details ...' className="t1"></textarea>
+
+
+    
+        <button className="chose1"
+                  style={{
+                    
+                  }}
+                >
+                  ChooseFiles
+                </button>
+                <button className="uplod1"
+                  style={{
+                    
+                  }}
+                >
+                  <MdOutlineFileUpload />
+                </button>
+                    
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <div className="video" style={{ backgroundColor: "skyblue" }}>
-                    <h3 style={{ marginBottom: "50px", paddingTop: "20px" }}>
+                  <div className="video">
+                    <h3 style={{}}>
                       Video
                     </h3>
-                    <ComponentSelect />
-                    <button
-                      style={{
-                        position: "relative",
-                        left: "62px",
-                        padding: "5px 10px",
-                        backgroundColor: "#2387E8",
-                        color: "white",
-                        borderBlockColor: "#2387E8",
-                        border: "none",
-                        cursor: "pointer",
-                        marginBottom: "20px",
-                      }}
+                    <h4 for="subject" >Subject</h4>
+          
+              <select name="class" className="select" style={{padding:"5px 0px 5px 2px",fontSize:"15px",marginBottom:"20px"}}>
+                 <option value="">subject</option>
+                 <option value="Mathematics">Mathematics</option>
+                 <option value="Science">Science</option>
+                 <option value="Agriculture">Agriculture</option>
+                 <option value="English Literature">English Literature</option>
+                 <option value="English">English</option>
+                 <option value="ICT">ICT</option>
+                 <option value="Chemistry">Chemistry</option>
+                 <option value="Combined Mathematics">Combined Mathematics</option>
+                 <option value="Physics">Physics</option>
+                 <option value="Biology">Biologye</option>
+                 <option value="Business Studies">Business Studies</option>
+                 <option value="Accounting">Accounting</option>
+                 <option value="Economics">Economics</option>
+                 <option value="Logic and Scientific Method">Logic and Scientific Method</option>
+                 <option value="Political Science">Political Science</option>
+                 <option value="Engineering Technology">Engineering Technology</option>
+                 <option value="Bio Systems Technology">Bio Systems Technology</option>
+                 <option value="Science for Technology">Science for Technology</option>
+              </select>
+            
+            <h5>Discription</h5>
+            <textarea  placeholder='Enter some details ...'></textarea>
+
+
+        
+            <button className="chose2"
+                     
                     >
                       ChooseFiles
                     </button>
+                    <button className="uplod2"
+                     
+                    >
+                      <MdOutlineFileUpload />
+                    </button>
+                    
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <div className="Adio" style={{ backgroundColor: "skyblue" }}>
-                    <h3 style={{ marginBottom: "50px", paddingTop: "20px" }}>
+                  <div className="Adio">
+                    <h3 >
                       Audio
                     </h3>
-                    <ComponentSelect />
-                    <button
-                      style={{
-                        position: "relative",
-                        left: "62px",
-                        padding: "5px 10px",
-                        backgroundColor: "#2387E8",
-                        color: "white",
-                        borderBlockColor: "#2387E8",
-                        border: "none",
-                        cursor: "pointer",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      ChooseFiles
-                    </button>
+                    <h4 for="subject" >Subject</h4>
+          
+          <select name="class" className="select" style={{padding:"5px 0px 5px 2px",fontSize:"15px",marginBottom:"20px"}}>
+             <option value="">subject</option>
+             <option value="Mathematics">Mathematics</option>
+             <option value="Science">Science</option>
+             <option value="Agriculture">Agriculture</option>
+             <option value="English Literature">English Literature</option>
+             <option value="English">English</option>
+             <option value="ICT">ICT</option>
+             <option value="Chemistry">Chemistry</option>
+             <option value="Combined Mathematics">Combined Mathematics</option>
+             <option value="Physics">Physics</option>
+             <option value="Biology">Biologye</option>
+             <option value="Business Studies">Business Studies</option>
+             <option value="Accounting">Accounting</option>
+             <option value="Economics">Economics</option>
+             <option value="Logic and Scientific Method">Logic and Scientific Method</option>
+             <option value="Political Science">Political Science</option>
+             <option value="Engineering Technology">Engineering Technology</option>
+             <option value="Bio Systems Technology">Bio Systems Technology</option>
+             <option value="Science for Technology">Science for Technology</option>
+          </select>
+        
+        <h5>Discription</h5>
+        <textarea placeholder='Enter some details ...'></textarea>
+
+
+    
+        <button className="chose3"
+                  
+                >
+                  ChooseFiles
+                </button>
+                <button className="uplod3"
+                 
+                >
+                  <MdOutlineFileUpload />
+                </button>
+                   
                   </div>
                 </Grid>
               </Grid>
