@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { RxDashboard } from "react-icons/rx";
-import { CgProfile } from "react-icons/cg";
-import { SiGoogleclassroom } from "react-icons/si";
-import { MdAssignmentAdd } from "react-icons/md";
-import { RiFeedbackFill } from "react-icons/ri";
-import { MdGrade } from "react-icons/md";
-import { FaBuysellads } from "react-icons/fa";
-import { MdPayment } from "react-icons/md";
-import { MdQuiz } from "react-icons/md";
-import { PiStudentFill } from "react-icons/pi";
+import { VscFeedback } from "react-icons/vsc";
+import { TfiAnnouncement } from "react-icons/tfi";
+import { GrResources } from "react-icons/gr";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import { PiStudent } from "react-icons/pi";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
-import "./Sidebar.css";
+import { IoMdHeadset } from "react-icons/io";
+import { RiDashboard3Fill } from "react-icons/ri";
+import "./ASidebar.css";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -33,65 +30,48 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
 const sidebarItems = [
   {
     name: "Dashboard",
-    href: "/TDashbord",
-    icon: RxDashboard,
+    href: "/ADashbord",
+    icon: RiDashboard3Fill ,
     Title: "Dashboard",
   },
   {
-    name: "My Profile",
-    href: "/UserProfile",
-    icon: CgProfile,
-    Title: "My Profile",
+    name: "ADS Manager",
+    href: "/AADSmanager",
+    icon: IoMdHeadset,
+    Title: "ADS Manager",
   },
 
   {
-    name: "Classes",
-    href: "/TClasses",
-    icon: SiGoogleclassroom,
-    Title: "Classes",
+    name: "Feedback Manager",
+    href: "/Afeedacks",
+    icon: VscFeedback ,
+    Title: "Feedback Manager",
   },
   {
-    name: "Assignments",
-    href: "/Assignments",
-    icon: MdAssignmentAdd,
-    Title: "Assignments",
+    name: "Announcement ",
+    href: "/AAnnouncement",
+    icon: TfiAnnouncement,
+    Title: "Announcement Manager",
   },
   {
-    name: "Feedbacks",
-    href: "/Feedbacks",
-    icon: RiFeedbackFill,
-    Title: "Feedbacks",
+    name: "Add Resources",
+    href: "/Aaddresources",
+    icon: GrResources,
+    Title: "Add Resources",
   },
   {
-    name: "Grades",
-    href: "/Grades",
-    icon: MdGrade,
-    Title: "Grades",
-  },
-  {
-    name: "MyAds",
-    href: "/MyAds",
-    icon: FaBuysellads,
-    Title: "MyAds",
-  },
-  {
-    name: "Payment Details",
-    href: "/PaymentDeat",
-    icon: MdPayment,
-    Title: "Payment Details",
-  },
-  {
-    name: "Quizzes",
-    href: "/Quizzes",
-    icon: MdQuiz,
-    Title: "Quizzes",
+    name: "Teachers",
+    href: "/Ateacher",
+    icon:  LiaChalkboardTeacherSolid ,
+    Title: "Teachers",
   },
   {
     name: "Students",
-    href: "/Students",
-    icon: PiStudentFill,
+    href: "/Astudent",
+    icon: PiStudent,
     Title: "Students",
   },
+  
 ];
 
 export default function Ssidebar() {

@@ -1,12 +1,10 @@
-import React from 'react'
-import './Contactus.css';
+import React from "react";
 import { Grid, Box } from "@mui/material";
-import Navbar from '../../Component/Navbar/Navbar'
-import Footer from '../../Component/Footer/Footer'
-import ASideBar from  '../../Component/ASideBar/ASidebar'
+import Navbar from "../../../Component/Navbar/Navbar";
+import Footer from "../../../Component/Footer/Footer";
+import ASideBar from "../../../Component/ASideBar/ASidebar";
 
-
-export default function Contactus() {
+function Ateachers() {
   return (
     <div>
       <Navbar />
@@ -22,6 +20,8 @@ export default function Contactus() {
       </Grid>
 
       <Footer />
-      </div>
-  )
+    </div>
+  );
 }
+
+export default Ateachers;

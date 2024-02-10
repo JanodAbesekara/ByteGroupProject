@@ -1,16 +1,14 @@
 import React from 'react'
-import './Contactus.css';
 import { Grid, Box } from "@mui/material";
-import Navbar from '../../Component/Navbar/Navbar'
-import Footer from '../../Component/Footer/Footer'
-import ASideBar from  '../../Component/ASideBar/ASidebar'
+import Navbar from '../../../Component/Navbar/Navbar'
+import Footer from '../../../Component/Footer/Footer'
+import ASideBar from '../../../Component/ASideBar/ASidebar'
 
-
-export default function Contactus() {
+function AAnnounceent() {
   return (
     <div>
-      <Navbar />
-      <Grid container>
+         <Navbar/>
+        <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
           <ASideBar />
         </Grid>
@@ -21,7 +19,10 @@ export default function Contactus() {
         </Grid>
       </Grid>
 
-      <Footer />
-      </div>
+        <Footer/>
+      
+    </div>
   )
 }
+
+export default AAnnounceent

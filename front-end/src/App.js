@@ -9,7 +9,7 @@ import Contactus from "./Pages/Contactus/Contactus";
 import Library from "./Pages/Library/Library";
 import Classes from "./Pages/Classes/Classes";
 import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
-import TDashbord from "./Pages/TeachersPages/Dashbord/Dashbord";
+import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
 import MyAds from "./Pages/TeachersPages/MyAds/MyAds";
@@ -23,6 +23,12 @@ import SDashbord from "./Pages/StudentPages/SDashbord/SDashbord";
 import ADashbord from "./Pages/AdminPages/ADashbord/ADashbord";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import Resetpassword from "./Pages/Resetpassword/Resetpassword";
+import Aaddresources from "./Pages/AdminPages/Aaddresources/Aaddresources";
+import AADSmanager from "./Pages/AdminPages/AADSmanager/AADSmanager";
+import AAnnouncement from "./Pages/AdminPages/AAnnounceent/AAnnounceent";
+import Afeedacks from "./Pages/AdminPages/Afeedbackmanager/Afeedbackmanager";
+import Astudent from "./Pages/AdminPages/Astudent/Astudent";
+import Ateacher from "./Pages/AdminPages/Ateachers/Ateachers";
 
 
 function App() {
@@ -90,6 +96,12 @@ function App() {
           <Route path="/ADashbord" element={<ADashbord   logoutuser={logoutuser}
                 isLoggedIn={isLoggedIn}
                 user={user} />} />
+          <Route path="/Aaddresources" element={<Aaddresources/>}/>
+          <Route path="/AADSmanager" element={<AADSmanager/>}/>
+          <Route path="/AAnnouncement" element={<AAnnouncement/>}/>
+          <Route path="/Afeedacks" element={<Afeedacks/>}/>
+          <Route path="/Astudent" element={<Astudent/>}/>
+          <Route path="/Ateacher" element={<Ateacher/>}/>
         </Routes>
         
       </div>
