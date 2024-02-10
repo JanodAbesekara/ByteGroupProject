@@ -50,9 +50,7 @@ const Insidepart = (props) => {
               <HtmlTooltip
                 title={
                   <React.Fragment>
-                    <Typography color="inherit">Tooltip with HTML</Typography>
-                    <em>{"And here's"}</em> <b>{"some"}</b>{" "}
-                    <u>{"amazing content"}</u>. {"It's very engaging. Right?"}
+                   {props.p1}
                   </React.Fragment>
                 }
               >
@@ -90,9 +88,7 @@ const Insidepart = (props) => {
                 <HtmlTooltip
                   title={
                     <React.Fragment>
-                      <Typography color="inherit">Tooltip with HTML</Typography>
-                      <em>{"And here's"}</em> <b>{"some"}</b>{" "}
-                      <u>{"amazing content"}</u>. {"It's very engaging. Right?"}
+                     {props.p2}
                     </React.Fragment>
                   }
                 >
@@ -132,9 +128,7 @@ const Insidepart = (props) => {
                 <HtmlTooltip
                   title={
                     <React.Fragment>
-                      <Typography color="inherit">Tooltip with HTML</Typography>
-                      <em>{"And here's"}</em> <b>{"some"}</b>{" "}
-                      <u>{"amazing content"}</u>. {"It's very engaging. Right?"}
+                      {props.p3}
                     </React.Fragment>
                   }
                 >
