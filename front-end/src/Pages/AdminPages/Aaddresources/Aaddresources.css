@@ -56,6 +56,7 @@ h1 {
   cursor: pointer;
   margin-bottom: 20px;
   bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
 .chose2 {
   position: relative;
@@ -67,6 +68,7 @@ h1 {
   cursor: pointer;
   margin-bottom: 20px;
   bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
 .chose3 {
   position: relative;
@@ -78,40 +80,60 @@ h1 {
   cursor: pointer;
   margin-bottom: 20px;
   bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
 
 .uplod1 {
   position: relative;
   top: 50px;
   padding: 4px 40px 4px 40px;
-  font-size: 25px;
+  font-size: 20px;
   right: 60px;
-  background-color: #001b79;
+  background-color: #490be4;
   color: white;
   cursor: pointer;
   margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
 }
 .uplod2 {
   position: relative;
   top: 50px;
   padding: 4px 40px 4px 40px;
-  font-size: 25px;
+  font-size: 20px;
   right: 60px;
-  background-color: #001b79;
+  background-color: #490be4;
   color: white;
   cursor: pointer;
   margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
 }
 .uplod3 {
   position: relative;
   top: 50px;
   padding: 4px 40px 4px 40px;
-  font-size: 25px;
+  font-size: 20px;
   right: 60px;
-  background-color: #001b79;
+  background-color: #490be4;
   color: white;
   cursor: pointer;
   margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
+}
+
+.uplod1:hover{
+  font-size: 25px;
+}
+.uplod2:hover{
+  font-size: 25px;
+}
+.uplod3:hover{
+  font-size: 25px;
 }
 textarea {
   width: 220px;
@@ -626,6 +648,9 @@ textarea {
   }
 
   @media (min-width: 1488px){
+    h1 {
+      margin-bottom: 200px;
+    }
     textarea {
         height: 100px;
         margin-left: 10px;
@@ -633,6 +658,9 @@ textarea {
         right: -100px;
         width: 240px;
         
+      }
+      .select {
+        width: 240px;
       }
       .Resourses   h5{
         margin-left: 30px;
@@ -672,5 +700,8 @@ textarea {
         position: relative;
         top: 70px;
         left: -150px;
+      }
+      .Resourses  h4{
+        margin-left: -15px;
       }
   }

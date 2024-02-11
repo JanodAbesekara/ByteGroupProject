@@ -6,11 +6,25 @@ import ASideBar from "../../../Component/ASideBar/ASidebar";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import "./Aaddresources.css";
-import { MdOutlineFileUpload } from "react-icons/md";
-import ComponentSelect from "./ComponentSelect";
+import { IoCloudUploadOutline } from "react-icons/io5";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 
 //samithamahedhs@gmail.com 12345678
+
+
+const BootstrapTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "black",
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "black",
+    fontSize: "12px",
+    padding: "8px",
+  },
+}));
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -75,13 +89,14 @@ function Aaddresources() {
                 >
                   ChooseFiles
                 </button>
+                <BootstrapTooltip title="Upload PDF" placement="bottom" arrow>
                 <button className="uplod1"
                   style={{
                     
                   }}
                 >
-                  <MdOutlineFileUpload />
-                </button>
+                  <IoCloudUploadOutline />
+                </button></BootstrapTooltip>
                     
                   </div>
                 </Grid>
@@ -124,12 +139,13 @@ function Aaddresources() {
                     >
                       ChooseFiles
                     </button>
+                    <BootstrapTooltip title="Upload Video" placement="bottom" arrow>
                     <button className="uplod2"
                      
                     >
-                      <MdOutlineFileUpload />
+                      <IoCloudUploadOutline />
                     </button>
-                    
+                    </BootstrapTooltip>
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -171,12 +187,13 @@ function Aaddresources() {
                 >
                   ChooseFiles
                 </button>
+                <BootstrapTooltip title="Upload Audio" placement="bottom" arrow>
                 <button className="uplod3"
                  
                 >
-                  <MdOutlineFileUpload />
+                  <IoCloudUploadOutline/>
                 </button>
-                   
+                </BootstrapTooltip>
                   </div>
                 </Grid>
               </Grid>
