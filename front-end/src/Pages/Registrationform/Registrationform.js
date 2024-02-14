@@ -3,10 +3,7 @@ import axios from "axios";
 import "./Registrationform.css";
 import { Input, Space } from "antd";
 
-
-
-
-export default function TeachersRegister() {
+export default function RegistrationForm() {
   const [firstname, setfirstname] = React.useState("");
   const [lastname, setlastname] = React.useState("");
   const [phonenumber, setphonenumber] = React.useState("");
@@ -28,55 +25,57 @@ export default function TeachersRegister() {
         password,
       };
     } else {
-      window.alert("Password donot match");
+      window.alert("Password does not match!");
     }
   };
 
   return (
     <div>
-      <div className="Teacher_main">
-        <h2> Registration Form</h2>
+      <div className="Main_container">
+        <h2>Registration Form</h2>
 
-        <div className="Teacher_form">
+        <div className="form_contents">
+          
           <form onSubmit={handleSubmit}>
-            <label>Name</label>
+            <label><span style={{ color: "red" }}>* </span>Name</label>
             <br></br>
             <input
               type="text"
-              placeholder="first name"
+              placeholder="First Name"
               name="firstname"
               value={firstname}
               required
               onChange={(e) => setfirstname(e.target.value)}
               style={{
-                width: "250px",
-                height: "50px",
+                width: "350px",
+                height: "40px",
                 marginTop: "10px",
-                fontSize: "18px",
+                fontSize: "15px",
+                display: "inline-block"
               }}
             />
             <input
               type="text"
-              placeholder="last name"
+              placeholder="Last Name"
               name="lastname"
               value={lastname}
               required
               onChange={(e) => setlastname(e.target.value)}
               style={{
-                width: "250px",
-                height: "50px",
+                width: "350px",
+                height: "40px",
                 marginTop: "10px",
-                fontSize: "18px",
+                fontSize: "15px",
               }}
             />
             <br></br>
             <br></br>
 
-            <label>Phone Number</label>
+            <label><span style={{ color: "red" }}>* </span>Phone Number</label>
             <br></br>
             <input
               type="tel"
-              placeholder="Phone number"
+              placeholder="Phone Number"
               name="phonenumber"
               value={phonenumber}
               required
@@ -84,16 +83,16 @@ export default function TeachersRegister() {
               maxLength={10}
               onChange={(e) => setphonenumber(e.target.value)}
               style={{
-                width: "250px",
-                height: "50px",
+                width: "280px",
+                height: "40px",
                 marginTop: "10px",
-                fontSize: "18px",
+                fontSize: "15px",
               }}
             />
             <br></br>
             <br></br>
 
-            <label>Email</label>
+            <label><span style={{ color: "red" }}>* </span>Email</label>
             <br></br>
 
             <input
@@ -104,26 +103,26 @@ export default function TeachersRegister() {
               required
               onChange={(e) => setemail(e.target.value)}
               style={{
-                width: "250px",
-                height: "50px",
+                width: "350px",
+                height: "40px",
                 marginTop: "10px",
-                fontSize: "18px",
+                fontSize: "15px",
               }}
             />
             <br></br>
             <br></br>
 
-            <label>Role</label>
+            <label><span style={{ color: "red" }}>* </span>Are you a...</label>
 
             <div className="radio">
               <input
                 type="radio"
                 name="role"
-                value="Lecture"
+                value="Lecturer"
                 required
                 onChange={(e) => setrole(e.target.value)}
               />{" "}
-              Lecture
+              Lecturer
               <br></br>
               <input
                 type="radio"
@@ -138,53 +137,51 @@ export default function TeachersRegister() {
             <br></br>
             <br></br>
 
-            <label>password</label>
+            <label><span style={{ color: "red" }}>* </span>Password</label>
             <br></br>
-            <Space direction="vertical" className="space">
-              <Input.Password
+              <input
                 type="password"
                 value={password}
                 required
-                placeholder="password"
+                placeholder="Password"
                 name="password"
                 onChange={(e) => setpassword(e.target.value)}
                 style={{
                   width: "250px",
-                  height: "50px",
+                  height: "40px",
                   marginTop: "10px",
-                  fontSize: "18px",
+                  fontSize: "15px",
                 }}
               />
-            </Space>
 
             <br></br>
             <br></br>
 
-            <label>Conform password</label>
+            <label><span style={{ color: "red" }}>* </span>Confirm Password</label>
             <br></br>
-            <Space direction="vertical">
-              <Input.Password
+            
+              <input
                 type="password"
                 required
-                placeholder="conform password"
-                name="conformpassword"
+                placeholder="Confirm Password"
+                name="confirmpassword"
                 value={confirmpassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 style={{
                   width: "250px",
-                  height: "50px",
+                  height: "40px",
                   marginTop: "10px",
-                  fontSize: "18px",
+                  fontSize: "15px",
                 }}
               />
-            </Space>
+            
 
             <br></br>
             <br></br>
             <br></br>
 
-            <button type="submit" value="Rigister" className="submit">
-              Registra
+            <button type="submit" value="Register" className="submit">
+              Register
             </button>
           </form>
         </div>

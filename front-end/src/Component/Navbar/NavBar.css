@@ -33,11 +33,7 @@ header .nav-btn{
     color: #1E1A4F;
     opacity: 0;
     visibility: hidden;
-    font-size: 1.8rem;
-    
-  
-   
-    
+    font-size: 1.8rem;   
 }
 
 
@@ -47,7 +43,7 @@ header .nav-btn{
 @media (min-width: 320px) and (max-width: 768px){
  
     header .im1{
-        width: 200px;
+        width: 350px;
         height: 100px;
         padding-left: 15px;
         margin-top: 5px;
@@ -103,7 +99,7 @@ header .nav-btn{
 
 @media (min-width: 769px) and (max-width: 1024px){
      header .im1{
-        width: 250px;
+        width: 310px;
         height: 100px;
         padding-left: 15px;
         margin-top: 8px;
@@ -130,7 +126,7 @@ header .nav-btn{
 @media (min-width: 1025px) and (max-width: 1200px){
 
     header .im1{
-        width: 300px;
+        width: 310px;
         height: 100px;
         margin:  5px 20px;
     }
@@ -162,9 +158,9 @@ header .nav-btn{
 @media (min-width: 1201px){
 
     header .im1{
-        width: 300px;
+        width: 310px;
         height: 100px;
-        margin: 3px 30px;
+        margin: 2px 30px;
     }
     header h1{
         color: #899CFF;
@@ -175,7 +171,6 @@ header .nav-btn{
     }
     header{
        background-color: #F5F4F4;
-       
     }
 
     nav{
@@ -192,10 +187,7 @@ header .nav-btn{
     
     .log{
         border-left: 2px solid #797070;
-    }
-
-    
-    
+    }  
 }
 
 

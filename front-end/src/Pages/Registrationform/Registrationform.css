@@ -1,230 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
   }
   
-  .Teacher_main {
-    border: none;
-  }
-  
-  .Teacher_main h2 {
+  .Main_container h2 {
     text-align: center;
     margin-top: 50px;
+    font-size: 40px;
+    letter-spacing: 0.5px;
+    font-weight: bold;
     margin-bottom: 50px;
     color: #378080;
+    text-transform: uppercase;
   }
-  
-  .Teacher_main form .m2 {
-    margin-right: 10px;
-  }
-  
-  .Teacher_form {
+
+  .form_contents {
+    border: 0.125px solid #74bfeaad;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
+    background: linear-gradient(135deg,#f7f7f7,#ebecf2);
     align-items: center;
-    background-color: rgb(189, 16, 208);
     margin-inline: 100px;
     padding: 50px;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-bottom: 80px;
-    margin-bottom: 50px;
-    box-shadow: 1px 9px 20px 5px rgb(69, 68, 68);
+    margin-bottom: 30px;
+    color: #384193;
   }
   
-  .Teacher_form form {
-    font-size: 20px;
-    padding-left: 5px;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  .form_contents form {
+    font-size: 18px;
+    padding-left: 10px;
   }
-  .Teacher_form form input {
-    font-size: 15px;
+  .form_contents form input {
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
-    border: none;
+    border: 0.25px solid #1196e348;
   }
   
-  .Teacher_form form input {
+  .form_contents form input {
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 10px;
-    opacity: 0.1px;
-    color: rgb(106, 96, 96);
+    margin-left: 15px;
+    color: #6a6060;
   }
   
-  .Teacher_form .Female {
-    margin-top: -20px;
-    margin-bottom: 20px;
-  }
-  
-  .Teacher_form button {
-    padding: 5px 10px 5px 10px;
-    font-size: 18px;
-    margin-left: 200px;
-    box-shadow: 1px 3px 5px 1px rgb(69, 68, 68);
-    width: 120px;
-    height: 40px;
+  .form_contents button {
+    padding: 2px 10px 5px 10px;
+    font-size: 16px;
+    margin-left: 8px;
+    box-shadow: 1px 2px 5px 1px rgb(69, 68, 68);
+    background: linear-gradient(120deg,#616fcb,#2b45eb);
+    width: 100px;
+    height: 30px;
     border: none;
     border-radius: 5px;
   }
   
-  .Teacher_form form .clear {
-    position: relative;
-    right: 200px;
-    color: antiquewhite;
-    background-color: brown;
-    border-color: rgb(189, 16, 208);
-  }
-  
-  .Teacher_form form .submit {
-    color: antiquewhite;
+  .form_contents form .submit {
+    color: #faebd7;
     background-color: #0d98e6;
-    border-color: rgb(189, 16, 208);
-    float: right;
+    float: left;
   }
   
-  .Teacher_form form .submit a {
-    text-decoration: none;
-    color: antiquewhite;
-  }
-  
-  .Role {
-    padding-bottom: 20px;
-  }
   .radio {
     padding-top: 10px;
     padding-left: 20px;
     padding-bottom: -30px;
   }
   
-  @media (min-width: 320px) and (max-width: 480px) {
-    .Teacher_main h2 {
-      font-size: 20px;
-      text-align: center;
-    }
-    .Teacher_form {
-      margin-inline: 10px;
-    }
-  
-    .Teacher_form button {
-      margin-left: 150px;
-    }
-  
-    .Teacher_form form .clear {
-      position: relative;
-      right: 150px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      right: 20px;
-      float: right;
-      bottom: 10px;
-    }
-  }
-  
-  @media (min-width: 481px) and (max-width: 620px) {
-    .Teacher_form {
-      margin-inline: 50px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      bottom: 28px;
-    }
-  }
-  
-  @media (min-width: 621px) and (max-width: 816px) {
-    .Teacher_form {
-      margin-inline: 75px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      bottom: 28px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 25px;
-      text-align: center;
-    }
-  }
-  
-  @media (min-width: 816px) and (max-width: 933px) {
-    .Teacher_form {
-      margin-inline: 100px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 30px;
-      text-align: center;
-    }
-  }
-
-  @media (min-width: 933px) and (max-width: 1024px) {
-    .Teacher_form {
-      margin-inline: 150px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 30px;
-      text-align: center;
-    }
-  }
-
-
-
-  
-  @media (min-width: 1024px) and (max-width: 1200px) {
-    .Teacher_form {
-      margin-inline: 150px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      bottom: 30px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 35px;
-      text-align: center;
-    }
-  }
-  
-  @media (min-width: 1100px) and (max-width: 1200px) {
-    .Teacher_form {
-      margin-inline: 200px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      bottom: 30px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 35px;
-      text-align: center;
-    }
-  }
-  
-  @media (min-width: 1200px) {
-    .Teacher_form {
-      margin-inline: 300px;
-    }
-  
-    .Teacher_form form .submit {
-      position: relative;
-      bottom: 27px;
-    }
-  
-    .Teacher_main h2 {
-      font-size: 35px;
-      text-align: center;
-    }
-  
-    .Teacher_form form .clear {
-      position: relative;
-      bottom: 20px;
-    }
-  }
-  
+ 

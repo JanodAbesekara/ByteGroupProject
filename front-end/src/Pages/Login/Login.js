@@ -54,7 +54,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
           <h2>Login</h2>
         </div>
         <form className="login_label" onSubmit={handleSubmit}>
-          <label htmlFor="Username_or_Email">Username</label>
+          <label htmlFor="Username_or_Email"><span style={{ color: "red" }}>*</span>Username</label>
           <br></br>
           <input
             className='Name'
@@ -66,7 +66,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
             value={email}
           />
           <br></br>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password"><span style={{ color: "red" }}>*</span>Password</label>
           <br></br>
           <input
             type='password'
@@ -102,7 +102,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
             </BootstrapDialog>
             <br></br>
             <h4>
-              New ?<Link to="/Registrationform">Create An Account </Link>
+              New ?<Link to="/Registrationform">Create an Account </Link>
             </h4>
           </div>
         </form>

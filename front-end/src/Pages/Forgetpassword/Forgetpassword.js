@@ -20,7 +20,7 @@ export default function Forgetpassword() {
         <div style={{position:"relative"}}>
 
         <label className="fPlabel" htmlFor="Email">
-          <b>User Name</b>
+          <b><span style={{ color: "red" }}>*</span>User Name</b>
         </label>
         <input
           className="fPiput"
