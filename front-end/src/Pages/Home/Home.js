@@ -11,9 +11,8 @@ export default function Home() {
       <div className="imj">
        
         <h2>Dream Learn Academy</h2>
-        <p>LoreumIpsumLoreumIpsumLoreumIpsumLoreumIpsumLoreumIpsumIpsum
-           LoreumIpsumLoreumIpsumLoreumIpsumLoreumIpsumLoreumIpsum
-            LoreumIpsumLoreumIpsumLoreumIpsum
+        <div style={{width:'100%',height:'10px'}}></div>
+        <p>At DreamLearn, we're dedicated to helping students excel in their academic journey. Our personalized tuition services and supportive learning community empower students to reach their full potential. From exam preparation to skill enhancement, DreamLearn Academy is here to guide you every step of the way. Join us and let's make your dreams a reality!
         </p>
       </div>
        <div className="new1">

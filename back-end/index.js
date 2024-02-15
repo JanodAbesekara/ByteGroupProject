@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import bodyParser from 'body-parser';
-import Usre from './models/usermodel.js';
 import dbConnect from './config/dbconnecter.js';
 import authAPI from './apis/authAPI.js';
 import emailAPI from './apis/emailAPI.js';
