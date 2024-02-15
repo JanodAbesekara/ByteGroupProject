@@ -51,24 +51,22 @@ function App() {
     setIsLoggedIn(false);
     navigate("/Login");
   };
-
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
-    if (token) {
-      const decodedToken = jwtDecode(token);
-
-      if (decodedToken.exp * 100 < Date.now()) {
+    const decodedToken = jwtDecode(token);
+    if (token && (decodedToken.exp * 100 > Date.now())) {
+        setUser(decodedToken);
+        setIsLoggedIn(true);
+    } else {
+      const currentPath = window.location.pathname;
+      if (currentPath !== "/VerifyEmail" && currentPath !== "/Resetpassword") {
         setUser(null);
         setIsLoggedIn(false);
         navigate("/Login");
-      } else {
-        setUser(decodedToken);
-        setIsLoggedIn(true);
       }
     }
   }, []);
-
 
 
   return (
