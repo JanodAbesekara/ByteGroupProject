@@ -20,7 +20,7 @@ export default function Navbar() {
       <nav ref={navRef}>
         <Link to="/">Home</Link>
         <Link to="/classes">Classes</Link>
-        <Link to="/library">Library</Link>
+        <Link to="/library">Knowledge Base</Link>
         <Link to="/abouus">About US</Link>
         <Link to="/contactus" className="con">
           Contact US

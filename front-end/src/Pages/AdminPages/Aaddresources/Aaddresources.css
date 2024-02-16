@@ -1,0 +1,708 @@
+@import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Inter:wght@300&family=Teko:wght@600&display=swap");
+h1 {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 50px;
+  font-size: 50px;
+  font-weight: 800;
+  font-family: "Gamja Flower", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Teko", sans-serif;
+  color: rgb(12, 78, 139);
+  word-spacing: 5px;
+  letter-spacing: 2px;
+}
+
+.Resourses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pdf {
+  background-color: skyblue;
+  height: 480px;
+}
+
+.Adio {
+  background-color: skyblue;
+  height: 480px;
+}
+.video {
+  background-color: skyblue;
+  height: 480px;
+}
+
+.Resourses h3 {
+  margin-bottom: 50px;
+  padding-top: 20px;
+}
+
+.Resourses h4 {
+  position: relative;
+  right: 80px;
+}
+.Resourses h5 {
+  position: relative;
+  right: 80px;
+}
+
+.select {
+  padding: 5px 0px 5px 2px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.chose1 {
+  position: relative;
+  left: 115px;
+  padding: 5px 8.5px;
+  background-color: #2387e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
+}
+.chose2 {
+  position: relative;
+  left: 115px;
+  padding: 5px 8.5px;
+  background-color: #2387e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
+}
+.chose3 {
+  position: relative;
+  left: 115px;
+  padding: 5px 8.5px;
+  background-color: #2387e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  bottom: 20px;
+  box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
+}
+
+.uplod1 {
+  position: relative;
+  top: 50px;
+  padding: 4px 40px 4px 40px;
+  font-size: 20px;
+  right: 60px;
+  background-color: #490be4;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
+}
+.uplod2 {
+  position: relative;
+  top: 50px;
+  padding: 4px 40px 4px 40px;
+  font-size: 20px;
+  right: 60px;
+  background-color: #490be4;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
+}
+.uplod3 {
+  position: relative;
+  top: 50px;
+  padding: 4px 40px 4px 40px;
+  font-size: 20px;
+  right: 60px;
+  background-color: #490be4;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 10px 0.5px rgb(1, 16, 40);
+}
+
+.uplod1:hover {
+  font-size: 25px;
+}
+.uplod2:hover {
+  font-size: 25px;
+}
+.uplod3:hover {
+  font-size: 25px;
+}
+textarea {
+  width: 220px;
+  height: 80px;
+  margin-bottom: 40px;
+  padding: 4px 0px 0px 4px;
+}
+.select {
+  padding: 5px 0px 5px 2px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+@media (min-width: 320px) and (max-width: 416px) {
+  h1 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 25px;
+  }
+  .Resourses h3 {
+    margin-bottom: 5px;
+  }
+  .pdf {
+    width: 100%;
+    height: 300px;
+  }
+  .Adio {
+    width: 100%;
+    height: 300px;
+  }
+  .video {
+    width: 100%;
+    height: 300px;
+  }
+  .Resourses h4 {
+    margin-left: 10px;
+  }
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 220px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 40px;
+    margin-left: 10px;
+  }
+
+  .Resourses h5 {
+    margin-left: 25px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+  }
+
+  .chose3 {
+    position: relative;
+    bottom: 40px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 20px;
+  }
+  .chose2 {
+    position: relative;
+    bottom: 40px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 20px;
+  }
+  .chose1 {
+    position: relative;
+    bottom: 40px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 20px;
+  }
+}
+
+@media (min-width: 416px) and (max-width: 548px) {
+  h1 {
+    margin-bottom: 24px;
+    font-size: 30px;
+    
+  }
+  .Resourses h3 {
+    margin-bottom: 5px;
+  }
+  .pdf {
+    width: 100%;
+    height: 300px;
+  }
+  .Adio {
+    width: 100%;
+    height: 300px;
+  }
+  .video {
+    width: 100%;
+    height: 300px;
+  }
+  .Resourses h4 {
+    margin-left: 10px;
+  }
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 220px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 40px;
+    margin-left: 10px;
+    position: relative;
+    left: 50px;
+  }
+
+  .Resourses h5 {
+    margin-left: 25px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: 0px;
+    left: -50px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 0px;
+    left: 2px;
+  }
+  .chose2 {
+    position: relative;
+    top: 0px;
+    left: -50px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 0px;
+    left: 2px;
+  }
+  .chose1 {
+    position: relative;
+    top: 0px;
+    left: -50px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 0px;
+    left: 2px;
+  }
+}
+
+@media (min-width: 549px) and (max-width: 600px) {
+  h1 {
+    margin-bottom: 15px;
+    font-size: 35px;
+  }
+  .Resourses h3 {
+    margin-bottom: 10px;
+  }
+  .pdf {
+    width: 100%;
+    height: 300px;
+  }
+  .Adio {
+    width: 100%;
+    height: 300px;
+  }
+  .video {
+    width: 100%;
+    height: 300px;
+  }
+  .Resourses h4 {
+    margin-left: 90px;
+  }
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 220px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 60px;
+    margin-left: 10px;
+    position: relative;
+    left: 100px;
+    width: 220px;
+  }
+
+  .Resourses h5 {
+    margin-left: 100px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: -5px;
+    left: 0px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 40px;
+    left: 2px;
+  }
+  .chose2 {
+    position: relative;
+    top: -5px;
+    left: 0px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 40px;
+    left: 2px;
+  }
+  .chose1 {
+    position: relative;
+    top: -5px;
+    left: 0px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 40px;
+    left: 2px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 758px) {
+  h1 {
+    margin-bottom: 120px;
+  }
+  .Resourses h3 {
+    margin-bottom: 40px;
+  }
+  .pdf {
+    width: 100%;
+    height: 400px;
+  }
+  .Adio {
+    width: 100%;
+    height: 400px;
+  }
+  .video {
+    width: 100%;
+    height: 400px;
+  }
+  .Resourses h4 {
+    margin-left: 85px;
+  }
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 140px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 60px;
+    margin-left: 10px;
+    position: relative;
+    left: -1px;
+    width: 140px;
+  }
+
+  .Resourses h5 {
+    margin-left: 60px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+    left: -60px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: -20px;
+    left: 10px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .chose2 {
+    position: relative;
+    top: -20px;
+    left: 10px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .chose1 {
+    position: relative;
+    top: -20px;
+    left: 10px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+}
+@media (min-width: 758px) and (max-width: 860px) {
+  h1 {
+    margin-bottom: 80px;
+  }
+  .Resourses h3 {
+    margin-bottom: 40px;
+  }
+  .pdf {
+    width: 100%;
+    height: 400px;
+  }
+  .Adio {
+    width: 100%;
+    height: 400px;
+  }
+  .video {
+    width: 100%;
+    height: 400px;
+  }
+  .Resourses h4 {
+    margin-left: 45px;
+  }
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 180px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 60px;
+    margin-left: 10px;
+    position: relative;
+    left: -1px;
+    width: 180px;
+  }
+
+  .Resourses h5 {
+    margin-left: 60px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: -20px;
+    left: 100px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 60px;
+    left: -40px;
+  }
+  .chose2 {
+    position: relative;
+    top: -20px;
+    left: 100px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 60px;
+    left: -40px;
+  }
+  .chose1 {
+    position: relative;
+    top: -20px;
+    left: 100px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 60px;
+    left: -40px;
+  }
+}
+
+@media (min-width: 860px) and (max-width: 1060px) {
+  .Resourses h5 {
+    position: relative;
+    right: 70px;
+    top: 0px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1060px) and (max-width: 1094px) {
+  .select {
+    padding: 5px 0px 5px 2px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 220px;
+    margin-left: 10px;
+  }
+  textarea {
+    height: 80px;
+    margin-left: 10px;
+    position: relative;
+    left: 0px;
+    width: 220px;
+  }
+  .Resourses h5 {
+    margin-left: 30px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+    margin-top: 30px;
+  }
+  .Resourses h4 {
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 1095px) and (max-width: 1158px) {
+  textarea {
+    height: 80px;
+    margin-left: 10px;
+    position: relative;
+    right: 0px;
+    width: 240px;
+  }
+  .Resourses h5 {
+    margin-left: 30px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+    margin-top: 30px;
+    left: -95px;
+  }
+  .select {
+    width: 240px;
+  }
+  .Resourses h4 {
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1159px) and (max-width: 1488px) {
+  h1 {
+    margin-bottom: 150px;
+  }
+
+  textarea {
+    height: 100px;
+    margin-left: 10px;
+    position: relative;
+    right: -40px;
+    width: 240px;
+  }
+  .Resourses h5 {
+    margin-left: 30px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+    margin-top: 30px;
+    left: -95px;
+  }
+  .select {
+    width: 240px;
+  }
+  .Resourses h4 {
+    margin-right: 20px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: 10px;
+    left: -55px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 40px;
+    left: -20px;
+  }
+  .chose2 {
+    position: relative;
+    top: 10px;
+    left: -55px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 40px;
+    left: -20px;
+  }
+  .chose1 {
+    position: relative;
+    top: 10px;
+    left: -55px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 40px;
+    left: -20px;
+  }
+}
+
+@media (min-width: 1488px) {
+  h1 {
+    margin-bottom: 120px;
+  }
+  textarea {
+    height: 100px;
+    margin-left: 10px;
+    position: relative;
+    right: -95px;
+    width: 240px;
+  }
+  .select {
+    width: 240px;
+  }
+  .Resourses h5 {
+    margin-left: 30px;
+    position: relative;
+    top: 0px;
+    font-size: 15px;
+    margin-top: 30px;
+    left: -95px;
+  }
+
+  .chose3 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .uplod3 {
+    position: relative;
+    top: 70px;
+    left: -150px;
+  }
+  .chose2 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .uplod2 {
+    position: relative;
+    top: 70px;
+    left: -150px;
+  }
+  .chose1 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .uplod1 {
+    position: relative;
+    top: 70px;
+    left: -150px;
+  }
+  .Resourses h4 {
+    margin-left: -20px;
+  }
+}
