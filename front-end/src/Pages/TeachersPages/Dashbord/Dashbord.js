@@ -1,21 +1,21 @@
-import React from "react";
-import "./Aboutus.css";
-import SideBar from "../TeachersPages/TeacherSidebar/SideBar/Sidebar";
+import React from 'react'
+import './Dashbord.css';
 import { Grid, Box } from "@mui/material";
+import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 
-export default function Aboutus() {
+export default function Dashbord() {
   return (
     <div>
       <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
-          <SideBar />
+          <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box
-            sx={{ width: "100%", height: "1000px", backgroundColor: "blue" }}
+            sx={{ width: "100%", height: "1000px", backgroundColor: "Ashe" }}
           ></Box>
         </Grid>
       </Grid>
     </div>
-  );
+  )
 }

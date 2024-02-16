@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 
 
 
@@ -117,5 +118,12 @@ export default function Home() {
 
       
     </div> 
+=======
+import './Home.css';
+
+export default function Home() {
+  return (
+    <div>Home</div>
+>>>>>>> origin/Test-main
   )
 }
