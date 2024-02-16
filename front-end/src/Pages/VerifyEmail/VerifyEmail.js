@@ -28,7 +28,7 @@ export default function VerifyEmail() {
             setVerified(true);
             console.log(token);
             navigate("/Login");
-          }, 2000);
+          }, 800);
         })
         .catch((err) => {
           console.log(err.response);
