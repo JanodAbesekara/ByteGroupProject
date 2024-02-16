@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import Login from "./Pages/Login/Login";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Aboutus from "./Pages/Aboutus/Aboutus";
@@ -36,6 +35,7 @@ import SProfile from "./Pages/StudentPages/SProfile/SProfile";
 import SQuizzes from "./Pages/StudentPages/SQuizzes/SQuizzes";
 import SSubject from "./Pages/StudentPages/SSubject/SSubject";
 import STeachers from "./Pages/StudentPages/STeachers/STeachers"; 
+import Login from "./Pages/Login/Login";
 
 
 function App() {
@@ -84,9 +84,7 @@ function App() {
           <Route path="/Assignments" element={<Assignments />} />
           <Route path="/Resetpassword" element={<Resetpassword />}/>
           <Route path="/VerifyEmail" element={<VerifyEmail />}/>
-          <Route path="/TDashbord" element={<TDashbord  logoutuser={logoutuser}
-                isLoggedIn={isLoggedIn}
-                user={user} />} />
+          <Route path="/TDashbord" element={<TDashbord  />} />
           <Route path="/Feedback" element={<Feedback />} />
           <Route path="/Grades" element={<Grades />} />
           <Route path="/MyAds" element={<MyAds />} />
@@ -95,12 +93,8 @@ function App() {
           <Route path="/Students" element={<Students />} />
           <Route path="/TClasses" element={<TClasses />} />
           <Route path="/UserProfile" element={<UserProfile />} />
-          <Route path="/SDashbord" element={<SDashbord  logoutuser={logoutuser}
-                isLoggedIn={isLoggedIn}
-                user={user} />} />
-          <Route path="/ADashbord" element={<ADashbord   logoutuser={logoutuser}
-                isLoggedIn={isLoggedIn}
-                user={user} />} />
+          <Route path="/SDashbord" element={<SDashbord  /> }/>
+          <Route path="/ADashbord" element={<ADashbord    />} />
           <Route path="/Aaddresources" element={<Aaddresources/>}/>
           <Route path="/AADSmanager" element={<AADSmanager/>}/>
           <Route path="/AAnnouncement" element={<AAnnouncement/>}/>
