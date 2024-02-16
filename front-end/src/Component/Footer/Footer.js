@@ -15,12 +15,12 @@ export default function Footer() {
           ></input>
           <br></br>
           <br></br>
-          <input
+          <textarea
             className="in2"
             type="text"
             name="t1"
             placeholder="Type your message here"
-          ></input>
+          ></textarea>
           <br></br>
           <br></br>
           <button className="seb">Send</button>
@@ -38,7 +38,6 @@ export default function Footer() {
             <h3>dreamlearnacademy@gmail.com</h3>
           </div>
         </div>
-
         <div className="line"></div>
 
         <div className="fdown">
@@ -50,13 +49,13 @@ export default function Footer() {
               <img src="./Symbles/link.png" />
             </a>
             <a href="">
-              <img src="./Symbles/fb.png" />
+              <img src="./Symbles/facebook.png" />
             </a>
             <a href="">
-              <img src="./Symbles/inst.png" />
+              <img src="./Symbles/whatsapp.png" />
             </a>
             <a href="">
-              <img src="./Symbles/yt.png" />
+              <img src="./Symbles/youtube.png" />
             </a>
           </div>
         </div>
