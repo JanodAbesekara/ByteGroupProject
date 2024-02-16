@@ -15,6 +15,7 @@ export default function Resetpassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email } = jwtDecode(token);
+    console.log(email + ":" + passwordN + ":" + passwordC);
 
     axios.post("/api/auth/resetpassword", { email, newPassword: passwordN, confirmNewPassword: passwordC })
       .then(res => {
@@ -31,11 +32,9 @@ export default function Resetpassword() {
     if (token) {
       axios.get(`/api/auth/verifyToken?token=${token}`)
         .then(res => {
-          console.log(res);
           setIsTokenVerified(true);
         })
         .catch(err => {
-          console.log(err.response);
           setError(err.response.data.msg);
         });
     }
