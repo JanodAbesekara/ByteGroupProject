@@ -132,7 +132,8 @@ const resetpasswordController = async (req, res) => {
             return res.status(400).json({ success: false, msg: "Passwords do not match" });
         }
 
-        const hashedPassword = hash;
+        const salt = await bcrypt.genSalt(12);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
 
         const updatedData = await User.findOneAndUpdate({email}, {
           $set:{
