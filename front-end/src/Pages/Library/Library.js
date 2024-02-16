@@ -13,7 +13,7 @@ const Library = () => {
     <div>
       <Navbar />
       <div className="L_label">
-        <h2>E- LIBRARY </h2>
+        <h2>Knowledge - Base </h2>
       </div>
       <div className="sb1">
         <Insidepart s1="Chemistry" v1="Organic " v2="Calcualtion" v3="sound" p1={p01} />
