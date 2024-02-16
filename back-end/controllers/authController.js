@@ -40,8 +40,9 @@ const registerController = async (req, res) => {
 
         await newUser.save();
 
+        // generated token 
         const token = tokengenerator({ email: newUser.email });
-        const link = `http://${req.hostname}:3000/VerifyEmail?token=${token}`;
+        const link = "http://" + req.hostname+ ":3000/VerifyEmail?token="+ token;
 
         const sendMail = await sendVerificationEmail(newUser.email, link);
 
@@ -63,7 +64,7 @@ const loginController = async (req, res) => {
         return res.status(400).json({ success: false, msg: "Invalid username or password" });
     }
 
-    try {
+    
         const oldUser = await User.findOne({ email });
         if (!oldUser) {
             return res.status(400).json({ success: false, msg: "Invalid username or password" });
@@ -76,10 +77,6 @@ const loginController = async (req, res) => {
 
         const token = tokengenerator({ email: oldUser.email, firstname: oldUser.firstname, role: oldUser.role, _id: oldUser._id, verified: oldUser.verified });
         return res.status(200).json({ success: true, token, msg: "You are successfully logged in" });
-    } catch (error) {
-        console.error("Error during user login:", error);
-        return res.status(500).json({ success: false, msg: "Internal Server Error" });
-    }
 };
 
 const forgotpasswordController = async (req, res) => {
@@ -89,14 +86,19 @@ const forgotpasswordController = async (req, res) => {
         return res.status(400).json({ success: false, msg: "Please enter a valid email" });
     }
 
-    try {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+        return res
+        .status(400)
+        .json({ success: false, msg: "Please enter a valid email" });
+    }
         const oldUser = await User.findOne({ email });
         if (!oldUser) {
             return res.status(404).json({ success: false, msg: "User not found" });
         }
 
         const token = tokengenerator({ email: oldUser.email });
-        const link = `http://${req.hostname}:3000/Resetpassword?token=${token}`;
+        const link = "http://"+req.hostname+ ":3000/Resetpassword?token="+ token;
 
         const sendMail = await sendForgotPasswordEmail(oldUser.email, link);
 
@@ -105,10 +107,7 @@ const forgotpasswordController = async (req, res) => {
         } else {
             return res.status(201).json({ success: true, msg: "Email sent" });
         }
-    } catch (error) {
-        console.error("Error during forgot password:", error);
-        return res.status(500).json({ success: false, msg: "Internal Server Error" });
-    }
+   
 };
 
 const resetpasswordController = async (req, res) => {
@@ -123,7 +122,7 @@ const resetpasswordController = async (req, res) => {
         return res.status(400).json({ success: false, msg: "Please enter a valid email" });
     }
 
-    try {
+
         const oldUser = await User.findOne({ email });
         if (!oldUser) {
             return res.status(400).json({ success: false, msg: "User not found" });
@@ -133,18 +132,20 @@ const resetpasswordController = async (req, res) => {
             return res.status(400).json({ success: false, msg: "Passwords do not match" });
         }
 
-        const hashedPassword = await bcrypt.hash(newPassword, 12);
-        const updatedData = await User.findOneAndUpdate({ email }, { password: hashedPassword });
+        const hashedPassword = hash;
+
+        const updatedData = await User.findOneAndUpdate({email}, {
+          $set:{
+             password: hashedPassword
+          }
+        })
 
         if (updatedData) {
             return res.status(200).json({ success: true, msg: "Password updated successfully" });
         } else {
             return res.status(500).json({ success: false, msg: "Something went wrong" });
         }
-    } catch (error) {
-        console.error("Error during password reset:", error);
-        return res.status(500).json({ success: false, msg: "Internal Server Error" });
-    }
+  
 };
 
 export { registerController, loginController, forgotpasswordController, resetpasswordController };
