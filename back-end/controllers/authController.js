@@ -75,6 +75,10 @@ const loginController = async (req, res) => {
             return res.status(400).json({ success: false, msg: "Invalid username or password" });
         }
 
+        if (!oldUser.verified) {
+            return res.status(400).json({ success: false, msg: "Please verify your email" });
+        }
+
         const token = tokengenerator({ email: oldUser.email, firstname: oldUser.firstname, role: oldUser.role, _id: oldUser._id, verified: oldUser.verified });
         return res.status(200).json({ success: true, token, msg: "You are successfully logged in" });
 };
