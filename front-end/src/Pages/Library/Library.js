@@ -11,6 +11,13 @@ export default function Library() {
   const onChange = (selectedValue) => {
     console.log(`selected ${selectedValue}`);
   };
+
+  const radioStyle = {
+    display: "block",
+    height: "30px",
+    lineHeight: "30px",
+  };
+
   const onRadioChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
