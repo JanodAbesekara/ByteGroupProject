@@ -16,7 +16,6 @@ export default function VerifyEmail() {
   const navigate = useNavigate();
   const token = useLocation().search.split("=").pop();
 
-<<<<<<< Updated upstream
   const [verified, setVerified] = React.useState(false);
   const [error, setError] = React.useState(false);
 
@@ -38,25 +37,6 @@ export default function VerifyEmail() {
       return <p style={{ border: "none" }}>Token not present</p>;
     }
   }, []);
-=======
-  const [verified, setVerified] = useState(false);
-  const [error, setError] = useState();
-
-  useEffect(() => {
-     if(token){
-          axios.get(`/api/email/verify?token=${token}`).then(res =>{
-             console.log(res);
-             setVerified(true);
-          }).catch(err =>{
-            console.log(error.response);
-          })
-     }
-  },[])
-
-  if (!token) {
-    return <p style={{ border: "none" }}>Token not present</p>;
-  }
->>>>>>> Stashed changes
 
   return (
     <>
