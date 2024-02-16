@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Library.css";
+import "./Knowledgehome.css";
 import { Select, Radio, Input } from "antd";
 import { Row, Col } from "antd";
 import { BiSolidFilePdf } from "react-icons/bi";
@@ -26,7 +26,7 @@ export default function Library() {
   return (
     <div>
       <div className="L_label">
-        <h2>e - LIBRARY </h2>
+        <h3>Knowledge is on your fingertips </h3>
       </div>
       <div className="filter">
         <Select

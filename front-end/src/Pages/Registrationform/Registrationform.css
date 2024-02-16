@@ -1,76 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-  }
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.Main_container {
+  width: 650px;
   
+}
+.Main_container h2 {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 40px;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  color: #378080;
+  text-transform: uppercase;
+}
+
+.form_contents {
+  background: linear-gradient(135deg, #f7f7f7, #ebecf2);
+  border: 0.125px solid #74bfeaad;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-bottom: 30px;
+  color: #384193;
+}
+
+.form_contents form {
+  font-size: 18px;
+  padding-left: 10px;
+}
+.form_contents form input {
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  border: 0.25px solid #1196e348;
+}
+
+.form_contents form input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  color: #6a6060;
+}
+
+.form_contents button {
+  padding: 2px 10px 5px 10px;
+  font-size: 16px;
+  margin-left: 8px;
+  box-shadow: 1px 2px 5px 1px rgb(69, 68, 68);
+  background: linear-gradient(120deg, #616fcb, #2b45eb);
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+.form_contents form .submit {
+  color: #faebd7;
+  background-color: #0d98e6;
+  float: left;
+}
+
+.radio {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: -30px;
+}
+
+@media (min-width: 320px) and (max-width:576px) {
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  button[type="submit"] {
+    width: 80%;
+  }
+  .Main_container {
+    width: 100%;
+    margin: 0px;
+  }
   .Main_container h2 {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 40px;
-    letter-spacing: 0.5px;
-    font-weight: bold;
-    margin-bottom: 50px;
-    color: #378080;
-    text-transform: uppercase;
+    font-size: 30px;
+    padding: 0 5px;
+  }
+  .form_contents {
+    margin: 0px 5px;
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 577px) and (max-width:768px){
+  .Main_container {
+    width: 100%;
+    margin: 0px;
   }
 
+  .Main_container h2 {
+    font-size: 35px;
+  }
   .form_contents {
-    border: 0.125px solid #74bfeaad;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(135deg,#f7f7f7,#ebecf2);
-    align-items: center;
-    margin-inline: 100px;
-    padding: 50px;
-    padding-top: 80px;
-    padding-bottom: 80px;
-    margin-bottom: 30px;
-    color: #384193;
+    margin: 10px 60px; 
   }
-  
-  .form_contents form {
-    font-size: 18px;
-    padding-left: 10px;
+}
+
+@media (min-width:769px)  and (max-width:1024px){
+  .Main_container {
+    width: 100%;
+    margin: 0px;
   }
-  .form_contents form input {
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
-    border: 0.25px solid #1196e348;
+
+  .Main_container h2 {
+    font-size: 40px;
   }
-  
-  .form_contents form input {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 15px;
-    color: #6a6060;
+  .form_contents {
+    margin: 15px 225px; 
+    padding-left: 0px;
+    padding-right: 20px;
   }
-  
-  .form_contents button {
-    padding: 2px 10px 5px 10px;
-    font-size: 16px;
-    margin-left: 8px;
-    box-shadow: 1px 2px 5px 1px rgb(69, 68, 68);
-    background: linear-gradient(120deg,#616fcb,#2b45eb);
-    width: 100px;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
+}
+
+@media (min-width:1025px){
+  .Main_container {
+    width: 100%;
+    margin: 0px;
   }
-  
-  .form_contents form .submit {
-    color: #faebd7;
-    background-color: #0d98e6;
-    float: left;
+  .form_contents {
+    margin: 30px 280px; 
   }
-  
-  .radio {
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-bottom: -30px;
-  }
-  
- 
+}

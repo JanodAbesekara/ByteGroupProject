@@ -43,8 +43,8 @@ header .nav-btn{
 @media (min-width: 320px) and (max-width: 768px){
  
     header .im1{
-        width: 350px;
-        height: 100px;
+        width: 250px;
+        height: 75px;
         padding-left: 15px;
         margin-top: 5px;
         
@@ -66,9 +66,9 @@ header .nav-btn{
         align-items: center;
         justify-content: center;
         gap: 1.5rem;
-        background-color: #708CE0;
-        transition: 1s;
-        transform: translateY(-100vh);
+        background-color: #e7ebf9;
+        transition: 0.2s;
+        transform: translateY(-210vh);
         z-index: 2;
     }
 
@@ -86,22 +86,18 @@ header .nav-btn{
         opacity: 1;
         float: right;
         position: relative;
-        top: 40px;
+        top: 20px;
         padding-right: 20px;
         z-index: 2;
-    }
-     
-    nav a:hover{
-        color: white;
     }
 
 }
 
 @media (min-width: 769px) and (max-width: 1024px){
      header .im1{
-        width: 310px;
+        width: 275px;
         height: 100px;
-        padding-left: 15px;
+        padding-left: 3px;
         margin-top: 8px;
      }
      nav{
@@ -112,15 +108,12 @@ header .nav-btn{
      nav a{
         padding-left: 7px;
         padding-right: 5px;
-        font-size: 14px;
+        font-size: 12px;
         transition: all 0.5s;
      }
      .log{
         border-left: 2px solid #797070;
     }
-   
-    
-
     
 }
 @media (min-width: 1025px) and (max-width: 1200px){

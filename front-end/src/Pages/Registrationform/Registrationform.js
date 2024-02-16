@@ -47,7 +47,7 @@ export default function RegistrationForm() {
               required
               onChange={(e) => setfirstname(e.target.value)}
               style={{
-                width: "350px",
+                width: "280px",
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
@@ -62,7 +62,7 @@ export default function RegistrationForm() {
               required
               onChange={(e) => setlastname(e.target.value)}
               style={{
-                width: "350px",
+                width: "280px",
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
@@ -103,7 +103,7 @@ export default function RegistrationForm() {
               required
               onChange={(e) => setemail(e.target.value)}
               style={{
-                width: "350px",
+                width: "280px",
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",

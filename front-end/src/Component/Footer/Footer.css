@@ -42,7 +42,7 @@
 
 
   
-@media (min-width: 320px) and (max-width: 576px){
+@media (min-width: 320px) and (max-width: 650px){
     .fbox{
         background-color:  #2A303C;
         align-items: center;
@@ -127,7 +127,7 @@
   
      
 
-     @media (min-width: 576px) {
+     @media (min-width: 651px) {
 
         .Footer{
             background-color: #2A303C;

@@ -38,7 +38,6 @@ export default function Footer() {
             <h3>dreamlearnacademy@gmail.com</h3>
           </div>
         </div>
-
         <div className="line"></div>
 
         <div className="fdown">
