@@ -7,20 +7,7 @@ import { BsFileEarmarkPdfFill } from "react-icons/bs";
 import { BiSolidVideos } from "react-icons/bi";
 import { IoMdRadioButtonOn } from "react-icons/io";
 import "./Insideparts.css";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-
-const HtmlTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#f5f5f9",
-    color: "rgba(0, 0, 0, 0.87)",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    border: "1px solid #dadde9",
-  },
-}));
+Subjecttite
 
 const Insidepart = (props) => {
   return (
