@@ -8,10 +8,8 @@ import "./Aaddresources.css";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import axios from "axios";
-
-
-
-//samithamahedhs@gmail.com 12345678
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import app from "../../../firebase";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -26,25 +24,94 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-
-//const[pdfS,setSubjectp]=useState("");
-//const[discriP,setdiscriP]=useState("");
-//const[PDF,setPDF]=useState(null);
-//
-//const[videos, setSubjectv]=useState("");
-//const[discriV,setdiscriV]=useState("");
-//const[video,setvideo]=useState(null);
-//
-//const[audios, setSubjecta]=useState("");
-//const[discriA,setdiscriA]=useState("");
-//const[audio,setaudio]=useState(null);
-
-
 const Aaddresources = () => {
+  const [pdfS, setSubjectp] = useState("");
+  const [discriP, setdiscriP] = useState("");
+  const [PDF, setPDF] = useState(undefined);
 
+  const [videos, setSubjectv] = useState("");
+  const [discriV, setdiscriV] = useState("");
+  const [video, setVideo] = useState(undefined);
 
-
+  const [audios, setSubjecta] = useState("");
+  const [discriA, setdiscriA] = useState("");
+  const [audio, setAudio] = useState(undefined);
  
+
+  const [inputs, setInputs] = useState({undefined});
+
+  useEffect(() => {
+    PDF && uploadFile(PDF, "PDFurl");
+  }, [PDF]);
+
+  useEffect(() => {
+    video && uploadFile(video, "videoUrl");
+  }, [video]);
+
+  useEffect(() => {
+    audio && uploadFile(audio, "audioUrl");
+  }, [audio]);
+
+  const uploadFile = (file, fileType) => {
+    const storage = getStorage(app);
+    const folder =
+      fileType === "PDFurl" ? "PDF/" :
+      fileType === "videoUrl" ? "Video/" :
+      fileType === "audioUrl" ? "Audio/" :
+      "Unknown/";
+    const fileName = new Date().getTime() + "_" + file.name;
+    const storageRef = ref(storage, folder + fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed',
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          window.alert('Upload is ' + progress + '% done');
+          break;
+      }
+    },
+      (error) => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            break;
+          case 'storage/canceled':
+            break;
+          case 'storage/unknown':
+            break;
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('downded URl', downloadURL);
+          setInputs(prev => ({
+            ...prev,
+            [fileType]: downloadURL
+          }));
+        });
+      }
+    );
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setInputs({});
+      setInputs({ ...inputs, pdfS: pdfS, discriP:discriP,videos: videos,discriV: discriV,audios: audios,discriA: discriA});
+      console.log(inputs);
+      const response = await axios.post(`api/auth/fileuplod`,inputs);
+      window.alert(response.data.msg);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -56,7 +123,7 @@ const Aaddresources = () => {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box sx={{ width: "100%", height: "1000px" }}>
             <h1>File upload</h1>
-          <form>
+          <form onSubmit={handleSubmit} >
               <div className="Resourses">
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={4}>
@@ -67,7 +134,7 @@ const Aaddresources = () => {
                       <select
                         name="class"
                         className="select"
-                        //onChange={(e) => setSubjectp(e.target.value)}
+                        onChange={(e) => setSubjectp(e.target.value)}
                       >
                         <option value="">subject</option>
                         <option value="Mathematics">Mathematics</option>
@@ -109,20 +176,21 @@ const Aaddresources = () => {
                       <h5>Discription</h5>
                       <textarea
                         placeholder="Enter some details ..."
-                       // onChange={(e) => setdiscriP(e.target.value)}
+                       onChange={(e) => setdiscriP(e.target.value)}
                       ></textarea>
 
                       <input
                         type="file"
                         className="chose1"
                         accept="application/pdf"
-                       // onChange={(e) => setPDF((prev) => e.target.files[0])}
+                       onChange={(e) => setPDF((prev) => e.target.files[0])}
                         style={{
                           width: "100px",
                           height: "30px",
                           color: "white",
                           backgroundColor: "#2387e8;",
                           border: "none",
+                          cursor: "pointer",
                         }}
                       />
                       <BootstrapTooltip
@@ -130,7 +198,7 @@ const Aaddresources = () => {
                         placement="bottom"
                         arrow
                       >
-                        <button className="uplod1" type="submit">
+                        <button className="uplod1" type="submit" >
                           <IoCloudUploadOutline />
                         </button>
                       </BootstrapTooltip>
@@ -144,7 +212,7 @@ const Aaddresources = () => {
                       <select
                         name="class"
                         className="select"
-                       // onChange={(e) => setSubjectv(e.target.value)}
+                        onChange={(e) => setSubjectv(e.target.value)}
                       >
                         <option value="">subject</option>
                         <option value="Mathematics">Mathematics</option>
@@ -186,14 +254,14 @@ const Aaddresources = () => {
                       <h5>Discription</h5>
                       <textarea
                         placeholder="Enter some details ..."
-                       //  onChange={(e) => setdiscriV(e.target.value)}
+                        onChange={(e) => setdiscriV(e.target.value)}
                       ></textarea>
 
                       <input
                         type="file"
                         className="chose2"
                         accept="video/*"
-                        //onChange={(e) => setvideo((prev) => e.target.files[0])}
+                        onChange={(e) => setVideo((prev) => e.target.files[0])}
                         style={{
                           width: "100px",
                           height: "30px",
@@ -221,7 +289,7 @@ const Aaddresources = () => {
                       <select
                         name="class"
                         className="select"
-                       // onChange={(e) => setSubjecta(e.target.value)}
+                        onChange={(e) => setSubjecta(e.target.value)}
                       >
                         <option value="">subject</option>
                         <option value="Mathematics">Mathematics</option>
@@ -263,14 +331,14 @@ const Aaddresources = () => {
                       <h5>Discription</h5>
                       <textarea
                         placeholder="Enter some details ..."
-                       // onChange={(e) => setdiscriA(e.target.value)}
+                        onChange={(e) => setdiscriA(e.target.value)}
                       ></textarea>
 
                       <input
                         type="file"
                         className="chose3"
                         accept="audio/*"
-                      //  onChange={(e) => setaudio((prev) => e.target.files[0])}
+                       onChange={(e) => setAudio((prev) => e.target.files[0])}
                         style={{
                           width: "100px",
                           height: "30px",

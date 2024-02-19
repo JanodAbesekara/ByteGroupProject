@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
+import cros from 'cors';
 import bodyParser from 'body-parser';
 import dbConnect from './config/dbconnecter.js';
 import authAPI from './apis/authAPI.js';
@@ -14,6 +15,8 @@ dbConnect();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cros());
+app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {

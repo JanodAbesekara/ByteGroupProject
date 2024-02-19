@@ -40,6 +40,17 @@ const files = [
     audioTopic: "Audio Topic",
     audioLink: "Audio Link",
   },
+  {
+    pdfSubject: "PDF Suject",
+    pdfTopic: "PDF Topic",
+    pdfLink: "PDF Link",
+    videoSubject: "Video Suject",
+    videoTopic: "Video Topic",
+    videoLink: "Video Link",
+    audioSubject: "Audio Suject",
+    audioTopic: "Audio Topic",
+    audioLink: "Audio Link",
+  },
 
 ];
 

@@ -91,6 +91,9 @@ h1 {
   box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
 
+button{
+  cursor: pointer;
+}
 .uplod1 {
   position: relative;
   top: 50px;
