@@ -40,6 +40,13 @@
     height: 125px;
     width: 125px;
     margin: 35px;
+    cursor: pointer;
+}
+
+.main_icons .icons img:hover{
+    height: 150px;
+    width: 150px;
+    margin: 35px;
 }
 .main_icons .icons img:last-child{
     width: 160px;

@@ -20,11 +20,11 @@ const fileSchema = new Schema(
             type: String,
            
         },
-        videosub:{
+        videos:{
             type: String,
            
         },  
-        videodis:{
+        discriV:{
             type: String,
            
         },
@@ -32,11 +32,11 @@ const fileSchema = new Schema(
             type: String,
            
         },
-        audiosub:{
+        audios:{
             type: String,
           
         },
-        audiodis:{
+        discriA:{
             type: String,
            
         },

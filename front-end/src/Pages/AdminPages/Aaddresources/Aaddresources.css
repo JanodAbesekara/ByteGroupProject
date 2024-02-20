@@ -90,10 +90,15 @@ h1 {
   bottom: 20px;
   box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
-
-button{
+button {
   cursor: pointer;
 }
+
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .uplod1 {
   position: relative;
   top: 50px;

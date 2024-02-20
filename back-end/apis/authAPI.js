@@ -25,6 +25,6 @@ router.get("/verifyToken", verifyTokenController);
 // Reset password
 router.post("/resetpassword", resetpasswordController);
 
-router.post("/fileuplod", fileuplodController);
+router.post("/fileupload", fileuplodController);
 
 export default router;
