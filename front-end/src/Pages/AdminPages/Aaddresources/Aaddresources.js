@@ -107,6 +107,7 @@ const Aaddresources = () => {
             break;
           case "running":
             // window.alert("Upload is " + progress + "% done");
+            
             break;
         }
       },

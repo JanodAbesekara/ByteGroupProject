@@ -19,18 +19,6 @@ const fileuplodController = async (req, res) => {
       .json({ Success: false, msg: "At least one file is required" });
   }
 
-  console.log(
-    PDFurl,
-    pdfS,
-    discriP,
-    videoUrl,
-    videos,
-    discriV,
-    audioUrl,
-    audios,
-    discriA
-  );
-
   try {
     if (PDFurl) {
       const existingPDF = await files.findOne({ discriP: discriP });
@@ -82,4 +70,24 @@ const fileuplodController = async (req, res) => {
   }
 };
 
-export { fileuplodController };
+
+const fileurlcontroller = async (req,res) => {
+  
+ try{
+  const filesurl = await files.find({});
+
+    return res
+    .status(400)
+    .json({Success:true, data:filesurl})
+  
+ } catch (err) {
+    return res
+      .status(500)
+      .json({ Success: false, msg: "Internal Server Error" });
+      
+  } 
+
+  
+};
+
+export { fileuplodController,fileurlcontroller };
