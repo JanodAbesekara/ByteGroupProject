@@ -2,42 +2,25 @@ import React, { useEffect, useState } from "react";
 import "./Library.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
-import TableComponent from "./Component/TableComponent"; // Corrected import name
+import TableComponent from "./Component/Tablecomponenet";
 import axios from "axios";
 
 const Library = () => {
-  const [data, setData] = useState([]);
-
+  const [files, setFiles] = useState([]);
+  const[list, setlist] = useState();
   useEffect(() => {
-    axios.get('/api/auth/fileurlsend')
-      .then(response => {
-        // Handle the response data
-        setData(response.data.data); // Assuming the data is structured as { success: true, data: files }
-        conv
-      })
-      .catch(error => {
-        // Handle errors
-        console.error('Error fetching data:', error);
-      });
+
+    getFille();
+
   }, []);
 
-  const files = [
-    {
-      pdfSubject: "PDF Suject",
-      pdfTopic: "PDF Topic",
-      pdfLink: "PDF Link",
-    },
-    {
-      videoSubject: "Video Suject",
-      videoTopic: "Video Topic",
-      videoLink: "Video Link",
-    },
-    {
-      audioSubject: "Audio Suject",
-      audioTopic: "Audio Topic",
-      audioLink: "Audio Link",
-    },
-  ];
+  const getFille = () => {
+    axios.get(`api/auth/fileurlsend`, files).then((response) => {
+      setFiles(response?.data?.data[0] || []);
+
+      console.log(response.data.data[0]);
+    });
+  }
 
   return (
     <div>
@@ -46,7 +29,7 @@ const Library = () => {
         <h2>Knowledge on your fingertips </h2>
       </div>
       <div className="sb1">
-        <TableComponent rows={files} /> {/* Pass the fetched data to the TableComponent */}
+        <TableComponent rows={files} />
       </div>
       <Footer />
     </div>
