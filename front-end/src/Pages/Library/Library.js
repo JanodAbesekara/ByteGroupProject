@@ -6,6 +6,7 @@ import TableComponent from "./Component/Tablecomponenet";
 import axios from "axios";
 
 const Library = () => {
+<<<<<<< Updated upstream
   const [files, setFiles] = useState([]);
   const[list, setlist] = useState();
   useEffect(() => {
@@ -13,6 +14,9 @@ const Library = () => {
     getFille();
 
   }, []);
+=======
+ 
+>>>>>>> Stashed changes
 
   const getFille = () => {
     axios.get(`api/auth/fileurlsend`, files).then((response) => {
