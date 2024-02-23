@@ -12,24 +12,13 @@ const fileuplodController = async (req, res) => {
     audios,
     discriA,
   } = req.body;
+  
 
   if (!PDFurl && !videoUrl && !audioUrl) {
     return res
       .status(400)
       .json({ Success: false, msg: "At least one file is required" });
   }
-
-  console.log(
-    PDFurl,
-    pdfS,
-    discriP,
-    videoUrl,
-    videos,
-    discriV,
-    audioUrl,
-    audios,
-    discriA
-  );
 
   try {
     if (PDFurl) {
@@ -82,4 +71,23 @@ const fileuplodController = async (req, res) => {
   }
 };
 
-export { fileuplodController };
+const fileurlcontroller = async (req, res) => {
+  try {
+    const filesurl = await files.find({});
+    const oldurl = await files.findOne({ filesurl });
+
+    if (oldurl) {
+      return res
+        .status(403)
+        .json({ Success: false, msg: "File already exists" });
+    } else {
+      return res.status(200).json({ Success: true, data: filesurl });
+    }
+  } catch (err) {
+    console.error("Error saving file:", err);
+    res.status(500).json({ Success: false, msg: "Internal Server Error" });
+  }
+};
+
+export { fileuplodController, fileurlcontroller };
+

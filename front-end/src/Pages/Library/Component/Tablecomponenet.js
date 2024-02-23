@@ -26,101 +26,112 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 }));
 
 const TableComponent = ({ rows }) => {
+  const pdfRows = rows.filter((row) => row.pdfLink);
+  const videoRows = rows.filter((row) => row.videoLink);
+  const audioRows = rows.filter((row) => row.audioLink);
+
   return (
     <div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell sx={{ textAlign: "center", fontSize: "15px" }}>
+            <TableRow sx={{marginBottom:"20px"}}>
+              <TableCell sx={{  fontSize: "20px",paddingInlineStart: "30px" }}>
                 PDF
               </TableCell>
-              <TableCell sx={{ textAlign: "center", fontSize: "15px" }}>
+              <TableCell sx={{  fontSize: "20px" }}>
                 Video
               </TableCell>
-              <TableCell sx={{ textAlign: "center", fontSize: "15px" }}>
+              <TableCell sx={{  fontSize: "20px" , textAlign:"center"}}>
                 Audio
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {
-            rows.length > 0 ? rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell component= 'th' scope="row">
-                  <Link
-                    to={row.pdfLink}
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      paddingLeft: "40px",
-                    }}
-                  >
-                    <HtmlTooltip title={row.pdfTopic}>
-                      <FaFilePdf
+            {Math.max(pdfRows.length, videoRows.length, audioRows.length) > 0 ? (
+              Array.from({ length: Math.max(pdfRows.length, videoRows.length, audioRows.length) }).map((_, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    {pdfRows[index] && (
+                      <Link
+                        to={pdfRows[index].pdfLink}
                         style={{
-                          color: "#FF0000",
-                          width: "20px",
-                          height: "20px",
+                          textDecoration: "none",
+                          color: "black",
+                          paddingLeft: "10px",
                         }}
-                      />
-                        {row.pdfSubject}
-                    </HtmlTooltip>
-                  </Link>
-                </TableCell>
-                <TableCell  component= 'th' scope="row">
-                  <Link
-                    to={row.videoLink}
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      paddingLeft: "100px",
-                      
-                    }}
-                  >
-                   
-                    <HtmlTooltip title={row.videoTopic}>
-                      <FaFileVideo
+                      >
+                        <HtmlTooltip title={pdfRows[index].pdfTopic}>
+                          <FaFilePdf
+                            style={{
+                              color: "#FF0000",
+                              width: "20px",
+                              height: "20px",
+                            }}
+                          />
+                          {pdfRows[index].pdfSubject}
+                        </HtmlTooltip>
+                      </Link>
+                    )}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {videoRows[index] && (
+                      <Link
+                        to={videoRows[index].videoLink}
                         style={{
-                          color: "#0033E7",
-                          width: "20px",
-                          height: "20px",
+                          textDecoration: "none",
+                          color: "black",
+                          paddingLeft: "10px",
                         }}
-                      />
-                       {row.videoSubject}
-                    </HtmlTooltip>
-                  </Link>
-                </TableCell>
-                <TableCell  component= 'th' scope="row">
-                  <Link
-                    to={row.audioLink}
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      paddingLeft: "20px",
-                    }}
-                  >
-                      
-                    <HtmlTooltip title={row.audioTopic}>
-                      <FaFileAudio
+                      >
+                        <HtmlTooltip title={videoRows[index].videoTopic}>
+                          <FaFileVideo
+                            style={{
+                              color: "#0033E7",
+                              width: "20px",
+                              height: "20px",
+                            }}
+                          />
+                          {videoRows[index].videoSubject}
+                        </HtmlTooltip>
+                      </Link>
+                    )}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {audioRows[index] && (
+                      <Link
+                        to={audioRows[index].audioLink}
                         style={{
-                          color: "#b6891c",
-                          width: "20px",
-                          height: "20px",
+                          textDecoration: "none",
+                          color: "black",
+                          paddingLeft: "2px",
+                          alignContent: "center",
+                        
                         }}
-                      />
-                      {row.audioSubject}
-                    </HtmlTooltip>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            )):(
+                      >
+                        <HtmlTooltip title={audioRows[index].audioTopic}>
+                          <FaFileAudio
+                            style={{
+                              color: "#b6891c",
+                              width: "20px",
+                              height: "20px",
+                            }}
+                          />
+                          {audioRows[index].audioSubject}
+                        </HtmlTooltip>
+                      </Link>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
               <TableRow>
-                <TableCell  component= 'th' scope="row"> No Data</TableCell>
+                <TableCell component="th" scope="row" colSpan={3}>
+                  No Data
+                </TableCell>
               </TableRow>
-            )
-          }
+            )}
           </TableBody>
         </Table>
       </TableContainer>

@@ -1,13 +1,13 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
 import { BsFileEarmarkPdfFill } from "react-icons/bs";
 import { BiSolidVideos } from "react-icons/bi";
 import { IoMdRadioButtonOn } from "react-icons/io";
+import HtmlTooltip from "./HtmlTooltip";
 import "./Insideparts.css";
-Subjecttite
+
 
 const Insidepart = (props) => {
   return (
@@ -77,8 +77,7 @@ const Insidepart = (props) => {
                     <React.Fragment>
                      {props.p2}
                     </React.Fragment>
-                  }
-                >
+                  } >
                   <Link style={{ textDecoration: "none" }}>
                     <span>
                       <BiSolidVideos
