@@ -6,25 +6,23 @@ import TableComponent from "./Component/Tablecomponenet";
 import axios from "axios";
 
 const Library = () => {
-<<<<<<< Updated upstream
   const [files, setFiles] = useState([]);
-  const[list, setlist] = useState();
+
   useEffect(() => {
-
     getFille();
-
   }, []);
-=======
- 
->>>>>>> Stashed changes
 
   const getFille = () => {
-    axios.get(`api/auth/fileurlsend`, files).then((response) => {
-      setFiles(response?.data?.data[0] || []);
-
-      console.log(response.data.data[0]);
-    });
-  }
+    axios
+      .get(`api/auth/fileurlsend`)
+      .then((response) => {
+        setFiles(response?.data?.data || []);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
   return (
     <div>
@@ -33,7 +31,19 @@ const Library = () => {
         <h2>Knowledge on your fingertips </h2>
       </div>
       <div className="sb1">
-        <TableComponent rows={files} />
+        <TableComponent
+          rows={files.map((file) => ({
+            pdfLink: file.PDFurl,
+            pdfTopic: file.discriP,
+            videoLink: file.videoUrl,
+            videoTopic: file.discriV,
+            audioLink: file.audioUrl,
+            audioTopic: file.audios,
+            pdfSubject: file.pdfS,
+            videoSubject: file.videos,
+            audioSubject: file.audios,
+          }))}
+        />
       </div>
       <Footer />
     </div>
