@@ -56,6 +56,7 @@ const TableComponent = ({ rows }) => {
                     {pdfRows[index] && (
                       <Link
                         to={pdfRows[index].pdfLink}
+                        target="_blank"
                         style={{
                           textDecoration: "none",
                           color: "black",
@@ -79,6 +80,7 @@ const TableComponent = ({ rows }) => {
                     {videoRows[index] && (
                       <Link
                         to={videoRows[index].videoLink}
+                        target="_blank"
                         style={{
                           textDecoration: "none",
                           color: "black",
@@ -101,7 +103,8 @@ const TableComponent = ({ rows }) => {
                   <TableCell component="th" scope="row">
                     {audioRows[index] && (
                       <Link
-                        to={audioRows[index].audioLink}
+                        to={audioRows[index].audioLink} 
+                        target="_blank"
                         style={{
                           textDecoration: "none",
                           color: "black",
