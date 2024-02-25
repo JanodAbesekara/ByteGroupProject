@@ -45,6 +45,10 @@ const Aaddresources = () => {
   const [audio, setAudio] = useState(undefined);
   const [doneUploadAudio, setDoneUploadAudio] = useState(false);
 
+ // const [pdfper, setpdfper] = useState(0);
+ // const [vidper, setvidper] = useState(0);
+ // const [audper, setaudper] = useState(0);
+
   const [submitButton, setSubmitButton] = useState(false);
   const [inputs, setInputs] = useState(undefined);
 
@@ -58,7 +62,7 @@ const Aaddresources = () => {
         console.error("Error:", error);
       }
     };
-    if (submitButton===true) {
+    if (submitButton === true) {
       fetchData();
       setSubmitButton(false);
       setDoneUploadPDF(false);
@@ -101,13 +105,22 @@ const Aaddresources = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
+
+      //  if (fileType === "PDFurl") {
+      //    setpdfper(Math.round(progress));
+      //  } else if (fileType === "videoUrl") {
+      //    setvidper(Math.round(progress));
+      //  } else if (fileType === "audioUrl") {
+      //    setaudper(Math.round(progress));
+      //  }
+//
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
             break;
           case "running":
             // window.alert("Upload is " + progress + "% done");
-            
+
             break;
         }
       },
@@ -128,11 +141,11 @@ const Aaddresources = () => {
             ...prev,
             [fileType]: downloadURL,
           }));
-          if(folder==="PDF/"){
+          if (folder === "PDF/") {
             setDoneUploadPDF(true);
-          }else if(folder==="Video/"){
+          } else if (folder === "Video/") {
             setDoneUploadVideo(true);
-          }else if(folder==="Audio/"){
+          } else if (folder === "Audio/") {
             setDoneUploadAudio(true);
           }
         });
@@ -218,34 +231,36 @@ const Aaddresources = () => {
                         onChange={(e) => setdiscriP(e.target.value)}
                       ></textarea>
 
-                      <input
-                        type="file"
-                        className="chose1"
-                        accept="application/pdf"
-                        onChange={(e) => setPDF(e.target.files[0])}
-                        style={{
-                          width: "100px",
-                          height: "30px",
-                          color: "white",
-                          backgroundColor: "#2387e8",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                      />
-
                       <BootstrapTooltip
-                        title="Upload PDF"
+                        title="Chose PDF only "
                         placement="bottom"
                         arrow
                       >
-                        <button
-                          className="uplod1"
-                          disabled={!doneUploadPDF}
-                          type="submit"
-                        >
-                          <IoCloudUploadOutline />
-                        </button>
+                        <input
+                          type="file"
+                          className="chose1"
+                          accept="application/pdf"
+                          onChange={(e) => setPDF(e.target.files[0])}
+                          style={{
+                            width: "100px",
+                            height: "30px",
+                            color: "white",
+                            backgroundColor: "#2387e8",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        />
                       </BootstrapTooltip>
+
+                      <button
+                        className="uplod1"
+                        disabled={!doneUploadPDF}
+                        type="submit"
+                      >
+                        <IoCloudUploadOutline />
+                      </button>
+
+                    
                     </div>
                   </form>
                 </Grid>
@@ -302,33 +317,34 @@ const Aaddresources = () => {
                         placeholder="Enter some details ..."
                         onChange={(e) => setdiscriV(e.target.value)}
                       ></textarea>
-
-                      <input
-                        type="file"
-                        className="chose2"
-                        accept="video/*"
-                        onChange={(e) => setVideo(e.target.files[0])}
-                        style={{
-                          width: "100px",
-                          height: "30px",
-                          color: "white",
-                          backgroundColor: "#2387e8;",
-                          border: "none",
-                        }}
-                      />
                       <BootstrapTooltip
-                        title="Upload Video"
+                        title="Chose Videoes only"
                         placement="bottom"
                         arrow
                       >
-                        <button
-                          className="uplod2"
-                          disabled={!doneUploadVideo}
-                          type="submit"
-                        >
-                          <IoCloudUploadOutline />
-                        </button>
+                        <input
+                          type="file"
+                          className="chose2"
+                          accept="video/*"
+                          onChange={(e) => setVideo(e.target.files[0])}
+                          style={{
+                            width: "100px",
+                            height: "30px",
+                            color: "white",
+                            backgroundColor: "#2387e8;",
+                            border: "none",
+                          }}
+                        />
                       </BootstrapTooltip>
+
+                      <button
+                        className="uplod2"
+                        disabled={!doneUploadVideo}
+                        type="submit"
+                      >
+                        <IoCloudUploadOutline />
+                      </button>
+
                     </div>
                   </form>
                 </Grid>
@@ -385,30 +401,31 @@ const Aaddresources = () => {
                         placeholder="Enter some details ..."
                         onChange={(e) => setdiscriA(e.target.value)}
                       ></textarea>
-
-                      <input
-                        type="file"
-                        className="chose3"
-                        accept="audio/*"
-                        onChange={(e) => setAudio(e.target.files[0])}
-                        style={{
-                          width: "100px",
-                          height: "30px",
-                        }}
-                      />
                       <BootstrapTooltip
-                        title="Upload Audio"
+                        title="Chose Audio only"
                         placement="bottom"
                         arrow
                       >
-                        <button
-                          className="uplod3"
-                          disabled={!doneUploadAudio}
-                          type="submit"
-                        >
-                          <IoCloudUploadOutline />
-                        </button>
+                        <input
+                          type="file"
+                          className="chose3"
+                          accept="audio/*"
+                          onChange={(e) => setAudio(e.target.files[0])}
+                          style={{
+                            width: "100px",
+                            height: "30px",
+                          }}
+                        />
                       </BootstrapTooltip>
+                      <button
+                        className="uplod3"
+                        disabled={!doneUploadAudio}
+                        type="submit"
+                      >
+                        <IoCloudUploadOutline />
+                      </button>
+
+                   
                     </div>
                   </form>
                 </Grid>
