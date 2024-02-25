@@ -17,11 +17,6 @@ const Quise = [
   {
     Subject: "Science",
     Date: "2022-09-01",
-    time: "30 minutes",
-  },
-  {
-    Subject: "Science",
-    Date: "2022-09-01",
     time: "60 minutes",
   },
   {
