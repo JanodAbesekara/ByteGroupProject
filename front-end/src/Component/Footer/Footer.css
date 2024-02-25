@@ -20,6 +20,8 @@
 .rme h2{
     font-weight: normal;
     padding-left: 20px;
+    position: relative;
+    bottom: 15px;
 }
 
 .lme{
