@@ -62,7 +62,7 @@ export default function Login({ setUser, setIsLoggedIn }) {
 
           const jobRole = decodedToken.role;
 
-          if (jobRole === "Lecture") {
+          if (jobRole === "Lecturer") {
             navigate("/TDashbord");
           } else if (jobRole === "Student") {
             navigate("/SDashbord");

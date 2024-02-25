@@ -6,6 +6,7 @@ import {
   resetpasswordController,
 } from "../controllers/authController.js";
 import verifyTokenController from "../controllers/verifyTokenController.js";
+import { fileuplodController,fileurlcontroller} from "../controllers/filehandle.js";
 
 const router = express.Router();
 
@@ -23,5 +24,9 @@ router.get("/verifyToken", verifyTokenController);
 
 // Reset password
 router.post("/resetpassword", resetpasswordController);
+
+router.post("/fileupload", fileuplodController);
+
+router.get("/fileurlsend", fileurlcontroller);
 
 export default router;

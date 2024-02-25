@@ -90,6 +90,14 @@ h1 {
   bottom: 20px;
   box-shadow: 1px 1px 3px 0.8px rgb(25, 3, 75);
 }
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 .uplod1 {
   position: relative;
@@ -177,22 +185,23 @@ textarea {
     height: 300px;
   }
   .Resourses h4 {
-    margin-left: 10px;
+    margin-left: 25px;
   }
   .select {
     padding: 5px 0px 5px 2px;
     font-size: 15px;
     margin-bottom: 20px;
-    width: 220px;
+    width: 210px;
     margin-left: 10px;
   }
   textarea {
-    height: 40px;
+    height: 60px;
     margin-left: 10px;
+    width: 210px;
   }
 
   .Resourses h5 {
-    margin-left: 25px;
+    margin-left: 40px;
     position: relative;
     top: 0px;
     font-size: 15px;
@@ -200,27 +209,33 @@ textarea {
 
   .chose3 {
     position: relative;
-    bottom: 40px;
+    bottom: 30px;
+    left: 62px;
   }
   .uplod3 {
     position: relative;
-    top: 20px;
+    top: -30px;
+    left: 10px;
   }
   .chose2 {
     position: relative;
-    bottom: 40px;
+    bottom: 30px;
+    left: 62px;
   }
   .uplod2 {
     position: relative;
-    top: 20px;
+    top: -30px;
+    left: 10px;
   }
   .chose1 {
     position: relative;
-    bottom: 40px;
+    bottom: 30px;
+    left: 62px;
   }
   .uplod1 {
     position: relative;
-    top: 20px;
+    top: -30px;
+    left: 10px;
   }
 }
 

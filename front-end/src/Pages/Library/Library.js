@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Library.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
-import Insidepart from "./Component/Insidepart/Insidepart";
-
-
-const p01 = "This is a peradgraph of organic chemisy=try"
-const p02 = "This a pdf aboutt a light and so=und waves"
+import TableComponent from "./Component/Tablecomponenet";
+import axios from "axios";
 
 const Library = () => {
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    getFille();
+  }, []);
+
+  const getFille = () => {
+    axios
+      .get(`api/auth/fileurlsend`)
+      .then((response) => {
+        setFiles(response?.data?.data || []);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
   return (
     <div>
       <Navbar />
@@ -16,8 +31,19 @@ const Library = () => {
         <h2>Knowledge on your fingertips </h2>
       </div>
       <div className="sb1">
-        <Insidepart s1="Chemistry" v1="Organic " v2="Calcualtion" v3="sound" p1={p01} />
-        <Insidepart s1="Physics" v1="pdf" v2="brr" v3="adas" p2={p02} />
+        <TableComponent
+          rows={files.map((file) => ({
+            pdfLink: file.PDFurl,
+            pdfTopic: file.discriP,
+            videoLink: file.videoUrl,
+            videoTopic: file.discriV,
+            audioLink: file.audioUrl,
+            audioTopic: file.audios,
+            pdfSubject: file.pdfS,
+            videoSubject: file.videos,
+            audioSubject: file.audios,
+          }))}
+        />
       </div>
       <Footer />
     </div>

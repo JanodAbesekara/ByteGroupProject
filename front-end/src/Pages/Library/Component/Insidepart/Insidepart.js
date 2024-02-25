@@ -1,26 +1,13 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
 import { BsFileEarmarkPdfFill } from "react-icons/bs";
 import { BiSolidVideos } from "react-icons/bi";
 import { IoMdRadioButtonOn } from "react-icons/io";
+import HtmlTooltip from "./HtmlTooltip";
 import "./Insideparts.css";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
 
-const HtmlTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#f5f5f9",
-    color: "rgba(0, 0, 0, 0.87)",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    border: "1px solid #dadde9",
-  },
-}));
 
 const Insidepart = (props) => {
   return (
@@ -90,8 +77,7 @@ const Insidepart = (props) => {
                     <React.Fragment>
                      {props.p2}
                     </React.Fragment>
-                  }
-                >
+                  } >
                   <Link style={{ textDecoration: "none" }}>
                     <span>
                       <BiSolidVideos
