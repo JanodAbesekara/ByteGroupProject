@@ -76,7 +76,7 @@
          padding: 5px 0px 30px 5px;
          border-radius: 5px;
          background-color: antiquewhite;
-         position: inherit;
+         position:relative;
          right: 10px;
      }
      .lme{
@@ -128,13 +128,12 @@
      }
 
     }
-
   
-    
+
     @media (min-width: 415px) and (max-width: 600px){
         .rme .in2{
             position: relative;
-            left: 0px;
+            left: -8px;
         }
     }
 
@@ -231,6 +230,22 @@
         }   
 
      }
+
+     @media (min-width: 320px) and (max-width: 576px){
+
+        .seb{
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 3px 10px 3px 10px;
+            margin-left: 0px;   
+            width: 20%;
+            height: 30px;
+            position: relative;
+            
+         }
+    }
+    
 
   
 
