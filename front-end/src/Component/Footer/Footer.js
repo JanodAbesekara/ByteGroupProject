@@ -12,6 +12,13 @@ function Footer() {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const message = form.current.message.value.trim();
+
+    if (!message) {
+      window.alert('Please fill the message field');
+      return;
+    }
+
     emailjs
       .sendForm('service_1gpq132', 'template_7ydso0h',form.current, {
         publicKey: 'KCo3zZMarlBJtwG3E',

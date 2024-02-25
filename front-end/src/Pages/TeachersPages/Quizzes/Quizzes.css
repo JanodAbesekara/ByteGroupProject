@@ -1,0 +1,23 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.Quibox{
+    margin-top: 50px;
+    width: 80%;
+    background-color: rgb(222, 216, 216);
+    height: 150px;
+    padding: 20px;
+    margin-inline: 50px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0.5px #6f6e6e;
+    margin-bottom: 40px;
+}
+
+.Quibox button{
+    float: right;
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+}
