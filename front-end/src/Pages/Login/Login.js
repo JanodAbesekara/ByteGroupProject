@@ -61,14 +61,20 @@ export default function Login({ setUser, setIsLoggedIn }) {
           setIsLoggedIn(true);
 
           const jobRole = decodedToken.role;
+          const encodedid = encodeURIComponent(decodedToken._id);
+
+     
+           
 
           if (jobRole === "Lecturer") {
-            navigate("/TDashbord");
+            navigate(`/TDashbord?$phw=${encodedid}`);
           } else if (jobRole === "Student") {
-            navigate("/SDashbord");
+            navigate(`/SDashbord?$phw=${encodedid}`);
           } else {
-            navigate("/ADashbord");
+            navigate(`/ADashbord?$phw=${encodedid}`);
           }
+          
+          
         } else {
           console.error("Unexpected response format:", response);
         }

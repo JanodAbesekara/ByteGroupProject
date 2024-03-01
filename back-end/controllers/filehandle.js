@@ -65,7 +65,7 @@ const fileuplodController = async (req, res) => {
         .json({ Success: true, msg: "Audio uploaded successfully" });
     }
   } catch (err) {
-    return res
+    return res 
       .status(500)
       .json({ Success: false, msg: "Internal Server Error" });
   }

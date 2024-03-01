@@ -36,6 +36,7 @@ import SQuizzes from "./Pages/StudentPages/SQuizzes/SQuizzes";
 import SSubject from "./Pages/StudentPages/SSubject/SSubject";
 import STeachers from "./Pages/StudentPages/STeachers/STeachers"; 
 import Login from "./Pages/Login/Login";
+import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
 
 
 function App() {
@@ -110,6 +111,7 @@ function App() {
           <Route path="/SQuizzes" element={<SQuizzes/>}/>
           <Route path="/SSubject" element={<SSubject/>}/>
           <Route path="/STeachers" element={<STeachers/>}/>
+          <Route path="/Enterquizes" element={<Enterquizes/>}/>
         </Routes>
         
       </div>

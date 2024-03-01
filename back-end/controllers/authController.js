@@ -83,6 +83,10 @@ const loginController = async (req, res) => {
         return res.status(200).json({ success: true, token, msg: "You are successfully logged in" });
 };
 
+
+
+
+
 const forgotpasswordController = async (req, res) => {
     const { email } = req.body;
 
