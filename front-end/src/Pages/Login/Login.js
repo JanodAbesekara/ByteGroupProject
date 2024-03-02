@@ -27,7 +27,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function Login({ setUser, setIsLoggedIn }) {
+ function Login({ setUser, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -173,3 +173,5 @@ export default function Login({ setUser, setIsLoggedIn }) {
     </div>
   );
 }
+
+export default Login;

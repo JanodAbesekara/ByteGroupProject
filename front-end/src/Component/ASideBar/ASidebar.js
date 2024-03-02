@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import { IoMdHeadset } from "react-icons/io";
 import { RiDashboard3Fill } from "react-icons/ri";
 import "./ASidebar.css";
+import { jwtDecode } from "jwt-decode";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -27,47 +28,74 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
+const token = localStorage.getItem("MERN_AUTH_TOKEN");
+const decodedToken = jwtDecode(token);
+
+const jobRole = decodedToken.role;
+
+
+
+const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : '';
+
+
+
+
 const sidebarItems = [
   {
     name: "Dashboard",
+<<<<<<< Updated upstream
     href: "/ADashbord",
     icon: RiDashboard3Fill,
+=======
+    href: `/ADashbord?$phw=${encodedid}`,
+    icon: RiDashboard3Fill ,
+>>>>>>> Stashed changes
     Title: "Dashboard",
   },
   {
     name: "ADS Manager",
-    href: "/AADSmanager",
+    href: `/AADSmanager?$phw=${encodedid}`,
     icon: IoMdHeadset,
     Title: "ADS Manager",
   },
 
   {
     name: "Feedback Manager",
+<<<<<<< Updated upstream
     href: "/Afeedacks",
     icon: VscFeedback,
+=======
+    href: `/Afeedacks?$phw=${encodedid}`,
+    icon: VscFeedback ,
+>>>>>>> Stashed changes
     Title: "Feedback Manager",
   },
   {
     name: "Announcement ",
-    href: "/AAnnouncement",
+    href: `/AAnnouncement?$phw=${encodedid}`,
     icon: TfiAnnouncement,
     Title: "Announcement Manager",
   },
   {
     name: "Add Resources",
-    href: "/Aaddresources",
+    href: `/Aaddresources?$phw=${encodedid}`,
     icon: GrResources,
     Title: "Add Resources",
   },
   {
     name: "Teachers",
+<<<<<<< Updated upstream
     href: "/Ateacher",
     icon: LiaChalkboardTeacherSolid,
+=======
+    href: `/Ateacher?$phw=${encodedid}`,
+    icon:  LiaChalkboardTeacherSolid ,
+>>>>>>> Stashed changes
     Title: "Teachers",
   },
   {
     name: "Students",
-    href: "/Astudent",
+    href: `/Astudent?$phw=${encodedid}`,
     icon: PiStudent,
     Title: "Students",
   },
