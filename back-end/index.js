@@ -1,11 +1,11 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import express from 'express';
-import cros from 'cors';
-import bodyParser from 'body-parser';
-import dbConnect from './config/dbconnecter.js';
-import authAPI from './apis/authAPI.js';
-import emailAPI from './apis/emailAPI.js';
+import express from "express";
+import cros from "cors";
+import bodyParser from "body-parser";
+import dbConnect from "./config/dbconnecter.js";
+import authAPI from "./apis/authAPI.js";
+import emailAPI from "./apis/emailAPI.js";
 
 const app = express();
 
@@ -20,16 +20,12 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-    res.send(" It's mern ");
+  res.send(" It's mern ");
 });
 
 // APIs
 app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
-
-
-
-
 
 // Port
 const port = process.env.PORT || 6000;

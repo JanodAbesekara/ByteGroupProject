@@ -3,14 +3,20 @@ import Postmodels from "../models/Postmodels.js";
 const postupdateController = async (req, res) => {
   const { photosURL, edulevel, subject, medium, pagelink } = req.body;
 
-  if (!edulevel || !medium || !photosURL || !subject || !pagelink ) {
+  if (!edulevel || !medium || !photosURL || !subject || !pagelink) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill in all the fields" });
   }
 
   try {
-    const newpost = new Postmodels({ photosURL, edulevel, subject, medium , pagelink });
+    const newpost = new Postmodels({
+      photosURL,
+      edulevel,
+      subject,
+      medium,
+      pagelink,
+    });
     await newpost.save();
     return res
       .status(200)
@@ -43,7 +49,7 @@ const postDetailsControl = async (req, res) => {
 
 const ubdatePostcontrolre = async (req, res) => {
   try {
-    const { photosURL, edulevel, subject, medium ,pagelink } = req.body;
+    const { photosURL, edulevel, subject, medium, pagelink } = req.body;
 
     if (!photosURL) {
       return res

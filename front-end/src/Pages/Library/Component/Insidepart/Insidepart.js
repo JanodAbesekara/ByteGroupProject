@@ -8,7 +8,6 @@ import { IoMdRadioButtonOn } from "react-icons/io";
 import HtmlTooltip from "./HtmlTooltip";
 import "./Insideparts.css";
 
-
 const Insidepart = (props) => {
   return (
     <div
@@ -34,18 +33,13 @@ const Insidepart = (props) => {
               className="G1"
             >
               <h3>PDF</h3>
-              <HtmlTooltip
-                title={
-                  <React.Fragment>
-                   {props.p1}
-                  </React.Fragment>
-                }
-              >
+              <HtmlTooltip title={<React.Fragment>{props.p1}</React.Fragment>}>
                 <Link style={{ textDecoration: "none" }}>
                   <span>
                     <BsFileEarmarkPdfFill
-                      style={{ color: "Red", width: "30px", height: "30px" }}  
-                      arrow/>
+                      style={{ color: "Red", width: "30px", height: "30px" }}
+                      arrow
+                    />
                   </span>
                   <span
                     style={{
@@ -55,7 +49,6 @@ const Insidepart = (props) => {
                     }}
                   >
                     {props.v1}
-                   
                   </span>
                 </Link>
               </HtmlTooltip>
@@ -73,11 +66,8 @@ const Insidepart = (props) => {
               >
                 <h3>Video</h3>
                 <HtmlTooltip
-                  title={
-                    <React.Fragment>
-                     {props.p2}
-                    </React.Fragment>
-                  } >
+                  title={<React.Fragment>{props.p2}</React.Fragment>}
+                >
                   <Link style={{ textDecoration: "none" }}>
                     <span>
                       <BiSolidVideos
@@ -112,11 +102,7 @@ const Insidepart = (props) => {
               >
                 <h3>Audio</h3>
                 <HtmlTooltip
-                  title={
-                    <React.Fragment>
-                      {props.p3}
-                    </React.Fragment>
-                  }
+                  title={<React.Fragment>{props.p3}</React.Fragment>}
                 >
                   <Link style={{ textDecoration: "none" }}>
                     <span>

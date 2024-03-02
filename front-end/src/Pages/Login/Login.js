@@ -63,9 +63,6 @@ export default function Login({ setUser, setIsLoggedIn }) {
           const jobRole = decodedToken.role;
           const encodedid = encodeURIComponent(decodedToken._id);
 
-     
-           
-
           if (jobRole === "Lecturer") {
             navigate(`/TDashbord?$phw=${encodedid}`);
           } else if (jobRole === "Student") {
@@ -73,8 +70,6 @@ export default function Login({ setUser, setIsLoggedIn }) {
           } else {
             navigate(`/ADashbord?$phw=${encodedid}`);
           }
-          
-          
         } else {
           console.error("Unexpected response format:", response);
         }
@@ -96,12 +91,23 @@ export default function Login({ setUser, setIsLoggedIn }) {
     <div>
       <Navbar />
       <div className="login_main">
-        <div className="login_m2" style={{ backgroundColor:"#e2e0e0e9", width: "100%", height: "40px"}}> </div>
+        <div
+          className="login_m2"
+          style={{
+            backgroundColor: "#e2e0e0e9",
+            width: "100%",
+            height: "40px",
+          }}
+        >
+          {" "}
+        </div>
         <div className="login_h3">
           <h2>Login</h2>
         </div>
         <form className="login_label" onSubmit={handleSubmit}>
-          <label htmlFor="Username_or_Email"><span style={{ color: "red" }}>*</span>Username</label>
+          <label htmlFor="Username_or_Email">
+            <span style={{ color: "red" }}>*</span>Username
+          </label>
           <br></br>
           <input
             className="Name"
@@ -113,7 +119,9 @@ export default function Login({ setUser, setIsLoggedIn }) {
             value={email}
           />
           <br></br>
-          <label htmlFor="password"><span style={{ color: "red" }}>*</span>password</label>
+          <label htmlFor="password">
+            <span style={{ color: "red" }}>*</span>password
+          </label>
           <br></br>
           <input
             type="password"

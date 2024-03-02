@@ -35,22 +35,27 @@ const TableComponent = ({ rows }) => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow sx={{marginBottom:"20px"}}>
-              <TableCell sx={{  fontSize: "20px",paddingInlineStart: "30px" }}>
+            <TableRow sx={{ marginBottom: "20px" }}>
+              <TableCell sx={{ fontSize: "20px", paddingInlineStart: "30px" }}>
                 PDF
               </TableCell>
-              <TableCell sx={{  fontSize: "20px" }}>
-                Video
-              </TableCell>
-              <TableCell sx={{  fontSize: "20px" , textAlign:"center"}}>
+              <TableCell sx={{ fontSize: "20px" }}>Video</TableCell>
+              <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
                 Audio
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {Math.max(pdfRows.length, videoRows.length, audioRows.length) > 0 ? (
-              Array.from({ length: Math.max(pdfRows.length, videoRows.length, audioRows.length) }).map((_, index) => (
+            {Math.max(pdfRows.length, videoRows.length, audioRows.length) >
+            0 ? (
+              Array.from({
+                length: Math.max(
+                  pdfRows.length,
+                  videoRows.length,
+                  audioRows.length
+                ),
+              }).map((_, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row">
                     {pdfRows[index] && (
@@ -103,14 +108,13 @@ const TableComponent = ({ rows }) => {
                   <TableCell component="th" scope="row">
                     {audioRows[index] && (
                       <Link
-                        to={audioRows[index].audioLink} 
+                        to={audioRows[index].audioLink}
                         target="_blank"
                         style={{
                           textDecoration: "none",
                           color: "black",
                           paddingLeft: "2px",
                           alignContent: "center",
-                        
                         }}
                       >
                         <HtmlTooltip title={audioRows[index].audioTopic}>

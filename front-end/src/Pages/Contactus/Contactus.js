@@ -27,15 +27,8 @@ export default function Contactus() {
         <img src="./Contact/map.png" alt="map" />
         <h3>Srilanka colombo , 7 Gallroad </h3>
       </div>
-      <h1>
-        Our Main Branch Location
-      </h1>
-      <div
-        className="map"
-        style={{
-         
-        }}
-      >
+      <h1>Our Main Branch Location</h1>
+      <div className="map" style={{}}>
         <div style={{ width: "100%" }}>
           <iframe
             title="Google Map"

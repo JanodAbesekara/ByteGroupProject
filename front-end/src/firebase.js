@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "bytetcms",
   storageBucket: "bytetcms.appspot.com",
   messagingSenderId: "541941146484",
-  appId: "1:541941146484:web:06b56e7995102c3a9c4221"
+  appId: "1:541941146484:web:06b56e7995102c3a9c4221",
 };
 
 // Initialize Firebase

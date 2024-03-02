@@ -31,7 +31,7 @@ const sidebarItems = [
   {
     name: "Dashboard",
     href: "/ADashbord",
-    icon: RiDashboard3Fill ,
+    icon: RiDashboard3Fill,
     Title: "Dashboard",
   },
   {
@@ -44,7 +44,7 @@ const sidebarItems = [
   {
     name: "Feedback Manager",
     href: "/Afeedacks",
-    icon: VscFeedback ,
+    icon: VscFeedback,
     Title: "Feedback Manager",
   },
   {
@@ -62,7 +62,7 @@ const sidebarItems = [
   {
     name: "Teachers",
     href: "/Ateacher",
-    icon:  LiaChalkboardTeacherSolid ,
+    icon: LiaChalkboardTeacherSolid,
     Title: "Teachers",
   },
   {
@@ -71,7 +71,6 @@ const sidebarItems = [
     icon: PiStudent,
     Title: "Students",
   },
-  
 ];
 
 export default function Ssidebar() {

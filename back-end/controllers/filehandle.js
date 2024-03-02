@@ -12,7 +12,6 @@ const fileuplodController = async (req, res) => {
     audios,
     discriA,
   } = req.body;
-  
 
   if (!PDFurl && !videoUrl && !audioUrl) {
     return res
@@ -65,7 +64,7 @@ const fileuplodController = async (req, res) => {
         .json({ Success: true, msg: "Audio uploaded successfully" });
     }
   } catch (err) {
-    return res 
+    return res
       .status(500)
       .json({ Success: false, msg: "Internal Server Error" });
   }
@@ -90,4 +89,3 @@ const fileurlcontroller = async (req, res) => {
 };
 
 export { fileuplodController, fileurlcontroller };
-

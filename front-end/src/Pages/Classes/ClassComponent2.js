@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function ClassComponent2() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
 
-export default ClassComponent2
+export default ClassComponent2;
