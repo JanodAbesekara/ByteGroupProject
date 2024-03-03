@@ -28,8 +28,6 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-<<<<<<< Updated upstream
-=======
 const token = localStorage.getItem("MERN_AUTH_TOKEN");
 const decodedToken = jwtDecode(token);
 
@@ -39,6 +37,7 @@ const encodedid =
   jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
 
 const sidebarItems = [
+
   {
     name: "Dashboard",
     href: `/ADashbord?$phw=${encodedid}`,
@@ -84,7 +83,6 @@ const sidebarItems = [
   },
 ];
 
->>>>>>> Stashed changes
 export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
   const history = useNavigate();
@@ -95,7 +93,9 @@ export default function Ssidebar() {
   
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
+
   if (!token) history("/Login");
+  if(token === "undefined") history("/Login");
 
   const decodedToken = jwtDecode(token);
   const jobRole = decodedToken.role;
