@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { VscFeedback } from "react-icons/vsc";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { GrResources } from "react-icons/gr";
@@ -28,85 +28,82 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const token = localStorage.getItem("MERN_AUTH_TOKEN");
-const decodedToken = jwtDecode(token);
-
-const jobRole = decodedToken.role;
-
-
-
-const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : '';
-
-
-
-
-const sidebarItems = [
-  {
-    name: "Dashboard",
-<<<<<<< Updated upstream
-    href: "/ADashbord",
-    icon: RiDashboard3Fill,
-=======
-    href: `/ADashbord?$phw=${encodedid}`,
-    icon: RiDashboard3Fill ,
->>>>>>> Stashed changes
-    Title: "Dashboard",
-  },
-  {
-    name: "ADS Manager",
-    href: `/AADSmanager?$phw=${encodedid}`,
-    icon: IoMdHeadset,
-    Title: "ADS Manager",
-  },
-
-  {
-    name: "Feedback Manager",
-<<<<<<< Updated upstream
-    href: "/Afeedacks",
-    icon: VscFeedback,
-=======
-    href: `/Afeedacks?$phw=${encodedid}`,
-    icon: VscFeedback ,
->>>>>>> Stashed changes
-    Title: "Feedback Manager",
-  },
-  {
-    name: "Announcement ",
-    href: `/AAnnouncement?$phw=${encodedid}`,
-    icon: TfiAnnouncement,
-    Title: "Announcement Manager",
-  },
-  {
-    name: "Add Resources",
-    href: `/Aaddresources?$phw=${encodedid}`,
-    icon: GrResources,
-    Title: "Add Resources",
-  },
-  {
-    name: "Teachers",
-<<<<<<< Updated upstream
-    href: "/Ateacher",
-    icon: LiaChalkboardTeacherSolid,
-=======
-    href: `/Ateacher?$phw=${encodedid}`,
-    icon:  LiaChalkboardTeacherSolid ,
->>>>>>> Stashed changes
-    Title: "Teachers",
-  },
-  {
-    name: "Students",
-    href: `/Astudent?$phw=${encodedid}`,
-    icon: PiStudent,
-    Title: "Students",
-  },
-];
-
 export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
+  const history = useNavigate();
 
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
   };
+
+  const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  if (!token) history("/Login");
+
+  const decodedToken = jwtDecode(token);
+  const jobRole = decodedToken.role;
+  const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
+
+  const sidebarItems = [
+    {
+      name: "Dashboard",
+      href: `/ADashbord?$phw=${encodedid}`,
+      icon: RiDashboard3Fill,
+      Title: "Dashboard",
+    },
+    {
+      name: "ADS Manager",
+      href: `/AADSmanager?$phw=${encodedid}`,
+      icon: IoMdHeadset,
+      Title: "ADS Manager",
+    },
+    {
+      name: "Feedback Manager",
+      href: `/Afeedacks?$phw=${encodedid}`,
+      icon: VscFeedback,
+      Title: "Feedback Manager",
+    },
+    {
+      name: "Announcement ",
+      href: `/AAnnouncement?$phw=${encodedid}`,
+      icon: TfiAnnouncement,
+      Title: "Announcement Manager",
+    },
+    {
+      name: "Add Resources",
+      href: `/Aaddresources?$phw=${encodedid}`,
+      icon: GrResources,
+      Title: "Add Resources",
+    },
+    {
+      name: "Teachers",
+      href: `/Ateacher?$phw=${encodedid}`,
+      icon: LiaChalkboardTeacherSolid,
+      Title: "Teachers",
+    },
+    {
+      name: "Students",
+      href: `/Astudent?$phw=${encodedid}`,
+      icon: PiStudent,
+      Title: "Students",
+    },
+  ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("MERN_AUTH_TOKEN");
+    history("/Login");
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const decodedToken = jwtDecode(token);
+    const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
+    const currentTime = Date.now();
+
+    if (currentTime > expirationTime) {
+      handleLogout();
+    }
+  }, []);
 
   return (
     <div className="sidebar_Wrapper">
@@ -122,7 +119,6 @@ export default function Ssidebar() {
                   <span className="sidebar_icon">
                     <Icon />
                   </span>
-
                   <span className="sidebar_name">{name}</span>
                 </Link>
               </BootstrapTooltip>
@@ -130,13 +126,12 @@ export default function Ssidebar() {
           ))}
         </ul>
         <BootstrapTooltip title="Logout" placement="right" arrow>
-          <Link className="sidebar_link logout_icon" to="/Login">
+          <div className="sidebar_link logout_icon" onClick={handleLogout}>
             <span className="sidebar_icon">
               <MdLogout />
             </span>
-
             <span className="sidebar_name">Logout</span>
-          </Link>
+          </div>
         </BootstrapTooltip>
       </aside>
     </div>

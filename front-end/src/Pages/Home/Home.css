@@ -6,15 +6,6 @@
   box-sizing: border-box;
 }
 
-<<<<<<< Updated upstream
-.main_img {
-  background-image: url("./images/wall.jpg");
-  box-shadow: inset 0 0 0 2000px #21202098;
-  background-size: cover;
-  height: 120vh;
-  width: auto;
-  text-align: center;
-=======
 
 .main_img{
     background-image: url("./images/wall.jpg");
@@ -45,7 +36,6 @@
         background-image: url('images/wall.jpg');
     }
 
->>>>>>> Stashed changes
 }
 
 .main_img h2 {
