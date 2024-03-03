@@ -11,6 +11,9 @@ import Forgetpassword from "../Forgetpassword/Forgetpassword";
 import axios from "axios";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
+import Lottie from "lottie-react";
+import animatio from "./Animation/Animation - 1709401152370.json";
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
@@ -27,7 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
- function Login({ setUser, setIsLoggedIn }) {
+function Login({ setUser, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -101,9 +104,20 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         >
           {" "}
         </div>
+
         <div className="login_h3">
           <h2>Login</h2>
         </div>
+
+        <Lottie
+          animationData={animatio}
+          style={{
+            width:"450px",
+            height:"450px",
+           float:"right",
+          }}
+        />
+
         <form className="login_label" onSubmit={handleSubmit}>
           <label htmlFor="Username_or_Email">
             <span style={{ color: "red" }}>*</span>Username

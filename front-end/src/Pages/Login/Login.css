@@ -99,6 +99,16 @@
   font-size: 15px;
 }
 
+#root > div > div > div.login_main > div:nth-child(3) > svg {
+  width: 40px;
+  height: 40px;
+  float: right;
+  margin-right: 60px;
+  margin-top: 20px;
+}
+
+
+
 @media (min-width: 620px) {
   .log_rem h2 {
     position: relative;
@@ -119,6 +129,17 @@
   }
 }
 
+@media (min-width: 620px) and (max-width: 900px) {
+  #root > div > div > div.login_main > div:nth-child(3) > svg {
+    width: 120px;
+    height: 120px;
+    float: right;
+    margin-top: 100px;
+    align-items: center;
+    margin-right: 0px;
+  }
+}
+
 @media (min-width: 403px) and (max-width: 620px) {
   .login_label input {
     width: 200px;
@@ -133,6 +154,13 @@
     font-size: 13px;
     position: relative;
     left: 30px;
+  }
+  #root > div > div > div.login_main > div:nth-child(3) > svg {
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    margin-top: 100px;
+    margin-right: 0px;
   }
 }
 
@@ -157,4 +185,14 @@
     left: 40px;
     font-size: 12px;
   }
+
+  #root > div > div > div.login_main > div:nth-child(3) > svg {
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    align-items: center;
+    margin-right: 30px;
+  }
 }
+
+

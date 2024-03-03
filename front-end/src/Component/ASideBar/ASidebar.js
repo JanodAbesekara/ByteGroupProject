@@ -28,6 +28,63 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
+<<<<<<< Updated upstream
+=======
+const token = localStorage.getItem("MERN_AUTH_TOKEN");
+const decodedToken = jwtDecode(token);
+
+const jobRole = decodedToken.role;
+
+const encodedid =
+  jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
+
+const sidebarItems = [
+  {
+    name: "Dashboard",
+    href: `/ADashbord?$phw=${encodedid}`,
+    icon: RiDashboard3Fill,
+    Title: "Dashboard",
+  },
+  {
+    name: "ADS Manager",
+    href: `/AADSmanager?$phw=${encodedid}`,
+    icon: IoMdHeadset,
+    Title: "ADS Manager",
+  },
+
+  {
+    name: "Feedback Manager",
+    href: `/Afeedacks?$phw=${encodedid}`,
+    icon: VscFeedback,
+    Title: "Feedback Manager",
+  },
+  {
+    name: "Announcement ",
+    href: `/AAnnouncement?$phw=${encodedid}`,
+    icon: TfiAnnouncement,
+    Title: "Announcement Manager",
+  },
+  {
+    name: "Add Resources",
+    href: `/Aaddresources?$phw=${encodedid}`,
+    icon: GrResources,
+    Title: "Add Resources",
+  },
+  {
+    name: "Teachers",
+    href: `/Ateacher?$phw=${encodedid}`,
+    icon: LiaChalkboardTeacherSolid,
+    Title: "Teachers",
+  },
+  {
+    name: "Students",
+    href: `/Astudent?$phw=${encodedid}`,
+    icon: PiStudent,
+    Title: "Students",
+  },
+];
+
+>>>>>>> Stashed changes
 export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
   const history = useNavigate();
@@ -35,6 +92,7 @@ export default function Ssidebar() {
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
   };
+  
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   if (!token) history("/Login");

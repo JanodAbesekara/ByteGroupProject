@@ -5,3 +5,4 @@ const generateToken = (data) => {
 };
 
 export default generateToken;
+ 
