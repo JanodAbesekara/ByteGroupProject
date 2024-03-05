@@ -33,14 +33,14 @@ const TableComponent = ({ rows }) => {
   return (
     <div>
       <TableContainer component={Paper}>
-        <Table>
+        <Table sx={{borderRight:"2px white solid", borderLeft:"2px white solid"}}>
           <TableHead>
-            <TableRow sx={{ marginBottom: "20px" }}>
-              <TableCell sx={{ fontSize: "20px", paddingInlineStart: "30px" }}>
+            <TableRow sx={{ marginBottom: "100px" }}>
+              <TableCell sx={{ textAlign:"center", fontSize: "20px", paddingInlineStart: "30px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid"}}>
                 PDF
               </TableCell>
-              <TableCell sx={{ fontSize: "20px" }}>Video</TableCell>
-              <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
+              <TableCell sx={{ textAlign:"center",fontSize: "20px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid" }}>Video</TableCell>
+              <TableCell sx={{ fontSize: "20px", textAlign: "center", backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px" }}>
                 Audio
               </TableCell>
             </TableRow>
@@ -56,7 +56,7 @@ const TableComponent = ({ rows }) => {
                   audioRows.length
                 ),
               }).map((_, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} sx={{paddingTop:"20px"}}>
                   <TableCell component="th" scope="row">
                     {pdfRows[index] && (
                       <Link
@@ -120,7 +120,7 @@ const TableComponent = ({ rows }) => {
                         <HtmlTooltip title={audioRows[index].audioTopic}>
                           <FaFileAudio
                             style={{
-                              color: "#b6891c",
+                              color: "purple",
                               width: "20px",
                               height: "20px",
                             }}

@@ -14,7 +14,6 @@ import Footer from "../../Component/Footer/Footer";
 import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
 
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
   "& .MuiDialogContent-root": {
@@ -109,14 +108,13 @@ function Login({ setUser, setIsLoggedIn }) {
           <h2>Login</h2>
         </div>
 
-        <Lottie
-          animationData={animatio}
-          style={{
-            width:"450px",
-            height:"450px",
-           float:"right",
-          }}
-        />
+
+          <Lottie
+            animationData={animatio}
+
+            className="lottie"
+          />
+ 
 
         <form className="login_label" onSubmit={handleSubmit}>
           <label htmlFor="Username_or_Email">

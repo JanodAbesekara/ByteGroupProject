@@ -99,11 +99,12 @@
   font-size: 15px;
 }
 
-#root > div > div > div.login_main > div:nth-child(3) > svg {
-  width: 40px;
-  height: 40px;
+
+.lottie{
+  width: 450px;
+  height: 450px;
   float: right;
-  margin-right: 60px;
+  margin-right: 40px;
   margin-top: 20px;
 }
 
@@ -129,16 +130,6 @@
   }
 }
 
-@media (min-width: 620px) and (max-width: 900px) {
-  #root > div > div > div.login_main > div:nth-child(3) > svg {
-    width: 120px;
-    height: 120px;
-    float: right;
-    margin-top: 100px;
-    align-items: center;
-    margin-right: 0px;
-  }
-}
 
 @media (min-width: 403px) and (max-width: 620px) {
   .login_label input {
@@ -155,14 +146,10 @@
     position: relative;
     left: 30px;
   }
-  #root > div > div > div.login_main > div:nth-child(3) > svg {
-    width: 100px;
-    height: 100px;
-    align-items: center;
-    margin-top: 100px;
-    margin-right: 0px;
-  }
+
 }
+
+
 
 @media (min-width: 320px) and (max-width: 403px) {
   .login_label input {
@@ -186,13 +173,79 @@
     font-size: 12px;
   }
 
-  #root > div > div > div.login_main > div:nth-child(3) > svg {
-    width: 50px;
-    height: 50px;
+  .lottie{
+    width: 300px;
+    height: 300px;
     margin-top: 100px;
     align-items: center;
     margin-right: 30px;
+    justify-content: center;
+    align-content: center;
+    display: flex;
   }
 }
 
+@media (min-width: 403px) and (max-width: 696px) {
+  .lottie{
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    margin-top: 120px;
+  }
+}
 
+@media (min-width: 720px) and (max-width: 845px) {
+  .lottie{
+    width: 600px;
+    height: 600px;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: -50px;
+
+  }
+}
+
+@media (min-width: 845px) and (max-width: 950px) {
+  .lottie{
+    width: 800px;
+    height: 800px;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: -50px;
+
+  }
+}
+
+@media (min-width: 845px) and (max-width: 950px) {
+  .lottie{
+    width: 200px;
+    height: 200px;
+   float: right;
+    margin-top: 80px;
+    margin-bottom: -50px;
+
+  }
+}
+
+@media (min-width: 929px) and (max-width: 1024px) {
+  .lottie{
+    width: 300px;
+    height: 300px;
+   float: right;
+    margin-top: 80px;
+    margin-bottom: -50px;
+
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .lottie{
+    width: 400px;
+    height: 400px;
+   float: right;
+    margin-top: 60px;
+    margin-bottom: -50px;
+    margin-right: 50px;
+
+  }
+}

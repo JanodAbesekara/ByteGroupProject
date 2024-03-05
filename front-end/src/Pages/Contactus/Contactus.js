@@ -2,6 +2,8 @@ import React from "react";
 import "./Contactus.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
+import Lottie from "lottie-react";
+import animation from './Animation/Animation - 1709480913381.json';
 
 export default function Contactus() {
   return (
@@ -26,7 +28,12 @@ export default function Contactus() {
       <div className="contact_detal_location">
         <img src="./Contact/map.png" alt="map" />
         <h3>Srilanka colombo , 7 Gallroad </h3>
+
+       
+        
+       
       </div>
+      <Lottie animationData={animation} className="lottie2" /> 
       <h1>Our Main Branch Location</h1>
       <div className="map" style={{}}>
         <div style={{ width: "100%" }}>

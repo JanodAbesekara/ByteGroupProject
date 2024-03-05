@@ -31,7 +31,7 @@ export default function Home() {
           <img src="./logos/parent.png" alt="parent controlling"></img>
           <img src="./logos/quiz.png" alt="tquiz img"></img>
           <img src="./logos/service.png" alt="services"></img>
-          <img src="./logos/feedback.png" alt="feedback"></img>
+          <img src="./logos/feedback.png" alt="feedback" className="h1"></img>
         </div>
       </div>
 

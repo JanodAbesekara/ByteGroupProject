@@ -69,6 +69,12 @@
   width: 150px;
   margin: 35px;
 }
+
+.main_icons .icons .h1:hover {
+  height: 150px;
+  width: 180px;
+  margin: 35px;
+}
 .main_icons .icons img:last-child {
   width: 160px;
   height: 138px;

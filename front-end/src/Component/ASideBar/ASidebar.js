@@ -28,61 +28,6 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const token = localStorage.getItem("MERN_AUTH_TOKEN");
-const decodedToken = jwtDecode(token);
-
-const jobRole = decodedToken.role;
-
-const encodedid =
-  jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
-
-const sidebarItems = [
-
-  {
-    name: "Dashboard",
-    href: `/ADashbord?$phw=${encodedid}`,
-    icon: RiDashboard3Fill,
-    Title: "Dashboard",
-  },
-  {
-    name: "ADS Manager",
-    href: `/AADSmanager?$phw=${encodedid}`,
-    icon: IoMdHeadset,
-    Title: "ADS Manager",
-  },
-
-  {
-    name: "Feedback Manager",
-    href: `/Afeedacks?$phw=${encodedid}`,
-    icon: VscFeedback,
-    Title: "Feedback Manager",
-  },
-  {
-    name: "Announcement ",
-    href: `/AAnnouncement?$phw=${encodedid}`,
-    icon: TfiAnnouncement,
-    Title: "Announcement Manager",
-  },
-  {
-    name: "Add Resources",
-    href: `/Aaddresources?$phw=${encodedid}`,
-    icon: GrResources,
-    Title: "Add Resources",
-  },
-  {
-    name: "Teachers",
-    href: `/Ateacher?$phw=${encodedid}`,
-    icon: LiaChalkboardTeacherSolid,
-    Title: "Teachers",
-  },
-  {
-    name: "Students",
-    href: `/Astudent?$phw=${encodedid}`,
-    icon: PiStudent,
-    Title: "Students",
-  },
-];
-
 export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
   const history = useNavigate();
@@ -90,13 +35,37 @@ export default function Ssidebar() {
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
   
+    
+    if (!token || typeof token === "") {
+      
+      history("/Login"); 
+    } else {
+      try {
+        const decodedToken = jwtDecode(token);
+        const expirationTime = decodedToken.exp * 1000; 
+        const currentTime = Date.now();
+  
+        if (currentTime > expirationTime) {
+          handleLogout(); 
+        }
+      } catch (error) {
+        history("/Login"); 
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("MERN_AUTH_TOKEN");
+    history("/Login");
+
+    window.location.reload();
+  };
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
-
-  if (!token) history("/Login");
-  if(token === "undefined") history("/Login");
-
   const decodedToken = jwtDecode(token);
   const jobRole = decodedToken.role;
   const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
@@ -128,40 +97,23 @@ export default function Ssidebar() {
     },
     {
       name: "Add Resources",
-      href: `/Aaddresources?$phw=${encodedid}`,
+      href: `/AAddResources?$phw=${encodedid}`,
       icon: GrResources,
       Title: "Add Resources",
     },
     {
       name: "Teachers",
-      href: `/Ateacher?$phw=${encodedid}`,
+      href: `/ATeacher?$phw=${encodedid}`,
       icon: LiaChalkboardTeacherSolid,
       Title: "Teachers",
     },
     {
       name: "Students",
-      href: `/Astudent?$phw=${encodedid}`,
+      href: `/AStudent?$phw=${encodedid}`,
       icon: PiStudent,
       Title: "Students",
     },
   ];
-
-  const handleLogout = () => {
-    localStorage.removeItem("MERN_AUTH_TOKEN");
-    history("/Login");
-
-    window.location.reload();
-  };
-
-  useEffect(() => {
-    const decodedToken = jwtDecode(token);
-    const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
-    const currentTime = Date.now();
-
-    if (currentTime > expirationTime) {
-      handleLogout();
-    }
-  }, []);
 
   return (
     <div className="sidebar_Wrapper">

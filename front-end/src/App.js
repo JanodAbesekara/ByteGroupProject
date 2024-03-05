@@ -37,18 +37,20 @@ import SSubject from "./Pages/StudentPages/SSubject/SSubject";
 import STeachers from "./Pages/StudentPages/STeachers/STeachers";
 import Login from "./Pages/Login/Login";
 import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
+import Enrollment from "./Pages/Enrollment/Enrollment";
 
+   
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
 
   const navigate = useNavigate();
 
-  const logoutuser = () => {
-    setUser(null);
-    setIsLoggedIn(false);
-    navigate("/Login");
-  };
+// const logoutuser = () => {
+//   setUser(null);
+//   setIsLoggedIn(false);
+//   navigate("/Login");
+// };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -110,6 +112,7 @@ function App() {
           <Route path="/SSubject" element={<SSubject />} />
           <Route path="/STeachers" element={<STeachers />} />
           <Route path="/Enterquizes" element={<Enterquizes />} />
+          <Route path="/Enrollment" element={<Enrollment />} />
         </Routes>
       </div>
     </>
