@@ -85,8 +85,8 @@ const ubdatePostcontrolre = async (req, res) => {
 
 const deletepostcontroller = async (req, res) => {
   try {
-    const { photosURL } = req.body;
-
+    const data = req.body;
+    const photosURL = data.photosURL;
     await Postmodels.deleteOne({ photosURL: photosURL });
 
     return res
@@ -100,9 +100,37 @@ const deletepostcontroller = async (req, res) => {
   }
 };
 
+
+const getpostcontroller =async (req,res) => {
+  try{
+    const photosURL = req.body.photosURL;
+    const post = await Postmodels.find({photosURL});
+
+    if (!post) {
+      return res
+        .status(404)
+        .json({ success: false, msg: "Post not found" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, data: post });
+
+  }
+
+  catch (error) {
+    console.error("Error during post deletion:", error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+    
+  }
+
 export {
   postupdateController,
   postDetailsControl,
   ubdatePostcontrolre,
   deletepostcontroller,
+  getpostcontroller
 };
+

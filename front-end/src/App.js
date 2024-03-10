@@ -38,6 +38,8 @@ import STeachers from "./Pages/StudentPages/STeachers/STeachers";
 import Login from "./Pages/Login/Login";
 import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
 import Enrollment from "./Pages/Enrollment/Enrollment";
+import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
+import Chat from "./Pages/Chat/Chat";
 
    
 function App() {
@@ -113,6 +115,8 @@ function App() {
           <Route path="/STeachers" element={<STeachers />} />
           <Route path="/Enterquizes" element={<Enterquizes />} />
           <Route path="/Enrollment" element={<Enrollment />} />
+          <Route path="/Classcontent" element={<Classcontent />} />
+          <Route path="/Chat" element={<Chat />}/>
         </Routes>
       </div>
     </>

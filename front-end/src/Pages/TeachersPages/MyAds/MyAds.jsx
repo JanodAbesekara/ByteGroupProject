@@ -26,6 +26,16 @@ function MyAds() {
   const [submitButton, setSubmitButton] = useState(false);
   const [inputs, setInputs] = useState(undefined);
 
+  const [selectedPost, setSelectedPost] = useState("");
+
+// useEffect(()=>{
+//   if (selectedPost) {
+//     setInputs(selectedPost);
+//   }
+
+// },[selectedPost])
+// }
+
 
   useEffect(() => {
     const feachData = async () => {
@@ -92,29 +102,31 @@ function MyAds() {
       edulevel: edulevel,
       subject: subject,
       medium: medium,
-      pagelink: "/ADashbord"
+      pagelink: "/Enrollment"
     });
    
     setSubmitButton(true);
   };
 
 
- //const updateuser = (inputs) => {
- //const paylod = {
- //  photosURL: inputs.photosURL,
- //  edulevel: inputs.edulevel,
- //  subject: inputs.subject,
- //  medium: inputs.medium,
- //}
- //axios.post(`api/auth/ubdatepost`, paylod)
- //  .then(()=>{
- //   getPosts();
- //    isedit(true);
- //  })
- //  .catch((error) => {
- //    console.error("Error fetching data:", error);
- //  })
- //
+ const updateuser = (inputs) => {
+ const paylod = {
+  photosURL: inputs.photosURL,
+  edulevel: inputs.edulevel,
+  subject: inputs.subject,
+  medium: inputs.medium,
+ }
+ axios.post(`api/auth/ubdatepost`, paylod)
+  .then(()=>{
+  //  getPosts();
+  //   isedit(true);
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+  })
+
+}
+ 
 
 
 
@@ -259,7 +271,8 @@ function MyAds() {
             </div>
 
 
-            <Tables  />
+            <Tables selectedPost={selectedPost} setSelectedPost={setSelectedPost} />
+
           </Box>
         </Grid>
       </Grid>

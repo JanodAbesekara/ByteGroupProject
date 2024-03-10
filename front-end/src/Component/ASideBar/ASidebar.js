@@ -40,7 +40,7 @@ export default function Ssidebar() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
   
     
-    if (!token || typeof token === "") {
+    if (!token || typeof token === "undefined" || token === null) {
       
       history("/Login"); 
     } else {

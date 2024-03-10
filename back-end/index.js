@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import dbConnect from "./config/dbconnecter.js";
 import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
+import chatAPI from "./apis/ChatAPI.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 // APIs
 app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
+app.use("/api/chat", chatAPI);
 
 // Port
 const port = process.env.PORT || 6000;

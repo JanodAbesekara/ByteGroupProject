@@ -32,6 +32,8 @@ export default function TeachersRegister() {
         .then((response) => {
           console.log(response.data);
           window.alert(response.data.msg);
+          window.location.reload();
+          window.location = "/login";
         })
         .catch((error) => {
           console.log(error.response);

@@ -12,10 +12,9 @@ import {
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 
-function Subject() {
+function Subject({ selectedPost, setSelectedPost }) {
   const [posts, setPosts] = useState([]);
-  const [isedit, setEdit] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+ // const [isedit, setEdit] = useState(false);
 
   useEffect(() => {
     getPosts();
@@ -26,59 +25,57 @@ function Subject() {
       .get(`api/auth/postdetails`)
       .then((response) => {
         setPosts(response?.data?.data || []);
-      
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   };
 
+  // const updateuser = (updatepost) => {
+  //
+  //   const payload = {
+  //     photosURL: updatepost.photosURL,
+  //     edulevel: updatepost.edulevel,
+  //     subject: updatepost.subject,
+  //     medium: updatepost.medium,
+  //   };
+  //   axios
+  //     .post(`api/auth/ubdatepost`, payload)
+  //     .then(() => {
+  //       getPosts();
+  //       isedit(false);
+  //       setSelectedPost(null);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // };
+  //
+  const handleSelectPost = (photoUrl) => {
+    setSelectedPost(photoUrl);
+  };
 
+  const deletePost = (photosURL) => {
+    const payload = { photosURL: photosURL };
 
+    axios
+      .post(`api/auth/deletepost`, payload)
+      .then(() => {
+        getPosts();
+      })
+      .catch((error) => {
+        console.log("Axios Error :", error);
+      });
+  };
 
-
- // const updateuser = (updatepost) => {
- // 
- //   const payload = {
- //     photosURL: updatepost.photosURL,
- //     edulevel: updatepost.edulevel,
- //     subject: updatepost.subject,
- //     medium: updatepost.medium,
- //   };
- //   axios
- //     .post(`api/auth/ubdatepost`, payload)
- //     .then(() => {
- //       getPosts();
- //       isedit(false);
- //       setSelectedPost(null);
- //     })
- //     .catch((error) => {
- //       console.error("Error fetching data:", error);
- //     });
- // };
-//
- const handleSelectPost = (post) => {
-   setSelectedPost(post);
- };
-
-
- const deletePost = (photosURL) => {
-  axios
-    .post(`api/auth/deletepost` ,photosURL)
-    .then(() => {
-      getPosts();
-    })
-    .catch((error) => {
-      console.log("Axios Error :", error);
-    });
-};
-
-const handleDeleteConfirmation = (photosURL) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this post?");
-  if (confirmDelete) {
-    deletePost(photosURL);
-  }
-};
+  const handleDeleteConfirmation = (photosURL) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (confirmDelete) {
+      deletePost(photosURL);
+    }
+  };
 
   return (
     <div>
@@ -123,7 +120,7 @@ const handleDeleteConfirmation = (photosURL) => {
                   >
                     <img
                       src={post.photosURL}
-                      alt="Post Image"
+                      alt="Post"
                       style={{
                         width: "50px",
                         height: "50px",
@@ -141,7 +138,7 @@ const handleDeleteConfirmation = (photosURL) => {
                       borderRadius: "5px",
                       border: "none",
                     }}
-                    onClick={() => handleSelectPost(post)}
+                    onClick={() => handleSelectPost(post.photosURL)}
                   >
                     Edit
                     <CiEdit />
