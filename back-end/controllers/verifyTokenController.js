@@ -3,6 +3,7 @@ import User from "../models/usermodel.js";
 
 const verifyTokenController = async (req, res) => {
     const { token } = req.query;
+   
 
     if (!token) {
         return res.status(404).json({ Success: false, msg: "Invalid Token !" });

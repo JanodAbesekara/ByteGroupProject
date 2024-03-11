@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
+import cros from 'cors';
 import bodyParser from 'body-parser';
-import Usre from './models/usermodel.js';
 import dbConnect from './config/dbconnecter.js';
 import authAPI from './apis/authAPI.js';
 import emailAPI from './apis/emailAPI.js';
@@ -15,6 +15,8 @@ dbConnect();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cros());
+app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
@@ -22,9 +24,13 @@ app.get("/", (req, res) => {
 });
 
 // APIs
-app.use('/api/auth', authAPI);
-app.use('/api/email', emailAPI);
+app.use("/api/auth", authAPI);
+app.use("/api/email", emailAPI);
+
+
+
+
 
 // Port
-const port = process.env.PORT ?? 6000;
+const port = process.env.PORT || 6000;
 app.listen(port, () => console.log(`Server port ${port}`));

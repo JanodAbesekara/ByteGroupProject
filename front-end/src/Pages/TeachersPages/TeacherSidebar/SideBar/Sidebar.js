@@ -12,13 +12,28 @@ import { MdQuiz } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
-import Tooltip from "@mui/material/Tooltip";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 import "./Sidebar.css";
+
+const BootstrapTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "#1A15BA",
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#1A15BA",
+    fontSize: "12px",
+    padding: "8px",
+    marginRight: "20px",
+  },
+}));
 
 const sidebarItems = [
   {
     name: "Dashboard",
-    href: "/Dashbord",
+    href: "/TDashbord",
     icon: RxDashboard,
     Title: "Dashboard",
   },
@@ -95,28 +110,27 @@ export default function Ssidebar() {
         <ul className="sidebar_list">
           {sidebarItems.map(({ name, href, Title, icon: Icon }) => (
             <li className="sidebar_item" key={name}>
-              <Link className="sidebar_link" to={href}>
-                <Tooltip
-                  title={Title}
-                  placement="right"
-                >
+              <BootstrapTooltip title={Title} placement="right" arrow>
+                <Link className="sidebar_link" to={href}>
                   <span className="sidebar_icon">
                     <Icon />
                   </span>
-                </Tooltip>
-                <span className="sidebar_name">{name}</span>
-              </Link>
+
+                  <span className="sidebar_name">{name}</span>
+                </Link>
+              </BootstrapTooltip>
             </li>
           ))}
         </ul>
-        <Link className="sidebar_link logout_icon">
-          <Tooltip title="Logout" placement="right">
+        <BootstrapTooltip title="Logout" placement="right" arrow>
+          <Link className="sidebar_link logout_icon" to="/Login">
             <span className="sidebar_icon">
               <MdLogout />
             </span>
-          </Tooltip>
-          <span className="sidebar_name">Logout</span>
-        </Link>
+
+            <span className="sidebar_name">Logout</span>
+          </Link>
+        </BootstrapTooltip>
       </aside>
     </div>
   );

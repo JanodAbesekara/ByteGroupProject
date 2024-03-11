@@ -1,0 +1,15 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.classes_content h2{
+    margin-top: 50px;
+    color: #555DA7;
+    font-size: 35px;
+    font-family:Lemon;
+    font-weight: 400px;
+    word-wrap: break-word;
+    text-align: center;
+    margin-bottom: 50px;
+}

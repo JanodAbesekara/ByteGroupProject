@@ -1,14 +1,12 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // Use SSL/TLS
     auth: {
-        user: 'gerard20@ethereal.email',
-        pass: '1MsFyxwztGubHxGaSW'
-    },
-    tls: {
-        rejectUnauthorized: false
+        user: 'dreamlearnacdemt@gmail.com',
+        pass: 'winceryyoqorlguy'
     }
 });
 
@@ -17,10 +15,10 @@ const sendVerificationEmail = async (senderAddress, link) => {
 
     try {
         await transporter.sendMail({
-            from: '"Fullyworld test account 👻" <fullyworld@gmail.com>', // sender address
-            to:senderAddress, // list of receivers
-            subject: "Verify Email", // Subject line
-            html: `Please verify your email by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`, // html body
+            from: 'dreamlearnacdemt@gmail.com',
+            to: senderAddress,
+            subject: "Verify Email",
+            html: `Please verify your email by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`,
         });
     } catch (e) {
         error = true;
@@ -34,10 +32,10 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
 
     try {
         await transporter.sendMail({
-            from: '"Fullyworld test account 👻" <fullyworld@gmail.com>', // sender address
-            to: senderAddress, // list of receivers
-            subject: "Reset Password", // Subject line
-            html: `Please reset your password by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`, // html body
+            from: 'dreamlearnacdemt@gmail.com',
+            to: senderAddress,
+            subject: "Reset Password",
+            html: `Please reset your password by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`,
         });
     } catch (e) {
         error = true;
@@ -47,4 +45,3 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
 };
 
 export { sendVerificationEmail, sendForgotPasswordEmail };
-

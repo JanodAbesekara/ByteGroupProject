@@ -2,11 +2,14 @@ import React from 'react'
 import './Assignments.css';
 import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Navbar from '../../../Component/Navbar/Navbar';
+import Footer from '../../../Component/Footer/Footer';
 
 
 export default function Assignments() {
   return (
     <div>
+      <Navbar/>
        <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
           <Sidebar />
@@ -17,6 +20,7 @@ export default function Assignments() {
           ></Box>
         </Grid>
       </Grid>
+      <Footer/>
     </div>
   )
 }

@@ -1,5 +1,8 @@
 import React from "react";
 import "./Forgetpassword.css";
+import axios from "axios";
+
+
 
 export default function Forgetpassword() {
   const [email, setEmail] = React.useState("");
@@ -11,9 +14,21 @@ export default function Forgetpassword() {
       window.alert("Email not present !");
       return;
     }
-  };
 
+    axios
+      .post("/api/auth/forgotpassword", { email })
+      .then((res) => {
+        console.log(res.data);
+        window.alert(res.data.msg);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert(err.response.data.msg);
+      });
+  };
   return (
+    <div>
+     
     <div className="FPdiv">
       <h2>Forget Password</h2>
       <form className="form" onSubmit={handleSubmit}>
@@ -39,6 +54,8 @@ export default function Forgetpassword() {
           Forget Password
         </button>
       </form>
+    </div>
+   
     </div>
   );
 }

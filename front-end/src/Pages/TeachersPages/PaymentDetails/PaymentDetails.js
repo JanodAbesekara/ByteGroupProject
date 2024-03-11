@@ -2,10 +2,14 @@ import React from 'react'
 import './PaymentDetails.css';
 import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Navbar from '../../../Component/Navbar/Navbar';
+import Footer from '../../../Component/Footer/Footer';
 
 export default function PaymentDetails() {
   return (
-    <div><Grid container>
+    <div>
+      <Navbar/>
+      <Grid container>
     <Grid item md={0.75} sm={1.5} xs={2.2}>
       <Sidebar />
     </Grid>
@@ -14,6 +18,8 @@ export default function PaymentDetails() {
         sx={{ width: "100%", height: "1000px", backgroundColor: "Ashe" }}
       ></Box>
     </Grid>
-  </Grid></div>
+  </Grid>
+  <Footer/>
+  </div>
   )
 }
