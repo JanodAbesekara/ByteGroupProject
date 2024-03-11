@@ -16,6 +16,8 @@ import {
   deletepostcontroller,
 } from "../controllers/PostControler.js";
 
+import { studentdetails, removeStudent } from "../controllers/Studentcontroller.js";
+
 const router = express.Router();
 
 // register user api
@@ -42,5 +44,9 @@ router.post("/postupdate", postupdateController);
 router.get("/postdetails", postDetailsControl);
 
 router.post("/deletepost", deletepostcontroller);
+
+router.get("/studentget", studentdetails);
+
+router.post("/studentpost",  removeStudent);
 
 export default router;
