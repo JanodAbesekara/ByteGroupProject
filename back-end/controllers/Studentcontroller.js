@@ -29,7 +29,7 @@ const  removeStudent = async (req, res) => {
 
 const teacherdetails = async (req, res) => {
     try{
-        const teachers = await usermodel.find({ role: "Teacher" });
+        const teachers = await usermodel.find({ role: "Lecturer" });
         
         return res.status(200).json({ success: true, data: teachers });
        

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import ASideBar from "../../../Component/ASideBar/ASidebar";
+import Axios from "axios";
 import {
   TableContainer,
   Paper,
@@ -15,36 +16,43 @@ import {
 import { MdDeleteOutline } from "react-icons/md";
 
 function Ateachers() {
-  const [teachers, setTeachers] = useState([
-    {
-      id: 1,
-      name: "Mr. Anil Perera",
-      email: "zdasdasjk@gmail",
-      contactNo: "0711234567",
-      dateOfJoin: "2021-10-10",
-    },
-    {
-      id: 2,
-      name: "Ms. Sarah Smith",
-      email: "zdasdasjk@gmail",
-      contactNo: "0711234567",
-      dateOfJoin: "2021-10-10",
-    },
-    {
-      id: 3,
-      name: "Mr. John Dhoeee",
-      email: "zdasdasjk@gmail",
-      contactNo: "0711234567",
-      dateOfJoin: "2021-10-10",
-    },
-    {
-      id: 4,
-      name: "Mr. John Doe",
-      email: "zdasdasjk@gmail",
-      contactNo: "0711234567",
-      dateOfJoin: "2021-10-10",
-    },
-  ]);
+  const [teachers, setTeachers] = useState([]);
+
+  useEffect(() => {
+    getTeachers();
+  }, []);
+
+  const getTeachers = () => {
+    Axios.get(`api/auth/teachermangement`)
+      .then((response) => {
+        setTeachers(response?.data?.data || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const deleteTeacher = (email) => {
+    const payload = { email: email };
+
+    Axios.post(`/api/auth/teacherremove`, payload)
+      .then(() => {
+        getTeachers();
+      })
+      .catch((error) => {
+        console.log("Axios Error :", error);
+      });
+  };
+
+  const handleDeleteConfirmation = (email) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this student?"
+    );
+    if (confirmDelete) {
+      deleteTeacher(email);
+    }
+  };
+
 
   return (
     <div>
@@ -80,7 +88,7 @@ function Ateachers() {
                         fontSize: "18px",
                       }}
                     >
-                      Student Name
+                      Teachers Name
                     </TableCell>
                     <TableCell
                       align="center"
@@ -131,10 +139,10 @@ function Ateachers() {
                 <TableBody>
                   {teachers.map((teacher) => (
                     <TableRow key={teacher.id}>
-                      <TableCell align="center">{teacher.name}</TableCell>
+                      <TableCell align="center">{teacher.firstname} {" " }{teacher.lastname}</TableCell>
                       <TableCell align="center">{teacher.email}</TableCell>
-                      <TableCell align="center">{teacher.contactNo}</TableCell>
-                      <TableCell align="center">{teacher.dateOfJoin}</TableCell>
+                      <TableCell align="center">{teacher.phonenumber}</TableCell>
+                      <TableCell align="center"> {new Date(teacher.updatedAt).toLocaleDateString()}</TableCell>
                       <TableCell align="center">
                         <button
                           style={{
@@ -147,7 +155,7 @@ function Ateachers() {
                             border: "none",
                             boxShadow: "2px 1px 10px 0.5px black",
                           }}
-                          // onClick={() => handleDeleteConfirmation(teacher.id)}
+                          onClick={() => handleDeleteConfirmation(teacher.email)}
                         >
                           Delete
                           <MdDeleteOutline />

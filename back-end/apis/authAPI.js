@@ -16,7 +16,7 @@ import {
   deletepostcontroller,
 } from "../controllers/PostControler.js";
 
-import { studentdetails, removeStudent } from "../controllers/Studentcontroller.js";
+import { studentdetails, removeStudent ,teacherdetails,removeteacher} from "../controllers/Studentcontroller.js";
 
 const router = express.Router();
 
@@ -48,5 +48,9 @@ router.post("/deletepost", deletepostcontroller);
 router.get("/studentget", studentdetails);
 
 router.post("/studentpost",  removeStudent);
+
+router.get("/teachermangement", teacherdetails);
+
+router.post("/teacherremove", removeteacher);
 
 export default router;
