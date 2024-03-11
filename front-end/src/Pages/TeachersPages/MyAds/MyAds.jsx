@@ -28,14 +28,6 @@ function MyAds() {
 
   const [selectedPost, setSelectedPost] = useState("");
 
-// useEffect(()=>{
-//   if (selectedPost) {
-//     setInputs(selectedPost);
-//   }
-
-// },[selectedPost])
-// }
-
 
   useEffect(() => {
     const feachData = async () => {
@@ -109,23 +101,7 @@ function MyAds() {
   };
 
 
- const updateuser = (inputs) => {
- const paylod = {
-  photosURL: inputs.photosURL,
-  edulevel: inputs.edulevel,
-  subject: inputs.subject,
-  medium: inputs.medium,
- }
- axios.post(`api/auth/ubdatepost`, paylod)
-  .then(()=>{
-  //  getPosts();
-  //   isedit(true);
-  })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
-  })
 
-}
  
 
 

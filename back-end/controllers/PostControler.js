@@ -47,41 +47,6 @@ const postDetailsControl = async (req, res) => {
   }
 };
 
-const ubdatePostcontrolre = async (req, res) => {
-  try {
-    const { photosURL, edulevel, subject, medium, pagelink } = req.body;
-
-    if (!photosURL) {
-      return res
-        .status(400)
-        .json({ success: false, msg: "Missing required field: photosURL" });
-    }
-
-    const updatedPost = await Postmodels.findOneAndUpdate(
-      { photosURL },
-      {
-        $set: {
-          medium: medium ? medium : undefined,
-          edulevel: edulevel ? edulevel : undefined,
-          subject: subject ? subject : undefined,
-        },
-      },
-      { new: true }
-    );
-
-    if (!updatedPost) {
-      return res.status(404).json({ success: false, msg: "Post not found" });
-    }
-    return res
-      .status(200)
-      .json({ success: true, msg: "Post updated successfully" });
-  } catch (error) {
-    console.error("Error during post update:", error);
-    return res
-      .status(500)
-      .json({ success: false, msg: "Internal Server Error" });
-  }
-};
 
 const deletepostcontroller = async (req, res) => {
   try {
@@ -101,36 +66,12 @@ const deletepostcontroller = async (req, res) => {
 };
 
 
-const getpostcontroller =async (req,res) => {
-  try{
-    const photosURL = req.body.photosURL;
-    const post = await Postmodels.find({photosURL});
 
-    if (!post) {
-      return res
-        .status(404)
-        .json({ success: false, msg: "Post not found" });
-    }
-    return res
-      .status(200)
-      .json({ success: true, data: post });
 
-  }
-
-  catch (error) {
-    console.error("Error during post deletion:", error);
-    return res
-      .status(500)
-      .json({ success: false, msg: "Internal Server Error" });
-  }
-    
-  }
 
 export {
   postupdateController,
   postDetailsControl,
-  ubdatePostcontrolre,
   deletepostcontroller,
-  getpostcontroller
 };
 

@@ -9,12 +9,12 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import { CiEdit } from "react-icons/ci";
+
 import { MdDeleteOutline } from "react-icons/md";
 
 function Subject({ selectedPost, setSelectedPost }) {
   const [posts, setPosts] = useState([]);
- // const [isedit, setEdit] = useState(false);
+
 
   useEffect(() => {
     getPosts();
@@ -31,29 +31,8 @@ function Subject({ selectedPost, setSelectedPost }) {
       });
   };
 
-  // const updateuser = (updatepost) => {
-  //
-  //   const payload = {
-  //     photosURL: updatepost.photosURL,
-  //     edulevel: updatepost.edulevel,
-  //     subject: updatepost.subject,
-  //     medium: updatepost.medium,
-  //   };
-  //   axios
-  //     .post(`api/auth/ubdatepost`, payload)
-  //     .then(() => {
-  //       getPosts();
-  //       isedit(false);
-  //       setSelectedPost(null);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // };
-  //
-  const handleSelectPost = (photoUrl) => {
-    setSelectedPost(photoUrl);
-  };
+
+
 
   const deletePost = (photosURL) => {
     const payload = { photosURL: photosURL };
@@ -96,7 +75,7 @@ function Subject({ selectedPost, setSelectedPost }) {
                 Uploaded Post
               </TableCell>
               <TableCell sx={{ marginBottom: "30px", textAlign: "center" }}>
-                Edit/Delete
+                Delete
               </TableCell>
             </TableRow>
           </TableHead>
@@ -130,19 +109,7 @@ function Subject({ selectedPost, setSelectedPost }) {
                   </a>
                 </TableCell>
                 <TableCell sx={{ textAlign: "center" }}>
-                  <button
-                    style={{
-                      padding: "2px 10px",
-                      backgroundColor: "Blue",
-                      color: "White",
-                      borderRadius: "5px",
-                      border: "none",
-                    }}
-                    onClick={() => handleSelectPost(post.photosURL)}
-                  >
-                    Edit
-                    <CiEdit />
-                  </button>
+                 
                   <button
                     style={{
                       padding: "2px 10px",
@@ -152,6 +119,7 @@ function Subject({ selectedPost, setSelectedPost }) {
                       color: "White",
                       borderRadius: "5px",
                       border: "none",
+                      boxShadow:"2px 1px 10px 0.5px black",
                     }}
                     onClick={() => handleDeleteConfirmation(post.photosURL)}
                   >

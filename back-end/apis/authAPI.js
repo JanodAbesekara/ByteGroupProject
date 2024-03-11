@@ -13,9 +13,7 @@ import {
 import {
   postupdateController,
   postDetailsControl,
-  ubdatePostcontrolre,
   deletepostcontroller,
-  getpostcontroller,
 } from "../controllers/PostControler.js";
 
 const router = express.Router();
@@ -43,11 +41,6 @@ router.post("/postupdate", postupdateController);
 
 router.get("/postdetails", postDetailsControl);
 
-router.post("/ubdatepost", ubdatePostcontrolre);
-
 router.post("/deletepost", deletepostcontroller);
-
-router.get("/getpost", getpostcontroller);
-
 
 export default router;
