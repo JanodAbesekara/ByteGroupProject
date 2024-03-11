@@ -58,7 +58,7 @@ const sidebarItems = [
   },
   {
     name: "Feedbacks",
-    href: "/Feedbacks",
+    href: "/Feedback",
     icon: RiFeedbackFill,
     Title: "Feedbacks",
   },
@@ -76,7 +76,7 @@ const sidebarItems = [
   },
   {
     name: "Payment Details",
-    href: "/PaymentDeat",
+    href: "/PaymentDetails",
     icon: MdPayment,
     Title: "Payment Details",
   },

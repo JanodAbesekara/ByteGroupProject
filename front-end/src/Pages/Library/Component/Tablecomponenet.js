@@ -33,25 +33,30 @@ const TableComponent = ({ rows }) => {
   return (
     <div>
       <TableContainer component={Paper}>
-        <Table>
+        <Table sx={{borderRight:"2px white solid", borderLeft:"2px white solid"}}>
           <TableHead>
-            <TableRow sx={{marginBottom:"20px"}}>
-              <TableCell sx={{  fontSize: "20px",paddingInlineStart: "30px" }}>
+            <TableRow sx={{ marginBottom: "100px" }}>
+              <TableCell sx={{ textAlign:"center", fontSize: "20px", paddingInlineStart: "30px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid"}}>
                 PDF
               </TableCell>
-              <TableCell sx={{  fontSize: "20px" }}>
-                Video
-              </TableCell>
-              <TableCell sx={{  fontSize: "20px" , textAlign:"center"}}>
+              <TableCell sx={{ textAlign:"center",fontSize: "20px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid" }}>Video</TableCell>
+              <TableCell sx={{ fontSize: "20px", textAlign: "center", backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px" }}>
                 Audio
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {Math.max(pdfRows.length, videoRows.length, audioRows.length) > 0 ? (
-              Array.from({ length: Math.max(pdfRows.length, videoRows.length, audioRows.length) }).map((_, index) => (
-                <TableRow key={index}>
+            {Math.max(pdfRows.length, videoRows.length, audioRows.length) >
+            0 ? (
+              Array.from({
+                length: Math.max(
+                  pdfRows.length,
+                  videoRows.length,
+                  audioRows.length
+                ),
+              }).map((_, index) => (
+                <TableRow key={index} sx={{paddingTop:"20px"}}>
                   <TableCell component="th" scope="row">
                     {pdfRows[index] && (
                       <Link
@@ -103,20 +108,19 @@ const TableComponent = ({ rows }) => {
                   <TableCell component="th" scope="row">
                     {audioRows[index] && (
                       <Link
-                        to={audioRows[index].audioLink} 
+                        to={audioRows[index].audioLink}
                         target="_blank"
                         style={{
                           textDecoration: "none",
                           color: "black",
                           paddingLeft: "2px",
                           alignContent: "center",
-                        
                         }}
                       >
                         <HtmlTooltip title={audioRows[index].audioTopic}>
                           <FaFileAudio
                             style={{
-                              color: "#b6891c",
+                              color: "purple",
                               width: "20px",
                               height: "20px",
                             }}

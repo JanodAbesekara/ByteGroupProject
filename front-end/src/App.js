@@ -34,23 +34,25 @@ import SGrades from "./Pages/StudentPages/SGrades/SGrades";
 import SProfile from "./Pages/StudentPages/SProfile/SProfile";
 import SQuizzes from "./Pages/StudentPages/SQuizzes/SQuizzes";
 import SSubject from "./Pages/StudentPages/SSubject/SSubject";
-import STeachers from "./Pages/StudentPages/STeachers/STeachers"; 
+import STeachers from "./Pages/StudentPages/STeachers/STeachers";
 import Login from "./Pages/Login/Login";
+import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
+import Enrollment from "./Pages/Enrollment/Enrollment";
+import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
+import Chat from "./Pages/Chat/Chat";
 
-
+   
 function App() {
-
-
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
 
   const navigate = useNavigate();
 
-  const logoutuser = () => {
-    setUser(null);
-    setIsLoggedIn(false);
-    navigate("/Login");
-  };
+// const logoutuser = () => {
+//   setUser(null);
+//   setIsLoggedIn(false);
+//   navigate("/Login");
+// };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -66,27 +68,28 @@ function App() {
         setUser(null);
         setIsLoggedIn(false);
         navigate("/Login");
-      }
-    }
+      }
+    }
   }, []);
-
 
   return (
     <>
       <div>
-        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/abouus" element={<Aboutus />} />
           <Route path="/Contactus" element={<Contactus />} />
           <Route path="/Library" element={<Library />} />
           <Route path="/Classes" element={<Classes />} />
-          <Route path="/Login" element={<Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/Registrationform" element={<Registrationform/>} />
+          <Route
+            path="/Login"
+            element={<Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />}
+          />
+          <Route path="/Registrationform" element={<Registrationform />} />
           <Route path="/Assignments" element={<Assignments />} />
-          <Route path="/Resetpassword" element={<Resetpassword />}/>
-          <Route path="/VerifyEmail" element={<VerifyEmail />}/>
-          <Route path="/TDashbord" element={<TDashbord  />} />
+          <Route path="/Resetpassword" element={<Resetpassword />} />
+          <Route path="/VerifyEmail" element={<VerifyEmail />} />
+          <Route path="/TDashbord" element={<TDashbord />} />
           <Route path="/Feedback" element={<Feedback />} />
           <Route path="/Grades" element={<Grades />} />
           <Route path="/MyAds" element={<MyAds />} />
@@ -95,23 +98,26 @@ function App() {
           <Route path="/Students" element={<Students />} />
           <Route path="/TClasses" element={<TClasses />} />
           <Route path="/UserProfile" element={<UserProfile />} />
-          <Route path="/SDashbord" element={<SDashbord  /> }/>
-          <Route path="/ADashbord" element={<ADashbord    />} />
-          <Route path="/Aaddresources" element={<Aaddresources/>}/>
-          <Route path="/AADSmanager" element={<AADSmanager/>}/>
-          <Route path="/AAnnouncement" element={<AAnnouncement/>}/>
-          <Route path="/Afeedacks" element={<Afeedacks/>}/>
-          <Route path="/Astudent" element={<Astudent/>}/>
-          <Route path="/Ateacher" element={<Ateacher/>}/>
-          <Route path="/Payment" element={<Payment/>}/>
-          <Route path="/SAssignment" element={<SAssignment/>}/>
-          <Route path="/SGrades" element={<SGrades/>}/>
-          <Route path="/SProfile" element={<SProfile/>}/>
-          <Route path="/SQuizzes" element={<SQuizzes/>}/>
-          <Route path="/SSubject" element={<SSubject/>}/>
-          <Route path="/STeachers" element={<STeachers/>}/>
+          <Route path="/SDashbord" element={<SDashbord />} />
+          <Route path="/ADashbord" element={<ADashbord />} />
+          <Route path="/Aaddresources" element={<Aaddresources />} />
+          <Route path="/AADSmanager" element={<AADSmanager />} />
+          <Route path="/AAnnouncement" element={<AAnnouncement />} />
+          <Route path="/Afeedacks" element={<Afeedacks />} />
+          <Route path="/Astudent" element={<Astudent />} />
+          <Route path="/Ateacher" element={<Ateacher />} />
+          <Route path="/Payment" element={<Payment />} />
+          <Route path="/SAssignment" element={<SAssignment />} />
+          <Route path="/SGrades" element={<SGrades />} />
+          <Route path="/SProfile" element={<SProfile />} />
+          <Route path="/SQuizzes" element={<SQuizzes />} />
+          <Route path="/SSubject" element={<SSubject />} />
+          <Route path="/STeachers" element={<STeachers />} />
+          <Route path="/Enterquizes" element={<Enterquizes />} />
+          <Route path="/Enrollment" element={<Enrollment />} />
+          <Route path="/Classcontent" element={<Classcontent />} />
+          <Route path="/Chat" element={<Chat />}/>
         </Routes>
-        
       </div>
     </>
   );

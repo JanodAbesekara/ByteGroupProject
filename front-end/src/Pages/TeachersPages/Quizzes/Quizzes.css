@@ -4,6 +4,7 @@
 }
 
 .Quibox{
+    
     margin-top: 50px;
     width: 80%;
     background-color: rgb(222, 216, 216);
@@ -20,4 +21,24 @@
     width: 100px;
     height: 30px;
     font-size: 15px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+@media(min-width: 320px) and (max-width: 382px){
+    .Quibox{
+       height: 200px;
+      
+    }
+
+    .Quibox button{
+        margin-top: 15px;
+    }
+
+}
+
+@media(min-width: 897px){
+    .Quibox{
+   margin-left: 10%;
+    }
 }

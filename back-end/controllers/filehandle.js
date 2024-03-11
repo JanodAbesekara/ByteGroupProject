@@ -12,7 +12,6 @@ const fileuplodController = async (req, res) => {
     audios,
     discriA,
   } = req.body;
-  
 
   if (!PDFurl && !videoUrl && !audioUrl) {
     return res
@@ -90,4 +89,3 @@ const fileurlcontroller = async (req, res) => {
 };
 
 export { fileuplodController, fileurlcontroller };
-

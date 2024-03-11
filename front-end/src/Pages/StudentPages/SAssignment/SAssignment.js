@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -7,7 +7,7 @@ import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 function SAssignment() {
   return (
     <div>
-        <Navbar />
+      <Navbar />
       <Grid container>
         <Grid item md={0.75} sm={1.5} xs={2.2}>
           <Ssidebar />
@@ -17,9 +17,8 @@ function SAssignment() {
         </Grid>
       </Grid>
       <Footer />
-      
     </div>
-  )
+  );
 }
 
-export default SAssignment
+export default SAssignment;

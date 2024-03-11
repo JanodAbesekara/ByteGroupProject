@@ -45,7 +45,7 @@ const sidebarItems = [
   {
     name: "Subject",
     href: "/SSubject",
-    icon: MdPlayLesson ,
+    icon: MdPlayLesson,
     Title: "Subject",
   },
   {

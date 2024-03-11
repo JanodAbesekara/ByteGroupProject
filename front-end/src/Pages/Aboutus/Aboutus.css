@@ -7,9 +7,9 @@
   margin-top: 200px;
   padding: 50px 200px;
   margin-bottom: 70px;
- text-align: center;
- line-height: 25px;
- word-spacing: 2px;
+  text-align: center;
+  line-height: 25px;
+  word-spacing: 2px;
 }
 
 .aboutus_h3 {
@@ -24,7 +24,6 @@
   margin-left: 50px;
   opacity: 0.5;
   border-radius: 5px;
-  
 }
 
 .aboutus_h3 h2 {
@@ -34,5 +33,5 @@
   position: relative;
   top: 12px;
   opacity: 0.5;
-  padding: 0px 25px ;
+  padding: 0px 25px;
 }

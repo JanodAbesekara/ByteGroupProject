@@ -3,6 +3,7 @@ import { Grid, Box } from "@mui/material";
 import Navbar from '../../../Component/Navbar/Navbar'
 import Footer from '../../../Component/Footer/Footer'
 import ASideBar from '../../../Component/ASideBar/ASidebar'
+import { Link} from "react-router-dom";
 
 function AAnnounceent() {
   return (
@@ -15,7 +16,12 @@ function AAnnounceent() {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box
             sx={{ width: "100%", height: "1000px", backgroundColor: "Ashe" }}
-          ></Box>
+          >
+            <button >
+              <Link  to="/Enrollment"> hellow</Link>
+             
+            </button>
+          </Box>
         </Grid>
       </Grid>
 
