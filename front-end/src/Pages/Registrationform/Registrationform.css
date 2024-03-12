@@ -7,7 +7,6 @@
 }
 .Main_container {
   width: 650px;
-  
 }
 .Main_container h2 {
   text-align: center;
@@ -74,7 +73,7 @@
   padding-bottom: -30px;
 }
 
-@media (min-width: 320px) and (max-width:576px) {
+@media (min-width: 320px) and (max-width: 576px) {
   input[type="text"],
   input[type="tel"],
   input[type="email"],
@@ -96,7 +95,7 @@
   }
 }
 
-@media (min-width: 577px) and (max-width:768px){
+@media (min-width: 577px) and (max-width: 768px) {
   .Main_container {
     width: 100%;
     margin: 0px;
@@ -106,11 +105,11 @@
     font-size: 35px;
   }
   .form_contents {
-    margin: 10px 60px; 
+    margin: 10px 60px;
   }
 }
 
-@media (min-width:769px)  and (max-width:1024px){
+@media (min-width: 769px) and (max-width: 1024px) {
   .Main_container {
     width: 100%;
     margin: 0px;
@@ -120,18 +119,18 @@
     font-size: 40px;
   }
   .form_contents {
-    margin: 15px 225px; 
+    margin: 15px 225px;
     padding-left: 0px;
     padding-right: 20px;
   }
 }
 
-@media (min-width:1025px){
+@media (min-width: 1025px) {
   .Main_container {
     width: 100%;
     margin: 0px;
   }
   .form_contents {
-    margin: 30px 280px; 
+    margin: 30px 280px;
   }
 }

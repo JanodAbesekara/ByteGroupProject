@@ -1,0 +1,39 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.login_m2 h2 {
+  color: #555da7;
+  font-size: 35px;
+  font-family: Lemon;
+  font-weight: 400px;
+  word-wrap: break-word;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.class-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.class-image {
+  margin: 5px;
+}
+
+.class-section1 h3,
+.class-section2 h3,
+.class-section3 h3 {
+  color: #555da7;
+  margin-top: 40px;
+  margin-left: 80px;
+  font-size: 25px;
+}
+
+.class-container h4{
+    margin-top: 20px;
+    font-size: 20px;
+    margin-left: 50px;
+    color: darkblue;
+}

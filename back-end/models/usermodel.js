@@ -5,8 +5,8 @@ const { Schema } = mongoose;
 const userSchema = new Schema(
   {
     firstname: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     lastname: {
       type: String,
@@ -23,7 +23,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["Admin", "Lecture", "Student"],
+      enum: ["Admin", "Lecturer", "Student"],
       required: true,
     },
     password: {
@@ -44,4 +44,4 @@ const userSchema = new Schema(
   }
 );
 
-export default mongoose.model('users', userSchema);
+export default mongoose.model("users", userSchema);

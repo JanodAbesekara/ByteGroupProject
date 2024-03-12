@@ -5,3 +5,8 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
+
+.alert-msg {
+    color: red;
+    font-size: 18px;
+}

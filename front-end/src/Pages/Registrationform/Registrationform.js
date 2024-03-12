@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Registrationform.css";
 import { Input, Space } from "antd";
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
 
-export default function RegistrationForm() {
+export default function TeachersRegister() {
   const [firstname, setfirstname] = React.useState("");
   const [lastname, setlastname] = React.useState("");
   const [phonenumber, setphonenumber] = React.useState("");
@@ -24,20 +26,37 @@ export default function RegistrationForm() {
         role,
         password,
       };
+
+      axios
+        .post(`/api/auth/register`, data)
+        .then((response) => {
+          console.log(response.data);
+          window.alert(response.data.msg);
+          window.location.reload();
+          window.location = "/login";
+        })
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.data.success === false) {
+            window.alert(error.response.data.msg);
+          }
+        });
     } else {
-      window.alert("Password does not match!");
+      window.alert("Password donot match");
     }
   };
 
   return (
     <div>
+      <Navbar />
       <div className="Main_container">
         <h2>Registration Form</h2>
 
         <div className="form_contents">
-          
           <form onSubmit={handleSubmit}>
-            <label><span style={{ color: "red" }}>* </span>Name</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Name
+            </label>
             <br></br>
             <input
               type="text"
@@ -51,7 +70,7 @@ export default function RegistrationForm() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
-                display: "inline-block"
+                display: "inline-block",
               }}
             />
             <input
@@ -71,7 +90,9 @@ export default function RegistrationForm() {
             <br></br>
             <br></br>
 
-            <label><span style={{ color: "red" }}>* </span>Phone Number</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Phone Number
+            </label>
             <br></br>
             <input
               type="tel"
@@ -92,7 +113,9 @@ export default function RegistrationForm() {
             <br></br>
             <br></br>
 
-            <label><span style={{ color: "red" }}>* </span>Email</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Email
+            </label>
             <br></br>
 
             <input
@@ -112,7 +135,9 @@ export default function RegistrationForm() {
             <br></br>
             <br></br>
 
-            <label><span style={{ color: "red" }}>* </span>Are you a...</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Are you a...
+            </label>
 
             <div className="radio">
               <input
@@ -137,44 +162,47 @@ export default function RegistrationForm() {
             <br></br>
             <br></br>
 
-            <label><span style={{ color: "red" }}>* </span>Password</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Password
+            </label>
             <br></br>
-              <input
-                type="password"
-                value={password}
-                required
-                placeholder="Password"
-                name="password"
-                onChange={(e) => setpassword(e.target.value)}
-                style={{
-                  width: "250px",
-                  height: "40px",
-                  marginTop: "10px",
-                  fontSize: "15px",
-                }}
-              />
+            <input
+              type="password"
+              value={password}
+              required
+              placeholder="Password"
+              name="password"
+              onChange={(e) => setpassword(e.target.value)}
+              style={{
+                width: "250px",
+                height: "40px",
+                marginTop: "10px",
+                fontSize: "15px",
+              }}
+            />
 
             <br></br>
             <br></br>
 
-            <label><span style={{ color: "red" }}>* </span>Confirm Password</label>
+            <label>
+              <span style={{ color: "red" }}>* </span>Confirm Password
+            </label>
             <br></br>
-            
-              <input
-                type="password"
-                required
-                placeholder="Confirm Password"
-                name="confirmpassword"
-                value={confirmpassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                style={{
-                  width: "250px",
-                  height: "40px",
-                  marginTop: "10px",
-                  fontSize: "15px",
-                }}
-              />
-            
+
+            <input
+              type="password"
+              required
+              placeholder="Confirm Password"
+              name="confirmpassword"
+              value={confirmpassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              style={{
+                width: "250px",
+                height: "40px",
+                marginTop: "10px",
+                fontSize: "15px",
+              }}
+            />
 
             <br></br>
             <br></br>
@@ -186,6 +214,7 @@ export default function RegistrationForm() {
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

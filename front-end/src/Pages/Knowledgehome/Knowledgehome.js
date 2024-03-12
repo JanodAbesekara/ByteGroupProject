@@ -1,91 +1,53 @@
-import React, { useState } from "react";
-import "./Knowledgehome.css";
-import { Select, Radio, Input } from "antd";
-import { Row, Col } from "antd";
-import { BiSolidFilePdf } from "react-icons/bi";
+import React, { useEffect, useState } from "react";
+import "./Library.css";
+import Navbar from "../../Component/Navbar/Navbar";
+import Footer from "../../Component/Footer/Footer";
+import TableComponent from "./Component/Tablecomponenet";
+import axios from "axios";
 
-export default function Library() {
-  const { Option } = Select;
-  const [value, setValue] = useState();
+const Library = () => {
+  const [files, setFiles] = useState([]);
 
-  const onChange = (selectedValue) => {
-    console.log(`selected ${selectedValue}`);
-  };
+  useEffect(() => {
+    getFille();
+  }, []);
 
-  const radioStyle = {
-    display: "block",
-    height: "30px",
-    lineHeight: "30px",
-  };
-
-  const onRadioChange = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+  const getFille = () => {
+    axios
+      .get(`api/auth/fileurlsend`)
+      .then((response) => {
+        setFiles(response?.data?.data || []);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   };
 
   return (
     <div>
+      <Navbar />
       <div className="L_label">
-        <h3>Knowledge is on your fingertips </h3>
+        <h2>Knowledge on your fingertips </h2>
       </div>
-      <div className="filter">
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Select Subject"
-          optionFilterProp="children"
-          onChange={onChange}
-          filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
-            0
-          }
-        >
-          <Option value="Maths">Maths</Option>
-          <Option value="Chemistry">Chemistry</Option>
-          <Option value="Physics">Physics</Option>
-        </Select>
-        <div className="selectset">
-          <label>Media</label>
-          <br></br>
-          <Radio.Group onChange={onRadioChange} value={value}>
-            <Radio style={radioStyle} value={1}>
-              Shinhala
-            </Radio>
-            <Radio style={radioStyle} value={2}>
-              English
-            </Radio>
-            <Radio style={radioStyle} value={3}>
-              Tamil
-            </Radio>
-          </Radio.Group>
-
-          <button className="B1">Search</button>
-        </div>
+      <div className="sb1">
+        <TableComponent
+          rows={files.map((file) => ({
+            pdfLink: file.PDFurl,
+            pdfTopic: file.discriP,
+            videoLink: file.videoUrl,
+            videoTopic: file.discriV,
+            audioLink: file.audioUrl,
+            audioTopic: file.audios,
+            pdfSubject: file.pdfS,
+            videoSubject: file.videos,
+            audioSubject: file.audios,
+          }))}
+        />
       </div>
-
-      <h2 style={{textAlign:'center',marginBottom:'40px'}}>Science</h2>
-      <Row>
-        <Col span={6}>
-          <h3 style={{marginLeft:"50px",marginBottom:"20px",}}>Chemistry</h3>
-          <BiSolidFilePdf style={{width:"25px",height:"25px", color:"red",marginLeft:"50px"}} />
-          <h5 style={{marginLeft:"80px"}}>Organic</h5>
-        </Col>
-        <Col span={6} >
-          <h3  style={{marginBottom:"20px"}}>Physics</h3>
-          <BiSolidFilePdf style={{width:"25px",height:"25px", color:"red",}} />
-          <h5  style={{marginLeft:"40px"}}>Light</h5>
-        </Col>
-        <Col span={6}>
-          <h3  style={{marginBottom:"20px"}}>Combine-Maths</h3>
-          <BiSolidFilePdf style={{width:"25px",height:"25px", color:"red"}} />
-          <h5  style={{marginLeft:"40px"}}>interagitation</h5>
-        </Col>
-        <Col span={6}>
-          <h3  style={{marginBottom:"20px",marginLeft:'150px'}}>Bialogy</h3>
-          <BiSolidFilePdf style={{width:"25px",height:"25px", color:"red",marginLeft:'150px'}} />
-          <h5 style={{marginLeft:"190px"}}>Animal Scaience</h5>
-        </Col>
-      </Row>
+      <Footer />
     </div>
   );
-}
+};
+
+export default Library;

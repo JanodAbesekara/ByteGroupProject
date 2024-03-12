@@ -6,6 +6,17 @@ import {
   resetpasswordController,
 } from "../controllers/authController.js";
 import verifyTokenController from "../controllers/verifyTokenController.js";
+import {
+  fileuplodController,
+  fileurlcontroller,
+} from "../controllers/filehandle.js";
+import {
+  postupdateController,
+  postDetailsControl,
+  deletepostcontroller,
+} from "../controllers/PostControler.js";
+
+import { studentdetails, removeStudent ,teacherdetails,removeteacher} from "../controllers/Studentcontroller.js";
 
 const router = express.Router();
 
@@ -23,5 +34,23 @@ router.get("/verifyToken", verifyTokenController);
 
 // Reset password
 router.post("/resetpassword", resetpasswordController);
+
+router.post("/fileupload", fileuplodController);
+
+router.get("/fileurlsend", fileurlcontroller);
+
+router.post("/postupdate", postupdateController);
+
+router.get("/postdetails", postDetailsControl);
+
+router.post("/deletepost", deletepostcontroller);
+
+router.get("/studentget", studentdetails);
+
+router.post("/studentpost",  removeStudent);
+
+router.get("/teachermangement", teacherdetails);
+
+router.post("/teacherremove", removeteacher);
 
 export default router;
