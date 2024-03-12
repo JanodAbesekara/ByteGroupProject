@@ -18,7 +18,6 @@ import { MdDeleteOutline } from "react-icons/md";
 function Astudent() {
   const [students, setStudents] = useState([]);
 
-
   useEffect(() => {
     getStudents();
   }, []);
@@ -49,6 +48,7 @@ function Astudent() {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this student?"
     );
+
     if (confirmDelete) {
       deleteStudent(email);
     }
@@ -63,9 +63,18 @@ function Astudent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-              <div className="StudentDetal">
-                 <h3 style={{textAlign:"center",fontSize:"30px", color:"#333A73" , marginTop: "100px" }}><b>Student Details</b></h3>
-              </div>
+            <div className="StudentDetal">
+              <h3
+                style={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  color: "#333A73",
+                  marginTop: "100px",
+                }}
+              >
+                <b>Student Details</b>
+              </h3>
+            </div>
             <TableContainer component={Paper} sx={{ marginTop: "100px" }}>
               <Table sx={{ marginBottom: "50px" }}>
                 <TableHead>
@@ -126,12 +135,14 @@ function Astudent() {
                       Delete
                     </TableCell>
                   </TableRow>
-                </TableHead> 
+                </TableHead>
                 <TableBody>
                   {students.map((student) => (
                     <TableRow key={student.id}>
                       <TableCell align="center">
-                        {student.firstname}{"  "}{student.lastname}
+                        {student.firstname}
+                        {"  "}
+                        {student.lastname}
                       </TableCell>
                       <TableCell align="center">{student.email}</TableCell>
                       <TableCell align="center">
@@ -153,7 +164,9 @@ function Astudent() {
                             border: "none",
                             boxShadow: "2px 1px 10px 0.5px black",
                           }}
-                          onClick={() => handleDeleteConfirmation(student.email)}
+                          onClick={() =>
+                            handleDeleteConfirmation(student.email)
+                          }
                         >
                           Delete
                           <MdDeleteOutline />

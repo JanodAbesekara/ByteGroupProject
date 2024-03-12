@@ -25,6 +25,7 @@ function Ateachers() {
   const getTeachers = () => {
     Axios.get(`api/auth/teachermangement`)
       .then((response) => {
+        console.log(response.data.data);
         setTeachers(response?.data?.data || []);
       })
       .catch((error) => {
