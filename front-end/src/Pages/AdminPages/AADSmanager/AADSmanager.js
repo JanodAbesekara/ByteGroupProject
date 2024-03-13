@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect ,useState} from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import ASideBar from "../../../Component/ASideBar/ASidebar";
+import axios from "axios";
 import {
   TableContainer,
   Paper,
@@ -15,63 +16,24 @@ import {
 
 function AADSmanager() {
 
-  const[ads,setAds]=React.useState([
-    {
-      id:1,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:2,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:3,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:4,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:5,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:6,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:7,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:8,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
-    {
-      id:9,
-      teacherName:"kamal Gunarathna",
-      subject:"Chemistry",
-      postedAdd:"https://www.w3schools.com/images"
-    },
+  const[ads,setAds]=React.useState([]);  
 
-  ]);  
+ useEffect(() => {
+    getAds();
+  }, []);
+
+  const getAds = () => {
+    axios
+      .get(`api/auth/postdetails`)
+      .then((response) => {
+        setAds(response?.data?.data || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
+
+
   return (
     <div>
       <Navbar />
@@ -85,24 +47,30 @@ function AADSmanager() {
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
-                  <TableRow>
-                    <TableCell>Teacher Name</TableCell>
-                    <TableCell>Subject</TableCell>
-                    <TableCell>Posted ADD</TableCell>
-                    <TableCell>Delete</TableCell>
+                  <TableRow sx={{ marginBottom: "60px", backgroundColor: "#B5DFCA" }}>
+                    <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Teacher Email</TableCell>
+                    <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Subject</TableCell>
+                    <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Posted ADD</TableCell>
+                    <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Delete</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {ads.map((ad) => (
                   <TableRow key={ad.id}>
-                    <TableCell>{ad.teacherName}</TableCell>
-                    <TableCell>{ad.subject}</TableCell>
-                    <TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{ad.email}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{ad.subject}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
                    <img
-                    src={ad.postedAdd}
-                    alt="This is a post add" />  
+                    src={ad.photosURL}
+                    alt="This is a post add"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      cursor: "pointer",
+                    }}
+                     />  
                     </TableCell>
-                    <TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
                       <button
                        style={{
                         padding: "2px 10px",
