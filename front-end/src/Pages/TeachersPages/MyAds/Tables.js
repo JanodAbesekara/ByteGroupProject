@@ -38,6 +38,7 @@ function Subject({ selectedPost, setSelectedPost }) {
   };
 
 
+  
 
 
   const deletePost = (photosURL) => {

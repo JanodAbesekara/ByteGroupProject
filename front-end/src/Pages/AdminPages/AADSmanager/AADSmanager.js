@@ -33,6 +33,28 @@ function AADSmanager() {
       });
   }
 
+  const deletAds = (photosURL) => {
+    const payload = { photosURL: photosURL };
+
+    axios
+      .post(`api/auth/deletepost`, payload)
+      .then(() => {
+        getAds();
+      })
+      .catch((error) => {
+        console.log("Axios Error :", error);
+      });
+  };
+
+  const handleDeleteConfirmation = (photosURL) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (confirmDelete) {
+      deletAds(photosURL);
+    }
+  };
+
 
   return (
     <div>
@@ -82,6 +104,7 @@ function AADSmanager() {
                         border: "none",
                         boxShadow:"2px 1px 10px 0.5px black",
                       }}
+                      onClick={() => handleDeleteConfirmation(ad.photosURL)}
                       >Delete</button>
                     </TableCell>
                   </TableRow>
