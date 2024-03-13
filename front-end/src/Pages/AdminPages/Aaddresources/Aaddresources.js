@@ -45,9 +45,9 @@ const Aaddresources = () => {
   const [audio, setAudio] = useState(undefined);
   const [doneUploadAudio, setDoneUploadAudio] = useState(false);
 
- // const [pdfper, setpdfper] = useState(0);
- // const [vidper, setvidper] = useState(0);
- // const [audper, setaudper] = useState(0);
+  // const [pdfper, setpdfper] = useState(0);
+  // const [vidper, setvidper] = useState(0);
+  // const [audper, setaudper] = useState(0);
 
   const [submitButton, setSubmitButton] = useState(false);
   const [inputs, setInputs] = useState(undefined);
@@ -106,33 +106,17 @@ const Aaddresources = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
 
-      //  if (fileType === "PDFurl") {
-      //    setpdfper(Math.round(progress));
-      //  } else if (fileType === "videoUrl") {
-      //    setvidper(Math.round(progress));
-      //  } else if (fileType === "audioUrl") {
-      //    setaudper(Math.round(progress));
-      //  }
-//
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            // window.alert("Upload is " + progress + "% done");
-
-            break;
-        }
+        //  if (fileType === "PDFurl") {
+        //    setpdfper(Math.round(progress));
+        //  } else if (fileType === "videoUrl") {
+        //    setvidper(Math.round(progress));
+        //  } else if (fileType === "audioUrl") {
+        //    setaudper(Math.round(progress));
+        //  }
+        //
       },
       (error) => {
-        switch (error.code) {
-          case "storage/unauthorized":
-            break;
-          case "storage/canceled":
-            break;
-          case "storage/unknown":
-            break;
-        }
+        console.error("Upload error:", error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -259,8 +243,6 @@ const Aaddresources = () => {
                       >
                         <IoCloudUploadOutline />
                       </button>
-
-                    
                     </div>
                   </form>
                 </Grid>
@@ -344,7 +326,6 @@ const Aaddresources = () => {
                       >
                         <IoCloudUploadOutline />
                       </button>
-
                     </div>
                   </form>
                 </Grid>
@@ -424,8 +405,6 @@ const Aaddresources = () => {
                       >
                         <IoCloudUploadOutline />
                       </button>
-
-                   
                     </div>
                   </form>
                 </Grid>
