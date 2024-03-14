@@ -24,7 +24,6 @@ function MyAds() {
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
-
   const useremail = decodedToken.email;
 
  
