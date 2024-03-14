@@ -11,7 +11,7 @@ import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
 import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
-import MyAds from "./Pages/TeachersPages/MyAds/MyAds";
+import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx"
 import PaymentDetails from "./Pages/TeachersPages/PaymentDetails/PaymentDetails";
 import Quizzes from "./Pages/TeachersPages/Quizzes/Quizzes";
 import Students from "./Pages/TeachersPages/Students/Students";
