@@ -112,6 +112,7 @@ const loginController = async (req, res) => {
   const token = tokengenerator({
     email: oldUser.email,
     firstname: oldUser.firstname,
+    lastname: oldUser.lastname,
     role: oldUser.role,
     _id: oldUser._id,
     verified: oldUser.verified,
