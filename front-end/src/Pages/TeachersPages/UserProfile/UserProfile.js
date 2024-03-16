@@ -21,16 +21,12 @@ function UserProfile() {
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
 
-
-
-  
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
-
 
   useEffect(() => {
     // Fetch the image URL from localStorage when the component mounts
@@ -61,11 +57,11 @@ function UserProfile() {
         console.log(error.message);
       });
   };
-
+  const profilePicUrl = localStorage.getItem("profileImageUrl");
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const userEmail = decodedToken.email;
-// getting users name
+  const decodedToken = jwtDecode(token);
+  const userEmail = decodedToken.email;
+  // getting users name
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
@@ -73,39 +69,38 @@ function UserProfile() {
     const userID = decodedToken._id;
 
     axios
-      .get(`/getUser/${userID}`)  
+      .get(`/getUser/${userID}`)
       .then((response) => {
         const userData = response.data;
         setUser(userData);
       })
       .catch((err) => console.log(err));
-    
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const data = {
-    //   subject,
-    //   degree,
-    //   experience,
-    //   aboutme,
-    //   email,
-    //   url,
-    // };
-    // Perform form submission logic here (e.g., send data to server)
-    // After form submission, update user info section with entered values
-    setUser({
+
+    const updatedUser={
       ...user,
       subject: subject,
       degree: degree,
       experience: experience,
       aboutme: aboutme,
       email: userEmail,
-    })};
+      profilePicUrl: profilePicUrl,
+    };
 
-    // axios
-    // .post(`/api/user/userProfile`,user)
-    // .then()
+    axios
+      .post(`/api/user/userProfile`, updatedUser)
+      .then(() => {
+        window.alert("Successfully updated!");
+        console.log("data updated successfully");
+      })
+      .catch(() => {
+        console.log("error");
+          window.alert("Data update failed!");
+      });
+  };
 
   return (
     <div>
@@ -138,7 +133,7 @@ function UserProfile() {
             </div>
             <div className="teacher_info">
               <div className="name">
-                <p>{ user.firstname + " "+ user.lastname }</p>
+                <p>{user.firstname + " " + user.lastname}</p>
               </div>
             </div>
           </div>
@@ -193,10 +188,13 @@ function UserProfile() {
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
                 ></textarea>
+
+                <div className="btn-2">
+                  <button type="submit" value="saveDetails">
+                    Save
+                  </button>
+                </div>
               </form>
-            </div>
-            <div className="btn-2">
-              <button type="submit">Save</button>
             </div>
           </div>
         </div>

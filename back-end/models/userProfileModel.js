@@ -22,7 +22,9 @@ const profileSchema = new Schema(
 
     email: {
         type:String,
-        required:true,
+    },
+    profilePicUrl: {
+      type: String,
     },
   },
   {
