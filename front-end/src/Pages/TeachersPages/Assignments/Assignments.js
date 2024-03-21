@@ -4,7 +4,7 @@ import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from '../../../Component/Navbar/Navbar';
 import Footer from '../../../Component/Footer/Footer';
-import Lecturematirial from '../TClasses/Lecturematirial';
+
 
 
 export default function Assignments() {
@@ -24,7 +24,7 @@ export default function Assignments() {
           <Box
             sx={{ width: "100%", height: "1000px", backgroundColor: "Ashe" }}
           >
-             <Lecturematirial/>
+             
           </Box>
         </Grid>
       </Grid>

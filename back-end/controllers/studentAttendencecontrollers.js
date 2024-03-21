@@ -2,9 +2,14 @@ import attendennceSchema from "../models/studentAttendesmodel.js";
 import teacherlecture from "../models/TeacherLecturecountmodel.js";
 
 const studentattendenceController = async (req, res) => {
-  try {
-    const { studentnemail, studentname, subject } = req.body;
+  const { studentnemail, studentname, subject } = req.body;
 
+  if (!studentnemail || !studentname || !subject) {
+    return res
+      .status(400)
+      .json({ success: false, msg: "Please fill all the fields" });
+  }
+  try {
     const attendence = new attendennceSchema({
       studentnemail,
       studentname,
@@ -35,18 +40,25 @@ const studentattendencegetController = async (req, res) => {
 };
 
 const teacherattendenceController = async (req, res) => {
+  const { teacheremail, leccount, subject, time } = req.body;
+  if (!teacheremail || !leccount || !subject || !time) {
+    return res
+      .status(400)
+      .json({ success: false, msg: "Please fill all the fields" });
+  }
   try {
-    const { teacheremail, leccount, subject ,time } = req.body;
-
     const lecture = new teacherlecture({
       teacheremail,
       leccount,
       time,
       subject,
     });
+
     await lecture.save();
+
     res.status(201).json({ success: true, msg: "Lecture marked successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
@@ -75,7 +87,7 @@ const editlecturecount = async (req, res) => {
       res.status(404).json({ success: false, msg: "No lecture count found" });
     } else {
       lecture.leccount = leccount;
-      
+
       await lecture.save();
       res
         .status(200)
