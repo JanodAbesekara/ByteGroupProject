@@ -1,51 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
-import './Dashbord.css';
+import "./Dashbord.css";
 import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
 import { ref, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+import Badge from "@mui/material/Badge";
+import Box from '@mui/material/Box';
+import Typography from "@mui/material/Typography";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
-import Navbar from '../../../Component/Navbar/Navbar';
-import Footer from '../../../Component/Footer/Footer';
+import Navbar from "../../../Component/Navbar/Navbar";
+import Footer from "../../../Component/Footer/Footer";
 
 export default function Dashbord() {
-  
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
 
-    // getting users name
+  // getting users name
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
     const userID = decodedToken._id;
     axios
-      .get(`/getUser/${userID}`)  
+      .get(`/getUser/${userID}`)
       .then((response) => {
         const userData = response.data;
         setUser(userData);
       })
       .catch((err) => console.log(err));
-    
   }, []);
 
   useEffect(() => {
-        
     // Fetch the image URL from localStorage when the component mounts
     const storedUrl = localStorage.getItem("profileImageUrl");
-      setUrl(storedUrl);
+    setUrl(storedUrl);
   }, []);
-
-
-
- 
-
-
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="head">
         <div className="container2">
           <Sidebar />
@@ -63,17 +57,23 @@ export default function Dashbord() {
             </div>
             <div className="teacher_info">
               <div className="name">
-            <p>{ user.firstname + " "+ user.lastname }</p>
+                <p>{user.firstname + " " + user.lastname}</p>
               </div>
               <div className="info">
                 <p>Subject : </p>
                 <p>Qualifications : </p>
+
               </div>
+              <Box sx={{ display: "flex", gap: 2, float:"right" }}>
+                  <Badge badgeContent="2">
+                    <Typography fontSize="xl">🔔</Typography>
+                  </Badge>
+                </Box>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }

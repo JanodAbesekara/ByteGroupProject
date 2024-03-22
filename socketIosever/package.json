@@ -1,0 +1,17 @@
+{
+  "name": "socket_io",
+  "version": "1.0.0",
+  "description": "real time message passing",
+  "main": "Server.js",
+  "type":"module",
+  "scripts": {
+    "start": "nodemon Server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "janod",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.0",
+    "socket.io": "^4.7.5"
+  }
+}

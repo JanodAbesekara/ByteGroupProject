@@ -41,12 +41,15 @@ import Enrollment from "./Pages/Enrollment/Enrollment";
 import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
 import Chat from "./Pages/Chat/Chat";
 
+
    
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
 
   const navigate = useNavigate();
+
+  
 
 // const logoutuser = () => {
 //   setUser(null);
