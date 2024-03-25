@@ -9,6 +9,7 @@ import emailAPI from "./apis/emailAPI.js";
 import chatAPI from "./apis/ChatAPI.js";
 import userAPI from "./apis/userAPI.js";
 
+
 const app = express();
 
 // Connection to the database
@@ -30,6 +31,7 @@ app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
 app.use("/api/chat", chatAPI);
 app.use("/api/user", userAPI);
+
 
 // Port
 const port = process.env.PORT || 6000;
