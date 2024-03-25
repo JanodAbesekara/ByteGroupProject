@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   TableContainer,
   Paper,
@@ -13,8 +12,6 @@ import { FaFilePdf, FaFileVideo, FaFileAudio } from "react-icons/fa";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import  {jwtDecode}  from "jwt-decode";
-import axios from "axios";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -33,44 +30,48 @@ const TableComponent = ({ rows }) => {
   const videoRows = rows.filter((row) => row.videoLink);
   const audioRows = rows.filter((row) => row.audioLink);
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`/api/auth/checkold_user`)
-      .then((res) => {
-        console.log(res.data);
-        const backendemail = res.data.email;
-
-        if(!backendemail.includes(useremail)){
-           window.alert("Please Login to Site");
-           navigate("/login");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },[]
-
-  );
-
-
-
   return (
     <div>
       <TableContainer component={Paper}>
-        <Table sx={{borderRight:"2px white solid", borderLeft:"2px white solid"}}>
+        <Table
+          sx={{ borderRight: "2px white solid", borderLeft: "2px white solid" }}
+        >
           <TableHead>
             <TableRow sx={{ marginBottom: "100px" }}>
-              <TableCell sx={{ textAlign:"center", fontSize: "20px", paddingInlineStart: "30px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid"}}>
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  paddingInlineStart: "30px",
+                  backgroundColor: "darkslateblue",
+                  color: "white",
+                  marginBottom: "20px",
+                  borderRight: "2px white solid",
+                }}
+              >
                 PDF
               </TableCell>
-              <TableCell sx={{ textAlign:"center",fontSize: "20px" , backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px",borderRight:"2px white solid" }}>Video</TableCell>
-              <TableCell sx={{ fontSize: "20px", textAlign: "center", backgroundColor:"darkslateblue" , color:"white",marginBottom:"20px" }}>
+              <TableCell
+                sx={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  backgroundColor: "darkslateblue",
+                  color: "white",
+                  marginBottom: "20px",
+                  borderRight: "2px white solid",
+                }}
+              >
+                Video
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "20px",
+                  textAlign: "center",
+                  backgroundColor: "darkslateblue",
+                  color: "white",
+                  marginBottom: "20px",
+                }}
+              >
                 Audio
               </TableCell>
             </TableRow>
@@ -86,7 +87,7 @@ const TableComponent = ({ rows }) => {
                   audioRows.length
                 ),
               }).map((_, index) => (
-                <TableRow key={index} sx={{paddingTop:"20px"}}>
+                <TableRow key={index} sx={{ paddingTop: "20px" }}>
                   <TableCell component="th" scope="row">
                     {pdfRows[index] && (
                       <Link

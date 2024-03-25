@@ -18,7 +18,7 @@ import {
 } from "../controllers/PostControler.js";
 
 import { studentdetails, removeStudent ,teacherdetails,removeteacher} from "../controllers/Studentcontroller.js";
-
+import  {feedbackget ,feedbackput}  from "../controllers/feedbackcontroler.js";
 const router = express.Router();
 
 // register user api
@@ -55,5 +55,9 @@ router.get("/teachermangement", teacherdetails);
 router.post("/teacherremove", removeteacher);
 
 router.get("/checkold_user", checkold_user);
+
+router.post("/feedbackadd" , feedbackget);
+
+router.get("/feedbackget", feedbackput);
 
 export default router;

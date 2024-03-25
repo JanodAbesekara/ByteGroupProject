@@ -91,7 +91,10 @@ const fileurlcontroller = async (req, res) => {
 
 const checkold_user = async (req, res) => {
   try {
-    const olduser = await User.find({ email: req.params.email });
+    const users = await User.find({}, { email: 1 }); 
+    const emails = users.map(user => user.email);
+
+    return res.status(200).json({ Success: true, data: emails });
   } catch (err) {
     console.error("Error saving file:", err);
     res.status(500).json({ Success: false, msg: "Internal Server Error" });
