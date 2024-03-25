@@ -4,11 +4,15 @@ import "./UserProfile.css";
 import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
+import { io } from "socket.io-client";
+
+
+
+
 
 function UserProfile() {
   const [image, setImage] = useState(null);
@@ -101,6 +105,25 @@ function UserProfile() {
           window.alert("Data update failed!");
       });
   };
+
+
+
+  useEffect(() => {
+    const socket = io("http://localhost:6000");
+
+    socket.on("connect", () => {
+      console.log("Connected to backend Socket.io server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from backend Socket.io server");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
 
   return (
     <div>
