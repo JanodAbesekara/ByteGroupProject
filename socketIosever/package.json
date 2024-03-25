@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "real time message passing",
   "main": "Server.js",
-  "type":"module",
   "scripts": {
     "start": "nodemon Server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
