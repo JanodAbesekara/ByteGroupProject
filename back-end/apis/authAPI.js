@@ -9,6 +9,7 @@ import verifyTokenController from "../controllers/verifyTokenController.js";
 import {
   fileuplodController,
   fileurlcontroller,
+  checkold_user,
 } from "../controllers/filehandle.js";
 import {
   postupdateController,
@@ -52,5 +53,7 @@ router.post("/studentpost",  removeStudent);
 router.get("/teachermangement", teacherdetails);
 
 router.post("/teacherremove", removeteacher);
+
+router.get("/checkold_user", checkold_user);
 
 export default router;

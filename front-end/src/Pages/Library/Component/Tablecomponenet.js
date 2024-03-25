@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TableContainer,
   Paper,
@@ -12,6 +13,8 @@ import { FaFilePdf, FaFileVideo, FaFileAudio } from "react-icons/fa";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import  {jwtDecode}  from "jwt-decode";
+import axios from "axios";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -29,6 +32,33 @@ const TableComponent = ({ rows }) => {
   const pdfRows = rows.filter((row) => row.pdfLink);
   const videoRows = rows.filter((row) => row.videoLink);
   const audioRows = rows.filter((row) => row.audioLink);
+
+  const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  const decodedToken = jwtDecode(token);
+  const useremail = decodedToken.email;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`/api/auth/checkold_user`)
+      .then((res) => {
+        console.log(res.data);
+        const backendemail = res.data.email;
+
+        if(!backendemail.includes(useremail)){
+           window.alert("Please Login to Site");
+           navigate("/login");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[]
+
+  );
+
+
 
   return (
     <div>

@@ -1,4 +1,5 @@
 import files from "../models/Filemodels.js";
+import User from "../models/usermodel.js";
 
 const fileuplodController = async (req, res) => {
   const {
@@ -88,4 +89,13 @@ const fileurlcontroller = async (req, res) => {
   }
 };
 
-export { fileuplodController, fileurlcontroller };
+const checkold_user = async (req, res) => {
+  try {
+    const olduser = await User.find({ email: req.params.email });
+  } catch (err) {
+    console.error("Error saving file:", err);
+    res.status(500).json({ Success: false, msg: "Internal Server Error" });
+  }
+};
+
+export { fileuplodController, fileurlcontroller,checkold_user };
