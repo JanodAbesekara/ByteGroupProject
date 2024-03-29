@@ -8,18 +8,14 @@ import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
 import chatAPI from "./apis/ChatAPI.js";
 import userAPI from "./apis/userAPI.js";
-import { createServer } from "http";
-import { Server } from "socket.io";
+
+
 
 
 
 const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer, { 
 
-  
 
- });
 
 // Connection to the database
 dbConnect();
@@ -49,16 +45,3 @@ app.listen(port, () => console.log(`Server port ${port}`));
 
 
 
-io.on("connection", (socket) => {
-  console.log("connected");
-  socket.on("disconnect", () => {
-    console.log("disconnected");
-  });
-});
-
-
-
-const socketPort = 4000;
-httpServer.listen(socketPort, () => {
-  console.log(`Socket.io server listening on port ${socketPort}`);
-});
