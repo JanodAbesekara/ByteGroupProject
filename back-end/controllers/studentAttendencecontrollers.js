@@ -76,25 +76,38 @@ const techerlecturecountget = async (req, res) => {
   }
 };
 
-const editlecturecount = async (req, res) => {
+const displayteacherattendence = async (req, res) => {
   try {
-    const { teacheremail, leccount, subject } = req.body;
-    const lecture = await teacherlecture.findOne({
-      teacheremail: teacheremail,
-      subject: subject,
+    const teacherattendence = await teacherlecture.find({});
+    const oldteacherattendence = await teacherlecture.findOne({
+      teacherattendence,
     });
-    if (!lecture) {
-      res.status(404).json({ success: false, msg: "No lecture count found" });
-    } else {
-      lecture.leccount = leccount;
 
-      await lecture.save();
-      res
-        .status(200)
-        .json({ success: true, msg: "Lecture count updated successfully" });
+    if (oldteacherattendence) {
+      return res
+        .status(403)
+        .json({ success: false, msg: "Details already exists" });
+    } else {
+      return res.status(200).json({ success: true, data: teacherattendence });
     }
   } catch (error) {
-    res.status(500).json({ success: false, msg: "Internal Server Error" });
+    res.status(500).json({ success: false, msg: "internal Server Error" });
+  }
+};
+
+const editlecturecount = async (req, res) => {
+  try {
+    const { teacheremail, leccount, time, subject } = req.body;
+    teacherlecture
+      .updateOne(
+        { teacheremail: teacheremail, subject: subject },
+        { $set: { leccount: leccount, time: time } }
+      )
+      .then((result) => {
+        res.status(200).json({ success: true, msg: "Lecture Time and Count updated "});
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "internal Server Error" });
   }
 };
 
@@ -103,5 +116,6 @@ export {
   teacherattendenceController,
   studentattendencegetController,
   techerlecturecountget,
+  displayteacherattendence,
   editlecturecount,
 };
