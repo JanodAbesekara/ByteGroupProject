@@ -45,7 +45,8 @@ function Lecturematirial() {
 
     try {
       const existingLecture = newvalue.find(
-        (lecture) => lecture.subject === subject && lecture.teacheremail === userEmail
+        (lecture) =>
+          lecture.subject === subject && lecture.teacheremail === userEmail
       );
       let response;
 
@@ -57,7 +58,6 @@ function Lecturematirial() {
 
       window.alert(response.data.msg);
       window.location.reload();
-
     } catch (error) {
       console.log(error);
     }
@@ -88,9 +88,9 @@ function Lecturematirial() {
           >
             <option value="">lecture time</option>
             <option value="30">30 mints</option>
-            <option value="60">1 hour</option>
-            <option value="90">1.5 hour</option>
-            <option value="120">2 hour</option>
+            <option value="1">1 hour</option>
+            <option value="1.5">1.5 hour</option>
+            <option value="2">2 hour</option>
           </select>
           <h3>Subject</h3>
           <select
@@ -137,7 +137,10 @@ function Lecturematirial() {
         {newvalue.map((lecture) => (
           <div>
             <h4>Subject: {lecture.subject}</h4>
-            <h4>Time: {lecture.time} Minits</h4>
+            <h4>
+              Time: {lecture.time}{" "}
+              {lecture.time === 30 ? "Minutes" : "Hours"}
+            </h4>
 
             <h4>Lecture Count: {lecture.leccount}</h4>
 

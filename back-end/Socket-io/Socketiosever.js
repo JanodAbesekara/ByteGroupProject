@@ -1,14 +1,12 @@
-import { Socket } from "dgram";
-import express from "express";
-import  createServer  from "http";
 import { Server } from "socket.io";
-
+import  http  from "http";
+import express from "express";
 
 
 const app = express();
+const server =  http.createServer(app);
 
 
-const server = createServer(app);
 const io = new Server(server,{
     cors:{
        origin:["http://localhost:3000"],
@@ -24,6 +22,7 @@ io.on('connection',(Socket)=>{
  Socket.on("disconnect",()=>{
     console.log("A user Disconnected ",Socket.id)
  })
+
 })
 
 

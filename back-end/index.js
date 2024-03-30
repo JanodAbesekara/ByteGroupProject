@@ -17,7 +17,7 @@ const app = express();
 
 
 
-// Connection to the database
+// Connection to the database 
 dbConnect();
 
 // Middleware
@@ -39,7 +39,7 @@ app.use("/api/user", userAPI);
 
 
 // Port
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server port ${port}`));
  
 
