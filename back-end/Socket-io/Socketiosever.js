@@ -1,30 +1,38 @@
 import { Server } from "socket.io";
-import  http  from "http";
+import http from "http";
 import express from "express";
+import {postanouncement, getAnnuncements} from "../controllers/anouncement.js";
+import bodyParser from "body-parser";
 
 
 const app = express();
-const server =  http.createServer(app);
+const server = http.createServer(app);
 
 
-const io = new Server(server,{
-    cors:{
-       origin:["http://localhost:3000"],
-       methods:["GET","POST"]
-    }
-})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
-io.on('connection',(Socket)=>{
- console.log("A user Connected ",Socket.id)
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("A user Connected ", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("A user Disconnected ", socket.id);
+  });
+});
 
 
- Socket.on("disconnect",()=>{
-    console.log("A user Disconnected ",Socket.id)
- })
 
-})
+app.post("/api/send/notifaction", postanouncement);
+app.get("/api/get/notifaction",  getAnnuncements);
 
 
-export {app,io,server};
-  
+
+export { app, io, server };
