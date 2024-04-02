@@ -25,9 +25,14 @@ function ARPreview({ imageUrl }) {
           </a-marker>
           {/* Add light sources for better visualization */}
           <a-light type="ambient" color="#fff" intensity="0.4"></a-light>
-          <a-light type="directional" color="#fff" intensity="0.8" target="#ar-image"></a-light>
+          <a-light
+            type="directional"
+            color="#fff"
+            intensity="0.8"
+            target="#ar-image"
+          ></a-light>
           {/* Add event listeners for user interaction */}
-          <a-entity click="handleClick"> 
+          <a-entity click="handleClick">
             {/* Your interactive elements go here */}
           </a-entity>
         </a-scene>
