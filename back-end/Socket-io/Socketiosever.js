@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-import {postanouncement, getAnnuncements} from "../controllers/anouncement.js";
+import {postanouncement, getAnnuncements,deleteAnnounce} from "../controllers/anouncement.js";
 import bodyParser from "body-parser";
 
 
@@ -32,6 +32,7 @@ io.on("connection", (socket) => {
 
 app.post("/api/send/notifaction", postanouncement);
 app.get("/api/get/notifaction",  getAnnuncements);
+app.post("/api/delete/notifacition", deleteAnnounce);
 
 
 
