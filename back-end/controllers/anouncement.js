@@ -57,4 +57,21 @@ const getAnnuncements = async (req, res) => {
   }
 };
 
-export { postanouncement, getAnnuncements };
+const deleteAnnounce = async (req,res)=>{
+   try{
+    const data = req.body;
+    const _id = data._id;
+
+    await Announcement.deleteOne({_id: _id})
+    return res
+    .status(200)
+    .json({success:true, msg:"Announcement delete !"});
+  } catch (error) {
+    console.error("Error during post deletion:", error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+export { postanouncement, getAnnuncements,deleteAnnounce };
