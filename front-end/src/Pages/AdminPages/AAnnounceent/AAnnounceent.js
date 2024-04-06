@@ -68,32 +68,6 @@ function AAnnounceent() {
 
   fetchData();
 
-  const deletehancle = async (_id) => {
-
-    const paylord = {_id:_id};
-     await axios.delete(`/api/delete/notifaction`,paylord) 
-     .then(() =>{
-      console.log(paylord);
-      fetchData();
-     }) 
-     .catch ((error) =>{
-      console.log(error);
-      window.alert(error);
-    });
-    
-  };
-  
-
-  const handledelete = (_id) => {
-    const conformdelete = window.confirm(
-      "Are you sure you want to delete this Announcement"
-    );
-
-    if (conformdelete) {
-      deletehancle(_id);
-    }
-  };
-
   return (
     <div>
       <Navbar />
@@ -145,7 +119,6 @@ function AAnnounceent() {
                       <TableCell>Message</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Time</TableCell>
-                      <TableCell>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -165,13 +138,6 @@ function AAnnounceent() {
                             </TableCell>
 
                             <TableCell>{announcement.time}</TableCell>
-                            <TableCell>
-                              <button
-                                onClick={() => handledelete(announcement._id)}
-                              >
-                                Delete
-                              </button>
-                            </TableCell>
                           </TableRow>
                         );
                       })}
