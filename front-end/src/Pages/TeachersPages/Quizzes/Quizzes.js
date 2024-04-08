@@ -5,7 +5,7 @@ import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from '../../../Component/Navbar/Navbar';
 import Footer from '../../../Component/Footer/Footer';
 import Setquise from './Component/Setquise';
-import Enterquizes from './Component/Enterquizes';
+
 
 
 const Quise = [
