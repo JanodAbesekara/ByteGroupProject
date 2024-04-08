@@ -1,7 +1,8 @@
-import profile from "../models/userProfileModel.js";
+import profilemodel from "../models/userProfileModel.js";
+import usermodel from "../models/usermodel.js";
 
 const userProfileController = async (req, res) => {
-  const { subject, degree, experience, aboutme, email, profilePicUrl } = req.body;
+  const { subject, degree, experience, aboutme, email, profilePicUrl, id } = req.body;
 
   if (!subject || !experience || !aboutme || !email) {
     return res
@@ -10,13 +11,14 @@ const userProfileController = async (req, res) => {
   }
 
   try {
-    const newprofile = new profile({
+    const newprofile = new profilemodel({
       subject,
       degree,
       experience,
       aboutme,
       email,
       profilePicUrl,
+      id,
     });
     await newprofile.save();
     return res
@@ -30,6 +32,30 @@ const userProfileController = async (req, res) => {
   }
 };
 
+const userDetailsController = async (req,res) => {
+  try{
+    const fetchID = req.params.userID;
+    const user = await usermodel.findById(fetchID);
+    return res
+       .json(user);
+  }
+  catch(error){
+    return res
+       .json("An error occurred");
+  }
+};
 
+const userOtherDetailsController = async (req,res) => {
+  try{
+    const id = req.params.userID;
+    const details = await profilemodel.findOne({id});
+    return res
+         .json(details);
+  }
+  catch(error){
+    return res
+         .json("Error getting user details");
+  }
+};
 
-export {userProfileController};
+export {userProfileController, userDetailsController, userOtherDetailsController};
