@@ -8,6 +8,11 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
+import { io } from "socket.io-client";
+
+
+
+
 
 function UserProfile() {
   const [image, setImage] = useState(null);
@@ -124,6 +129,7 @@ function UserProfile() {
       setIsUploaded(true);
     }
   }, []);
+
 
   return (
     <div>
