@@ -6,10 +6,10 @@ import bodyParser from "body-parser";
 import dbConnect from "./config/dbconnecter.js";
 import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
-import chatAPI from "./apis/ChatAPI.js";
+// import chatAPI from "./apis/ChatAPI.js";
 import userAPI from "./apis/userAPI.js";
 import {app, io, server} from "./Socket-io/Socketiosever.js";
-
+import QuiseAPI from "./apis/QuiseAPI.js";
 
 
 
@@ -34,8 +34,9 @@ app.get("/", (req, res) => {
 // APIs
 app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
-app.use("/api/chat", chatAPI);
+// app.use("/api/chat", chatAPI);
 app.use("/api/user", userAPI);
+app.use("/api/Quise", QuiseAPI);
 
 
 // Port

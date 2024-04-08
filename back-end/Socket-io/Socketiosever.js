@@ -1,9 +1,11 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-import {postanouncement, getAnnuncements,deleteAnnounce} from "../controllers/anouncement.js";
+import {postanouncement, getAnnuncements} from "../controllers/anouncement.js";
 import bodyParser from "body-parser";
+import  {createChatController, userChatController,findChatController,addmessageController,getmessageController
 
+}  from "../controllers/chatContrillers.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -32,7 +34,12 @@ io.on("connection", (socket) => {
 
 app.post("/api/send/notifaction", postanouncement);
 app.get("/api/get/notifaction",  getAnnuncements);
-app.post("/api/delete/notifacition", deleteAnnounce);
+app.post("/api/createchat", createChatController);
+app.get("/api/createchat:userId", userChatController); 
+app.get("/api/finduser/:firstId/:secondId", findChatController);
+app.get("/api/message/:chatId", getmessageController);
+app.post("/api/message", addmessageController);
+
 
 
 
