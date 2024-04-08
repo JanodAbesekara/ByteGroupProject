@@ -4,7 +4,6 @@ import "./UserProfile.css";
 import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
@@ -20,6 +19,8 @@ function UserProfile() {
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
+
+  const [isUploaded, setIsUploaded] = useState(false);
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -69,18 +70,29 @@ function UserProfile() {
     const userID = decodedToken._id;
 
     axios
-      .get(`/getUser/${userID}`)
-      .then((response) => {
-        const userData = response.data;
-        setUser(userData);
-      })
-      .catch((err) => console.log(err));
+        .get(`api/user/userProfile/${userID}`)
+        .then((response)=>{
+          const userData = response.data;
+          setUser(userData);
+        })
+        .catch((error)=>console.log(error));
   }, []);
 
   const handleSubmit = (e) => {
+
+    setSubject((pre) => (pre.length > 0 ? "" : pre));
+    setDegree((pre) => (pre.length > 0 ? "" : pre));
+    setExperience((pre) => (pre.length > 0 ? "" : pre));
+    setAboutMe((pre) => (pre.length > 0 ? "" : pre));
+
     e.preventDefault();
 
-    const updatedUser={
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const userID = decodedToken._id;
+    setUser(decodedToken);
+
+    const updatedUser = {
       ...user,
       subject: subject,
       degree: degree,
@@ -88,19 +100,30 @@ function UserProfile() {
       aboutme: aboutme,
       email: userEmail,
       profilePicUrl: profilePicUrl,
+      id: userID,
     };
+
 
     axios
       .post(`/api/user/userProfile`, updatedUser)
       .then(() => {
+        setIsUploaded(true);
         window.alert("Successfully updated!");
         console.log("data updated successfully");
       })
       .catch(() => {
         console.log("error");
-          window.alert("Data update failed!");
+        window.alert("Data update failed!");
       });
   };
+
+  useEffect(() => {
+    // Check if the details have been uploaded when the component mounts
+    const uploaded = localStorage.getItem("detailsUploaded");
+    if (uploaded === "true") {
+      setIsUploaded(true);
+    }
+  }, []);
 
   return (
     <div>
@@ -193,6 +216,10 @@ function UserProfile() {
                   <button type="submit" value="saveDetails">
                     Save
                   </button>
+                  <br/><br/>
+                  {isUploaded && <p style={{
+                    color: "#0a6e1e"
+                  }}>You have uploaded your details!</p>}
                 </div>
               </form>
             </div>

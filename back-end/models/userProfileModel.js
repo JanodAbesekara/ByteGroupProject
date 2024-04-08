@@ -26,6 +26,9 @@ const profileSchema = new Schema(
     profilePicUrl: {
       type: String,
     },
+    id: {
+      type: String,
+    },
   },
   {
     timestamps: true,
