@@ -15,20 +15,8 @@ import {
 import app from "../../../firebase";
 import axios from "axios";
 import Tables from "./Tables";
-import { jwtDecode } from "jwt-decode";
-
 
 function MyAds() {
-
-
-
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-
- 
-
-
   const [photos, setFile] = useState(undefined);
   const [subject, setSubjectp] = useState("");
   const [edulevel, setEducation] = useState("");
@@ -99,7 +87,6 @@ function MyAds() {
     );
   };
 
-  console.log(inputs);
   const handleSubmit = (e) => {
     e.preventDefault();
     setInputs({
@@ -107,8 +94,7 @@ function MyAds() {
       edulevel: edulevel,
       subject: subject,
       medium: medium,
-      pagelink: "/Enrollment",
-      email: useremail,
+      pagelink: "/Enrollment"
     });
    
     setSubmitButton(true);

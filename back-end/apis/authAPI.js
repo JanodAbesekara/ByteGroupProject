@@ -9,7 +9,6 @@ import verifyTokenController from "../controllers/verifyTokenController.js";
 import {
   fileuplodController,
   fileurlcontroller,
-  checkold_user,
 } from "../controllers/filehandle.js";
 import {
   postupdateController,
@@ -18,7 +17,7 @@ import {
 } from "../controllers/PostControler.js";
 
 import { studentdetails, removeStudent ,teacherdetails,removeteacher} from "../controllers/Studentcontroller.js";
-import  {feedbackget ,feedbackput}  from "../controllers/feedbackcontroler.js";
+
 const router = express.Router();
 
 // register user api
@@ -53,11 +52,5 @@ router.post("/studentpost",  removeStudent);
 router.get("/teachermangement", teacherdetails);
 
 router.post("/teacherremove", removeteacher);
-
-router.get("/checkold_user", checkold_user);
-
-router.post("/feedbackadd" , feedbackget);
-
-router.get("/feedbackget", feedbackput);
 
 export default router;

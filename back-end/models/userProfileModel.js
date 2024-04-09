@@ -19,13 +19,12 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
+
     email: {
-      type: String,
-      required: true,
+        type:String,
     },
     profilePicUrl: {
       type: String,
-      required: true,
     },
     id: {
       type: String,

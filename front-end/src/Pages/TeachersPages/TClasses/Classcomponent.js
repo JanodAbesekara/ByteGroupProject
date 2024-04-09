@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ClasstimesetCom from "./ClasstimesetCom";
 
 function Classcomponent({ selectsubject }) {
   return (
@@ -20,7 +19,7 @@ function Classcomponent({ selectsubject }) {
           <div
             
             className="classcom"
-            style={{ width: "95%", border: "2px solid black" }}
+            style={{ width: "95%", height: "120px", border: "2px solid black" }}
           >
             <Link to="/ClassContent">
             <h2
@@ -36,8 +35,6 @@ function Classcomponent({ selectsubject }) {
             <h4>{subject.mediem}</h4>
             <subject />
             </Link>
-            <ClasstimesetCom />
-
           </div>
         </div>
       ))}

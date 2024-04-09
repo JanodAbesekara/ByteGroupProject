@@ -32,20 +32,31 @@ export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
   const history = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    if (!token || typeof token === "undefined" || token === null) {
-      history("/Login");
-    }
-  }, [history]);
-
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
   };
 
-  if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
-    return null;
-  }
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  
+    
+    if (!token || typeof token === "undefined" || token === null) {
+      
+      history("/Login"); 
+    } else {
+      try {
+        const decodedToken = jwtDecode(token);
+        const expirationTime = decodedToken.exp * 1000; 
+        const currentTime = Date.now();
+  
+        if (currentTime > expirationTime) {
+          handleLogout(); 
+        }
+      } catch (error) {
+        history("/Login"); 
+      }
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("MERN_AUTH_TOKEN");
@@ -57,8 +68,7 @@ export default function Ssidebar() {
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const jobRole = decodedToken.role;
-  const encodedid =
-    jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
+  const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
 
   const sidebarItems = [
     {

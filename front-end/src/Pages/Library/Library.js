@@ -38,7 +38,7 @@ const Library = () => {
             videoLink: file.videoUrl,
             videoTopic: file.discriV,
             audioLink: file.audioUrl,
-            audioTopic: file.discriA,
+            audioTopic: file.audios,
             pdfSubject: file.pdfS,
             videoSubject: file.videos,
             audioSubject: file.audios,

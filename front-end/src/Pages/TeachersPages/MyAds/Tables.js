@@ -9,15 +9,10 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import { jwtDecode } from "jwt-decode";
+
 import { MdDeleteOutline } from "react-icons/md";
 
 function Subject({ selectedPost, setSelectedPost }) {
-
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-
   const [posts, setPosts] = useState([]);
 
 
@@ -29,8 +24,7 @@ function Subject({ selectedPost, setSelectedPost }) {
     axios
       .get(`api/auth/postdetails`)
       .then((response) => {
-        const filteredPosts = response?.data?.data.filter(post => post.email === useremail);
-        setPosts(filteredPosts || []);
+        setPosts(response?.data?.data || []);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -38,7 +32,6 @@ function Subject({ selectedPost, setSelectedPost }) {
   };
 
 
-  
 
 
   const deletePost = (photosURL) => {

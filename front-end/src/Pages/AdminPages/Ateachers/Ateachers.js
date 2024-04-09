@@ -73,7 +73,7 @@ function Ateachers() {
                   marginTop: "100px",
                 }}
               >
-                <b>Students Details</b>
+                <b>Teacher Details</b>
               </h3>
             </div>
             <TableContainer component={Paper} sx={{ marginTop: "100px" }}>

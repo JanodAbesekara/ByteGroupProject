@@ -21,7 +21,7 @@ const userChatController = async (req, res) => {
     res.status(200).json(chat);
   } catch (err) {
     res.status(500).json(err);
-  } 
+  }
 };
 
 const findChatController = async (req, res) => {
