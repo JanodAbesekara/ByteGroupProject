@@ -24,12 +24,10 @@ const registerController = async (req, res) => {
   }
 
   if (password.length < 8) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        msg: "Password should be at least 8 characters long",
-      });
+    return res.status(400).json({
+      success: false,
+      msg: "Password should be at least 8 characters long",
+    });
   }
 
   try {
@@ -61,12 +59,10 @@ const registerController = async (req, res) => {
     const sendMail = await sendVerificationEmail(newUser.email, link);
 
     if (sendMail) {
-      return res
-        .status(201)
-        .json({
-          success: true,
-          msg: "Successfully registered. Error in sending verification email",
-        });
+      return res.status(201).json({
+        success: true,
+        msg: "Successfully registered. Error in sending verification email",
+      });
     } else {
       return res
         .status(201)
@@ -206,9 +202,23 @@ const resetpasswordController = async (req, res) => {
   }
 };
 
+const getuserdetails = async (req, res) => {
+  try {
+    const details = await User.find({});
+  
+    return res.status(200).json({ success: true, data: details });
+  } catch (error) {
+    console.error("Error during user registration:", error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   registerController,
   loginController,
   forgotpasswordController,
   resetpasswordController,
+  getuserdetails,
 };

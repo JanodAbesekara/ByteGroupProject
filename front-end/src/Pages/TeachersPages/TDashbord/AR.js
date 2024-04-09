@@ -1,50 +1,40 @@
 import React, { useState, useEffect } from "react";
+import QRCode from "qrcode.react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-function ARPreview({ peopleData }) {
-  const [isARSupported, setIsARSupported] = useState(false);
+const QRCodeGenerator = () => {
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    if (navigator.xr && peopleData) { // Check if peopleData is defined
-      setIsARSupported(true);
-    }
-  }, [peopleData]);
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
 
-  const createMarkerEntities = () => {
-    if (!peopleData) return [];
+    axios
+      .get(`/api/auth/getuserdetails`)
+      .then((response) => {
+        console.log(response.data.data);
+        const filteredUserData = response.data.data.filter(user => user.email === useremail); 
+        console.log("Filtered Data:", filteredUserData);
+        setUserData(filteredUserData.length > 0 ? filteredUserData[0] : null); 
+        
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
 
-    return peopleData.map((person) => (
-      <a-marker key={person.id} type="pattern" url={person.markerUrl}>
-        {/* Add content inside the marker */}
-        <a-entity position="0 0 0">
-          <a-image src={person.avatarUrl} width="1" height="1"></a-image>
-        </a-entity>
-      </a-marker>
-    ));
-  };
+  }, []);
+
+  // Serialize the user data array into a JSON string
+  const serializedData = JSON.stringify(userData);
 
   return (
-    <>
-      {isARSupported ? (
-        <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-          <a-assets>
-            {/* Define markers based on peopleData */}
-            {peopleData && createMarkerEntities()}
-          </a-assets>
-          {/* Add pre-created markers */}
-          {peopleData && createMarkerEntities()}
-          {/* Add elements to display details on marker found (replace with your UI components) */}
-          <a-entity id="details-entity" visible="false">
-            <h1>Person Found</h1>
-            <p>Name: {/* Dynamically insert name from personData */}</p>
-            <p>Title: {/* Dynamically insert title from personData */}</p>
-            {/* Add more details as needed */}
-          </a-entity>
-        </a-scene>
-      ) : (
-        <p>AR not supported on your device.</p>
-      )}
-    </>
+    <div>
+      <h2>QR Code for User Data</h2>
+      <QRCode value={serializedData} size={80} />
+    </div>
   );
-}
+};
 
-export default ARPreview;
+export default QRCodeGenerator;
