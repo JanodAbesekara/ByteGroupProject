@@ -1,46 +1,40 @@
 import React, { useState, useEffect } from "react";
+import QRCode from "qrcode.react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-function ARPreview({ imageUrl }) {
-  const [isARSupported, setIsARSupported] = useState(false);
+const QRCodeGenerator = () => {
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    if (navigator.xr) {
-      setIsARSupported(true);
-    }
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
+
+    axios
+      .get(`/api/auth/getuserdetails`)
+      .then((response) => {
+        console.log(response.data.data);
+        const filteredUserData = response.data.data.filter(user => user.email === useremail); 
+        console.log("Filtered Data:", filteredUserData);
+        setUserData(filteredUserData.length > 0 ? filteredUserData[0] : null); 
+        
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+
   }, []);
 
-  return (
-    <>
-      {isARSupported ? (
-        <a-scene embedded arjs="sourceType: webcam;">
-          <a-assets>
-            <img id="ar-image" src={imageUrl} alt="Profile Image" />
-          </a-assets>
-          <a-marker preset="hiro">
-            <a-image
-              src="#ar-image"
-              width="1" // Adjust based on image and desired size
-              height="1" // Adjust based on image and desired size
-            />
-          </a-marker>
-          {/* Add light sources for better visualization */}
-          <a-light type="ambient" color="#fff" intensity="0.4"></a-light>
-          <a-light
-            type="directional"
-            color="#fff"
-            intensity="0.8"
-            target="#ar-image"
-          ></a-light>
-          {/* Add event listeners for user interaction */}
-          <a-entity click="handleClick">
-            {/* Your interactive elements go here */}
-          </a-entity>
-        </a-scene>
-      ) : (
-        <p>AR not supported on your device.</p>
-      )}
-    </>
-  );
-}
+  // Serialize the user data array into a JSON string
+  const serializedData = JSON.stringify(userData);
 
-export default ARPreview;
+  return (
+    <div>
+      <h2>QR Code for User Data</h2>
+      <QRCode value={serializedData} size={80} />
+    </div>
+  );
+};
+
+export default QRCodeGenerator;

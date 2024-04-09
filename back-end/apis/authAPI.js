@@ -4,6 +4,7 @@ import {
   loginController,
   forgotpasswordController,
   resetpasswordController,
+  getuserdetails,
 } from "../controllers/authController.js";
 import verifyTokenController from "../controllers/verifyTokenController.js";
 import {
@@ -59,5 +60,8 @@ router.get("/checkold_user", checkold_user);
 router.post("/feedbackadd" , feedbackget);
 
 router.get("/feedbackget", feedbackput);
+
+// Qr code
+router.get("/getuserdetails", getuserdetails);
 
 export default router;
