@@ -1,9 +1,9 @@
 import Postmodels from "../models/Postmodels.js";
 
 const postupdateController = async (req, res) => {
-  const { photosURL, edulevel, subject, medium, pagelink } = req.body;
+  const { photosURL, edulevel, subject, medium, pagelink, email } = req.body;
 
-  if (!edulevel || !medium || !photosURL || !subject || !pagelink) {
+  if (!edulevel || !medium || !photosURL || !subject || !pagelink, !email) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill in all the fields" });
@@ -16,6 +16,7 @@ const postupdateController = async (req, res) => {
       subject,
       medium,
       pagelink,
+      email,
     });
     await newpost.save();
     return res
