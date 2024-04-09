@@ -1,39 +1,43 @@
 import React, { useState, useEffect } from "react";
 
-function ARPreview({ imageUrl }) {
+function ARPreview({ peopleData }) {
   const [isARSupported, setIsARSupported] = useState(false);
 
   useEffect(() => {
-    if (navigator.xr) {
+    if (navigator.xr && peopleData) { // Check if peopleData is defined
       setIsARSupported(true);
     }
-  }, []);
+  }, [peopleData]);
+
+  const createMarkerEntities = () => {
+    if (!peopleData) return [];
+
+    return peopleData.map((person) => (
+      <a-marker key={person.id} type="pattern" url={person.markerUrl}>
+        {/* Add content inside the marker */}
+        <a-entity position="0 0 0">
+          <a-image src={person.avatarUrl} width="1" height="1"></a-image>
+        </a-entity>
+      </a-marker>
+    ));
+  };
 
   return (
     <>
       {isARSupported ? (
-        <a-scene embedded arjs="sourceType: webcam;">
+        <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
           <a-assets>
-            <img id="ar-image" src={imageUrl} alt="Profile Image" />
+            {/* Define markers based on peopleData */}
+            {peopleData && createMarkerEntities()}
           </a-assets>
-          <a-marker preset="hiro">
-            <a-image
-              src="#ar-image"
-              width="1" // Adjust based on image and desired size
-              height="1" // Adjust based on image and desired size
-            />
-          </a-marker>
-          {/* Add light sources for better visualization */}
-          <a-light type="ambient" color="#fff" intensity="0.4"></a-light>
-          <a-light
-            type="directional"
-            color="#fff"
-            intensity="0.8"
-            target="#ar-image"
-          ></a-light>
-          {/* Add event listeners for user interaction */}
-          <a-entity click="handleClick">
-            {/* Your interactive elements go here */}
+          {/* Add pre-created markers */}
+          {peopleData && createMarkerEntities()}
+          {/* Add elements to display details on marker found (replace with your UI components) */}
+          <a-entity id="details-entity" visible="false">
+            <h1>Person Found</h1>
+            <p>Name: {/* Dynamically insert name from personData */}</p>
+            <p>Title: {/* Dynamically insert title from personData */}</p>
+            {/* Add more details as needed */}
           </a-entity>
         </a-scene>
       ) : (
