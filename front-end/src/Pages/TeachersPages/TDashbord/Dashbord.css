@@ -45,16 +45,13 @@
 .teacher_info .name {
   padding-left: 8px;
   color: #1a6a84;
-  font-size: 27px;
+  font-size: 29px;
   font-weight: bold;
 }
 .teacher_info .name::first-letter {
   text-transform: uppercase;
 }
 .teacher_info .info {
-  color: #ff0b37;
-  font-style: italic;
-  font-weight: bold;
   padding-left: 0px;
 }
 .teacher_info .info p {

@@ -52,9 +52,6 @@
   text-transform: uppercase;
 }
 .teacher_info .info {
-  color: #ff0b37;
-  font-style: italic;
-  font-weight: bold;
   padding-left: 0px;
 }
 .teacher_info .info p {
