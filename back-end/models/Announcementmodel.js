@@ -14,8 +14,8 @@ const announcementSchema = new Schema(
 
     TeacheSubject: {
       type: String,
-      required: function () {
-        return this.jobrole !== "Admin";
+      default: function () {
+        return this.jobrole === "Admin" ? "System change" : "";
       },
     },
     Announcementmessage: {
