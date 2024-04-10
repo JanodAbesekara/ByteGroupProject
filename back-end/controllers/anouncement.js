@@ -57,6 +57,19 @@ const getAnnuncements = async (req, res) => {
   }
 };
 
+const deleteAnnouncement = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Announcement.deleteOne({ id });
+    return res
+      .status(200)
+      .json({ success: true, message: "Announcement deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
 
-
-export { postanouncement, getAnnuncements };
+export { postanouncement, getAnnuncements, deleteAnnouncement };
