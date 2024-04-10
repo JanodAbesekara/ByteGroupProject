@@ -34,9 +34,14 @@ function AAnnounceent() {
       minute: "2-digit",
     });
 
+    let TeacheSubject = "";
+    if (role === "Admin") {
+      TeacheSubject = "System changes";
+    }
+
     const formdata = {
       postedemail: useremail,
-      TeacheSubject: "",
+      TeacheSubject,
       Announcementmessage,
       titleofAnn,
       date: currentDate.toISOString().split("T")[0],
@@ -50,6 +55,7 @@ function AAnnounceent() {
       window.alert(response.data.message);
       setAnnouncementmessage("");
       settitleofAnn("");
+
     } catch (error) {
       console.log(error.response.data);
       window.alert(error.response.data.message);

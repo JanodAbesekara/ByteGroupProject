@@ -15,24 +15,41 @@ const QRCodeGenerator = () => {
       .get(`/api/auth/getuserdetails`)
       .then((response) => {
         console.log(response.data.data);
-        const filteredUserData = response.data.data.filter(user => user.email === useremail); 
+        const filteredUserData = response.data.data.filter(
+          (user) => user.email === useremail
+        );
         console.log("Filtered Data:", filteredUserData);
-        setUserData(filteredUserData.length > 0 ? filteredUserData[0] : null); 
-        
+
+        const userDataToSet =
+          filteredUserData.length > 0
+            ? {
+                email: filteredUserData[0].email,
+                username:
+                  filteredUserData[0].firstname +
+                  " " +
+                  filteredUserData[0].lastname,
+                Phonenumber: filteredUserData[0].phonenumber,
+              }
+            : null;
+
+        setUserData(userDataToSet);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-
   }, []);
 
-  // Serialize the user data array into a JSON string
-  const serializedData = JSON.stringify(userData);
-
+  // Serialize the user data array into nomal format 
+  const dataForQRCode = userData
+    ?
+`Name:- ${userData.username}
+Email:- ${userData.email}
+Phonenumber:- ${userData.Phonenumber}`
+    : "";
   return (
     <div>
       <h2>QR Code for User Data</h2>
-      <QRCode value={serializedData} size={80} />
+      <QRCode value={dataForQRCode} size={80} />
     </div>
   );
 };
