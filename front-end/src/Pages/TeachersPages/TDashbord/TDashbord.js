@@ -14,6 +14,7 @@ import AR from "./AR";
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
+  const [details, setDetails] = useState("");
 
   // getting users name
   useEffect(() => {
@@ -21,19 +22,31 @@ export default function Dashbord() {
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
     const userID = decodedToken._id;
+
     axios
-      .get(`/getUser/${userID}`)
+
+      .get(`api/user/userProfile/${userID}`)  
+
       .then((response) => {
         const userData = response.data;
         setUser(userData);
       })
       .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
-    // Fetch the image URL from localStorage when the component mounts
+
+      // Fetch the image URL from localStorage when the component mounts
     const storedUrl = localStorage.getItem("profileImageUrl");
     setUrl(storedUrl);
+
+
+    axios
+      .get(`api/user/dashboard/${userID}`)
+      .then((response) => {
+        const details = response.data;
+        setDetails(details);
+      })
+      .catch((error) => console.log(error));
+    
   }, []);
 
   return (
@@ -59,8 +72,13 @@ export default function Dashbord() {
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
               <div className="info">
-                <p>Subject : </p>
-                <p>Qualifications : </p>
+
+
+              <p><span style={{color: "#de162d", fontSize: "22px", fontWeight: "bold"}}>{details.subject}</span></p>
+                <p><span style={{color: "darkblue"}}>{details.degree}</span><br/> 
+                   <span style={{color: "#366491", fontStyle: "italic"}}>{details.aboutme}</span> </p>
+
+
               </div>
               <Box sx={{ display: "flex", gap: 2, float: "right" }}>
                 <Badge badgeContent="2">
