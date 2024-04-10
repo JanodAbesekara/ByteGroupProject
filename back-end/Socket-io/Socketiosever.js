@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-import {postanouncement, getAnnuncements} from "../controllers/anouncement.js";
+import {postanouncement, getAnnuncements,deleteAnnouncement} from "../controllers/anouncement.js";
 import bodyParser from "body-parser";
 import  {createChatController, userChatController,findChatController,addmessageController,getmessageController
 
@@ -34,6 +34,7 @@ io.on("connection", (socket) => {
 
 app.post("/api/send/notifaction", postanouncement);
 app.get("/api/get/notifaction",  getAnnuncements);
+app.post("/api/delete/notifaction", deleteAnnouncement);
 app.post("/api/createchat", createChatController);
 app.get("/api/createchat:userId", userChatController); 
 app.get("/api/finduser/:firstId/:secondId", findChatController);

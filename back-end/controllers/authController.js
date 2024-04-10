@@ -205,7 +205,7 @@ const resetpasswordController = async (req, res) => {
 const getuserdetails = async (req, res) => {
   try {
     const details = await User.find({});
-  
+    const olddetails = await User.findOne({ details });
     return res.status(200).json({ success: true, data: details });
   } catch (error) {
     console.error("Error during user registration:", error);
