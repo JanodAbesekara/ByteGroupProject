@@ -19,7 +19,7 @@ import {
 } from "../controllers/PostControler.js";
 
 import { studentdetails, removeStudent ,teacherdetails,removeteacher} from "../controllers/Studentcontroller.js";
-import  {feedbackget ,feedbackput}  from "../controllers/feedbackcontroler.js";
+import  {feedbackget ,feedbackput ,deletFeedback}  from "../controllers/feedbackcontroler.js";
 const router = express.Router();
 
 // register user api
@@ -60,6 +60,8 @@ router.get("/checkold_user", checkold_user);
 router.post("/feedbackadd" , feedbackget);
 
 router.get("/feedbackget", feedbackput);
+
+router.post("/deletefeedback", deletFeedback);
 
 // Qr code
 router.get("/getuserdetails", getuserdetails);

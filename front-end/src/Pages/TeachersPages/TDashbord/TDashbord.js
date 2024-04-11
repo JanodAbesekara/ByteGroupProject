@@ -24,9 +24,7 @@ export default function Dashbord() {
     const userID = decodedToken._id;
 
     axios
-
       .get(`api/user/userProfile/${userID}`)  
-
       .then((response) => {
         const userData = response.data;
         setUser(userData);
@@ -74,9 +72,9 @@ export default function Dashbord() {
               <div className="info">
 
 
-              <p><span style={{color: "#de162d", fontSize: "22px", fontWeight: "bold"}}>{details.subject}</span></p>
-                <p><span style={{color: "darkblue"}}>{details.degree}</span><br/> 
-                   <span style={{color: "#366491", fontStyle: "italic"}}>{details.aboutme}</span> </p>
+              <p><span style={{color: "#de162d", fontSize: "22px", fontWeight: "bold"}}>Chemistry</span></p>
+                <p><span style={{color: "darkblue"}}>Universiy of mortuwa</span><br/> 
+                   <span style={{color: "#366491", fontStyle: "italic"}}>hellow</span> </p>
 
 
               </div>
