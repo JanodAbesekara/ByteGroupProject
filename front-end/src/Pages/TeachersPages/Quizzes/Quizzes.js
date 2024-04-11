@@ -5,7 +5,7 @@ import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from '../../../Component/Navbar/Navbar';
 import Footer from '../../../Component/Footer/Footer';
 import Setquise from './Component/Setquise';
-import Enterquizes from './Component/Enterquizes';
+import InputTimerange from './Component/InputTimerange';
 
 
 const Quise = [
@@ -42,8 +42,10 @@ export default function Quizzes() {
       <Sidebar />
     </Grid>
     <Grid item md={11.25} sm={10.5} xs={9.8}>
-      <Box div ={Quise} >
-       <Setquise div={Quise}/>
+
+    <Box>
+      <h2>Set Quizzes</h2>
+      <InputTimerange />
     </Box>
     </Grid>
   </Grid>
