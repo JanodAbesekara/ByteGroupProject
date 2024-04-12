@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {userProfileController, userDetailsController, userOtherDetailsController} from "../controllers/userProfileController.js";
+import {userProfileController, userDetailsController, userOtherDetailsController, studentsDetailsController} from "../controllers/userProfileController.js";
 import {studentattendenceController, teacherattendenceController, studentattendencegetController,techerlecturecountget,editlecturecount,displayteacherattendence} from "../controllers/studentAttendencecontrollers.js";
 
 
@@ -17,5 +17,7 @@ router.get("/teacherattendence", displayteacherattendence);
 router.get("/userProfile/:userID" , userDetailsController);
 
 router.get("/dashboard/:userID", userOtherDetailsController);
+
+router.post("/student", studentsDetailsController);
 
 export default router;
