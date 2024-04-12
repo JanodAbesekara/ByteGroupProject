@@ -64,16 +64,18 @@ export default function Dashbord() {
       .get("/api/get/notifaction")
       .then((response) => {
         const announcements = response.data.announcements;
-        const filteredMessages = announcements.filter((item) => item.jobrole === "Admin");
+        const filteredMessages = announcements.filter(
+          (item) => item.jobrole === "Admin"
+        );
 
-       // Set notification state with filtered messages
-      setNotification(filteredMessages);
-      
-      // Set notification count
-      setNotCount(filteredMessages.length);
-      
-      console.log(filteredMessages);
-      console.log(filteredMessages.length);
+        // Set notification state with filtered messages
+        setNotification(filteredMessages);
+
+        // Set notification count
+        setNotCount(filteredMessages.length);
+
+        console.log(filteredMessages);
+        console.log(filteredMessages.length);
       })
       .catch((error) => console.log(error));
   };
@@ -129,11 +131,15 @@ export default function Dashbord() {
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box sx={{ display: "flex", gap: 2, float: "right" }}>
                     <Badge badgeContent={notCount}>
-                      <Typography fontSize="xl">🔔</Typography>
+                      <Typography fontSize="1.4rem">🔔</Typography>
                     </Badge>
                   </Box>
                 </Link>
-                <Openwindow open={open} handleClose={handleClose} notifications={notifaication} />
+                <Openwindow
+                  open={open}
+                  handleClose={handleClose}
+                  notifications={notifaication}
+                />
               </React.Fragment>
             </div>
           </div>
