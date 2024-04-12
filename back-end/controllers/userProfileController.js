@@ -1,6 +1,5 @@
 import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
-import stProfilemodel from "../models/studentProfilemodel.js";
 
 const userProfileController = async (req, res) => {
   const { subject, degree, experience, aboutme, email, profilePicUrl, id } = req.body;
@@ -59,33 +58,4 @@ const userOtherDetailsController = async (req,res) => {
   }
 };
 
-
-const studentsDetailsController = async (req,res) => {
-  const {name, email, mobileNo, id} = req.body;
-  if( !name || !email || !mobileNo) {
-    return res 
-        .status(400)
-        .json({success: false , msg: "Please fill all the fields"});
-  }
-
-  try{
-    const studentsDetails = new stProfilemodel({
-      name,
-      email,
-      mobileNo,
-      id,
-    });
-    await studentsDetails.save();
-    return res
-    .status(200)
-    .json({success: true, msg: "success"});
-  }
-  catch (error) {
-    console.error("An error has occured !", error);
-    return res
-      .status(500)
-      .json({ success: false , msg: "error"});
-  }
-}
-
-export {userProfileController, userDetailsController, userOtherDetailsController, studentsDetailsController};
+export {userProfileController, userDetailsController, userOtherDetailsController};
