@@ -11,11 +11,25 @@ import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import AR from "./AR";
 import { Link } from "react-router-dom";
+import Openwindow from "./Openwindow";
 
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
   const [details, setDetails] = useState("");
+  const [notifaication, setNotification] = useState([]);
+  const [notCount, setNotCount] = useState(0);
+
+  // notofication popup
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // getting users name
   useEffect(() => {
@@ -25,18 +39,16 @@ export default function Dashbord() {
     const userID = decodedToken._id;
 
     axios
-      .get(`api/user/userProfile/${userID}`)  
+      .get(`api/user/userProfile/${userID}`)
       .then((response) => {
         const userData = response.data;
         setUser(userData);
       })
       .catch((err) => console.log(err));
 
-
-      // Fetch the image URL from localStorage when the component mounts
+    // Fetch the image URL from localStorage when the component mounts
     const storedUrl = localStorage.getItem("profileImageUrl");
     setUrl(storedUrl);
-
 
     axios
       .get(`api/user/dashboard/${userID}`)
@@ -45,8 +57,28 @@ export default function Dashbord() {
         setDetails(details);
       })
       .catch((error) => console.log(error));
-    
   }, []);
+
+  const featchNotification = () => {
+    axios
+      .get("/api/get/notifaction")
+      .then((response) => {
+        const announcements = response.data.announcements;
+        const filteredMessages = announcements.filter((item) => item.jobrole === "Admin");
+
+       // Set notification state with filtered messages
+      setNotification(filteredMessages);
+      
+      // Set notification count
+      setNotCount(filteredMessages.length);
+      
+      console.log(filteredMessages);
+      console.log(filteredMessages.length);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  featchNotification();
 
   return (
     <div>
@@ -71,21 +103,38 @@ export default function Dashbord() {
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
               <div className="info">
-
-
-              <p><span style={{color: "#de162d", fontSize: "22px", fontWeight: "bold"}}>Chemistry</span></p>
-                <p><span style={{color: "darkblue"}}>Universiy of mortuwa</span><br/> 
-                   <span style={{color: "#366491", fontStyle: "italic"}}>hellow</span> </p>
-
-
+                <p>
+                  <span
+                    style={{
+                      color: "#de162d",
+                      fontSize: "22px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Chemistry
+                  </span>
+                </p>
+                <p>
+                  <span style={{ color: "darkblue" }}>
+                    Universiy of mortuwa
+                  </span>
+                  <br />
+                  <span style={{ color: "#366491", fontStyle: "italic" }}>
+                    hellow
+                  </span>{" "}
+                </p>
               </div>
-              <Link to="/Openwindow">
-              <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                <Badge badgeContent="2">
-                <Typography fontSize="xl">🔔</Typography>
-                </Badge>
-              </Box>
-              </Link>
+
+              <React.Fragment>
+                <Link variant="outlined" onClick={handleClickOpen}>
+                  <Box sx={{ display: "flex", gap: 2, float: "right" }}>
+                    <Badge badgeContent={notCount}>
+                      <Typography fontSize="xl">🔔</Typography>
+                    </Badge>
+                  </Box>
+                </Link>
+                <Openwindow open={open} handleClose={handleClose} notifications={notifaication} />
+              </React.Fragment>
             </div>
           </div>
           <AR imageUrl={url} />
