@@ -10,6 +10,7 @@ import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import AR from "./AR";
+import { Link } from "react-router-dom";
 
 export default function Dashbord() {
   const [user, setUser] = useState("");
@@ -78,11 +79,13 @@ export default function Dashbord() {
 
 
               </div>
+              <Link to="/Openwindow">
               <Box sx={{ display: "flex", gap: 2, float: "right" }}>
                 <Badge badgeContent="2">
-                  <Typography fontSize="xl">🔔</Typography>
+                <Typography fontSize="xl">🔔</Typography>
                 </Badge>
               </Box>
+              </Link>
             </div>
           </div>
           <AR imageUrl={url} />
