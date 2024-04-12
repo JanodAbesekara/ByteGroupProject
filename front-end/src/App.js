@@ -40,7 +40,8 @@ import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
 import Enrollment from "./Pages/Enrollment/Enrollment";
 import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
 import Chat from "./Pages/Chat/Chat";
-
+import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
+import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 
    
 function App() {
@@ -120,6 +121,8 @@ function App() {
           <Route path="/Enrollment" element={<Enrollment />} />
           <Route path="/Classcontent" element={<Classcontent />} />
           <Route path="/Chat" element={<Chat />}/>
+          <Route path="/Openwindow" element={<Openwindow />} />
+          <Route path="/Popupbox" element={<Popupbox />} />
         </Routes>
       </div>
     </>

@@ -1,30 +1,34 @@
-import React from 'react'
+import React from "react";
 import { CgSoftwareUpload } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import InputTimerange from "./InputTimerange";
 
-function Setquise({ div }) {
- 
+function Setquise() {
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submitted");
+  
+  };
 
   return (
     <div>
-      {div.map((item, index) => (
-        <div className="Quibox" key={index}>
-          <h2>{item.Subject}</h2>
-          <h3>Data : {item.Date}</h3>
-          <h4>Time limit : {item.time}</h4>
-          <button >
+      <div className="Quibox">
+        <form onSubmit={handleSubmit}>
+          <InputTimerange />
+          <button type="submit">
             <CgSoftwareUpload />
           </button>
-
           <Link to="/Enterquizes">
-            <button
-              style={{ padding: "5px", textAlign: "center", fontSize: "14px" }}
-            >
-              SelectQuises
-            </button>
+          <button
+            style={{ padding: "5px", textAlign: "center", fontSize: "14px" }}
+          >
+            SelectQuises
+          </button>
           </Link>
-        </div>
-      ))}
+        </form>
+      </div>
     </div>
   );
 }

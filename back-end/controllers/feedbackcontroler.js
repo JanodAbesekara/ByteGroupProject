@@ -21,8 +21,33 @@ const feedbackget = async (req,res) => {
 
 const feedbackput = async (req,res) => {
  
+    try{
+        const feedbacks = await Getfeedbacks.find();
+        return res.status(200).json({success:true,data:feedbacks});
+    }
+    catch(error){
+        console.error("Error during feedback fetch:",error);
+        return res.status(500).json({success:false,msg:"Internal Server Error"});
+    }
     
-
 };
 
-export { feedbackget ,feedbackput};
+
+const deletFeedback = async (req,res) => {
+    const {_id} = req.body;
+
+    if(!_id){
+        return res.status(400).json({success:false,msg:"Please provide an id"});
+    }
+
+    try{
+        await Getfeedbacks.findByIdAndDelete(_id);
+        return res.status(200).json({success:true,msg:"Feedback deleted successfully"});
+    }
+    catch(error){
+        console.error("Error during feedback delete:",error);
+        return res.status(500).json({success:false,msg:"Internal Server Error"});
+    }
+};
+
+export { feedbackget ,feedbackput ,deletFeedback};
