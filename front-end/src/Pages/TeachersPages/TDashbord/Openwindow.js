@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -8,6 +8,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -19,6 +21,43 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function Openwindow({ open, handleClose, notifications }) {
+  const [subject, setSubject] = useState("");
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+
+  const currentDate = new Date();
+  const currentTime = currentDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  const decodedToken = jwtDecode(token);
+  const useremail = decodedToken.email;
+  const role = decodedToken.role;
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      titleofAnn: title,
+      Announcementmessage: message,
+      TeacheSubject: subject,
+      postedemail: useremail,
+      date: currentDate.toISOString().split("T")[0],
+      time: currentTime,
+      jobrole: role,
+    };
+    console.log(data);
+
+    try {
+      const response = await axios.post(`/api/send/notifaction`, data);
+      window.alert(response.data.message);
+      handleClose();
+    } catch (error) {
+      window.alert(error.response.data.message);
+    }
+  };
+
   return (
     <BootstrapDialog
       onClose={handleClose}
@@ -51,20 +90,42 @@ function Openwindow({ open, handleClose, notifications }) {
             >
               {notification.Announcementmessage}
             </Typography>
+            <span>{notification.date.split("T")[0]}</span>
           </DialogContent>
         );
       })}
 
-      <DialogActions>
-        <select>
-          <option value={" "}>Select subject</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="English">English</option>
-          <option value="Physics">Physics</option>
-          <option value="ICT">ICT</option>
-        </select>
-        <input style={{ width: "100%" }} />
-        <Button type="submit">submit</Button>
+      <DialogActions sx={{ display: "flex" }}>
+        <div>
+          <form onSubmit={handlesubmit}>
+            <label htmlFor="title">Title</label>
+            <input
+              style={{ width: "100%", padding: "5px 10px" }}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <label htmlFor="message">Message</label>
+            <input
+              style={{ width: "100%", padding: "5px 10px" }}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <div style={{ marginTop: "20px" }}>
+              <select
+                onChange={(e) => setSubject(e.target.value)}
+                sx={{ padding: "5px 10px" }}
+              >
+                <option value={" "}>Select subject</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="English">English</option>
+                <option value="Physics">Physics</option>
+                <option value="ICT">ICT</option>
+              </select>
+
+              <Button type="submit" variant="outlined" sx={{ float: "right" }}>
+                submit
+              </Button>
+            </div>
+          </form>
+        </div>
       </DialogActions>
     </BootstrapDialog>
   );
