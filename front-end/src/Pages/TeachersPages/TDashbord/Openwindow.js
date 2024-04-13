@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -100,14 +102,23 @@ function Openwindow({ open, handleClose, notifications }) {
           <form onSubmit={handlesubmit}>
             <label htmlFor="title">Title</label>
             <input
+              type="text"
+              placeholder="Enter Title"
               style={{ width: "100%", padding: "5px 10px" }}
               onChange={(e) => setTitle(e.target.value)}
             />
             <label htmlFor="message">Message</label>
             <input
-              style={{ width: "100%", padding: "5px 10px" }}
+              type="text"
+              placeholder="Enter Message"
+              style={{
+                height: "100px",
+                width: "100%",
+                padding: "10px 10px 70px 10px",
+              }}
               onChange={(e) => setMessage(e.target.value)}
             />
+
             <div style={{ marginTop: "20px" }}>
               <select
                 onChange={(e) => setSubject(e.target.value)}
@@ -120,8 +131,13 @@ function Openwindow({ open, handleClose, notifications }) {
                 <option value="ICT">ICT</option>
               </select>
 
-              <Button type="submit" variant="outlined" sx={{ float: "right" }}>
-                submit
+              <Button
+                type="submit"
+                variant="contained"
+                endIcon={<SendIcon />}
+                sx={{ float: "right" }}
+              >
+                Send
               </Button>
             </div>
           </form>

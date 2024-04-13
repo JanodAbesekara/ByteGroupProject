@@ -55,6 +55,7 @@ export default function Dashbord() {
       .then((response) => {
         const details = response.data;
         setDetails(details);
+        console.log(details);
       })
       .catch((error) => console.log(error));
   }, []);

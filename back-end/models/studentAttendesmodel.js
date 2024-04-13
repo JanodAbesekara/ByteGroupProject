@@ -16,14 +16,14 @@ const attendennceSchema = new Schema({
         type: String,
         required: true
     },
-    isPresent: {
-        type: Boolean,
-        default: false
+    teachetmail:{
+        type: String,
+        required: true
     },
-    timestamp: {
-        type: Date,
-        default: Date.now
-    }
+    countAttendence:{
+        type: Number,
+        required: true
+    },
    },
     {
         timestamps: true
