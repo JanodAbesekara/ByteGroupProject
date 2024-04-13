@@ -2,25 +2,48 @@ import attendennceSchema from "../models/studentAttendesmodel.js";
 import teacherlecture from "../models/TeacherLecturecountmodel.js";
 
 const studentattendenceController = async (req, res) => {
-  const { studentnemail, studentname, subject } = req.body;
+  const { studentnemail, studentname, subject, teachetmail } = req.body;
 
-  if (!studentnemail || !studentname || !subject) {
+  // Validate required fields
+  if (!studentnemail || !studentname || !subject || !teachetmail) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill all the fields" });
   }
+
   try {
-    const attendence = new attendennceSchema({
+    // Efficiently Find Existing Attendance (if any)
+    const existingAttendance = await attendennceSchema.findOne({
       studentnemail,
-      studentname,
-      subject,
-      isPresent: true,
+      subject, // Filter by subject for subject-specific attendance
     });
-    await attendence.save();
+
+    let newCountAttendence;
+
+    if (existingAttendance) {
+      // Increment countAttendence if record exists for the student and subject
+      newCountAttendence = existingAttendance.countAttendence + 1;
+      existingAttendance.countAttendence = newCountAttendence; // Update existing document
+
+      await existingAttendance.save(); // Save updated countAttendence
+    } else {
+      // Create new attendance record if no previous entry exists
+      newCountAttendence = 1; // Initial count for new record
+      const attendance = new attendennceSchema({
+        studentnemail,
+        studentname,
+        subject,
+        countAttendence: newCountAttendence,
+        teachetmail,
+      });
+      await attendance.save();
+    }
+
     res
       .status(201)
       .json({ success: true, msg: "Attendance marked successfully" });
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };

@@ -1,6 +1,7 @@
 import "./Footer.css";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const form = useRef();
@@ -77,26 +78,26 @@ function Footer() {
             <h4>@ 2024 DreamLearnAcademy.lk</h4>
           </div>
           <div className="logo3">
-            <a href="">
+            < Link to="">
               <img src="./Symbles/link.png" alt="link" target="_blank" />
-            </a>
-            <a href="">
+            </ Link>
+            < Link to="">
               <img
                 src="./Symbles/facebook.png"
                 alt="facebook"
                 target="_blank"
               />
-            </a>
-            <a href="">
+            </ Link>
+            < Link to="">
               <img
                 src="./Symbles/whatsapp.png"
                 alt="whatsapp"
                 target="_blank"
               />
-            </a>
-            <a href="">
+            </ Link>
+            < Link to="">
               <img src="./Symbles/youtube.png" alt="youtube" target="_blank" />
-            </a>
+            </ Link>
           </div>
         </div>
       </div>

@@ -10,16 +10,16 @@ import {
   TableBody,
 } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
-import { MdDeleteOutline } from "react-icons/md";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+
 
 function Subject({ selectedPost, setSelectedPost }) {
-
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const useremail = decodedToken.email;
 
   const [posts, setPosts] = useState([]);
-
 
   useEffect(() => {
     getPosts();
@@ -29,17 +29,15 @@ function Subject({ selectedPost, setSelectedPost }) {
     axios
       .get(`api/auth/postdetails`)
       .then((response) => {
-        const filteredPosts = response?.data?.data.filter(post => post.email === useremail);
+        const filteredPosts = response?.data?.data.filter(
+          (post) => post.email === useremail
+        );
         setPosts(filteredPosts || []);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   };
-
-
-  
-
 
   const deletePost = (photosURL) => {
     const payload = { photosURL: photosURL };
@@ -116,9 +114,10 @@ function Subject({ selectedPost, setSelectedPost }) {
                   </a>
                 </TableCell>
                 <TableCell sx={{ textAlign: "center" }}>
-                 
-                  <button
-                    style={{
+                  <Button
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    sx={{
                       padding: "2px 10px",
                       fontSize: "15px",
                       marginLeft: "10px",
@@ -126,13 +125,12 @@ function Subject({ selectedPost, setSelectedPost }) {
                       color: "White",
                       borderRadius: "5px",
                       border: "none",
-                      boxShadow:"2px 1px 10px 0.5px black",
+                      boxShadow: "2px 1px 10px 0.5px black",
                     }}
                     onClick={() => handleDeleteConfirmation(post.photosURL)}
                   >
                     Delete
-                    <MdDeleteOutline />
-                  </button>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
