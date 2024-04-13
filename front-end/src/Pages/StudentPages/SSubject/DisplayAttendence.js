@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
+import axios from 'axios'; // Correct import
 
 function DisplayAttendence() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
-
+    const useremail = decodedToken.email;
 
     const [displayData1, setDisplayData1] = useState([]);
     const [displayData2, setDisplayData2] = useState([]);
-    let filterData1 = [];
-    let filterData2 = [];
 
     useEffect(() => {
         const fetchAttendance = () => {
             axios.get(`/api/user/techeralectureget`)
                 .then(res => {
                     const fildata1 = res.data.data;
-                    filterData1 = fildata1.filter((item) => item.subject === "Business Studies" && item.teacheremail === "janodabesekara91@gmail.com");
-                    setDisplayData1(filterData1);
+                    const filteredData1 = fildata1.filter((item) => item.subject === "Business Studies" && item.teacheremail === "janodabesekara91@gmail.com");
+                    setDisplayData1(filteredData1);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -31,8 +29,8 @@ function DisplayAttendence() {
             axios.get(`/api/user/studenceattendenceget`)
                 .then(res => {
                     const fildata2 = res.data.data;
-                    filterData2 = fildata2.filter((item) => item.subject === "Business Studies" && item.studentnemail === decodedToken.email);
-                    setDisplayData2(filterData2);
+                    const filteredData2 = fildata2.filter((item) => item.subject === "Business Studies" && item.studentnemail === useremail);
+                    setDisplayData2(filteredData2);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -40,10 +38,10 @@ function DisplayAttendence() {
         };
 
         fetchStudentAttendance();
-    }, []);
+    }, [useremail]);
 
     // Calculate attendance percentage here
-    const attendancePercentage = filterData2.countAttendence / filterData1.leccount * 100 || 0;
+    const attendancePercentage = displayData2.length > 0 && displayData1.length > 0 ? displayData2[0].countAttendence / displayData1[0].leccount * 100 : 0;
 
     return (
         <div>

@@ -20,6 +20,7 @@ function ComAttendence() {
                 teachetmail: "janodabesekara@gmail.com",
             });
             window.alert(response.data.msg);
+            window.location.reload();
         } catch (error) {
             window.alert(error.response.data.msg);
         }
