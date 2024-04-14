@@ -22,7 +22,18 @@ const createQuizController = async (req, res) => {
     if (question.length > 30 && question.length < 1) {
       return res
         .status(400)
-        .json({ message: "Maximum 30 questions are allowed and Minimun length 1" });
+        .json({
+          message: "Maximum 30 questions are allowed and Minimun length 1",
+        });
+    }
+
+    const oldQuiz = await Quiz.findOne({
+      QuizeNumber,
+      TeacherSubject,
+      TeacherEmail,
+    });
+    if (oldQuiz) {
+      return res.status(403).json({success: false, message: "Quiz already exists"});
     }
 
     const newQuiz = new Quiz({
@@ -42,4 +53,13 @@ const createQuizController = async (req, res) => {
   }
 };
 
-export { createQuizController };
+const getQuizController = async (req, res) => {
+  try {
+    const quiz = await Quiz.find();
+    res.status(200).json(quiz);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export { createQuizController, getQuizController };

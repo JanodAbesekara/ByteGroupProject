@@ -42,6 +42,7 @@ import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
 import Chat from "./Pages/Chat/Chat";
 import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
+import ComQuises from "./Pages/StudentPages/SQuizzes/ComQuises.js";
 
    
 function App() {
@@ -123,6 +124,7 @@ function App() {
           <Route path="/Chat" element={<Chat />}/>
           <Route path="/Openwindow" element={<Openwindow />} />
           <Route path="/Popupbox" element={<Popupbox />} />
+          <Route path="/ComQuises" element={<ComQuises />} />
         </Routes>
       </div>
     </>

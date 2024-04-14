@@ -1,10 +1,11 @@
 import express from 'express';
-import { createQuizController } from '../controllers/QuiseController.js';
+import { createQuizController ,getQuizController } from '../controllers/QuiseController.js';
 
 
 const router = express.Router();
 
 router.post("/createQuise", createQuizController);
+router.get("/getQuise", getQuizController);
 
 
 export default router;
