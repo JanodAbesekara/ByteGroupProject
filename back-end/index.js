@@ -13,10 +13,6 @@ import QuiseAPI from "./apis/QuiseAPI.js";
 
 
 
-
-
-
-
 // Connection to the database 
 dbConnect();
 

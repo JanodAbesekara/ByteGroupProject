@@ -5,21 +5,39 @@ import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ComQuises from "./ComQuises";
 
 function SQuizzes() {
-  const [quizzes, setQuizzes] = useState([]);
+  const [quizzes3, setQuizzes3] = useState([]);
+  const[quizzes1, setquizzes1] = useState([]);
+  const[quizzes2, setquizzes2] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/Quise/getQuise`);
         const quises = response.data;
-        const filteredQuizes = quises.filter(
+        const filteredQuizes1 = quises.filter(
           (quise) =>
             quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics"
+            quise.TeacherSubject === "Mathematics" &&
+            quise.QuizeNumber === 1
         );
-        setQuizzes(filteredQuizes);
+        setquizzes1(filteredQuizes1);
+        const filteredQuizes2 = quises.filter(
+          (quise) =>
+            quise.TeacherEmail === "teacher@example.com" &&
+            quise.TeacherSubject === "Mathematics" &&
+            quise.QuizeNumber === 2
+        );
+        setquizzes2(filteredQuizes2);
+        const filteredQuizes3 = quises.filter(
+          (quise) =>
+            quise.TeacherEmail === "teacher@example.com" &&
+            quise.TeacherSubject === "Mathematics" &&
+            quise.QuizeNumber === 3
+        );
+        setQuizzes3(filteredQuizes3);
       } catch (error) {
         console.log(error);
         window.alert(error.response.data.message);
@@ -37,7 +55,7 @@ function SQuizzes() {
           <Ssidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          {quizzes.map((quiz) => (
+          {quizzes1.map((quiz) => (
             <Box key={quiz._id}>
               <div
                 style={{
@@ -58,7 +76,7 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to="/ComQuises">
+                 <Link to= "/ComQuises">
                     <button
                       style={{
                         float: "right",
@@ -70,8 +88,91 @@ function SQuizzes() {
                       Attempt to Quiz
                     </button>
                   </Link>
+                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-              <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                </div>
+              </div>
+
+            </Box>
+          ))}
+            {quizzes2.map((quiz) => (
+            <Box key={quiz._id}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "80%",
+                    height: "60%",
+                    backgroundColor: "#C3B091",
+                    padding: "40px",
+                    borderRadius: "20px",
+                    marginTop: "40px",
+                    marginBottom: "30px",
+                    boxShadow: "2px 4px 8px 0.5px black",
+                  }}
+                >
+                  <Link to= "/ComQuises2">
+                    <button
+                      style={{
+                        float: "right",
+                        padding: "5px 10px",
+                        boxShadow: "2px 1px 10px 0.5px black",
+                      }}
+                    >
+                      {" "}
+                      Attempt to Quiz
+                    </button>
+                  </Link>
+                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                </div>
+              </div>
+
+            </Box>
+          ))}
+            {quizzes3.map((quiz) => (
+            <Box key={quiz._id}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "80%",
+                    height: "60%",
+                    backgroundColor: "#C3B091",
+                    padding: "40px",
+                    borderRadius: "20px",
+                    marginTop: "40px",
+                    marginBottom: "30px",
+                    boxShadow: "2px 4px 8px 0.5px black",
+                  }}
+                >
+                  <Link to="/ComQuises3">
+                    <button
+                      style={{
+                        float: "right",
+                        padding: "5px 10px",
+                        boxShadow: "2px 1px 10px 0.5px black",
+                      }}
+                    >
+                      {" "}
+                      Attempt to Quiz
+                    </button>
+                  </Link>
+                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>Time range :-{quiz.TimeRanges} minits</p>
                 </div>
               </div>
 

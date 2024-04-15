@@ -43,6 +43,8 @@ import Chat from "./Pages/Chat/Chat";
 import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 import ComQuises from "./Pages/StudentPages/SQuizzes/ComQuises.js";
+import ComQuises2 from "./Pages/StudentPages/SQuizzes/ComQuises2.js";
+import ComQuises3 from "./Pages/StudentPages/SQuizzes/ComQuises3.js";
 
    
 function App() {
@@ -125,6 +127,8 @@ function App() {
           <Route path="/Openwindow" element={<Openwindow />} />
           <Route path="/Popupbox" element={<Popupbox />} />
           <Route path="/ComQuises" element={<ComQuises />} />
+          <Route path="/ComQuises2" element={<ComQuises2 />}/>
+          <Route path="/ComQuises3" element={<ComQuises3 />}/>
         </Routes>
       </div>
     </>
