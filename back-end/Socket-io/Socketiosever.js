@@ -36,7 +36,7 @@ app.post("/api/send/notifaction", postanouncement);
 app.get("/api/get/notifaction",  getAnnuncements);
 app.post("/api/delete/notifaction", deleteAnnouncement);
 app.post("/api/createchat", createChatController);
-app.get("/api/createchat:userId", userChatController); 
+app.get("/api/createchat/:userId", userChatController); 
 app.get("/api/finduser/:firstId/:secondId", findChatController);
 app.get("/api/message/:chatId", getmessageController);
 app.post("/api/message", addmessageController);
