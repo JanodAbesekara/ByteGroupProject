@@ -13,6 +13,7 @@ import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
 import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
+import Alertbox from "../../Component/Alertbox/Alertbox";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
@@ -108,13 +109,7 @@ function Login({ setUser, setIsLoggedIn }) {
           <h2>Login</h2>
         </div>
 
-
-          <Lottie
-            animationData={animatio}
-
-            className="lottie"
-          />
- 
+        <Lottie animationData={animatio} className="lottie" />
 
         <form className="login_label" onSubmit={handleSubmit}>
           <label htmlFor="Username_or_Email">
