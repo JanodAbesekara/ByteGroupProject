@@ -74,10 +74,10 @@ function Login({ setUser, setIsLoggedIn }) {
           } else if (jobRole === "Student") {
             redirectPath = `/SDashbord?$phw=${encodedid}`;
           } else {
-             redirectPath = `/ADashbord?$phw=${encodedid}`;
+            redirectPath = `/ADashbord?$phw=${encodedid}`;
           }
 
-          navigate(redirectPath); 
+          navigate(redirectPath);
           setAlertSeverity("success"); // Set success alert on successful login
           setAlertMessage(response.data.msg); // Set alert message from response
         } else {
@@ -116,17 +116,24 @@ function Login({ setUser, setIsLoggedIn }) {
         >
           {" "}
         </div>
-        <div style={{display:"flex", justifyContent:"center",alignItems:"center"}}>
-      <Alert severity={alertSeverity} sx={{ width: "100%", margin: "auto" ,textAlign:"center" }}>
-          {alertMessage}
-        </Alert>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Alert
+            severity={alertSeverity}
+            sx={{ width: "100%", margin: "auto", textAlign: "center" }}
+          >
+            {alertMessage}
+          </Alert>
         </div>
         <div className="login_h3">
           <h2>Login</h2>
         </div>
-
         <Lottie animationData={animatio} className="lottie" />
-
         <form className="login_label" onSubmit={handleSubmit}>
           <label htmlFor="Username_or_Email">
             <span style={{ color: "red" }}>*</span>Username
