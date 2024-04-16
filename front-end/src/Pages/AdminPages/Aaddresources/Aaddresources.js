@@ -15,6 +15,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "../../../firebase";
+import Alert from "@mui/material/Alert";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -52,14 +53,20 @@ const Aaddresources = () => {
   const [submitButton, setSubmitButton] = useState(false);
   const [inputs, setInputs] = useState(undefined);
 
+  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`api/auth/fileupload`, inputs);
-        window.alert(response.data.msg);
+        setAlertSeverity("success"); // Set success alert on successful login
+        setAlertMessage(response.data.msg);
         window.location.reload();
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Unexpected error format:", error);
+        setAlertSeverity("error"); // Set error alert on unexpected error
+        setAlertMessage("An unexpected error occurred. Please try again.");
       }
     };
     if (submitButton === true) {
@@ -159,7 +166,14 @@ const Aaddresources = () => {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
+        <Alert
+              severity={alertSeverity}
+              sx={{ width: "100%", textAlign: "center", margin: "auto",}}
+            >
+              {alertMessage}
+            </Alert>
           <Box sx={{ width: "100%", height: "1000px" }}>
+
             <h1>File upload</h1>
             <div className="Resourses">
               <Grid container spacing={2}>
