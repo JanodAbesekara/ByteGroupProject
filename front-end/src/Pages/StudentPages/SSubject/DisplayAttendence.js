@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import axios from 'axios'; // Correct import
 
+
+
 function DisplayAttendence() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
@@ -46,6 +48,7 @@ function DisplayAttendence() {
     return (
         <div>
             <h2>The percentage: {attendancePercentage}%</h2>
+            
         </div>
     );
 }

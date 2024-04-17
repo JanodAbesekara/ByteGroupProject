@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-function ComQuises() {
+function ComQuises3() {
 
 
   const [quizzes, setQuizzes] = useState([]);
@@ -38,7 +38,7 @@ function ComQuises() {
         (quise) =>
           quise.TeacherEmail === "teacher@example.com" &&
           quise.TeacherSubject === "Mathematics" &&
-          quise.QuizeNumber === 1
+          quise.QuizeNumber === 3
       );
       const timeRangeFromBackend = filteredQuizes[0].TimeRanges;
       setTimeRange(timeRangeFromBackend);
@@ -179,4 +179,4 @@ function ComQuises() {
   );
 }
 
-export default ComQuises;
+export default ComQuises3;

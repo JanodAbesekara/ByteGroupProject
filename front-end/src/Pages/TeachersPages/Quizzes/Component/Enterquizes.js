@@ -1,3 +1,4 @@
+import { margin } from "@mui/system";
 import React, { useState } from "react";
 
 function Enterquizes({ setQuestions }) {
@@ -25,7 +26,8 @@ function Enterquizes({ setQuestions }) {
 
   const handleAnswerChange = (questionIndex, answerIndex, e) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answers[answerIndex] = e.target.value.toLowerCase(); // Lowercased 'answers'
+    updatedQuestions[questionIndex].answers[answerIndex] =
+      e.target.value.toLowerCase(); // Lowercased 'answers'
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
@@ -40,7 +42,7 @@ function Enterquizes({ setQuestions }) {
   };
 
   return (
-    <div>
+    <div >
       <h2>Question count</h2>
       <input
         style={{ width: "50px", height: "30px" }}
@@ -50,19 +52,23 @@ function Enterquizes({ setQuestions }) {
         onChange={handleQuestionCountChange}
       />
       {questions.map((question, index) => (
-        <div key={index}>
+        <div key={index} style={{ marginTop:"20px"}}>
           <h2>Question {index + 1}</h2>
           <input
-            style={{ width: "400px", height: "30px" }}
+            style={{ width: "400px", height: "30px",padding:"10px" }}
             placeholder="Enter the Question"
             value={question.Question}
             onChange={(e) => handleQuestionChange(index, e)}
           />
-          <h3>Answers</h3>
+          <h3 style={{marginTop:"20px"}}>Answers</h3>
           <ul>
             {question.answers.map((answer, answerIndex) => (
-              <li key={answerIndex}>
+              <li
+                key={answerIndex}
+                style={{ paddingTop: "10px", paddingBottom: "10px" }}
+              >
                 <input
+                  sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px"}}
                   placeholder={`Enter answer ${answerIndex + 1}`}
                   value={answer}
                   onChange={(e) => handleAnswerChange(index, answerIndex, e)}
@@ -70,9 +76,10 @@ function Enterquizes({ setQuestions }) {
               </li>
             ))}
           </ul>
-          <div>
+          <div style={{ marginTop: "20px", marginBottom: "20px" }}>
             <label>Select Correct Answer:</label>
             <select
+              style={{ marginLeft: "20px" }}
               value={question.correctAnswerIndex}
               onChange={(e) => handleCorrectAnswerChange(index, e)}
             >

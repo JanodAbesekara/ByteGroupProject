@@ -25,7 +25,7 @@ export default function CombinedComponent() {
       QuizeNumber: quizNumber,
       question: questions,
       TeacherEmail: useremail,
-      TeacherSubject:"Business Studies",
+      TeacherSubject: "Business Studies",
     };
 
     const request = axios.post(`/api/Quise/createQuise`, payload);
@@ -38,24 +38,53 @@ export default function CombinedComponent() {
       console.error("Error:", error);
       window.alert(error.response.data.message);
     });
-
-  
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <InputTimerange
-          setTimeRange={setTimeRange}
-          setQuizNumber={setQuizNumber}
-        />
-        <Enterquizes setQuestions={setQuestions} />
-        <button type="submit">
-          {" "}
-          <CgSoftwareUpload />
-          Submit
-        </button>
-      </form>
+      <div
+        style={{
+          marginRight: "20px",
+          boxShadow: "2px 2px 10px 2px #888888",
+          padding: "20px",
+          marginTop: "100px",
+          paddingBottom: "50px",
+          marginBottom: "100px",
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+            <InputTimerange
+              setTimeRange={setTimeRange}
+              setQuizNumber={setQuizNumber}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Enterquizes setQuestions={setQuestions} />
+          </div>
+          <button
+            type="submit"
+            style={{
+              marginTop: "20px",
+              padding: "5px 30px",
+              boxShadow: "2px 2px 10px 2px #888888",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "20px",
+              marginLeft: "50px",
+            }}
+          >
+            {" "}
+            <CgSoftwareUpload />
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

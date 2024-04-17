@@ -35,7 +35,6 @@ function InputTimerange({ setTimeRange ,setQuizNumber}) {
         <option value="1">Quizzes 1</option>
         <option value="2">Quizzes 2</option>
         <option value="3">Quizzes 3</option>
-        <option value="4">Quizzes 4</option>
       </select>
     </div>
   );
