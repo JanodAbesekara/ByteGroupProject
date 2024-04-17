@@ -35,11 +35,17 @@ function UserProfile() {
   };
 
   useEffect(() => {
-    // Fetch the image URL from localStorage when the component mounts
-    const storedUrl = localStorage.getItem("profileImageUrl");
-    if (storedUrl) {
-      setUrl(storedUrl);
-    }
+    const checkImageExists = async () => {
+      const imageRef = ref(storage, 'profile_pic');
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log('Error checking image existence:', error.message);
+      }
+    };
+
+    checkImageExists();
   }, []);
 
   const handleSave = () => {
@@ -49,8 +55,6 @@ function UserProfile() {
       .then(() => {
         getDownloadURL(imageRef)
           .then((url) => {
-            // Save the image URL to localStorage
-            localStorage.setItem("profileImageUrl", url);
             setUrl(url);
             window.alert("Image uploaded successfully!");
           })
