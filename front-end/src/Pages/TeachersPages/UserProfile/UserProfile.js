@@ -8,7 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import { io } from "socket.io-client";
+
 
 
 
@@ -43,7 +43,7 @@ function UserProfile() {
   }, []);
 
   const handleSave = () => {
-    const imageRef = ref(storage, "profile_pic");
+    const imageRef = ref(storage, `profile_pics/${userEmail}`);
 
     uploadBytes(imageRef, image)
       .then(() => {
