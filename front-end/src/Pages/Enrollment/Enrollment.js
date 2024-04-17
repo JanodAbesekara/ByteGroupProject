@@ -12,10 +12,11 @@ import axios from "axios";
 import QRCodeGenerator from "./QRCodeGenerator";
 
 function Enrollment() {
-  const [teachers, setTeachers] = useState([]);
+ // const [teachers, setTeachers] = useState([]);
   const [postdeatal, setPosts] = useState([]);
   const [Profile, setProfiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     const featchteacher = () => {
@@ -41,10 +42,25 @@ function Enrollment() {
 
   const handleSearch = () => {
     const filteredTeachers = postdeatal.filter((posts) =>
-      posts.firstname.toLowerCase().includes(searchQuery.toLowerCase())
+    posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setTeachers(filteredTeachers);
+    setPosts(filteredTeachers);
   };
+
+
+
+  const handleEnroll = async (teacherEmail, subject) => {
+    try {
+      const response = await (teacherEmail, subject);
+      console.log("Enrollment successful:", response.data);
+    } catch (error) {
+      console.error("Enrollment failed:", error);
+    }
+  };
+ 
+      //setSelectedCourse(subject); // Assuming subject is unique
+     
 
   return (
     <div>
@@ -159,20 +175,20 @@ function Enrollment() {
                       justifyContent: "center",
                       alignContent: "center",
                       display: "flex",
+                      padding: "50px",
                     }}
                   >
                     <button
-                      style={{
-                        color: "white",
-                        backgroundColor: "#1b690d",
-                        border: "2px solid white",
-                        borderRadius: "20px",
-                        padding: "5px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      Enroll
-                    </button>
+                    variant="contained"
+                    disabled={selectedCourse === Profile[index].subject}
+                    onClick={() => {
+                      setSelectedCourse(Profile[index].subject);
+                      handleEnroll(Profile[index].email, Profile[index].subject);
+                    }}
+                    style={{ color: "white", backgroundColor: selectedCourse === Profile[index].subject ? "#ccc" : "#1b690d" }}
+                  >
+                    {selectedCourse === Profile[index].subject ? "Enrolled" : "Enroll"}
+                  </button>
                   </TableCell>
                 </TableRow>
               ))}
