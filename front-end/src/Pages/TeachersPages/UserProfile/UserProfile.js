@@ -26,6 +26,7 @@ function UserProfile() {
   const [aboutme, setAboutMe] = useState("");
 
   const [isUploaded, setIsUploaded] = useState(false);
+  
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -35,8 +36,13 @@ function UserProfile() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
     const checkImageExists = async () => {
-      const imageRef = ref(storage, 'profile_pic');
+      const imageRef = ref(storage,`teacherProfile/${userID}/profile_pic`);
       try {
         const imageUrl = await getDownloadURL(imageRef);
         setUrl(imageUrl);
@@ -49,7 +55,11 @@ function UserProfile() {
   }, []);
 
   const handleSave = () => {
-    const imageRef = ref(storage, "profile_pic");
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+    const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
 
     uploadBytes(imageRef, image)
       .then(() => {
@@ -67,7 +77,7 @@ function UserProfile() {
         console.log(error.message);
       });
   };
-  const profilePicUrl = localStorage.getItem("profileImageUrl");
+
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const userEmail = decodedToken.email;
@@ -108,7 +118,7 @@ function UserProfile() {
       experience: experience,
       aboutme: aboutme,
       email: userEmail,
-      profilePicUrl: profilePicUrl,
+      profilePicUrl: url,
       id: userID,
     };
 
