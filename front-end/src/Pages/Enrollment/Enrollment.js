@@ -10,13 +10,17 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import QRCodeGenerator from "./QRCodeGenerator";
+import { jwtDecode } from "jwt-decode";
 
 function Enrollment() {
- // const [teachers, setTeachers] = useState([]);
+  // const [teachers, setTeachers] = useState([]);
   const [postdeatal, setPosts] = useState([]);
   const [Profile, setProfiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [teacherEmail, setteacherEmail] = useState();
+  const [enroller , setenroller] = useState("");
+  const [subject, setsubject] = useState("");
 
   useEffect(() => {
     const featchteacher = () => {
@@ -41,26 +45,34 @@ function Enrollment() {
   }, []);
 
   const handleSearch = () => {
-    const filteredTeachers = postdeatal.filter((posts) =>
-    posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredTeachers = postdeatal.filter(
+      (posts) =>
+        posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setPosts(filteredTeachers);
   };
 
-
-
-  const handleEnroll = async (teacherEmail, subject) => {
+  const handleEnroll = async (req, res) => {
     try {
-      const response = await (teacherEmail, subject);
-      console.log("Enrollment successful:", response.data);
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const userEmail = decodedToken.email;
+ 
+      setenroller({
+        userEmail:userEmail,
+        teacherEmail: teacherEmail,
+        Ensubject : subject
+      });
+
+      //  const paylord = {teacherEmail,useremail,subject};
+      const response = await axios(`/api/Enrol/studentEnrollment`);
+      console.log(response);
+      // setSelectedCourse(subject); // Assuming subject is unique
     } catch (error) {
-      console.error("Enrollment failed:", error);
+      console.error("Error during enrollment:", error);
     }
   };
- 
-      //setSelectedCourse(subject); // Assuming subject is unique
-     
 
   return (
     <div>
@@ -179,16 +191,27 @@ function Enrollment() {
                     }}
                   >
                     <button
-                    variant="contained"
-                    disabled={selectedCourse === Profile[index].subject}
-                    onClick={() => {
-                      setSelectedCourse(Profile[index].subject);
-                      handleEnroll(Profile[index].email, Profile[index].subject);
-                    }}
-                    style={{ color: "white", backgroundColor: selectedCourse === Profile[index].subject ? "#ccc" : "#1b690d" }}
-                  >
-                    {selectedCourse === Profile[index].subject ? "Enrolled" : "Enroll"}
-                  </button>
+                      variant="contained"
+                      disabled={selectedCourse === Profile[index].subject}
+                      onClick={() => {
+                        setSelectedCourse(Profile[index].subject);
+                        handleEnroll(
+                          Profile[index].email,
+                          Profile[index].subject
+                        );
+                      }}
+                      style={{
+                        color: "white",
+                        backgroundColor:
+                          selectedCourse === Profile[index].subject
+                            ? "#ccc"
+                            : "#1b690d",
+                      }}
+                    >
+                      {selectedCourse === Profile[index].subject
+                        ? "Enrolled"
+                        : "Enroll"}
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
