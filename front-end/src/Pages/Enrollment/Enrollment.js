@@ -10,13 +10,19 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import QRCodeGenerator from "./QRCodeGenerator";
+import { jwtDecode } from "jwt-decode";
+import Alert from "@mui/material/Alert";
 
 function Enrollment() {
- // const [teachers, setTeachers] = useState([]);
+  // const [teachers, setTeachers] = useState([]);
   const [postdeatal, setPosts] = useState([]);
   const [Profile, setProfiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
+
+  // alerts
+  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
 
   useEffect(() => {
     const featchteacher = () => {
@@ -41,26 +47,45 @@ function Enrollment() {
   }, []);
 
   const handleSearch = () => {
-    const filteredTeachers = postdeatal.filter((posts) =>
-    posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredTeachers = postdeatal.filter(
+      (posts) =>
+        posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setPosts(filteredTeachers);
   };
 
+  const handleEnroll = (email, subject,medium) => {
 
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const userEmail = decodedToken.email;
 
-  const handleEnroll = async (teacherEmail, subject) => {
-    try {
-      const response = await (teacherEmail, subject);
-      console.log("Enrollment successful:", response.data);
-    } catch (error) {
-      console.error("Enrollment failed:", error);
-    }
+    const paylord = {
+      userEmail,
+      teacherEmail: email,
+      Ensubject: subject,
+      Enmedium: medium,
+    };
+
+    axios
+      .post(`/api/Enrol/studentEnrollment`, paylord)
+      .then((response) => {
+        setAlertSeverity("success"); // Set success alert on successful login
+        setAlertMessage(response.data.msg); // Set alert message from response
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch((error) => {
+        // Handle error if needed
+        setAlertSeverity("error"); // Set error alert for failed login
+        setAlertMessage(error.response.data.msg); // Set alert message from response
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      });
   };
- 
-      //setSelectedCourse(subject); // Assuming subject is unique
-     
 
   return (
     <div>
@@ -105,6 +130,19 @@ function Enrollment() {
           Search
         </button>
       </div>
+
+      <Alert
+        severity={alertSeverity}
+        sx={{
+          width: "100%",
+          margin: "auto",
+          textAlign: "center",
+          marginBottom: "20px",
+        }}
+      >
+        {alertMessage}
+      </Alert>
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -144,6 +182,15 @@ function Enrollment() {
                   textAlign: "center",
                 }}
               >
+                Medium
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  borderRight: "2px white solid",
+                  textAlign: "center",
+                }}
+              >
                 Enroll
               </TableCell>
             </TableRow>
@@ -170,6 +217,9 @@ function Enrollment() {
                   <TableCell sx={{ textAlign: "center" }}>
                     {Profile[index].subject}
                   </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {Profile[index].medium}
+                  </TableCell>
                   <TableCell
                     sx={{
                       justifyContent: "center",
@@ -179,16 +229,29 @@ function Enrollment() {
                     }}
                   >
                     <button
-                    variant="contained"
-                    disabled={selectedCourse === Profile[index].subject}
-                    onClick={() => {
-                      setSelectedCourse(Profile[index].subject);
-                      handleEnroll(Profile[index].email, Profile[index].subject);
-                    }}
-                    style={{ color: "white", backgroundColor: selectedCourse === Profile[index].subject ? "#ccc" : "#1b690d" }}
-                  >
-                    {selectedCourse === Profile[index].subject ? "Enrolled" : "Enroll"}
-                  </button>
+                      variant="contained"
+                      disabled={selectedCourse === Profile[index].subject}
+                      onClick={() => {
+                        setSelectedCourse(Profile[index].subject);
+                        handleEnroll(
+                          Profile[index].email,
+                          Profile[index].subject,
+                          Profile[index].medium
+                        );
+                      }}
+                      style={{
+                        color: "white",
+                        padding: "5px",
+                        backgroundColor:
+                          selectedCourse === Profile[index].subject
+                            ? "#ccc"
+                            : "#1b690d",
+                      }}
+                    >
+                      {selectedCourse === Profile[index].subject
+                        ? "Enrolled"
+                        : "Enroll"}
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}

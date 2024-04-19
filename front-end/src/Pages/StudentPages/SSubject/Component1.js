@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { jwtDecode } from "jwt-decode";
 import Axios from "axios";
 
-function Component1() {
+function Component1({subject,teachermail, Feedmedium}) {
   const [value, setValue] = useState(1);
   const [feedtext, setFeedtext] = useState("");
 
@@ -19,7 +19,9 @@ function Component1() {
       feedtext,
       value,
       studentemail,
-      teacheremail: "janodabesekara91@gmail.com",
+      teacheremail:teachermail,
+      feedSubject:subject,
+      feedmedium:Feedmedium,
     };
 
     Axios.post("/api/auth/feedbackadd", data)

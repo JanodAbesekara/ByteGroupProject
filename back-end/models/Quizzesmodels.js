@@ -11,6 +11,10 @@ const QuizSchema = new Schema({
         type: String,
         required: true
     },
+    submedium:{
+        type: String,
+        required: true
+    },
     QuizeNumber:{
         type: Number,
         required: true

@@ -9,6 +9,7 @@ const postanouncement = async (req, res) => {
     date,
     time,
     jobrole,
+    mediua,
   } = req.body;
   try {
     if (
@@ -17,7 +18,8 @@ const postanouncement = async (req, res) => {
       !Announcementmessage ||
       !titleofAnn ||
       !date ||
-      !time
+      !time 
+     
     ) {
       return res
         .status(400)
@@ -31,6 +33,7 @@ const postanouncement = async (req, res) => {
         date,
         time,
         jobrole,
+        mediua,
       });
       await newannouncement.save();
       return res
