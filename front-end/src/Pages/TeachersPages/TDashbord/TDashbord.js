@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Dashbord.css";
 import Avatar from "@mui/material/Avatar";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
@@ -46,9 +48,6 @@ export default function Dashbord() {
       })
       .catch((err) => console.log(err));
 
-    // Fetch the image URL from localStorage when the component mounts
-    const storedUrl = localStorage.getItem("profileImageUrl");
-    setUrl(storedUrl);
 
     axios
       .get(`api/user/dashboard/${userID}`)
@@ -57,6 +56,26 @@ export default function Dashbord() {
         setDetails(details);
       })
       .catch((error) => console.log(error));
+
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
+    const checkImageExists = async () => {
+      const imageRef = ref(storage,`teacherProfile/${userID}/profile_pic`);
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log('Error checking image existence:', error.message);
+      }
+    };
+
+    checkImageExists();
   }, []);
 
   const featchNotification = () => {

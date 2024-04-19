@@ -26,6 +26,7 @@ function UserProfile() {
   const [aboutme, setAboutMe] = useState("");
 
   const [isUploaded, setIsUploaded] = useState(false);
+  
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -35,22 +36,37 @@ function UserProfile() {
   };
 
   useEffect(() => {
-    // Fetch the image URL from localStorage when the component mounts
-    const storedUrl = localStorage.getItem("profileImageUrl");
-    if (storedUrl) {
-      setUrl(storedUrl);
-    }
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
+    const checkImageExists = async () => {
+      const imageRef = ref(storage,`teacherProfile/${userID}/profile_pic`);
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log('Error checking image existence:', error.message);
+      }
+    };
+
+    checkImageExists();
   }, []);
 
   const handleSave = () => {
-    const imageRef = ref(storage, `profile_pics/${userEmail}`);
+
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+    const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
+
 
     uploadBytes(imageRef, image)
       .then(() => {
         getDownloadURL(imageRef)
           .then((url) => {
-            // Save the image URL to localStorage
-            localStorage.setItem("profileImageUrl", url);
             setUrl(url);
             window.alert("Image uploaded successfully!");
           })
@@ -63,7 +79,7 @@ function UserProfile() {
         console.log(error.message);
       });
   };
-  const profilePicUrl = localStorage.getItem("profileImageUrl");
+
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const userEmail = decodedToken.email;
@@ -104,7 +120,7 @@ function UserProfile() {
       experience: experience,
       aboutme: aboutme,
       email: userEmail,
-      profilePicUrl: profilePicUrl,
+      profilePicUrl: url,
       id: userID,
     };
 
