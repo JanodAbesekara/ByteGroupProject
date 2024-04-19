@@ -40,11 +40,12 @@ export default function Quizzes() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            {quise.map((quises) => (
-              <div key={quises._id}>
-                <Setquise subject={quises} />
-              </div>
-            ))}
+            {quise.length > 0 &&
+              quise.map((quises) => (
+                <div key={quises._id}>
+                  <Setquise subject={quises.subject} medium={quises.medium} />
+                </div>
+              ))}
           </Box>
         </Grid>
       </Grid>

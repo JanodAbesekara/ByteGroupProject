@@ -54,6 +54,7 @@ function Classcomponent({ subjectData }) {
       // Update local state and display success message
       setFetchedData(response.data); // Assuming data contains lecture info
       window.alert(response.data.msg);
+      
     } catch (error) {
       console.error(error);
     }

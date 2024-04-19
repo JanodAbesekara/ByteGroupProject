@@ -5,7 +5,7 @@ import Enterquizes from "./Enterquizes";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
-export default function CombinedComponent({quiseadd}) {
+export default function CombinedComponent({medium , subject}) {
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const useremail = decodedToken.email;
@@ -25,10 +25,11 @@ export default function CombinedComponent({quiseadd}) {
       QuizeNumber: quizNumber,
       question: questions,
       TeacherEmail: useremail,
-      TeacherSubject: quiseadd.subject,
-      submedium: quiseadd.medium
+      TeacherSubject:subject,
+      submedium:  medium,
     };
 
+  
     const request = axios.post(`/api/Quise/createQuise`, payload);
     request.then((response) => {
       console.log("Response:", response);
@@ -53,8 +54,8 @@ export default function CombinedComponent({quiseadd}) {
           marginBottom: "100px",
         }}
       >
-        <h2>{quiseadd.subject}</h2>
-        <h2>{quiseadd.medium}</h2>
+        <h2>{subject}</h2>
+        <h2>{medium}</h2>
         
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "20px", marginTop: "20px" }}>
