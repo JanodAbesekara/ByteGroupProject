@@ -10,6 +10,7 @@ const QRCodeGenerator = ({
   degree,
   experience,
   aboutme,
+  
 }) => {
   const [userData, setUserData] = useState(null);
 

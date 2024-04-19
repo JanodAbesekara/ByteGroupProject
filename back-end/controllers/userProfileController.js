@@ -2,16 +2,16 @@ import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
 
 const userProfileController = async (req, res) => {
-  const { subject, degree, experience, aboutme, email, profilePicUrl, id } =
+  const { subject, degree, experience, aboutme, email, profilePicUrl, id ,medium } =
     req.body;
 
-  if (!subject || !experience || !aboutme || !email) {
+  if (!subject || !experience || !aboutme || !email || ! medium) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill in all the fields" });
   }
 
-  const olduser = await profilemodel.findOne({ email });
+  const olduser = await profilemodel.findOne({ email ,subject , medium });
 
   if (olduser) {
     return res
@@ -28,6 +28,7 @@ const userProfileController = async (req, res) => {
       email,
       profilePicUrl,
       id,
+      medium,
     });
 
     await newprofile.save();

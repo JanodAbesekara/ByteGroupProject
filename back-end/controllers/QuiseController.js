@@ -1,7 +1,7 @@
 import Quiz from "../models/Quizzesmodels.js";
 
 const createQuizController = async (req, res) => {
-  const { TeacherEmail, TeacherSubject, QuizeNumber, question, TimeRanges } =
+  const { TeacherEmail, TeacherSubject, QuizeNumber, question, TimeRanges ,submedium} =
     req.body;
 
   try {
@@ -10,7 +10,8 @@ const createQuizController = async (req, res) => {
       !TeacherSubject ||
       !QuizeNumber ||
       !question ||
-      !TimeRanges
+      !TimeRanges ||
+      !submedium
     ) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -31,6 +32,7 @@ const createQuizController = async (req, res) => {
       QuizeNumber,
       TeacherSubject,
       TeacherEmail,
+      submedium,
     });
     if (oldQuiz) {
       return res.status(403).json({success: false, message: "Quiz already exists"});
@@ -42,6 +44,7 @@ const createQuizController = async (req, res) => {
       QuizeNumber,
       question,
       TimeRanges,
+      submedium,
     });
 
     await newQuiz.save();

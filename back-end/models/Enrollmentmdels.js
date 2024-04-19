@@ -15,6 +15,10 @@ const EnrollmentSchema = new Schema(
       type: String,
       required: true,
     },
+    Enmedium: {
+      type: String,
+      required: true,
+    },
   },
 
   { timestamps: true }

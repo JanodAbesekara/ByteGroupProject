@@ -2,14 +2,14 @@ import Getfeedbacks from '../models/Getfeedbacksmodel.js';
 
 const feedbackget = async (req,res) => {
 
-    const {feedtext,value,studentemail,teacheremail} = req.body;
+    const {feedtext,value,studentemail,teacheremail,feedSubject,feedmedium} = req.body;
 
-    if(!feedtext|| !value || !studentemail || !teacheremail){
+    if(!feedtext|| !value || !studentemail || !teacheremail || !feedSubject || !feedmedium){
         return res.status(400).json({success:false,msg:"Please fill in all the fields"});
     }
 
     try{
-        const newfeedback = new Getfeedbacks({feedtext,value,studentemail,teacheremail});
+        const newfeedback = new Getfeedbacks({feedtext,value,studentemail,teacheremail ,feedSubject,feedmedium});
         await newfeedback.save();
         return res.status(200).json({success:true,msg:"Feedback uploaded successfully"});
     }

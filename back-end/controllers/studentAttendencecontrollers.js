@@ -63,8 +63,8 @@ const studentattendencegetController = async (req, res) => {
 };
 
 const teacherattendenceController = async (req, res) => {
-  const { teacheremail, leccount, subject, time } = req.body;
-  if (!teacheremail || !leccount || !subject || !time) {
+  const { teacheremail, leccount, subject, media } = req.body;
+  if (!teacheremail || !leccount || !subject || !media) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill all the fields" });
@@ -73,7 +73,7 @@ const teacherattendenceController = async (req, res) => {
     const lecture = new teacherlecture({
       teacheremail,
       leccount,
-      time,
+      media,
       subject,
     });
 
@@ -120,11 +120,11 @@ const displayteacherattendence = async (req, res) => {
 
 const editlecturecount = async (req, res) => {
   try {
-    const { teacheremail, leccount, time, subject } = req.body;
+    const { teacheremail, leccount, media, subject } = req.body;
     teacherlecture
       .updateOne(
         { teacheremail: teacheremail, subject: subject },
-        { $set: { leccount: leccount, time: time } }
+        { $set: { leccount: leccount } }
       )
       .then((result) => {
         res.status(200).json({ success: true, msg: "Lecture Time and Count updated "});
