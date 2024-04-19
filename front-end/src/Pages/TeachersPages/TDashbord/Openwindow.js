@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -11,7 +11,6 @@ import DialogActions from "@mui/material/DialogActions";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -26,6 +25,7 @@ function Openwindow({ open, handleClose, notifications }) {
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
+  const [teacherSubject, setTeacherSubject] = useState([]);
 
   const currentDate = new Date();
   const currentTime = currentDate.toLocaleTimeString([], {
@@ -43,22 +43,43 @@ function Openwindow({ open, handleClose, notifications }) {
     const data = {
       titleofAnn: title,
       Announcementmessage: message,
-      TeacheSubject: subject,
+      TeacheSubject: subject.subject,
       postedemail: useremail,
       date: currentDate.toISOString().split("T")[0],
       time: currentTime,
-      jobrole: role,
+      jobrole:role,
+      mediua:subject.medium
     };
-    console.log(data);
 
     try {
       const response = await axios.post(`/api/send/notifaction`, data);
       window.alert(response.data.message);
+      console.log(data);
       handleClose();
     } catch (error) {
       window.alert(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
+
+    axios
+      .get(`/api/user/getsubjectreg`)
+      .then((response) => {
+        console.log(response.data.data);
+        const filteredSubject = response.data.data.filter(
+          (subject) => subject.email === useremail
+        );
+        console.log("Filtered Subject Data:", filteredSubject);
+        setTeacherSubject(filteredSubject);
+      })
+      .catch((error) => {
+        console.error("Error fetching notification data:", error);
+      });
+  }, []);
 
   return (
     <BootstrapDialog
@@ -120,17 +141,27 @@ function Openwindow({ open, handleClose, notifications }) {
             />
 
             <div style={{ marginTop: "20px" }}>
-              <select
-                onChange={(e) => setSubject(e.target.value)}
-                sx={{ padding: "5px 10px" }}
-              >
-                <option value={" "}>Select subject</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="English">English</option>
-                <option value="Physics">Physics</option>
-                <option value="ICT">ICT</option>
-              </select>
-
+              <div>
+                <select
+                  onChange={(e) =>
+                    setSubject({
+                      subject: e.target.value.split(",")[0],
+                      medium: e.target.value.split(",")[1],
+                    })
+                  }
+                  style={{ padding: "5px 10px" }}
+                >
+                  <option value="">Select subject</option>
+                  {teacherSubject.map((subject) => (
+                    <option
+                      key={subject.id}
+                      value={`${subject.subject},${subject.medium}`}
+                    >
+                      {subject.subject} ({subject.medium})
+                    </option>
+                  ))}
+                </select>
+              </div>
               <Button
                 type="submit"
                 variant="contained"

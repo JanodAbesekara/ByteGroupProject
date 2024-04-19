@@ -1,29 +1,28 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const teacherlecture = new Schema(
+const EnrollmentSchema = new Schema(
   {
-    teacheremail: {
+    userEmail: {
       type: String,
       required: true,
     },
-    subject: {
+    teacherEmail: {
       type: String,
       required: true,
     },
-    media:{
+    Ensubject: {
       type: String,
       required: true,
     },
-    leccount: {
-      type: Number,
+    Enmedium: {
+      type: String,
       required: true,
-      default: 0,
     },
   },
-  {
-    timestamps: true,
-  }
+
+  { timestamps: true }
 );
 
-export default mongoose.model("teacherlecturecount", teacherlecture);
+const Enrollment = mongoose.model("Enrollment", EnrollmentSchema);
+export default Enrollment;

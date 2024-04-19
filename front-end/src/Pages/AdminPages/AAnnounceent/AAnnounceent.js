@@ -131,6 +131,7 @@ function AAnnounceent() {
                     <TableRow>
                       <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Teacher Email</TableCell>
                       <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Subject</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Media</TableCell>
                       <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Title</TableCell>
                       <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Message</TableCell>
                       <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Date</TableCell>
@@ -146,6 +147,7 @@ function AAnnounceent() {
                           <TableRow key={announcement.id}>
                             <TableCell  sx={{textAlign:"center"}} >{announcement.postedemail}</TableCell>
                             <TableCell sx={{textAlign:"center"}}>{announcement.TeacheSubject}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>{announcement.mediua}</TableCell>
                             <TableCell sx={{textAlign:"center"}}>{announcement.titleofAnn}</TableCell>
                             <TableCell sx={{textAlign:"center"}}>
                               {announcement.Announcementmessage}

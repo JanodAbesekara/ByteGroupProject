@@ -5,7 +5,7 @@ import Enterquizes from "./Enterquizes";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
-export default function CombinedComponent() {
+export default function CombinedComponent({medium , subject}) {
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const useremail = decodedToken.email;
@@ -25,9 +25,11 @@ export default function CombinedComponent() {
       QuizeNumber: quizNumber,
       question: questions,
       TeacherEmail: useremail,
-      TeacherSubject:"Business Studies",
+      TeacherSubject:subject,
+      submedium:  medium,
     };
 
+  
     const request = axios.post(`/api/Quise/createQuise`, payload);
     request.then((response) => {
       console.log("Response:", response);
@@ -38,24 +40,56 @@ export default function CombinedComponent() {
       console.error("Error:", error);
       window.alert(error.response.data.message);
     });
-
-  
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <InputTimerange
-          setTimeRange={setTimeRange}
-          setQuizNumber={setQuizNumber}
-        />
-        <Enterquizes setQuestions={setQuestions} />
-        <button type="submit">
-          {" "}
-          <CgSoftwareUpload />
-          Submit
-        </button>
-      </form>
+      <div
+        style={{
+          marginRight: "20px",
+          boxShadow: "2px 2px 10px 2px #888888",
+          padding: "20px",
+          marginTop: "100px",
+          paddingBottom: "50px",
+          marginBottom: "100px",
+        }}
+      >
+        <h2>{subject}</h2>
+        <h2>{medium}</h2>
+        
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+            <InputTimerange
+              setTimeRange={setTimeRange}
+              setQuizNumber={setQuizNumber}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Enterquizes setQuestions={setQuestions} />
+          </div>
+          <button
+            type="submit"
+            style={{
+              marginTop: "20px",
+              padding: "5px 30px",
+              boxShadow: "2px 2px 10px 2px #888888",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "20px",
+              marginLeft: "50px",
+            }}
+          >
+            {" "}
+            <CgSoftwareUpload />
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

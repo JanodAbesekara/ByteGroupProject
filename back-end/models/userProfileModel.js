@@ -8,9 +8,14 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
+    medium: {
+      type: String,
+      required: true,
+    },
     degree: {
       type: String,
     },
+
     experience: {
       type: String,
       required: true,

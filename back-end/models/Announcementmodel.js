@@ -14,8 +14,14 @@ const announcementSchema = new Schema(
 
     TeacheSubject: {
       type: String,
-      default: function () {
+      default:function () {
         return this.jobrole === "Admin" ? "System change" : "";
+      },
+    },
+    mediua: {
+      type: String,
+      default:function () {
+        return this.jobrole === "Admin" ? "System" : "";
       },
     },
     Announcementmessage: {

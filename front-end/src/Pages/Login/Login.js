@@ -13,6 +13,7 @@ import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
 import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
+import Alert from "@mui/material/Alert";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
@@ -31,6 +32,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 function Login({ setUser, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
+  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -55,7 +58,6 @@ function Login({ setUser, setIsLoggedIn }) {
       .post(`/api/auth/login`, data)
       .then((response) => {
         if (response.data) {
-          window.alert(response.data.msg);
           const token = response.data.token;
           localStorage.setItem("MERN_AUTH_TOKEN", JSON.stringify(token));
           const decodedToken = jwtDecode(token);
@@ -65,15 +67,23 @@ function Login({ setUser, setIsLoggedIn }) {
           const jobRole = decodedToken.role;
           const encodedid = encodeURIComponent(decodedToken._id);
 
+          let redirectPath;
+
           if (jobRole === "Lecturer") {
-            navigate(`/TDashbord?$phw=${encodedid}`);
+            redirectPath = `/TDashbord?$phw=${encodedid}`;
           } else if (jobRole === "Student") {
-            navigate(`/SDashbord?$phw=${encodedid}`);
+            redirectPath = `/SDashbord?$phw=${encodedid}`;
           } else {
-            navigate(`/ADashbord?$phw=${encodedid}`);
+            redirectPath = `/ADashbord?$phw=${encodedid}`;
           }
+
+          navigate(redirectPath);
+          setAlertSeverity("success"); // Set success alert on successful login
+          setAlertMessage(response.data.msg); // Set alert message from response
         } else {
           console.error("Unexpected response format:", response);
+          setAlertSeverity("error"); // Set error alert on unexpected response
+          setAlertMessage("An unexpected error occurred. Please try again.");
         }
       })
       .catch((error) => {
@@ -82,9 +92,12 @@ function Login({ setUser, setIsLoggedIn }) {
           error.response.data &&
           error.response.data.success === false
         ) {
-          window.alert(error.response.data.msg);
+          setAlertSeverity("error"); // Set error alert for failed login
+          setAlertMessage(error.response.data.msg); // Set alert message from error response
         } else {
           console.error("Unexpected error format:", error);
+          setAlertSeverity("error"); // Set error alert on unexpected error
+          setAlertMessage("An unexpected error occurred. Please try again.");
         }
       });
   };
@@ -103,19 +116,24 @@ function Login({ setUser, setIsLoggedIn }) {
         >
           {" "}
         </div>
-
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Alert
+            severity={alertSeverity}
+            sx={{ width: "100%", margin: "auto", textAlign: "center" }}
+          >
+            {alertMessage}
+          </Alert>
+        </div>
         <div className="login_h3">
           <h2>Login</h2>
         </div>
-
-
-          <Lottie
-            animationData={animatio}
-
-            className="lottie"
-          />
- 
-
+        <Lottie animationData={animatio} className="lottie" />
         <form className="login_label" onSubmit={handleSubmit}>
           <label htmlFor="Username_or_Email">
             <span style={{ color: "red" }}>*</span>Username

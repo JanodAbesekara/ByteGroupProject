@@ -8,7 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import { io } from "socket.io-client";
+
 
 
 
@@ -55,11 +55,13 @@ function UserProfile() {
   }, []);
 
   const handleSave = () => {
+
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
     const userID = decodedToken._id;
     const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
+
 
     uploadBytes(imageRef, image)
       .then(() => {
