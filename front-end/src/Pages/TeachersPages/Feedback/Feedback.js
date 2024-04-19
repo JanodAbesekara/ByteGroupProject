@@ -108,7 +108,7 @@ export default function Feedback() {
                     return (
                       <TableRow key={feedback._id}>
                         <TableCell sx={{ textAlign: "center" }}>{feedback.studentemail}</TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>{feedback.subject}</TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>{feedback.feedSubject}</TableCell>
                         <TableCell sx={{ textAlign: "center" }}>{feedback.feedtext}</TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           <Rating

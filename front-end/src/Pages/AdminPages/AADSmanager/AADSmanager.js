@@ -72,6 +72,7 @@ function AADSmanager() {
                   <TableRow sx={{ marginBottom: "60px", backgroundColor: "#B5DFCA" }}>
                     <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Teacher Email</TableCell>
                     <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Subject</TableCell>
+                    <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Media</TableCell>
                     <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Posted ADD</TableCell>
                     <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Delete</TableCell>
                   </TableRow>
@@ -81,6 +82,7 @@ function AADSmanager() {
                   <TableRow key={ad.id}>
                     <TableCell sx={{ textAlign: "center" }}>{ad.email}</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>{ad.subject}</TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>{ad.medium}</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                    <img
                     src={ad.photosURL}
