@@ -47,7 +47,7 @@ function Popupbox({ open, handleClose, notifications }) {
             <h3>{notification.titleofAnn}</h3>
             <Typography
               gutterBottom
-              sx={{ border: "2px solid black", padding: "10px" ,margin:"20px"}}
+              sx={{ border: "2px solid black", padding: "10px" ,margin:"40px"}}
             >
               {notification.Announcementmessage}
             </Typography>
@@ -60,4 +60,3 @@ function Popupbox({ open, handleClose, notifications }) {
 }
 
 export default Popupbox
-
