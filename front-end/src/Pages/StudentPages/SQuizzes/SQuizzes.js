@@ -198,8 +198,8 @@ function SQuizzes() {
                   </Link>
                   <p style={{ textAlign: "center" }}>
                     Quizes :- {quiz.QuizeNumber}</p>
-                  <p>meium :- {quiz.submedium}</p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>meium :- {quiz.submedium}</p>
                   <p>Time range :-{quiz.TimeRanges} minits</p>
                 </div>
               </div>

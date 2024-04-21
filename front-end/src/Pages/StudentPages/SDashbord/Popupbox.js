@@ -34,7 +34,7 @@ function Popupbox({ open, handleClose, notifications }) {
         sx={{
           position: "absolute",
           right: 8,
-          top: 8,
+          top: 20,
           color: (theme) => theme.palette.grey[500],
         }}
       >
