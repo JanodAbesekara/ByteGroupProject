@@ -129,17 +129,18 @@ export default function Dashbord() {
                       fontWeight: "bold",
                     }}
                   >
-                    Chemistry
+                   {details.subject}
                   </span>
                 </p>
                 <p>
                   <span style={{ color: "darkblue" }}>
-                    Universiy of mortuwa
+                  {details.degree && <p>{details.degree}</p>}
+                  {details.experience && <p>{details.experience} of experience</p>}
                   </span>
-                  <br />
+                  
                   <span style={{ color: "#366491", fontStyle: "italic" }}>
-                    hellow
-                  </span>{" "}
+                  {details.aboutme && <p>{details.aboutme}</p>}
+                  </span>
                 </p>
               </div>
 

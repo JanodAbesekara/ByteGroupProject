@@ -57,7 +57,10 @@ const userOtherDetailsController = async (req, res) => {
   try {
     const id = req.params.userID;
     const details = await profilemodel.findOne({ id });
-    return res.json(details);
+    if(details){
+      return res.json(details);
+    };
+    
   } catch (error) {
     return res.json("Error getting user details");
   }
