@@ -20,12 +20,23 @@ function UserProfile() {
   const [user, setUser] = useState("");
   const fileInputRef = useRef(null);
 
+  const [medium, setMedium] = useState("");
   const [subject, setSubject] = useState("");
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
+  const [showChooseOption,setShowChooseOption] = useState(true);
 
-  const [isUploaded, setIsUploaded] = useState(false);
+  const [scheme, setScheme] = useState("");
+
+  // const handleScheme = (e) => {
+  //   setScheme(e.target.value);
+  //   setShowChooseOption(false);
+  // };
+
+  // const handleOption = (e) => {
+  //   setMedium(e.target.value);
+  // };
   
 
   // Function to handle image upload
@@ -101,10 +112,6 @@ function UserProfile() {
 
   const handleSubmit = (e) => {
 
-    setSubject((pre) => (pre.length > 0 ? "" : pre));
-    setDegree((pre) => (pre.length > 0 ? "" : pre));
-    setExperience((pre) => (pre.length > 0 ? "" : pre));
-    setAboutMe((pre) => (pre.length > 0 ? "" : pre));
 
     e.preventDefault();
 
@@ -115,36 +122,34 @@ function UserProfile() {
 
     const updatedUser = {
       ...user,
+      medium: medium,
+      scheme: scheme,
       subject: subject,
       degree: degree,
       experience: experience,
       aboutme: aboutme,
       email: userEmail,
-      profilePicUrl: url,
       id: userID,
     };
 
 
     axios
       .post(`/api/user/userProfile`, updatedUser)
-      .then(() => {
-        setIsUploaded(true);
-        window.alert("Successfully updated!");
-        console.log("data updated successfully");
+      .then((response) => {
+        setSubject((pre) => (pre.length > 0 ? "" : pre));
+        setDegree((pre) => (pre.length > 0 ? "" : pre));
+        setExperience((pre) => (pre.length > 0 ? "" : pre));
+        setAboutMe((pre) => (pre.length > 0 ? "" : pre));
+        window.alert(response.data.msg);
+        console.log(response.data.msg);
       })
-      .catch(() => {
-        console.log("error");
-        window.alert("Data update failed!");
+      .catch((error) => {
+        window.alert(error.response.data.msg);
+        console.log(error.response.data.msg);
       });
   };
 
-  useEffect(() => {
-    // Check if the details have been uploaded when the component mounts
-    const uploaded = localStorage.getItem("detailsUploaded");
-    if (uploaded === "true") {
-      setIsUploaded(true);
-    }
-  }, []);
+
 
 
   return (
@@ -186,17 +191,112 @@ function UserProfile() {
           <div className="personal_details">
             <div className="details">
               <form onSubmit={handleSubmit}>
+
+
+              <lebel htmlFor="medium">
+                  <span style={{ color: "red" }}>*</span>Medium
+                </lebel>
+                <br/>
+                <select style={{
+                  height: '36px',
+                  width: '300px',
+                  borderRadius: '5px',
+                  border: '0.5px solid #10155b4d',
+                  cursor: 'pointer'
+                }} onChange={(e) => setMedium(e.target.value)}>
+                  <option value="English">English</option>
+                  <option value="Sinhala">Sinhala</option>
+                </select>
+                <br/><br/>
+
+              <lebel htmlFor="scheme">
+                  <span style={{ color: "red" }}>*</span>Scheme
+                </lebel>
+                <br/>
+                <select style={{
+                  height: '36px',
+                  width: '300px',
+                  borderRadius: '5px',
+                  border: '0.5px solid #10155b4d',
+                  cursor: 'pointer'
+                }}
+                onChange={(e) => {
+                  setScheme(e.target.value);
+                  setShowChooseOption(false);}}>
+                  {showChooseOption && (<option value="Choose your scheme">Choose your Scheme</option>)}
+                  <option value="Grade 5">Grade 5</option>
+                  <option value="Ordinary Level">Ordinary Level</option>
+                  <option value="Advanced Level">Advanced Level</option>
+                </select>
+                <br/><br/>
+
+
+
+
                 <lebel htmlFor="subject">
                   <span style={{ color: "red" }}>*</span>Subject
                 </lebel>
                 <br></br>
-                <input
-                  type="text"
-                  className="subject"
-                  placeholder="Enter here"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                ></input>
+                <select style={{
+                  height: '36px',
+                  width: '200px',
+                  borderRadius: '5px',
+                  border: '0.5px solid #10155b4d',
+                  cursor: 'pointer'
+                }} onChange={(e) => setSubject(e.target.value)}>
+
+            {scheme === "Grade 5" && (
+              <>
+              <option value="Grade 5">Grade 5</option>
+              </>
+            )}
+
+            {scheme === "Ordinary Level" && (
+              <>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Science">Science</option>
+                <option value="English">English</option>
+                <option value="History">History</option>
+                <option value="Music">Music</option>
+                <option value="Geography">Geography</option>
+                <option value="Heath Studies">Health Studies</option>
+                <option value="Arts">Arts</option>
+                <option value="IT">IT</option>
+                <option value="Civic">Civic</option>
+              </>
+            )}
+
+
+
+            {scheme === "Advanced Level" && (
+              <>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Combined Maths">Combined Maths</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Bio System Technology">Bio System Technology</option>
+                <option value="Engineering Technology">Engineering Technology</option>
+                <option value="Science for Technology">Science for Technology</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Economics">Economics</option>
+                <option value="Business Studies">Business Studies</option>
+                <option value="Accounting">Accounting</option>
+                <option value="Political Science">Political Science</option>
+                <option value="Buddhism Culture">Buddhism Culture</option>
+                <option value="Sinhala">Sinhala</option>
+                <option value="Media">Media</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Germen">Germen</option>
+                <option value="Japanese">Japanese</option>
+              </>
+            )}
+
+</select>
+<br/>
+
+
                 <br></br>
                 <lebel htmlFor="degree">
                   <span style={{ color: "red" }}>*</span>Degree
@@ -239,9 +339,6 @@ function UserProfile() {
                     Save
                   </button>
                   <br/><br/>
-                  {isUploaded && <p style={{
-                    color: "#0a6e1e"
-                  }}>You have uploaded your details!</p>}
                 </div>
               </form>
             </div>

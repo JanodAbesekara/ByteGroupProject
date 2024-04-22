@@ -2,13 +2,13 @@ import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
 
 const userProfileController = async (req, res) => {
-  const { subject, degree, experience, aboutme, email, profilePicUrl, id ,medium } =
+  const { medium ,scheme ,subject, degree, experience, aboutme, email, id } =
     req.body;
 
-  if (!subject || !experience || !aboutme || !email || ! medium) {
+  if (!medium || !scheme ||!subject || !experience || !aboutme || !email ) {
     return res
       .status(400)
-      .json({ success: false, msg: "Please fill in all the fields" });
+      .json({ success: false, msg: "Please fill all the fields" });
   }
 
   const olduser = await profilemodel.findOne({ email ,subject , medium });
@@ -16,25 +16,25 @@ const userProfileController = async (req, res) => {
   if (olduser) {
     return res
       .status(403)
-      .json({ success: false, msg: "Allready fill the Fields " });
+      .json({ success: false, msg: "Already filled the Fields " });
   }
 
   try {
     const newprofile = new profilemodel({
+      medium,
+      scheme,
       subject,
       degree,
       experience,
       aboutme,
       email,
-      profilePicUrl,
       id,
-      medium,
     });
 
     await newprofile.save();
     return res
       .status(200)
-      .json({ success: true, msg: "Profile details upload successfully !" });
+      .json({ success: true, msg: "Profile details uploaded successfully" });
   } catch (error) {
     console.error("An error has occured !", error);
     return res
