@@ -1,5 +1,6 @@
 import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
+import paymentmodel from "../models/paymentModel.js";
 
 const userProfileController = async (req, res) => {
   const { medium ,scheme ,subject, degree, experience, aboutme, email, id } =
@@ -66,8 +67,30 @@ const userOtherDetailsController = async (req, res) => {
   }
 };
 
+const paymentDetailsController = async (req,res) => {
+  const { bank, accountNo, id } = req.body;
+  if( !bank || !accountNo){
+    return res
+         .json({success: false, msg:"Missing something"});
+  }
+  try{
+    const paymentDetails = new paymentmodel({
+      id,
+      bank,
+      accountNo,
+    });
+    await paymentDetails.save();
+    return res
+       .json({success: true, msg: "Saved successfully"});
+  } catch (error) {
+    return res
+      .json({ success: false, msg: "Internal Sever Error" });
+  }
+}
+
 export {
   userProfileController,
   userDetailsController,
   userOtherDetailsController,
+  paymentDetailsController,
 };

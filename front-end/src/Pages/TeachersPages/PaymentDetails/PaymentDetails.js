@@ -1,11 +1,45 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './PaymentDetails.css';
 import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from '../../../Component/Navbar/Navbar';
 import Footer from '../../../Component/Footer/Footer';
+import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 
 export default function PaymentDetails() {
+
+  const [bank,setBank] = useState("");
+  const [accountNo,setAccountNo] = useState("");
+  const [confirmAccount,setConfirmAccount] = useState("");
+ // const [payment,setPayment] = useState([]);
+
+  const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  const decodedToken = jwtDecode(token);
+  const userID = decodedToken._id;
+
+  const handleSubmit = () => {
+    if(accountNo === confirmAccount){
+    const paymentDetails = {
+
+      id: userID,
+      bank: bank,
+      accountNo: accountNo,
+    }
+
+    axios
+      .post(`api/user/payment`,paymentDetails)
+      .then((response) => {
+        window.alert(response.data.msg);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.msg);
+      })
+  }
+  else{
+    window.alert("Account Numbers Does not match ");
+  }
+  }
   return (
     <div>
       <Navbar/>
@@ -33,7 +67,7 @@ export default function PaymentDetails() {
           <hr/>
           <br/>
             <div className="details">
-              <form > 
+              <form onSubmit={handleSubmit} > 
                 <lebel htmlFor="bankName">
                   <span style={{ color: "red" }}>*</span>Choose Your Bank
                 </lebel>
@@ -51,11 +85,15 @@ export default function PaymentDetails() {
                   borderRadius: '5px',
                   border: '0.5px solid #10155b4d',
                   color: '#969683'
-                }}>
-                  <option>Commercial Bank</option>
-                  <option>Sampath Bank</option>
-                  <option>Peoples Bank</option>
-                  <option>Bank of Ceylon</option>
+                }} value={bank} onChange={(e) => setBank(e.target.value)}>
+                  <option value="Sampath Bank">Sampath Bank</option>
+                  <option value="Commercial Bank">Commercial Bank</option>
+                  <option value="Peoples Bank">Peoples Bank</option>
+                  <option value="Bank of Ceylon">Bank of Ceylon</option>
+                  <option value="HABIB Bank">HABIB Bank</option>
+                  <option value="Ceylan Bank">Ceylan Bank</option>
+                  <option value="Hatton National Bank">Hatton National Bank</option>
+                  <option value="Nations Saving Bank">Nations Saving Bank</option>
                 </select>
                 <br/>
                 <br></br>
@@ -65,10 +103,10 @@ export default function PaymentDetails() {
                 <br></br>
                 <input
                   type="text"
-                  className="acno"
+                  className="ac_no"
                   placeholder="Enter here"
-                  // value={degree}
-                  // onChange={(e) => setDegree(e.target.value)}
+                  value={accountNo}
+                  onChange={(e) => setAccountNo(e.target.value)}
                 ></input>
                 <br></br>
                 <lebel htmlFor="cacno">
@@ -77,16 +115,18 @@ export default function PaymentDetails() {
                 <br></br>
                 <input
                   type="text"
-                  className="cacno"
+                  className="c_ac_no"
                   placeholder="Enter here"
-                  // value={experience}
-                  // onChange={(e) => setExperience(e.target.value)}
+                  value={confirmAccount}
+                  onChange={(e) => setConfirmAccount(e.target.value)}
                 ></input>
                 <br></br>
-              </form>
-            </div>
-            <div className="btn-2">
+
+                <div className="btn-2">
               <button type="submit">Save</button>
+            </div> 
+
+              </form>
             </div>
           </div> 
       </Box>
