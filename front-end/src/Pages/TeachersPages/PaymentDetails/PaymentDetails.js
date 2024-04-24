@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './PaymentDetails.css';
 import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
@@ -12,7 +12,7 @@ export default function PaymentDetails() {
   const [bank,setBank] = useState("");
   const [accountNo,setAccountNo] = useState("");
   const [confirmAccount,setConfirmAccount] = useState("");
- // const [payment,setPayment] = useState([]);
+  const [status,setPreviousStatus] = useState("");
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
@@ -39,7 +39,17 @@ export default function PaymentDetails() {
   else{
     window.alert("Account Numbers Does not match ");
   }
-  }
+  };
+
+  useEffect(() => {
+    axios
+      .get(`api/user/payment/${userID}`)
+      .then((response) => {
+        const previous = response.data;
+        setPreviousStatus(previous);
+      })
+      .catch((error) => console.log(error.response.data.msg))
+  },[]);
   return (
     <div>
       <Navbar/>
@@ -72,13 +82,6 @@ export default function PaymentDetails() {
                   <span style={{ color: "red" }}>*</span>Choose Your Bank
                 </lebel>
                 <br></br>
-                {/* <input
-                  type="text"
-                  className="banks"
-                  placeholder="Enter here"
-                  // value={subject}
-                  // onChange={(e) => setSubject(e.target.value)}
-                ></input> */}
                 <select style={{
                   height: '32px',
                   width: '350px',
@@ -128,6 +131,15 @@ export default function PaymentDetails() {
 
               </form>
             </div>
+            <br/>
+            <span> {status && <p  style={
+            {
+              color: '#145212',
+              fontWeight: 'bold',
+              fontSize: '13px',
+            }
+          }>You have uploaded your bank details !</p>}</span>
+           
           </div> 
       </Box>
     </Grid>

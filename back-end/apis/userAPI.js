@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {userProfileController, userDetailsController, userOtherDetailsController, paymentDetailsController} from "../controllers/userProfileController.js";
+import {userProfileController, userDetailsController, userOtherDetailsController, paymentDetailsController, fetchPaymentDetailsController} from "../controllers/userProfileController.js";
 import {studentattendenceController, teacherattendenceController, studentattendencegetController,techerlecturecountget,editlecturecount,displayteacherattendence} from "../controllers/studentAttendencecontrollers.js";
 import {getregisterdesubject} from "../controllers/SubjectRegistercontroller.js";
 
@@ -13,6 +13,7 @@ router.post("/editlecturecount", editlecturecount);
 router.get("/teacherattendence", displayteacherattendence);
 
 router.post("/payment",paymentDetailsController);
+router.get("/payment/:userID",fetchPaymentDetailsController);
 
 
 

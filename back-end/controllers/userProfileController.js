@@ -88,9 +88,24 @@ const paymentDetailsController = async (req,res) => {
   }
 }
 
+const fetchPaymentDetailsController = async (req, res) => {
+  try {
+    const id = req.params.userID;
+    const details = await paymentmodel.findOne({ id });
+    if(details){
+      return res.json(details);
+    };
+    
+  } catch (error) {
+    return res.json("Error getting user details");
+  }
+};
+
+
 export {
   userProfileController,
   userDetailsController,
   userOtherDetailsController,
   paymentDetailsController,
+  fetchPaymentDetailsController,
 };
