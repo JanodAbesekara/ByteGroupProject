@@ -17,7 +17,7 @@ function DisplayAttendence() {
             axios.get(`/api/user/techeralectureget`)
                 .then(res => {
                     const fildata1 = res.data.data;
-                    const filteredData1 = fildata1.filter((item) => item.subject === "Business Studies" && item.teacheremail === "janodabesekara91@gmail.com");
+                    const filteredData1 = fildata1.filter((item) => item.subject === "chemistry" && item.teacheremail === "janodabesekara91@gmail.com");
                     setDisplayData1(filteredData1);
                 })
                 .catch(error => {
@@ -31,7 +31,8 @@ function DisplayAttendence() {
             axios.get(`/api/user/studenceattendenceget`)
                 .then(res => {
                     const fildata2 = res.data.data;
-                    const filteredData2 = fildata2.filter((item) => item.subject === "Business Studies" && item.studentnemail === useremail);
+                    const filteredData2 = fildata2.filter((item) => item.subject === "chemistry" && item.studentnemail === useremail);
+                    console.log(filteredData2);
                     setDisplayData2(filteredData2);
                 })
                 .catch(error => {
