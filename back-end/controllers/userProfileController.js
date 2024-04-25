@@ -1,14 +1,15 @@
 import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
+import paymentmodel from "../models/paymentModel.js";
 
 const userProfileController = async (req, res) => {
-  const { subject, degree, experience, aboutme, email, profilePicUrl, id ,medium } =
+  const { medium ,scheme ,subject, degree, experience, aboutme, email, id } =
     req.body;
 
-  if (!subject || !experience || !aboutme || !email || ! medium) {
+  if (!medium || !scheme ||!subject || !experience || !aboutme || !email ) {
     return res
       .status(400)
-      .json({ success: false, msg: "Please fill in all the fields" });
+      .json({ success: false, msg: "Please fill all the fields" });
   }
 
   const olduser = await profilemodel.findOne({ email ,subject , medium });
@@ -16,25 +17,25 @@ const userProfileController = async (req, res) => {
   if (olduser) {
     return res
       .status(403)
-      .json({ success: false, msg: "Allready fill the Fields " });
+      .json({ success: false, msg: "Already filled the Fields " });
   }
 
   try {
     const newprofile = new profilemodel({
+      medium,
+      scheme,
       subject,
       degree,
       experience,
       aboutme,
       email,
-      profilePicUrl,
       id,
-      medium,
     });
 
     await newprofile.save();
     return res
       .status(200)
-      .json({ success: true, msg: "Profile details upload successfully !" });
+      .json({ success: true, msg: "Profile details uploaded successfully" });
   } catch (error) {
     console.error("An error has occured !", error);
     return res
@@ -57,14 +58,54 @@ const userOtherDetailsController = async (req, res) => {
   try {
     const id = req.params.userID;
     const details = await profilemodel.findOne({ id });
-    return res.json(details);
+    if(details){
+      return res.json(details);
+    };
+    
   } catch (error) {
     return res.json("Error getting user details");
   }
 };
 
+const paymentDetailsController = async (req,res) => {
+  const { bank, accountNo, id } = req.body;
+  if( !bank || !accountNo){
+    return res
+         .json({success: false, msg:"Missing something"});
+  }
+  try{
+    const paymentDetails = new paymentmodel({
+      id,
+      bank,
+      accountNo,
+    });
+    await paymentDetails.save();
+    return res
+       .json({success: true, msg: "Saved successfully"});
+  } catch (error) {
+    return res
+      .json({ success: false, msg: "Internal Sever Error" });
+  }
+}
+
+const fetchPaymentDetailsController = async (req, res) => {
+  try {
+    const id = req.params.userID;
+    const details = await paymentmodel.findOne({ id });
+    if(details){
+      return res.json(details);
+    };
+    
+  } catch (error) {
+    return res.json("Error getting user details");
+  }
+};
+
+
 export {
   userProfileController,
   userDetailsController,
   userOtherDetailsController,
+  paymentDetailsController,
+  fetchPaymentDetailsController,
 };
