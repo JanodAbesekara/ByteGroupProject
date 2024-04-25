@@ -48,15 +48,32 @@ export default function CombinedComponent({medium , subject}) {
         style={{
           marginRight: "20px",
           boxShadow: "2px 2px 10px 2px #888888",
+          borderRadius: "5px",
           padding: "20px",
           marginTop: "100px",
           paddingBottom: "50px",
           marginBottom: "100px",
+          backgroundColor: "#eef2ed",
         }}
       >
-        <h2>{subject}</h2>
-        <h2>{medium}</h2>
+
+          <h2 style={{
+          textTransform: "uppercase",
+          color: "#2439bf",
+          fontSize: "25px",
+          
+      }}>{subject}</h2>
+  
+        <h2 style={{
+          fontSize: "15px",
+          paddingTop: "4px",
+          fontWeight: "bold",
+          color: "#0e5e5a",
+          marginBottom:"10px",
+        }}>{medium}</h2>
         
+<hr/>
+
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "20px", marginTop: "20px" }}>
             <InputTimerange
@@ -86,7 +103,7 @@ export default function CombinedComponent({medium , subject}) {
             }}
           >
             {" "}
-            <CgSoftwareUpload />
+            <CgSoftwareUpload/>
           </button>
         </form>
       </div>
