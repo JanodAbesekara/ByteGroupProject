@@ -4,18 +4,21 @@ const { Schema } = mongoose;
 
 const profileSchema = new Schema(
   {
-    subject: {
+    medium: {
       type: String,
       required: true,
     },
-    medium: {
+    scheme: {
+      type: String,
+      required: true,
+    },
+    subject: {
       type: String,
       required: true,
     },
     degree: {
       type: String,
     },
-
     experience: {
       type: String,
       required: true,
@@ -25,10 +28,6 @@ const profileSchema = new Schema(
       required: true,
     },
     email: {
-      type: String,
-      required: true,
-    },
-    profilePicUrl: {
       type: String,
       required: true,
     },

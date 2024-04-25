@@ -43,9 +43,14 @@ function Enterquizes({ setQuestions }) {
 
   return (
     <div >
-      <h2>Question count</h2>
+      <h3 style={{marginBottom: "6px",color: "#1a7873",textTransform: "uppercase",}}>Question count</h3>
       <input
-        style={{ width: "50px", height: "30px" }}
+        style={{ 
+          width: "50px", 
+          height: "30px",
+          borderRadius: "5px",
+          border: "1px solid gray"
+         }}
         placeholder="Enter the Question count"
         type="number"
         value={questionCount}
@@ -53,9 +58,13 @@ function Enterquizes({ setQuestions }) {
       />
       {questions.map((question, index) => (
         <div key={index} style={{ marginTop:"20px"}}>
-          <h2>Question {index + 1}</h2>
+          <h2 style={{
+            fontSize: "18px",
+            marginBottom: "10px",
+            color: "#1f5c73"
+          }}>Question {index + 1}</h2>
           <input
-            style={{ width: "400px", height: "30px",padding:"10px" }}
+            style={{ width: "400px", height: "30px",padding:"10px", borderRadius: "5px", border: "1px solid gray"}}
             placeholder="Enter the Question"
             value={question.Question}
             onChange={(e) => handleQuestionChange(index, e)}
@@ -68,7 +77,7 @@ function Enterquizes({ setQuestions }) {
                 style={{ paddingTop: "10px", paddingBottom: "10px" }}
               >
                 <input
-                  sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px"}}
+                  sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px",borderRadius: "5px", border: "1px solid gray"}}
                   placeholder={`Enter answer ${answerIndex + 1}`}
                   value={answer}
                   onChange={(e) => handleAnswerChange(index, answerIndex, e)}
@@ -77,9 +86,9 @@ function Enterquizes({ setQuestions }) {
             ))}
           </ul>
           <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-            <label>Select Correct Answer:</label>
+            <label style={{ color: "#474b4d"}}>Select Correct Answer:</label>
             <select
-              style={{ marginLeft: "20px" }}
+              style={{ marginLeft: "20px",color: "#474b4d", }}
               value={question.correctAnswerIndex}
               onChange={(e) => handleCorrectAnswerChange(index, e)}
             >
