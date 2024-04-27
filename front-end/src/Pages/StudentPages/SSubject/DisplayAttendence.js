@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import axios from 'axios'; // Correct import
-
+import AttendenceChart from "./AttendanceChart";
 
 
 function DisplayAttendence() {
@@ -46,9 +46,11 @@ function DisplayAttendence() {
     // Calculate attendance percentage here
     const attendancePercentage = displayData2.length > 0 && displayData1.length > 0 ? displayData2[0].countAttendence / displayData1[0].leccount * 100 : 0;
 
+
     return (
         <div>
             <h2>The percentage: {attendancePercentage}%</h2>
+            <AttendenceChart value = {attendancePercentage} />
             
         </div>
     );
