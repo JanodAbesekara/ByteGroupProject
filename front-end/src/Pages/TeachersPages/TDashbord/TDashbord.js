@@ -122,17 +122,6 @@ export default function Dashbord() {
               </div>
               <div className="info">
                 <p>
-                  <span
-                    style={{
-                      color: "#de162d",
-                      fontSize: "22px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                   {details.subject}
-                  </span>
-                </p>
-                <p>
                   <span style={{ color: "darkblue" }}>
                   {details.degree && <p>{details.degree}</p>}
                   {details.experience && <p>{details.experience} of experience</p>}

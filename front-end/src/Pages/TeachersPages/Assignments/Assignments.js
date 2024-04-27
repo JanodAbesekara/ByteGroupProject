@@ -4,7 +4,7 @@ import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from '../../../Component/Navbar/Navbar';
 import Footer from '../../../Component/Footer/Footer';
-import Quisecom from './QuiseCom';
+import Assignment from './QuizCom';
 
 
 
@@ -23,7 +23,7 @@ export default function Assignments() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box >
-           <Quisecom/>  
+           <Assignment/>  
           </Box>
         </Grid>
       </Grid>
