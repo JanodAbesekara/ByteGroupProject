@@ -7,6 +7,7 @@ import Component1 from "./Component1";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import DisplayAttendence from "./DisplayAttendence";
 
 function SSubject() {
   const [subjects, setSubjects] = useState([]);
@@ -89,6 +90,9 @@ function SSubject() {
                       subject={subject.Ensubject}
                       Feedmedium={subject.Enmedium}
                     />
+                  </div>
+                  <div style={{ marginRight: "20%", marginTop: "20px" }}>
+                    <DisplayAttendence />
                   </div>
                 </div>
               ))}
