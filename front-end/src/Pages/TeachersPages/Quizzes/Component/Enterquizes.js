@@ -1,4 +1,4 @@
-import { margin } from "@mui/system";
+//import { margin } from "@mui/system";
 import React, { useState } from "react";
 
 function Enterquizes({ setQuestions }) {
@@ -10,8 +10,8 @@ function Enterquizes({ setQuestions }) {
     setQuestionCount(count);
     setQuestionsLocal(
       Array.from({ length: count }, () => ({
-        Question: "", // Changed from 'text' to 'Question'
-        answers: ["", "", "", ""], // Lowercased 'answers'
+        Question: "", 
+        answers: ["", "", "", ""], 
         correctAnswerIndex: 0,
       }))
     );
@@ -19,7 +19,7 @@ function Enterquizes({ setQuestions }) {
 
   const handleQuestionChange = (index, e) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].Question = e.target.value; // Changed from 'text' to 'Question'
+    updatedQuestions[index].Question = e.target.value; 
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
@@ -27,7 +27,7 @@ function Enterquizes({ setQuestions }) {
   const handleAnswerChange = (questionIndex, answerIndex, e) => {
     const updatedQuestions = [...questions];
     updatedQuestions[questionIndex].answers[answerIndex] =
-      e.target.value.toLowerCase(); // Lowercased 'answers'
+      e.target.value.toLowerCase(); 
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };

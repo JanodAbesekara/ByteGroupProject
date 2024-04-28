@@ -5,6 +5,7 @@ import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 
 function SQuizzes() {
@@ -15,13 +16,19 @@ function SQuizzes() {
 
   useEffect(() => {
     const fetchData = async () => {
+ 
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const StuEmail = decodedToken.email;
+
       try {
         // Fetching initial data
-        const response = await axios.get(`/api/Enrol/enrolement`);
-        const newData = response.data.data.map((item) => ({
-          subject: item.profile.subject,
-          medium: item.profile.medium,
-          email: item.email,
+        const response = await axios.get(`/api/Enrol/getSubject`);
+        const filteredData = response.data.data.filter(item => item.userEmail === StuEmail);
+        const newData = filteredData.map((item) => ({
+          subject: item.Ensubject,
+          medium: item.Enmedium,
+          email: item.teacherEmail,
         }));
         console.log(newData);
         setData(newData);
