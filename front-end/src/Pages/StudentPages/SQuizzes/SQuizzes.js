@@ -5,48 +5,72 @@ import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ComQuises from "./ComQuises";
+
 
 function SQuizzes() {
   const [quizzes3, setQuizzes3] = useState([]);
-  const[quizzes1, setquizzes1] = useState([]);
-  const[quizzes2, setquizzes2] = useState([]);
+  const [quizzes1, setQuizzes1] = useState([]);
+  const [quizzes2, setQuizzes2] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/Quise/getQuise`);
-        const quises = response.data;
+        // Fetching initial data
+        const response = await axios.get(`/api/Enrol/enrolement`);
+        const newData = response.data.data.map((item) => ({
+          subject: item.profile.subject,
+          medium: item.profile.medium,
+          email: item.email,
+        }));
+        console.log(newData);
+        setData(newData);
+
+        // Fetching quizzes data
+        const quizzesResponse = await axios.get(`/api/Quise/getQuise`);
+        const quises = quizzesResponse.data;
+        console.log(quises);
+        // Filtering quizzes based on subjects, mediums, and emails
         const filteredQuizes1 = quises.filter(
           (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
-            quise.QuizeNumber === 1
+            newData.some(
+              (d) =>
+                d.email === quise.TeacherEmail &&
+                d.subject === quise.TeacherSubject &&
+                d.medium === quise.submedium
+            ) && quise.QuizeNumber === 1
         );
-        setquizzes1(filteredQuizes1);
+        console.log(filteredQuizes1);
+        setQuizzes1(filteredQuizes1);
+
         const filteredQuizes2 = quises.filter(
           (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
-            quise.QuizeNumber === 2
+            newData.some(
+              (d) =>
+                d.email === quise.TeacherEmail &&
+                d.subject === quise.TeacherSubject &&
+                d.medium === quise.submedium
+            ) && quise.QuizeNumber === 2
         );
-        setquizzes2(filteredQuizes2);
-        const filteredQuizes3 = quises.filter(
-          (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
+        setQuizzes2(filteredQuizes2);
+
+        const filteredQuizes3 = quises.filter(quise =>
+          newData.some(d =>
+            d.email === quise.TeacherEmail &&
+            d.subject === quise.TeacherSubject &&
+            d.medium === quise.submedium &&
             quise.QuizeNumber === 3
+          )
         );
+        console.log(filteredQuizes3);
         setQuizzes3(filteredQuizes3);
       } catch (error) {
-        console.log(error);
-        window.alert(error.response.data.message);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
-
   return (
     <div>
       <Navbar />
@@ -76,7 +100,7 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                 <Link to= "/ComQuises">
+                  <Link to="/ComQuises">
                     <button
                       style={{
                         float: "right",
@@ -88,15 +112,16 @@ function SQuizzes() {
                       Attempt to Quiz
                     </button>
                   </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber} </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>meium :- {quiz.submedium}</p>
                   <p>Time range :-{quiz.TimeRanges} minits</p>
                 </div>
               </div>
-
             </Box>
           ))}
-            {quizzes2.map((quiz) => (
+          {quizzes2.map((quiz) => (
             <Box key={quiz._id}>
               <div
                 style={{
@@ -117,7 +142,7 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to= "/ComQuises2">
+                  <Link to="/ComQuises2">
                     <button
                       style={{
                         float: "right",
@@ -129,15 +154,16 @@ function SQuizzes() {
                       Attempt to Quiz
                     </button>
                   </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber}</p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>meium :- {quiz.submedium}</p>
                   <p>Time range :-{quiz.TimeRanges} minits</p>
                 </div>
               </div>
-
             </Box>
           ))}
-            {quizzes3.map((quiz) => (
+          {quizzes3.map((quiz) => (
             <Box key={quiz._id}>
               <div
                 style={{
@@ -170,12 +196,13 @@ function SQuizzes() {
                       Attempt to Quiz
                     </button>
                   </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber}</p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
+                  <p>meium :- {quiz.submedium}</p>
                   <p>Time range :-{quiz.TimeRanges} minits</p>
                 </div>
               </div>
-
             </Box>
           ))}
         </Grid>

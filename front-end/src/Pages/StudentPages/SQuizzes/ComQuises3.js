@@ -15,6 +15,7 @@ function ComQuises3() {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [submitbutton, setSubmit] = useState(false);
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
 
   
 
@@ -32,24 +33,42 @@ function ComQuises3() {
 
   const startquise = async () => {
     try {
-      const response = await axios.get(`/api/Quise/getQuise`);
-      const quises = response.data;
-      const filteredQuizes = quises.filter(
+      // Fetching initial data
+      const response = await axios.get(`/api/Enrol/enrolement`);
+      const newData = response.data.data.map((item) => ({
+        subject: item.profile.subject,
+        medium: item.profile.medium,
+        email: item.email,
+      }));
+      console.log(newData);
+      setData(newData);
+
+      // Fetching quizzes data
+      const quizzesResponse = await axios.get(`/api/Quise/getQuise`);
+      const quises = quizzesResponse.data;
+      console.log(quises);
+      // Filtering quizzes based on subjects, mediums, and emails
+      const filteredQuizes1 = quises.filter(
         (quise) =>
-          quise.TeacherEmail === "teacher@example.com" &&
-          quise.TeacherSubject === "Mathematics" &&
-          quise.QuizeNumber === 3
+          newData.some(
+            (d) =>
+              d.email === quise.TeacherEmail &&
+              d.subject === quise.TeacherSubject &&
+              d.medium === quise.submedium
+          ) && quise.QuizeNumber === 3
       );
-      const timeRangeFromBackend = filteredQuizes[0].TimeRanges;
+      console.log(filteredQuizes1);
+      setQuizzes(filteredQuizes1);
+
+      const timeRangeFromBackend = filteredQuizes1[0].TimeRanges; // Change filteredQuizes to filteredQuizes1
       setTimeRange(timeRangeFromBackend);
       setCorrectAnswers(
-        filteredQuizes[0].question.map(
+        filteredQuizes1[0].question.map(
           (question) => question.correctAnswerIndex
         )
       );
       setRemainingTime(timeRangeFromBackend * 60 * 1000);
       setCountdownStarted(true);
-      setQuizzes(filteredQuizes);
       setButtonClicked(true);
       setSubmit(false); // Set submit to true when starting a new quiz
     } catch (error) {
