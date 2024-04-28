@@ -17,6 +17,7 @@ const registerController = async (req, res) => {
       .json({ success: false, msg: "Please fill in all the fields" });
   }
 
+
   if (!emailRegex.test(email)) {
     return res
       .status(400)
