@@ -52,7 +52,7 @@ function ComponentClass({ posts }) {
             <a href={post.pagelink}>
               <BootstrapTooltip
                 title="Click to Enroll courses"
-                placement="right"
+                placement="bottom"
                 arrow
               >
                 <img src={post.photosURL} alt="slide_image" />
