@@ -10,6 +10,7 @@ import userAPI from "./apis/userAPI.js";
 import { app, io, server } from "./Socket-io/Socketiosever.js";
 import QuiseAPI from "./apis/QuiseAPI.js";
 import EnrolAPI from "./apis/EnrolAPI.js";
+import assignmentAPI from "./apis/assignmentAPI.js";
 
 // Connection to the database
 dbConnect();
@@ -30,7 +31,10 @@ app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
 app.use("/api/Quise", QuiseAPI);
-app.use("/api/Enrol", EnrolAPI);
+app.use("/api/Enrol",  EnrolAPI);
+app.use("/api/assignment",  assignmentAPI);
+
+
 
 // Port
 const port = process.env.PORT || 5000;

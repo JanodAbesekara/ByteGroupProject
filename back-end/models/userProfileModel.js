@@ -33,7 +33,7 @@ const profileSchema = new Schema(
     },
     id: {
       type: String,
-    },
+    }
   },
   {
     timestamps: true,
