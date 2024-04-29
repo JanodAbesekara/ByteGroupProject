@@ -110,7 +110,7 @@ function ComQuizes({ quisedata }) {
                       </ul>
                     </div>
                   ))}
-                  <button type="submit" disabled={!submitButton || remainingTime === 0}>
+                  <button type="submit"  disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
                     Submit
                   </button>
                 </form>
