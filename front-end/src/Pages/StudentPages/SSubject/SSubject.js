@@ -7,6 +7,7 @@ import Component1 from "./Component1";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import DisplayAttendence from "./DisplayAttendence";
 
 function SSubject() {
   const [subjects, setSubjects] = useState([]);
@@ -42,28 +43,61 @@ function SSubject() {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
             <Link to="/Enrollment">
-              <button>More Courses</button>
+              <button
+                style={{
+                  marginBottom: "50px",
+                  marginTop: "50px",
+                  marginLeft: "90%",
+                  padding: "5px 10px ",
+                }}
+              >
+                More Courses
+              </button>
             </Link>
             <>
               {subjects.map((subject) => (
                 <div
                   key={subject._id}
                   style={{
-                    width: "100%",
-                    height: "600px",
-                    border: "2px solid black",
+                    width: "99%",
+                    height: "500px",
+                    boxShadow: "2px 1px 10px 0.5px black",
+                    marginright: "5px",
+                    marginRight: "10px",
+                    marginBottom: "80px",
+                    paddingTop: "2px",
+                    borderRadius: "20px",
                   }}
                 >
-                  <h1>{subject.Ensubject}</h1>
-                  <h2>{subject.Enmedium}</h2>
-                  <Grid item md={6} sm={6} xs={6}></Grid>
-                  <Grid item md={6} sm={6} xs={6}>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: "80px",
+                      textAlign: "center",
+                      alignContent: "center",
+                      justifyContent: "center", 
+                    }}
+                  >
+                    <h2 style={{ textAlign: "center" }}>
+                      {subject.Ensubject}
+                    </h2>
+                    <h3 style={{ marginTop: "10px", textAlign: "center" ,fontSize:"12px" }}>
+                      ({subject.Enmedium})
+                    </h3>
+                  </div>
+
+                  
+                  <div style={{ marginLeft:"80%" }}>
+                    <DisplayAttendence />
+                  </div>
+                  <div style={{  marginLeft:"20px" ,marginTop:"-130px"}}>
+                    <Link></Link>
                     <Component1
                       teachermail={subject.teacherEmail}
                       subject={subject.Ensubject}
-                      Feedmedium ={subject.Enmedium}
+                      Feedmedium={subject.Enmedium}
                     />
-                  </Grid>
+                  </div>
                 </div>
               ))}
             </>
