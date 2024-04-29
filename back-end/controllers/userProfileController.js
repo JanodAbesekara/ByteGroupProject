@@ -3,7 +3,7 @@ import usermodel from "../models/usermodel.js";
 import paymentmodel from "../models/paymentModel.js";
 
 const userProfileController = async (req, res) => {
-  const { medium ,scheme ,subject, degree, experience, aboutme, email, id  } =
+  const { medium ,scheme ,subject, degree, experience, aboutme, email, id } =
     req.body;
 
   if (!medium || !scheme ||!subject || !experience || !aboutme || !email ) {

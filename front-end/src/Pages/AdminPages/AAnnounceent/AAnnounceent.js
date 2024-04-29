@@ -52,7 +52,9 @@ function AAnnounceent() {
     try {
       const response = await axios.post(`/api/send/notifaction`, formdata);
       window.alert(response.data.message);
-      window.location.reload();
+      setAnnouncementmessage("");
+      settitleofAnn("");
+
     } catch (error) {
       window.alert(error.response.data.message);
     }
@@ -68,6 +70,7 @@ function AAnnounceent() {
   };
 
   fetchData();
+
 
   const deleteAnnouncement = async (_id) => {
     try {
@@ -120,94 +123,20 @@ function AAnnounceent() {
             </div>
 
             <div style={{ marginTop: "200px" }}>
-              <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
-                Announcements
-              </h1>
+              <h1 style={{textAlign:"center", marginBottom:"100px"}}>Announcements</h1>
 
               <TableContainer component={Paper}>
-                <Table sx={{ marginBottom: "50px", paddingRight: "20px" }}>
+                <Table sx={{marginBottom:"50px",paddingRight:"20px"}}>
                   <TableHead>
                     <TableRow>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Teacher Email
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Subject
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Media
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Title
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Message
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Date
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Time
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          backgroundColor: "blueviolet",
-                          color: "white",
-                          borderRight: "2px solid white",
-                        }}
-                      >
-                        Active
-                      </TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Teacher Email</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Subject</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Media</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Title</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Message</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Date</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Time</TableCell>
+                      <TableCell  sx={{textAlign:"center",backgroundColor:"blueviolet",color:"white",borderRight:"2px solid white"}}>Active</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -216,45 +145,20 @@ function AAnnounceent() {
                         console.log(announcement);
                         return (
                           <TableRow key={announcement.id}>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.postedemail}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.TeacheSubject}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.mediua}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.titleofAnn}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
+                            <TableCell  sx={{textAlign:"center"}} >{announcement.postedemail}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>{announcement.TeacheSubject}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>{announcement.mediua}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>{announcement.titleofAnn}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>
                               {announcement.Announcementmessage}
                             </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
+                            <TableCell sx={{textAlign:"center"}}>
                               {announcement.date.split("T")[0]}
                             </TableCell>
 
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.time}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              <button
-                                style={{
-                                  color: "white",
-                                  backgroundColor: "red",
-                                  border: "none",
-                                  padding: "5px",
-                                  boxShadow: "2px 1px 10px 0.5px black",
-                                  borderRadius: "5px",
-                                }}
-                                onClick={() =>
-                                  deleteAnnouncement(announcement._id)
-                                }
-                              >
-                                Delete
-                              </button>
-                            </TableCell>
+                            <TableCell sx={{textAlign:"center"}}>{announcement.time}</TableCell>
+                            <TableCell sx={{textAlign:"center"}}>
+                             <button style={{color:"white",backgroundColor:"red",border:"none" , padding:"5px" ,boxShadow:"2px 1px 10px 0.5px black",borderRadius:"5px"}} onClick={() => deleteAnnouncement(announcement._id)}>Delete</button></TableCell>
                           </TableRow>
                         );
                       })}

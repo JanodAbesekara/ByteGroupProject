@@ -1,6 +1,4 @@
 import Announcement from "../models/Announcementmodel.js";
-import EnrollmentSchema from "../models/Enrollmentmdels.js";
-
 
 const postanouncement = async (req, res) => {
   const {

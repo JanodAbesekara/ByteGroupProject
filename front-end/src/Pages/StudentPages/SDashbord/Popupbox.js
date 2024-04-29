@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
+import Typography from "@mui/material/Typography";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -44,11 +44,14 @@ function Popupbox({ open, handleClose, notifications }) {
       {notifications.map((notification) => {
         return (
           <DialogContent dividers>
-            <h2 style={{textAlign:"center"}}>{notification.TeacheSubject}</h2>
-            <h3>Title :- {notification.titleofAnn}</h3>
-             Message :- {notification.Announcementmessage}  
-              <br></br> 
-            <span> Time :- {notification.date.split("T")[0]}</span>
+            <h3>{notification.titleofAnn}</h3>
+            <Typography
+              gutterBottom
+              sx={{ border: "2px solid black", padding: "10px" ,margin:"20px"}}
+            >
+              {notification.Announcementmessage}
+            </Typography>
+            <span>{notification.date.split("T")[0]}</span>
           </DialogContent>
         );
       })}
@@ -57,3 +60,4 @@ function Popupbox({ open, handleClose, notifications }) {
 }
 
 export default Popupbox
+

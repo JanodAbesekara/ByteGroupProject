@@ -23,16 +23,10 @@ const registerController = async (req, res) => {
       .json({ success: false, msg: "Please enter a valid email" });
   }
 
-  if (
-    password.length < 8 &&
-    ![A - Z].test(password) &&
-    ![a - z].test(password) &&
-    ![0 - 9].test(password) &&
-    !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(password)
-  ) {
+  if (password.length < 8) {
     return res.status(400).json({
       success: false,
-      msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
+      msg: "Password should be at least 8 characters long",
     });
   }
 
@@ -177,21 +171,6 @@ const resetpasswordController = async (req, res) => {
   const oldUser = await User.findOne({ email });
   if (!oldUser) {
     return res.status(400).json({ success: false, msg: "User not found" });
-  }
-
-  if (
-    newPassword.length < 8 &&
-    ![A - Z].test(newPassword) &&
-    ![a - z].test(newPassword) &&
-    ![0 - 9].test(newPassword) &&
-    !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(newPassword)
-  ) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
-      });
   }
 
   if (newPassword !== confirmNewPassword) {

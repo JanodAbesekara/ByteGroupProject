@@ -16,7 +16,7 @@ function ComAttendence() {
             const response = await axios.post('/api/user/studentattendence', {
                 studentnemail: decodedToken.email,
                 studentname: firstname + " " + lastname,
-                subject: "chemistry",
+                subject: "Business Studies",
                 teachetmail: "janodabesekara@gmail.com",
             });
             window.alert(response.data.msg);

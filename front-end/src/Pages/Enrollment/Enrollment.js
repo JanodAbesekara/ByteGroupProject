@@ -29,7 +29,7 @@ function Enrollment() {
       axios
         .get(`/api/Enrol/enrolement`)
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           // Extract profile and posts separately
           const profiles = response.data.data.map((item) => item.profile);
           const posts = response.data.data.map((item) => item.posts);

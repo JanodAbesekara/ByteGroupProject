@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import {userProfileController, userDetailsController, userOtherDetailsController, paymentDetailsController, fetchPaymentDetailsController} from "../controllers/userProfileController.js";
 import {studentattendenceController, teacherattendenceController, studentattendencegetController,techerlecturecountget,editlecturecount,displayteacherattendence} from "../controllers/studentAttendencecontrollers.js";
-import {getregisterdesubject } from "../controllers/SubjectRegistercontroller.js";
+import {getregisterdesubject} from "../controllers/SubjectRegistercontroller.js";
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);

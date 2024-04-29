@@ -6,13 +6,16 @@ import bodyParser from "body-parser";
 import dbConnect from "./config/dbconnecter.js";
 import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
+// import chatAPI from "./apis/ChatAPI.js";
 import userAPI from "./apis/userAPI.js";
-import { app, io, server } from "./Socket-io/Socketiosever.js";
+import {app, io, server} from "./Socket-io/Socketiosever.js";
 import QuiseAPI from "./apis/QuiseAPI.js";
 import EnrolAPI from "./apis/EnrolAPI.js";
 import assignmentAPI from "./apis/assignmentAPI.js";
 
-// Connection to the database
+
+
+// Connection to the database 
 dbConnect();
 
 // Middleware
@@ -29,13 +32,20 @@ app.get("/", (req, res) => {
 // APIs
 app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
+// app.use("/api/chat", chatAPI);
 app.use("/api/user", userAPI);
 app.use("/api/Quise", QuiseAPI);
 app.use("/api/Enrol",  EnrolAPI);
 app.use("/api/assignment",  assignmentAPI);
 
 
-
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
+
+
+
+ 
+
+
+

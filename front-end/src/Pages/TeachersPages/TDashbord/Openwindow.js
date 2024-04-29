@@ -47,8 +47,8 @@ function Openwindow({ open, handleClose, notifications }) {
       postedemail: useremail,
       date: currentDate.toISOString().split("T")[0],
       time: currentTime,
-      jobrole: role,
-      mediua: subject.medium,
+      jobrole:role,
+      mediua:subject.medium
     };
 
     try {
@@ -106,10 +106,14 @@ function Openwindow({ open, handleClose, notifications }) {
       {notifications.map((notification) => {
         return (
           <DialogContent dividers>
-            <h3>Title :- {notification.titleofAnn}</h3>
-            Message :- {notification.Announcementmessage}
-            <br></br>
-            <span>Time :- {notification.date.split("T")[0]}</span>
+            <h3>{notification.titleofAnn}</h3>
+            <Typography
+              gutterBottom
+              sx={{ border: "2px solid black", padding: "10px" }}
+            >
+              {notification.Announcementmessage}
+            </Typography>
+            <span>{notification.date.split("T")[0]}</span>
           </DialogContent>
         );
       })}

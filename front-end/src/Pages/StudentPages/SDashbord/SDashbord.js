@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useState} from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -7,67 +8,50 @@ import { Link } from "react-router-dom";
 import Popupbox from "./Popupbox";
 import Badge from "@mui/material/Badge";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+
 
 function SDashbord() {
-  const [notifications, setNotifications] = useState([]);
+
+
+  const [notifaication, setNotification] = useState([]);
   const [notCount, setNotCount] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [dataN, setData] = useState([]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("MERN_AUTH_TOKEN");
-      const decodedToken = jwtDecode(token);
-      const Stuemail = decodedToken.email;
+    // notofication popup
+    const [open, setOpen] = useState(false);
 
-      try {
-        const response = await axios.get(`/api/Enrol/getSubject`);
-        const filterdata = response.data.data.filter(
-          (item) => item.userEmail === Stuemail
-        );
-        const newData = filterdata.map((item) => ({
-          subject: item.Ensubject,
-          medium: item.Enmedium,
-          email: item.teacherEmail,
-        }));
-
-        setData(newData);
-        console.log(newData);
-
-        const notificationResponse = await axios.get(`/api/get/notifaction`);
-        const announcements = notificationResponse.data.announcements;
-        const filteredMessages = announcements.filter(
-          (item) =>
-            item.jobrole === "Admin" ||
-            (item.jobrole === "Lecturer" &&
-              newData.some(
-                (dataN) =>
-                  dataN.email === item.postedemail &&
-                  dataN.subject === item.TeacheSubject &&
-                  dataN.medium === item.mediua
-              ))
-        );
-
-        setNotifications(filteredMessages);
-        console.log(filteredMessages);
-        setNotCount(filteredMessages.length);
-      } catch (error) {
-        console.log(error);
-      }
+    const handleClickOpen = () => {
+      setOpen(true);
     };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
 
-    fetchData();
-  }, []);
+
+    // notifacition 
+    const featchNotification = () => {
+      axios
+        .get("/api/get/notifaction")
+        .then((response) => {
+          const announcements = response.data.announcements;
+          const filteredMessages = announcements.filter((item) => item.jobrole === "Admin");
+  
+         // Set notification state with filtered messages
+        setNotification(filteredMessages);
+        
+        // Set notification count
+        setNotCount(filteredMessages.length);
+        
+        console.log(filteredMessages);
+        console.log(filteredMessages.length);
+        })
+        .catch((error) => console.log(error));
+    };
+  
+    featchNotification();
 
   return (
     <div>
@@ -90,19 +74,15 @@ function SDashbord() {
               />
             </Link>
             <React.Fragment>
-              <Link variant="outlined" onClick={handleClickOpen}>
-                <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                  <Badge badgeContent={notCount}>
-                    <Typography fontSize="1.4rem">🔔</Typography>
-                  </Badge>
-                </Box>
-              </Link>
-              <Popupbox
-                open={open}
-                handleClose={handleClose}
-                notifications={notifications}
-              />
-            </React.Fragment>
+                <Link variant="outlined" onClick={handleClickOpen} >
+                  <Box sx={{ display: "flex", gap: 2, float: "right", }}>
+                  <Badge badgeContent={notCount} >
+                      <Typography fontSize="1.4rem" >🔔</Typography>
+                    </Badge>
+                  </Box>
+                </Link>
+                <Popupbox open={open} handleClose={handleClose} notifications={notifaication} />
+              </React.Fragment>
           </Box>
         </Grid>
       </Grid>
