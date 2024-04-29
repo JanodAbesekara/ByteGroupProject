@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+
 const assignmentSchema = new Schema({
     TeacherEmail:{
         type: String,

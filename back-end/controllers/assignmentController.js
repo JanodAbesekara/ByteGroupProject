@@ -27,7 +27,6 @@ const createAssignmentController = async (req, res) => {
         });
     }
 
-
     const newAssignment = new Assignment({
       TeacherEmail,
       TeacherSubject,
