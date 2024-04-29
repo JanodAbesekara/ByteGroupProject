@@ -57,13 +57,13 @@ function ComQuizes({ quisedata }) {
 
   return (
     <>
-      <div>
-        <button onClick={() => setShowContent(!showContent)}>
+      <div style={{marginTop:"20px"}}>
+        <button onClick={() => setShowContent(!showContent)} style={{marginTop:"20px"}}>
           {showContent ? "Hide Content" : "Show Content"}
         </button>
 
         {showContent && (
-          <div>
+          <div style={{backgroundColor:"white",padding:"20px"}}>
             {!quizStarted && ( // Render start button if quiz has not started
               <button onClick={startQuiz}>Start Quiz</button>
             )}
@@ -110,7 +110,7 @@ function ComQuizes({ quisedata }) {
                       </ul>
                     </div>
                   ))}
-                  <button type="submit" disabled={!submitButton || remainingTime === 0}>
+                  <button type="submit"  disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
                     Submit
                   </button>
                 </form>

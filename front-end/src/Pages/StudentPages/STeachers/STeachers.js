@@ -26,11 +26,12 @@ function STeachers() {
 
       try {
         const response = await Axios.get(`/api/Enrol/getteacher`);
-        console.log(response.data.data);
-        const filteredData = response.data.data.filter(
-          (item) => item.posts.userEmail === Stuemail
+
+        const data = response.data.data.filter(
+          (item) => item.userEmail === Stuemail
         );
-        setsubjectdetal(filteredData);
+        console.log(data);
+        setsubjectdetal(data);
       } catch (error) {
         console.log(error);
       }
@@ -53,30 +54,51 @@ function STeachers() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={{textAlign:"center" ,backgroundColor:"#317873", borderRight:"2px white solid",color:"white"}}>Profile</TableCell>
-                    <TableCell sx={{textAlign:"center",backgroundColor:"#317873" , borderRight:"2px white solid",color:"white"}}>Email</TableCell>
-                    <TableCell sx={{textAlign:"center",backgroundColor:"#317873" , borderRight:"2px white solid",color:"white"}}>Subject</TableCell>
-                    <TableCell sx={{textAlign:"center",backgroundColor:"#317873" , borderRight:"2px white solid",color:"white"}}>Medium</TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#317873",
+                        borderRight: "2px white solid",
+                        color: "white",
+                      }}
+                    >
+                      Email
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#317873",
+                        borderRight: "2px white solid",
+                        color: "white",
+                      }}
+                    >
+                      Subject
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#317873",
+                        borderRight: "2px white solid",
+                        color: "white",
+                      }}
+                    >
+                      Medium
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {subjectdetal.length > 0 &&
                     subjectdetal.map((subjectDetails, index) => (
                       <TableRow key={index}>
-                        <TableCell sx={{textAlign:"center"}}>
-                          <img
-                            src={subjectDetails.profile.profilePicUrl}
-                            alt="Profile image"
-                            style={{
-                              width: "50px",
-                              height: "50px",
-                              borderRadius: "50%",
-                            }}
-                          />
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {subjectDetails.teacherEmail}
                         </TableCell>
-                        <TableCell sx={{textAlign:"center"}}>{subjectDetails.profile.email}</TableCell>
-                        <TableCell sx={{textAlign:"center"}}>{subjectDetails.profile.subject}</TableCell>
-                        <TableCell sx={{textAlign:"center"}}>{subjectDetails.profile.medium}</TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {subjectDetails.Ensubject}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {subjectDetails.Enmedium}
+                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>

@@ -121,45 +121,16 @@ const getSubjects = async (req, res) => {
 
 const getstudentregistedteachers = async (req, res) => {
   try {
-
-    
-    const Profileimage  = await profileSchema.find();
+   
     const enrolteacher = await EnrollmentSchema.find();
 
-
-    // Extract unique email addresses 
-
-    const ProfileimageEmails = new Set(Profileimage.map((item) => item.email));
-    const enrolteacherEmails = new Set(enrolteacher.map((item) => item.teacherEmail));
-
-    // Find common email addresses across all datasets
-    const commonEmails = [...ProfileimageEmails].filter((email) =>
-      enrolteacherEmails.has(email)
-    );
-
-    // Combine data where email is common
-    const combinedData = [];
-
-    for (const email of commonEmails) {
-      const userProfile = Profileimage.find((item) => item.email === email);
-      const userPosts = enrolteacher.find((item) => item.teacherEmail === email);
-
-      if (userProfile && userPosts) {
-        combinedData.push({
-          email,
-          profile: userProfile,
-          posts: userPosts,
-        });
-      }
-    }
-    return res.status(200).json({ success: true, data: combinedData });
+     return res.status(200).json({ success: true, data: enrolteacher });
    
   } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, msg: "Internal Server Error" });
+    return res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
+
 
 export {
   Enrolementcontroller,
