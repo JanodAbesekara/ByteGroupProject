@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
+const{Schema} = mongoose;
 
-const { Schema } = mongoose;
-
-const assignmentSchema = new Schema({
+const Assignmentschema = new Schema({
     TeacherEmail:{
         type: String,
         required: true
@@ -35,7 +34,8 @@ const assignmentSchema = new Schema({
         type:Number,
         required: true
     },
+    
 });
 
-const Assignment = mongoose.model('assignment', assignmentSchema);
+const Assignment = mongoose.model('Assignment', Assignmentschema);
 export default Assignment;

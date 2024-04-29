@@ -1,59 +1,34 @@
-import Assignment from "../models/assignmentmodel.js";
+import Assignmentschema from '../models/Assignmentmodel.js';
 
-const createAssignmentController = async (req, res) => {
-  const { TeacherEmail, TeacherSubject, question, TimeRanges ,submedium} =
-    req.body;
+const assignmentadd = async (req, res) => {
+   
+    const { TeacherEmail, TeacherSubject, submedium, question, TimeRanges } = req.body;
 
-  try {
-    if (
-      !TeacherEmail ||
-      !TeacherSubject ||
-      !question ||
-      !TimeRanges ||
-      !submedium
-    ) {
-      return res.status(400).json({ message: "All fields are required" });
+    if(!TeacherEmail || !TeacherSubject || !submedium || !question || !TimeRanges){
+        return res.status(400).json({success: false, message: "All fields are required"});
     }
-    if (question.length === 0) {
-      return res
-        .status(400)
-        .json({ message: "At least one question is required" });
+
+    const oldassignmet = await Assignmentschema.findOne({TeacherEmail, TeacherSubject, submedium, question, TimeRanges});
+
+    if(oldassignmet){
+        return res.status(400).json({success: false, message: "Assignment already exists"});
     }
-    if (question.length > 30 && question.length < 1) {
-      return res
-        .status(400)
-        .json({
-          message: "Maximum 30 questions are allowed and Minimun length 1",
+
+    try {
+        const newAssignment = new Assignmentschema({
+            TeacherEmail,
+            TeacherSubject,
+            submedium,
+            question,
+            TimeRanges
         });
+        await newAssignment.save();
+        res.status(201).json({success: true, message: "Assignment created successfully"});
+    } catch (error) {
+        console.error("Error creating assignment:", error);
+        res.status(500).json({success: false, message: "Internal server error"});
     }
 
-
-    const newAssignment = new Assignment({
-      TeacherEmail,
-      TeacherSubject,
-      question,
-      TimeRanges,
-      submedium,
-    });
-
-    await newAssignment.save();
-    return res
-      .status(201)
-      .json({ message: "Assignment created successfully", quiz: newAssignment });
-  } catch (error) {
-    res.status(409).json({ message: error.message });
-  }
 };
 
-const getAssignmentController = async (req, res) => {
-  try {
-    const assignment = await Assignment.find();
-    res.status(200).json(assignment);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
-
-
-export { createAssignmentController, getAssignmentController };
+export default assignmentadd;
