@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import ComQuizes1 from "./ComQuises1";
 
 
 function SQuizzes() {
@@ -16,7 +16,6 @@ function SQuizzes() {
 
   useEffect(() => {
     const fetchData = async () => {
- 
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
       const decodedToken = jwtDecode(token);
       const StuEmail = decodedToken.email;
@@ -24,20 +23,20 @@ function SQuizzes() {
       try {
         // Fetching initial data
         const response = await axios.get(`/api/Enrol/getSubject`);
-        const filteredData = response.data.data.filter(item => item.userEmail === StuEmail);
+        const filteredData = response.data.data.filter(
+          (item) => item.userEmail === StuEmail
+        );
         const newData = filteredData.map((item) => ({
           subject: item.Ensubject,
           medium: item.Enmedium,
           email: item.teacherEmail,
         }));
-        console.log(newData);
         setData(newData);
 
         // Fetching quizzes data
         const quizzesResponse = await axios.get(`/api/Quise/getQuise`);
         const quises = quizzesResponse.data;
-        console.log(quises);
-        // Filtering quizzes based on subjects, mediums, and emails
+
         const filteredQuizes1 = quises.filter(
           (quise) =>
             newData.some(
@@ -47,7 +46,6 @@ function SQuizzes() {
                 d.medium === quise.submedium
             ) && quise.QuizeNumber === 1
         );
-        console.log(filteredQuizes1);
         setQuizzes1(filteredQuizes1);
 
         const filteredQuizes2 = quises.filter(
@@ -61,15 +59,15 @@ function SQuizzes() {
         );
         setQuizzes2(filteredQuizes2);
 
-        const filteredQuizes3 = quises.filter(quise =>
-          newData.some(d =>
-            d.email === quise.TeacherEmail &&
-            d.subject === quise.TeacherSubject &&
-            d.medium === quise.submedium &&
-            quise.QuizeNumber === 3
+        const filteredQuizes3 = quises.filter((quise) =>
+          newData.some(
+            (d) =>
+              d.email === quise.TeacherEmail &&
+              d.subject === quise.TeacherSubject &&
+              d.medium === quise.submedium &&
+              quise.QuizeNumber === 3
           )
         );
-        console.log(filteredQuizes3);
         setQuizzes3(filteredQuizes3);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -78,6 +76,7 @@ function SQuizzes() {
 
     fetchData();
   }, []);
+
   return (
     <div>
       <Navbar />
@@ -107,23 +106,13 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to="/ComQuises">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
                   <p style={{ textAlign: "center" }}>
-                    Quizes :- {quiz.QuizeNumber} </p>
+                    Quizes :- {quiz.QuizeNumber}{" "}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>meium :- {quiz.submedium}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
             </Box>
@@ -149,23 +138,13 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to="/ComQuises2">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
                   <p style={{ textAlign: "center" }}>
-                    Quizes :- {quiz.QuizeNumber}</p>
+                    Quizes :- {quiz.QuizeNumber}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>meium :- {quiz.submedium}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
             </Box>
@@ -191,23 +170,13 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to="/ComQuises3">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
                   <p style={{ textAlign: "center" }}>
-                    Quizes :- {quiz.QuizeNumber}</p>
+                    Quizes :- {quiz.QuizeNumber}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>meium :- {quiz.submedium}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
             </Box>
