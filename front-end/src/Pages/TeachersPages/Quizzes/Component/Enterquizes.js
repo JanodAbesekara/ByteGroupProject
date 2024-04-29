@@ -1,4 +1,3 @@
-//import { margin } from "@mui/system";
 import React, { useState } from "react";
 
 function Enterquizes({ setQuestions }) {
@@ -26,8 +25,7 @@ function Enterquizes({ setQuestions }) {
 
   const handleAnswerChange = (questionIndex, answerIndex, e) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answers[answerIndex] =
-      e.target.value.toLowerCase(); 
+    updatedQuestions[questionIndex].answers[answerIndex] =  e.target.value;  // add the ansewr value
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
@@ -76,6 +74,7 @@ function Enterquizes({ setQuestions }) {
                 key={answerIndex}
                 style={{ paddingTop: "10px", paddingBottom: "10px" }}
               >
+                <h6>{answerIndex +1}</h6>
                 <input
                   sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px",borderRadius: "5px", border: "1px solid gray"}}
                   placeholder={`Enter answer ${answerIndex + 1}`}

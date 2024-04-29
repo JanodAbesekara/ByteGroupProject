@@ -74,25 +74,29 @@ function SSubject() {
                       display: "flex",
                       marginTop: "80px",
                       textAlign: "center",
+                      alignContent: "center",
+                      justifyContent: "center", 
                     }}
                   >
                     <h2 style={{ textAlign: "center" }}>
-                      {subject.Ensubject}{" "}
+                      {subject.Ensubject}
                     </h2>
-                    <h3 style={{ marginTop: "5px", textAlign: "center" }}>
+                    <h3 style={{ marginTop: "10px", textAlign: "center" ,fontSize:"12px" }}>
                       ({subject.Enmedium})
                     </h3>
                   </div>
 
-                  <div style={{ marginLeft: "80%", marginTop: "-50px" }}>
+                  
+                  <div style={{ marginLeft:"80%" }}>
+                    <DisplayAttendence />
+                  </div>
+                  <div style={{  marginLeft:"20px" ,marginTop:"-130px"}}>
+                    <Link></Link>
                     <Component1
                       teachermail={subject.teacherEmail}
                       subject={subject.Ensubject}
                       Feedmedium={subject.Enmedium}
                     />
-                  </div>
-                  <div style={{ marginRight: "20%", marginTop: "20px" }}>
-                    <DisplayAttendence />
                   </div>
                 </div>
               ))}

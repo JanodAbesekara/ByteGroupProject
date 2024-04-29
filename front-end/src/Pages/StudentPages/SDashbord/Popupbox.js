@@ -44,7 +44,8 @@ function Popupbox({ open, handleClose, notifications }) {
       {notifications.map((notification) => {
         return (
           <DialogContent dividers>
-            <h3>Title :- {notification.titleofAnn}({notification.TeacheSubject})</h3>
+            <h2 style={{textAlign:"center"}}>{notification.TeacheSubject}</h2>
+            <h3>Title :- {notification.titleofAnn}</h3>
              Message :- {notification.Announcementmessage}  
               <br></br> 
             <span> Time :- {notification.date.split("T")[0]}</span>
