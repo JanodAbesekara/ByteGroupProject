@@ -115,23 +115,36 @@ function AAnnounceent() {
                   onChange={(e) => setAnnouncementmessage(e.target.value)}
                 />
 
-                <button type="submit">send</button>
+                <button
+                  type="submit"
+                  style={{
+                    padding: "5px",
+                    color: "white",
+                    backgroundColor: "#007FFF",
+                    border: "none",
+                    borderRadius: "5px",
+                    marginLeft: "10px",
+                    
+                  }}
+                >
+                  send
+                </button>
               </form>
             </div>
 
-            <div style={{ marginTop: "200px" }}>
+            <div style={{ marginTop: "150px" }}>
               <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
                 Announcements
               </h1>
 
               <TableContainer component={Paper}>
-                <Table sx={{ marginBottom: "50px", paddingRight: "20px" }}>
+                <Table sx={{ marginBottom: "100px", paddingRight: "20px" }}>
                   <TableHead>
                     <TableRow>
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -141,7 +154,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -151,7 +164,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -161,7 +174,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -171,7 +184,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -181,7 +194,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -191,7 +204,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}
@@ -201,7 +214,7 @@ function AAnnounceent() {
                       <TableCell
                         sx={{
                           textAlign: "center",
-                          backgroundColor: "blueviolet",
+                          backgroundColor: "#1F305E",
                           color: "white",
                           borderRight: "2px solid white",
                         }}

@@ -44,11 +44,12 @@ import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
 import Alertbox from "./Component/Alertbox/Alertbox.js";
+import Content from "./Pages/StudentPages/SSubject/Content"
    
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
-
   const navigate = useNavigate();
 
   
@@ -126,6 +127,7 @@ function App() {
           <Route path="/Popupbox" element={<Popupbox />} />
           <Route path="/ComQuises1" element={<ComQuises1 />}/>
           <Route path="/Alertbox " element={<Alertbox />} />
+          <Route path="/Content" element={<Content />} />
         </Routes>
       </div>
     </>

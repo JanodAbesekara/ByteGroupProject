@@ -59,7 +59,7 @@ function DisplayAttendence() {
 
   return (
     <div style={{marginTop:"100px"}} >
-      <h2 style={{marginLeft:"80px"}}>Attendence</h2>
+      <h2 style={{marginLeft:"80px",color:"#000080"}}>Attendence</h2>
       <br></br>
       <div  >
       <AttendenceChart value={attendancePercentage}  />
