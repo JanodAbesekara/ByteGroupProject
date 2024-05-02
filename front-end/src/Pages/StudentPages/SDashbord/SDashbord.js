@@ -1,5 +1,7 @@
+
 import axios from "axios";
 import React, { useState,useEffect} from "react";
+
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -15,11 +17,16 @@ import { jwtDecode } from "jwt-decode";
 import "./SDashbord.css";
 
 
+
 function SDashbord() {
-
-
-  const [notifaication, setNotification] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [notCount, setNotCount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [dataN, setData] = useState([]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
 
   const [user, setUser] = useState("");
@@ -63,41 +70,55 @@ function SDashbord() {
 
 
 
-
-    // notofication popup
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
-    // notifacition 
-    const featchNotification = () => {
-      axios
-        .get("/api/get/notifaction")
-        .then((response) => {
-          const announcements = response.data.announcements;
-          const filteredMessages = announcements.filter((item) => item.jobrole === "Admin");
-  
-         // Set notification state with filtered messages
-        setNotification(filteredMessages);
-        
-        // Set notification count
-        setNotCount(filteredMessages.length);
-        
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const Stuemail = decodedToken.email;
+
+      try {
+        const response = await axios.get(`/api/Enrol/getSubject`);
+        const filterdata = response.data.data.filter(
+          (item) => item.userEmail === Stuemail
+        );
+        const newData = filterdata.map((item) => ({
+          subject: item.Ensubject,
+          medium: item.Enmedium,
+          email: item.teacherEmail,
+        }));
+
+        setData(newData);
+        console.log(newData);
+
+        const notificationResponse = await axios.get(`/api/get/notifaction`);
+        const announcements = notificationResponse.data.announcements;
+        const filteredMessages = announcements.filter(
+          (item) =>
+            item.jobrole === "Admin" ||
+            (item.jobrole === "Lecturer" &&
+              newData.some(
+                (dataN) =>
+                  dataN.email === item.postedemail &&
+                  dataN.subject === item.TeacheSubject &&
+                  dataN.medium === item.mediua
+              ))
+        );
+
+        setNotifications(filteredMessages);
         console.log(filteredMessages);
-        console.log(filteredMessages.length);
-        })
-        .catch((error) => console.log(error));
+        setNotCount(filteredMessages.length);
+      } catch (error) {
+        console.log(error);
+      }
     };
-  
-    featchNotification();
+
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -118,6 +139,7 @@ function SDashbord() {
                   marginTop: "20px",
                 }}
               />
+
             </Link> */}
            <div className="container3">
           <div className="container1">
@@ -153,6 +175,7 @@ function SDashbord() {
             </div>
             <div/>
             </div>
+
           </Box>
         </Grid>
       </Grid>

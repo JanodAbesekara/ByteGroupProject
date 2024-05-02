@@ -149,7 +149,7 @@ export default function Dashbord() {
               </React.Fragment>
             </div>
           </div>
-          <AR imageUrl={url} />
+         
         </div>
       </div>
 

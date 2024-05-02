@@ -1,25 +1,12 @@
-import { PieChart, BarChart } from 'react-chartjs-2';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import { Gauge } from '@mui/x-charts/Gauge';
 
-
-function AttendanceChart({ attendancePercentage }) {
-  const chartData = {
-    labels: ['Present', 'Absent'],
-    datasets: [
-      {
-        data: [attendancePercentage, 100 - attendancePercentage],
-        backgroundColor: ['#28a745', '#dc3545'],
-        hoverBackgroundColor: ['#207735', '#b02a37'],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
-
-  return <PieChart data={chartData} options={chartOptions} />;
+export default function BasicGauges({value}) {
+  
+  return (
+    <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
+      <Gauge width={100} height={100} value={value} /> 
+    </Stack>
+  );
 }
-
-export default AttendanceChart;
