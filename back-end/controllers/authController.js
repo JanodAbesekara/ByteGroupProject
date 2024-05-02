@@ -175,6 +175,7 @@ const resetpasswordController = async (req, res) => {
   }
 
   const oldUser = await User.findOne({ email });
+  
   if (!oldUser) {
     return res.status(400).json({ success: false, msg: "User not found" });
   }

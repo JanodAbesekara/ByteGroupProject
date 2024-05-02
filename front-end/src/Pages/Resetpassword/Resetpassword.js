@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "./Resetpassword.css";
@@ -14,6 +14,8 @@ export default function Resetpassword() {
   const [passwordC, setPasswordC] = useState("");
   const [isTokenVerified, setIsTokenVerified] = useState(false);
   const [error, setError] = useState("");
+
+  const navigate = Navigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,11 +45,13 @@ export default function Resetpassword() {
         .get(`/api/auth/verifyToken?token=${token}`)
         .then((res) => {
           setIsTokenVerified(true);
+          navigate("/");
         })
         .catch((err) => {
           setError(err.response.data.msg);
         });
     }
+    
   }, [token]);
 
   return (
