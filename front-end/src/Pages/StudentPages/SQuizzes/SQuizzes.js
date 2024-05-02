@@ -1,46 +1,76 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import ComQuises from "./ComQuises";
+import ComQuizes1 from "./ComQuises1";
+
 
 function SQuizzes() {
   const [quizzes3, setQuizzes3] = useState([]);
-  const[quizzes1, setquizzes1] = useState([]);
-  const[quizzes2, setquizzes2] = useState([]);
+  const [quizzes1, setQuizzes1] = useState([]);
+  const [quizzes2, setQuizzes2] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const StuEmail = decodedToken.email;
+
       try {
-        const response = await axios.get(`/api/Quise/getQuise`);
-        const quises = response.data;
+        // Fetching initial data
+        const response = await axios.get(`/api/Enrol/getSubject`);
+        const filteredData = response.data.data.filter(
+          (item) => item.userEmail === StuEmail
+        );
+        const newData = filteredData.map((item) => ({
+          subject: item.Ensubject,
+          medium: item.Enmedium,
+          email: item.teacherEmail,
+        }));
+        setData(newData);
+
+        // Fetching quizzes data
+        const quizzesResponse = await axios.get(`/api/Quise/getQuise`);
+        const quises = quizzesResponse.data;
+
         const filteredQuizes1 = quises.filter(
           (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
-            quise.QuizeNumber === 1
+            newData.some(
+              (d) =>
+                d.email === quise.TeacherEmail &&
+                d.subject === quise.TeacherSubject &&
+                d.medium === quise.submedium
+            ) && quise.QuizeNumber === 1
         );
-        setquizzes1(filteredQuizes1);
+        setQuizzes1(filteredQuizes1);
+
         const filteredQuizes2 = quises.filter(
           (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
-            quise.QuizeNumber === 2
+            newData.some(
+              (d) =>
+                d.email === quise.TeacherEmail &&
+                d.subject === quise.TeacherSubject &&
+                d.medium === quise.submedium
+            ) && quise.QuizeNumber === 2
         );
-        setquizzes2(filteredQuizes2);
-        const filteredQuizes3 = quises.filter(
-          (quise) =>
-            quise.TeacherEmail === "teacher@example.com" &&
-            quise.TeacherSubject === "Mathematics" &&
-            quise.QuizeNumber === 3
+        setQuizzes2(filteredQuizes2);
+
+        const filteredQuizes3 = quises.filter((quise) =>
+          newData.some(
+            (d) =>
+              d.email === quise.TeacherEmail &&
+              d.subject === quise.TeacherSubject &&
+              d.medium === quise.submedium &&
+              quise.QuizeNumber === 3
+          )
         );
         setQuizzes3(filteredQuizes3);
       } catch (error) {
-        console.log(error);
-        window.alert(error.response.data.message);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -76,27 +106,18 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                 <Link to= "/ComQuises">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber}{" "}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
-
             </Box>
           ))}
-            {quizzes2.map((quiz) => (
+          {quizzes2.map((quiz) => (
             <Box key={quiz._id}>
               <div
                 style={{
@@ -117,27 +138,18 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to= "/ComQuises2">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
-
             </Box>
           ))}
-            {quizzes3.map((quiz) => (
+          {quizzes3.map((quiz) => (
             <Box key={quiz._id}>
               <div
                 style={{
@@ -158,24 +170,15 @@ function SQuizzes() {
                     boxShadow: "2px 4px 8px 0.5px black",
                   }}
                 >
-                  <Link to="/ComQuises3">
-                    <button
-                      style={{
-                        float: "right",
-                        padding: "5px 10px",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                    >
-                      {" "}
-                      Attempt to Quiz
-                    </button>
-                  </Link>
-                  <p style={{textAlign:"center"}}>Quizes :- {quiz.QuizeNumber}</p>
+                  <p style={{ textAlign: "center" }}>
+                    Quizes :- {quiz.QuizeNumber}
+                  </p>
                   <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>Time range :-{quiz.TimeRanges} minits</p>
+                  <p>medium :- {quiz.submedium}</p>
+                  <p>Time range :-{quiz.TimeRanges} minutes</p>
+                  <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
-
             </Box>
           ))}
         </Grid>

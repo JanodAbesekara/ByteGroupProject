@@ -107,9 +107,15 @@ export default function Feedback() {
                   {feedbackData.map((feedback) => {
                     return (
                       <TableRow key={feedback._id}>
-                        <TableCell sx={{ textAlign: "center" }}>{feedback.studentemail}</TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>{feedback.feedSubject}</TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>{feedback.feedtext}</TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {feedback.studentemail}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {feedback.feedSubject}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {feedback.feedtext}
+                        </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           <Rating
                             name="read-only"

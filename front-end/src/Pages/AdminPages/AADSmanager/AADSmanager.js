@@ -67,7 +67,7 @@ function AADSmanager() {
           <Box>
             <h1>ADS Manager</h1>
             <TableContainer component={Paper}>
-              <Table>
+              <Table sx={{marginBottom:"50px"}}>
                 <TableHead>
                   <TableRow sx={{ marginBottom: "60px", backgroundColor: "#B5DFCA" }}>
                     <TableCell sx={{ textAlign: "center",borderRight:"2px solid white" }}>Teacher Email</TableCell>

@@ -42,15 +42,14 @@ import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
 import Chat from "./Pages/Chat/Chat";
 import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
-import ComQuises from "./Pages/StudentPages/SQuizzes/ComQuises.js";
-import ComQuises2 from "./Pages/StudentPages/SQuizzes/ComQuises2.js";
-import ComQuises3 from "./Pages/StudentPages/SQuizzes/ComQuises3.js";
+import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
 import Alertbox from "./Component/Alertbox/Alertbox.js";
+import Content from "./Pages/StudentPages/SSubject/Content"
    
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
-
   const navigate = useNavigate();
 
   
@@ -126,10 +125,9 @@ function App() {
           <Route path="/Chat" element={<Chat />}/>
           <Route path="/Openwindow" element={<Openwindow />} />
           <Route path="/Popupbox" element={<Popupbox />} />
-          <Route path="/ComQuises" element={<ComQuises />} />
-          <Route path="/ComQuises2" element={<ComQuises2 />}/>
-          <Route path="/ComQuises3" element={<ComQuises3 />}/>
+          <Route path="/ComQuises1" element={<ComQuises1 />}/>
           <Route path="/Alertbox " element={<Alertbox />} />
+          <Route path="/Content" element={<Content />} />
         </Routes>
       </div>
     </>

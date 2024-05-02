@@ -67,27 +67,102 @@ function Classcomponent({ subjectData }) {
 
   return (
     <>
-      <div style={{ justifyContent: "center", alignContent: "center", display: "flex", marginBottom: "50px", marginTop: "50px", backgroundColor:"#dfebea", padding: '33px 20px', border:"none", borderRadius:"10px" }}>
+      <div
+        style={{
+          justifyContent: "center",
+          alignContent: "center",
+          display: "flex",
+          marginBottom: "50px",
+          marginTop: "50px",
+          backgroundColor: "#dfebea",
+          padding: "33px 20px",
+          border: "none",
+          borderRadius: "10px",
+        }}
+      >
         <div className="classcom" style={{ width: "95%", border: "none" }}>
-          <Link to="/ClassContent"style={{ textDecoration: "none", textTransform:"uppercase"}}  >
-            <p style={{ width: "100%", backgroundColor: "#65a1a0", textAlign: "center", padding: "10px 4px",color:"#fff", margin: "4px 0px", border:"none",borderRadius:"7px", fontSize:"25px" }}>
+          <Link
+            to="/ClassContent"
+            style={{ textDecoration: "none", textTransform: "uppercase" }}
+          >
+            <p
+              style={{
+                width: "100%",
+                backgroundColor: "#65a1a0",
+                textAlign: "center",
+                padding: "10px 4px",
+                color: "#fff",
+                margin: "4px 0px",
+                border: "none",
+                borderRadius: "7px",
+                fontSize: "25px",
+              }}
+            >
               {subjectData.subject}
             </p>
           </Link>
-          <h4 style={{margin: "4px 0px", color: "#21319c"}}>{subjectData.medium}</h4>
+          <h4 style={{ margin: "4px 0px", color: "#21319c" }}>
+            {subjectData.medium}
+          </h4>
           <div>
-          <h2 style={{fontSize:"20px", fontWeight:"normal", color:"#594f4f", padding:"5px 0px"}}><span style={{ color: "red" }}>*</span>Add Class Days Count</h2>
+            <h2
+              style={{
+                fontSize: "20px",
+                fontWeight: "normal",
+                color: "#594f4f",
+                padding: "5px 0px",
+              }}
+            >
+              <span style={{ color: "red" }}>*</span>Add Class Days Count
+            </h2>
             <form onSubmit={handleSubmit}>
-            
-              <input style={{margin:"3px 0px 10px", padding:"3px", borderRadius:"5px", border:"1px solid gray", width:"40px"}} type="number" value={lectureCount} onChange={(e) => setLectureCount(e.target.value)} />
-              <br/>
-              <button style={{color:"#fff", padding:"3px", backgroundColor:"#a4a6b3", border:"1px solid gray", borderRadius:"5px"}} type="submit">{editMode ? "Update" : "Submit"}</button>
+              <input
+                style={{
+                  margin: "3px 0px 10px",
+                  padding: "3px",
+                  borderRadius: "5px",
+                  border: "1px solid gray",
+                  width: "50px",
+                }}
+                type="number"
+                value={lectureCount}
+                onChange={(e) => setLectureCount(e.target.value)}
+              />
+              <br />
+              <button
+                style={{
+                  color: "#fff",
+                  padding: "3px",
+                  backgroundColor: "#a4a6b3",
+                  border: "1px solid gray",
+                  borderRadius: "5px",
+                }}
+                type="submit"
+              >
+                {editMode ? "Update" : "Submit"}
+              </button>
             </form>
             <div style={{ float: "left", marginRight: "50px" }}>
               {fetchedData && ( // Conditionally render details
                 <div>
-                  <h4 style={{padding:"10px 0px", color:"#594f4f"}}>Class Day Count : <span style={{color:"#000"}}>{fetchedData.leccount}</span></h4>
-                  <button style={{padding:"3px", borderRadius:"5px",backgroundColor:"#a4a6b3", border:"1px solid gray", color:"#fff"}} onClick={handleEdit}>Edit</button>
+                  <h4 style={{ padding: "10px 0px", color: "#594f4f" }}>
+                    Class Day Count :{" "}
+                    <span style={{ color: "#000" }}>
+                      {fetchedData.leccount}
+                    </span>
+                  </h4>
+                  <button
+                    style={{
+                      padding: "3px",
+                      borderRadius: "5px",
+                      backgroundColor: "#a4a6b3",
+                      border: "1px solid gray",
+                      color: "#fff",
+                    }}
+                    onClick={handleEdit}
+                  >
+                    Edit
+                  </button>
                 </div>
               )}
             </div>

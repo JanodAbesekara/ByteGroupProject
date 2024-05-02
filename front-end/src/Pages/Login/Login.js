@@ -15,6 +15,7 @@ import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
 import Alert from "@mui/material/Alert";
 
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
   "& .MuiDialogContent-root": {
@@ -49,10 +50,28 @@ function Login({ setUser, setIsLoggedIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if(!email || !password) {
+
+    setAlertSeverity("error");
+    setAlertMessage("Please fill in all fields.");
+
+    return;
+    }
+
     const data = {
       email,
       password,
     };
+    
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setAlertSeverity("error");
+      setAlertMessage("Please enter a valid email.");
+    }
+
+    
+
 
     axios
       .post(`/api/auth/login`, data)

@@ -1,5 +1,7 @@
 import express from "express";
 const router = express.Router();
+
+
 import {userProfileController, 
         userDetailsController, 
         userOtherDetailsController, 
@@ -15,6 +17,7 @@ import {studentattendenceController,
         displayteacherattendence} from "../controllers/studentAttendencecontrollers.js";
 
 import {getregisterdesubject} from "../controllers/SubjectRegistercontroller.js";
+
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);

@@ -1,5 +1,7 @@
+
 import axios from "axios";
 import React, { useState,useEffect} from "react";
+
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -16,10 +18,14 @@ import "./SDashbord.css";
 
 
 function SDashbord() {
-
-
-  const [notifaication, setNotification] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [notCount, setNotCount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [dataN, setData] = useState([]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
 
   const [user, setUser] = useState("");
@@ -31,6 +37,7 @@ function SDashbord() {
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
     const userID = decodedToken._id;
+
 
     axios
       .get(`api/user/userProfile/${userID}`)
@@ -63,41 +70,86 @@ function SDashbord() {
 
 
 
+    axios
+      .get(`api/user/userProfile/${userID}`)
+      .then((response) => {
+        const userData = response.data;
+        setUser(userData);
+      })
+      .catch((err) => console.log(err));
 
-    // notofication popup
-    const [open, setOpen] = useState(false);
+  }, []);
 
-    const handleClickOpen = () => {
-      setOpen(true);
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
+    const checkImageExists = async () => {
+      const imageRef = ref(storage,`studentProfile/${userID}/profile_pic`);
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log('Error checking image existence:', error.message);
+      }
     };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
+
+    checkImageExists();
+  }, []);
 
 
-    // notifacition 
-    const featchNotification = () => {
-      axios
-        .get("/api/get/notifaction")
-        .then((response) => {
-          const announcements = response.data.announcements;
-          const filteredMessages = announcements.filter((item) => item.jobrole === "Admin");
-  
-         // Set notification state with filtered messages
-        setNotification(filteredMessages);
-        
-        // Set notification count
-        setNotCount(filteredMessages.length);
-        
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const Stuemail = decodedToken.email;
+
+      try {
+        const response = await axios.get(`/api/Enrol/getSubject`);
+        const filterdata = response.data.data.filter(
+          (item) => item.userEmail === Stuemail
+        );
+        const newData = filterdata.map((item) => ({
+          subject: item.Ensubject,
+          medium: item.Enmedium,
+          email: item.teacherEmail,
+        }));
+
+        setData(newData);
+        console.log(newData);
+
+        const notificationResponse = await axios.get(`/api/get/notifaction`);
+        const announcements = notificationResponse.data.announcements;
+        const filteredMessages = announcements.filter(
+          (item) =>
+            item.jobrole === "Admin" ||
+            (item.jobrole === "Lecturer" &&
+              newData.some(
+                (dataN) =>
+                  dataN.email === item.postedemail &&
+                  dataN.subject === item.TeacheSubject &&
+                  dataN.medium === item.mediua
+              ))
+        );
+
+        setNotifications(filteredMessages);
         console.log(filteredMessages);
-        console.log(filteredMessages.length);
-        })
-        .catch((error) => console.log(error));
+        setNotCount(filteredMessages.length);
+      } catch (error) {
+        console.log(error);
+      }
     };
-  
-    featchNotification();
+
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -118,6 +170,7 @@ function SDashbord() {
                   marginTop: "20px",
                 }}
               />
+
             </Link> */}
            <div className="container3">
           <div className="container1">

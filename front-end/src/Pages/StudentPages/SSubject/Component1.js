@@ -40,7 +40,7 @@ function Component1({subject,teachermail, Feedmedium}) {
     <div>
       <div>
         <form>
-          <h2> Enter your feedback</h2>
+          <h2 style={{color:"#000080" , marginBottom:"30px"}}> Enter your feedback</h2>
           <input
             type="text"
             style={{
