@@ -9,32 +9,32 @@ import tokengenerator from "../config/createToken.js";
 const registerController = async (req, res) => {
   const { firstname, lastname, phonenumber, email, role, password } = req.body;
 
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+ // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-  if (!firstname || !lastname || !phonenumber || !email || !role || !password) {
-    return res
-      .status(400)
-      .json({ success: false, msg: "Please fill in all the fields" });
-  }
+ // if (!firstname || !lastname || !phonenumber || !email || !role || !password) {
+ //   return res
+ //     .status(400)
+ //     .json({ success: false, msg: "Please fill in all the fields" });
+ // }
+//
+ //if (!emailRegex.test(email)) {
+ //  return res
+ //    .status(400)
+ //    .json({ success: false, msg: "Please enter a valid email" });
+ //}
 
-  if (!emailRegex.test(email)) {
-    return res
-      .status(400)
-      .json({ success: false, msg: "Please enter a valid email" });
-  }
-
-  if (
-    password.length < 8 &&
-    ![A - Z].test(password) &&
-    ![a - z].test(password) &&
-    ![0 - 9].test(password) &&
-    !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(password)
-  ) {
-    return res.status(400).json({
-      success: false,
-      msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
-    });
-  }
+ //if (
+ //  password.length < 8 &&
+ //  ![A - Z].test(password) &&
+ //  ![a - z].test(password) &&
+ //  ![0 - 9].test(password) &&
+ //  !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(password)
+ //) {
+ //  return res.status(400).json({
+ //    success: false,
+ //    msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
+ //  });
+ //}
 
   try {
     const oldUser = await User.findOne({ email });
@@ -175,6 +175,7 @@ const resetpasswordController = async (req, res) => {
   }
 
   const oldUser = await User.findOne({ email });
+  
   if (!oldUser) {
     return res.status(400).json({ success: false, msg: "User not found" });
   }

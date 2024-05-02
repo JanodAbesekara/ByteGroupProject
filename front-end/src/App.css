@@ -28,3 +28,7 @@
     text-align: center;
     padding: 5px;
 }
+
+.subject-link:hover {
+    background-color: #D71868;
+  }

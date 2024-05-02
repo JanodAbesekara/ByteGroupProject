@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios"; // Correct import
 import AttendenceChart from "./AttendanceChart";
@@ -11,7 +11,7 @@ function DisplayAttendence() {
   const [displayData1, setDisplayData1] = useState([]);
   const [displayData2, setDisplayData2] = useState([]);
 
-  useEffect(() => {
+
     const fetchAttendance = () => {
       axios
         .get(`/api/user/techeralectureget`)
@@ -49,7 +49,7 @@ function DisplayAttendence() {
     };
 
     fetchStudentAttendance();
-  }, [useremail]);
+  
 
   // Calculate attendance percentage here
   const attendancePercentage =
@@ -59,7 +59,7 @@ function DisplayAttendence() {
 
   return (
     <div style={{marginTop:"100px"}} >
-      <h2 style={{marginLeft:"80px"}}>Attendence</h2>
+      <h2 style={{marginLeft:"80px",color:"#000080"}}>Attendence</h2>
       <br></br>
       <div  >
       <AttendenceChart value={attendancePercentage}  />

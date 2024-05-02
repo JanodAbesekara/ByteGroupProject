@@ -65,7 +65,7 @@ function ComQuizes({ quisedata }) {
         {showContent && (
           <div style={{backgroundColor:"white",padding:"20px"}}>
             {!quizStarted && ( // Render start button if quiz has not started
-              <button onClick={startQuiz}>Start Quiz</button>
+              <button onClick={startQuiz} style={{marginTop:"20px",marginBottom:"30px"}}>Start Quiz</button>
             )}
 
             <div>

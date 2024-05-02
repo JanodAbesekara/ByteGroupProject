@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 
@@ -9,9 +9,12 @@ function ComAttendence() {
      const lastname = decodedToken.lastname;
 
 
+     const [buttonDisabled, setButtonDisabled] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setButtonDisabled(true);
         try {
             const response = await axios.post('/api/user/studentattendence', {
                 studentnemail: decodedToken.email,
@@ -20,7 +23,6 @@ function ComAttendence() {
                 teachetmail: "janodabesekara@gmail.com",
             });
             window.alert(response.data.msg);
-            window.location.reload();
         } catch (error) {
             window.alert(error.response.data.msg);
         }
@@ -28,8 +30,8 @@ function ComAttendence() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <button type="submit">Mark Attendance</button>
+            <form onSubmit={handleSubmit} >
+                <button type="submit" disabled={buttonDisabled}>Mark Attendance</button>
             </form>
         </div>
     );
