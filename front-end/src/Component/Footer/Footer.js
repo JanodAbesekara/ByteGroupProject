@@ -64,7 +64,7 @@ function Footer() {
 
           <div className="im1">
             <img src="./Symbles/phone.png" alt="phone" />
-            <h3>+9477-123-456-78</h3>
+            <h3>+9477 - 1234 - 567</h3>
           </div>
           <div className="im2">
             <img src="./Symbles/gmail.png" alt="gmail" />

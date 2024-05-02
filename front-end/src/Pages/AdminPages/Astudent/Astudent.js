@@ -76,7 +76,7 @@ function Astudent() {
               </h3>
             </div>
             <TableContainer component={Paper} sx={{ marginTop: "100px" }}>
-              <Table sx={{ marginBottom: "50px" }}>
+              <Table >
                 <TableHead>
                   <TableRow>
                     <TableCell
