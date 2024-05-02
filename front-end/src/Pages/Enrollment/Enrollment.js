@@ -14,54 +14,51 @@ import { jwtDecode } from "jwt-decode";
 import Alert from "@mui/material/Alert";
 
 function Enrollment() {
-  // const [teachers, setTeachers] = useState([]);
-  const [postdeatal, setPosts] = useState([]);
-  const [Profile, setProfiles] = useState([]);
+  const [postdata, setPostData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   // alerts
-  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
-  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
+  const [alertSeverity, setAlertSeverity] = useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = useState(""); // State for alert message
 
   useEffect(() => {
-    const featchteacher = () => {
-      axios
-        .get(`/api/Enrol/enrolement`)
-        .then((response) => {
-          console.log(response.data.data);
-          // Extract profile and posts separately
-          const profiles = response.data.data.map((item) => item.profile);
-          const posts = response.data.data.map((item) => item.posts);
-
-          // Set the state for profiles and posts
-          setProfiles(profiles);
-          setPosts(posts);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/Enrol/enrolement");
+        setPostData(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    featchteacher();
+    fetchData();
   }, []);
 
   const handleSearch = () => {
-    const filteredTeachers = postdeatal.filter(
-      (posts) =>
-        posts.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        posts.lastname.toLowerCase().includes(searchQuery.toLowerCase())
+    // Convert the search query to lowercase
+    const searchQueryLowerCase = searchQuery.toLowerCase();  
+
+    // Split the search query into first name and last name
+    const [firstName, lastName] = searchQueryLowerCase.split(" ");
+
+    // Filter the data based on the search name
+    const filteredData = postdata.filter(item =>
+        item.posts.firstname.toLowerCase().includes(firstName) &&
+        item.posts.lastname.toLowerCase().includes(lastName)
     );
-    setPosts(filteredTeachers);
-  };
 
-  const handleEnroll = (email, subject,medium) => {
+    setPostData(filteredData);
+};
 
+
+  const handleEnroll = (email, subject, medium) => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
 
-    const paylord = {
+    const payload = {
       userEmail,
       teacherEmail: email,
       Ensubject: subject,
@@ -69,18 +66,17 @@ function Enrollment() {
     };
 
     axios
-      .post(`/api/Enrol/studentEnrollment`, paylord)
+      .post("/api/Enrol/studentEnrollment", payload)
       .then((response) => {
-        setAlertSeverity("success"); // Set success alert on successful login
-        setAlertMessage(response.data.msg); // Set alert message from response
+        setAlertSeverity("success");
+        setAlertMessage(response.data.msg);
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       })
       .catch((error) => {
-        // Handle error if needed
-        setAlertSeverity("error"); // Set error alert for failed login
-        setAlertMessage(error.response.data.msg); // Set alert message from response
+        setAlertSeverity("error");
+        setAlertMessage(error.response.data.msg);
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -196,29 +192,28 @@ function Enrollment() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {postdeatal.length > 0 &&
-              Profile.length > 0 &&
-              postdeatal.map((post, index) => (
-                <TableRow key={index}>
+            {postdata.map((item, index) =>
+              item.profile.map((profileItem, profileIndex) => (
+                <TableRow key={`${index}-${profileIndex}`}>
                   <TableCell sx={{ textAlign: "center" }}>
                     <QRCodeGenerator
-                      email={Profile[index].email}
-                      firstname={post.firstname}
-                      lastname={post.lastname}
-                      phonenumber={post.phonenumber}
-                      degree={Profile[index].degree}
-                      experience={Profile[index].experience}
-                      aboutme={Profile[index].aboutme}
+                      email={item.posts.email}
+                      firstname={item.posts.firstname}
+                      lastname={item.posts.lastname}
+                      phonenumber={item.posts.phonenumber}
+                      degree={profileItem.degree}
+                      experience={profileItem.experience}
+                      aboutme={profileItem.aboutme}
                     />
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {post.firstname} {post.lastname}
+                    {item.posts.firstname} {item.posts.lastname}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {Profile[index].subject}
+                    {profileItem.subject}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {Profile[index].medium}
+                    {profileItem.medium}
                   </TableCell>
                   <TableCell
                     sx={{
@@ -230,31 +225,32 @@ function Enrollment() {
                   >
                     <button
                       variant="contained"
-                      disabled={selectedCourse === Profile[index].subject}
+                      disabled={selectedCourse === profileItem.subject}
                       onClick={() => {
-                        setSelectedCourse(Profile[index].subject);
+                        setSelectedCourse(profileItem.subject);
                         handleEnroll(
-                          Profile[index].email,
-                          Profile[index].subject,
-                          Profile[index].medium
+                          item.posts.email,
+                          profileItem.subject,
+                          profileItem.medium
                         );
                       }}
                       style={{
                         color: "white",
                         padding: "5px",
                         backgroundColor:
-                          selectedCourse === Profile[index].subject
+                          selectedCourse === profileItem.subject
                             ? "#ccc"
                             : "#1b690d",
                       }}
                     >
-                      {selectedCourse === Profile[index].subject
+                      {selectedCourse === profileItem.subject
                         ? "Enrolled"
                         : "Enroll"}
                     </button>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
