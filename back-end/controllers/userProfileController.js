@@ -1,6 +1,7 @@
 import profilemodel from "../models/userProfileModel.js";
 import usermodel from "../models/usermodel.js";
 import paymentmodel from "../models/paymentModel.js";
+import studentProfileModel from "../models/studentProfileModel.js";
 
 const userProfileController = async (req, res) => {
   const { medium ,scheme ,subject, degree, experience, aboutme, email, id } =
@@ -101,6 +102,33 @@ const fetchPaymentDetailsController = async (req, res) => {
   }
 };
 
+const studentParentDetailsController = async (req,res) => {
+  const {name, email, mobileNo, uEmail, id } = req.body;
+
+  if(!name||!email||!mobileNo){
+    return res .status(400).json({ success: false, msg: "Please fill all the fields" });
+  }
+
+  try{
+    const parentDetails = new studentProfileModel({
+      name,
+      email, 
+      mobileNo,
+      uEmail,
+      id
+    });
+    await parentDetails.save();
+    return res
+      .status(200)
+      .json({ success: true, msg: "Guardian details uploaded successfully" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Sever Error" });
+  }
+  
+}
+
 
 export {
   userProfileController,
@@ -108,4 +136,5 @@ export {
   userOtherDetailsController,
   paymentDetailsController,
   fetchPaymentDetailsController,
+  studentParentDetailsController
 };
