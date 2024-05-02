@@ -12,6 +12,9 @@ import axios from "axios";
 import QRCodeGenerator from "./QRCodeGenerator";
 import { jwtDecode } from "jwt-decode";
 import Alert from "@mui/material/Alert";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from 'react-router-dom';
+
 
 function Enrollment() {
   const [postdata, setPostData] = useState([]);
@@ -38,20 +41,20 @@ function Enrollment() {
 
   const handleSearch = () => {
     // Convert the search query to lowercase
-    const searchQueryLowerCase = searchQuery.toLowerCase();  
+    const searchQueryLowerCase = searchQuery.toLowerCase();
 
     // Split the search query into first name and last name
     const [firstName, lastName] = searchQueryLowerCase.split(" ");
 
     // Filter the data based on the search name
-    const filteredData = postdata.filter(item =>
+    const filteredData = postdata.filter(
+      (item) =>
         item.posts.firstname.toLowerCase().includes(firstName) &&
         item.posts.lastname.toLowerCase().includes(lastName)
     );
 
     setPostData(filteredData);
-};
-
+  };
 
   const handleEnroll = (email, subject, medium) => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
@@ -85,6 +88,11 @@ function Enrollment() {
 
   return (
     <div>
+      <Link to="/Classes">
+        <div style={{ marginTop: "30px", marginLeft: "20px" ,cursor:"pointer"  }}>
+        <IoMdArrowRoundBack style={{width:"25px",height:"25px" ,color:"black"}} />
+        </div>
+      </Link>
       <h1>Enroll your Courses</h1>
       <div
         className="search"
