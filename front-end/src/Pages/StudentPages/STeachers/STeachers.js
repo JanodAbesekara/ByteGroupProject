@@ -26,7 +26,6 @@ function STeachers() {
 
       try {
         const response = await Axios.get(`/api/Enrol/getteacher`);
-
         const data = response.data.data.filter(
           (item) => item.userEmail === Stuemail
         );
