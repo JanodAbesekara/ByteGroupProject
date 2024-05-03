@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import AR from "./AR";
 import { Link } from "react-router-dom";
 import Openwindow from "./Openwindow";
 
@@ -48,7 +47,6 @@ export default function Dashbord() {
       })
       .catch((err) => console.log(err));
 
-
     axios
       .get(`api/user/dashboard/${userID}`)
       .then((response) => {
@@ -56,7 +54,6 @@ export default function Dashbord() {
         setDetails(details);
       })
       .catch((error) => console.log(error));
-
   }, []);
 
   useEffect(() => {
@@ -66,12 +63,12 @@ export default function Dashbord() {
     const userID = decodedToken._id;
 
     const checkImageExists = async () => {
-      const imageRef = ref(storage,`teacherProfile/${userID}/profile_pic`);
+      const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
       try {
         const imageUrl = await getDownloadURL(imageRef);
         setUrl(imageUrl);
       } catch (error) {
-        console.log('Error checking image existence:', error.message);
+        console.log("Error checking image existence:", error.message);
       }
     };
 
@@ -123,16 +120,18 @@ export default function Dashbord() {
               <div className="info">
                 <p>
                   <span style={{ color: "darkblue" }}>
-                  {details.degree && <p>{details.degree}</p>}
-                  {details.experience && <p>{details.experience} of experience</p>}
+                    {details.degree && <p>{details.degree}</p>}
+                    {details.experience && (
+                      <p>{details.experience} of experience</p>
+                    )}
                   </span>
-                  
                   <span style={{ color: "#366491", fontStyle: "italic" }}>
-                  {details.aboutme && <p>{details.aboutme}</p>}
+                   <p> {details.aboutme} details about me</p>
                   </span>
                 </p>
               </div>
-
+            </div>
+            <div className="Notificati">
               <React.Fragment>
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box sx={{ display: "flex", gap: 2, float: "right" }}>
@@ -149,7 +148,6 @@ export default function Dashbord() {
               </React.Fragment>
             </div>
           </div>
-         
         </div>
       </div>
 
