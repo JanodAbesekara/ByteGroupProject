@@ -1,7 +1,6 @@
 
 import axios from "axios";
 import React, { useState,useEffect} from "react";
-
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -152,12 +151,12 @@ function SDashbord() {
                 />
               </div>
             </div>
-            <div className="student_info">
-              <div className="name">
+            <div className="student_info" >
+              <div className="name" style={{marginBottom:"30px"}}>
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
 
-              <React.Fragment>
+              <React.Fragment >
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box sx={{ display: "flex", gap: 2, float: "right" }}>
                     <Badge badgeContent={notCount}>
@@ -168,7 +167,7 @@ function SDashbord() {
                 <Popupbox
                   open={open}
                   handleClose={handleClose}
-                  notifications={notifaication}
+                  notifications={notifications}
                 />
               </React.Fragment>
             </div>
