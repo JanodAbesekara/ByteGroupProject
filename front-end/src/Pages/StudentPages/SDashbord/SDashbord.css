@@ -9,9 +9,14 @@
     display: flex;
     position: relative;
 }
-.container3{
-  width: calc(100% - 100px);
+.containe3{
+  width: calc(100% - 20px);
   margin-left: 10px;
+}
+.Notif{
+  position: relative;
+  left: 60%;
+  margin-top: 10px;
 }
 .container1 {
   display: flex;
@@ -100,6 +105,15 @@
   box-shadow: 0 1.5px 5px #2d2d2d; 
 }
 
+#root > div > div > div.MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-9\.8.MuiGrid-grid-sm-10\.5.MuiGrid-grid-md-11\.25.css-e1vjxl-MuiGrid-root > div > div > div.container1 > div.Notif > a > div > span > span{
+  background-color: rgb(9, 9, 156);
+  color: white;
+  font-size: 15px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+}
+
 
 @media only screen and (min-width: 300px)and (max-width: 768px) {
   .container1{
@@ -127,6 +141,15 @@
     width: 65%;
     left: 0;
   }
+  .Notif{
+    position: relative;
+    left: 5%;
+  }
+  .containe3{
+    width: calc(100% );
+    margin-left: 10px;
+  
+  }
 }
 
 
@@ -139,6 +162,10 @@
     width: 90%;
     padding-left: 90px;
   }
+  .Notif{
+    position: relative;
+    left: -20%;
+  }
 }
 
 @media (min-width:1025px) {
@@ -148,5 +175,9 @@
   } 
   .student_info{
     padding-left: 80px;
+  }
+  .Notif{
+    position: relative;
+    left: 63%;
   }
 }

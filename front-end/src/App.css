@@ -11,31 +11,6 @@
     font-size: 18px;
 }
 
-#root > div > div > div.MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-9\.8.MuiGrid-grid-sm-10\.5.MuiGrid-grid-md-11\.25.css-e1vjxl-MuiGrid-root > div > a:nth-child(2) > div > span > span{
-    background-color: rgb(9, 9, 156);
-    color: white;
-    font-size: 15px;
-    border-radius: 50%;
-    text-align: center;
-    padding: 5px;
-}
-
-#root > div > div > div.head > div.container3 > div.container1 > div.teacher_info > a > div > span > span{
-    background-color: rgb(9, 9, 156);
-    color: white;
-    font-size: 15px;
-    border-radius: 50%;
-    text-align: center;
-    padding: 5px;
-}
-#root > div > div > div.MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-9\.8.MuiGrid-grid-sm-10\.5.MuiGrid-grid-md-11\.25.css-e1vjxl-MuiGrid-root > div > div > div.container1 > div.student_info > a > div > span > span{
-    background-color: rgb(9, 9, 156);
-    color: white;
-    font-size: 15px;
-    border-radius: 50%;
-    text-align: center;
-    padding: 5px;
-}
 
 .subject-link:hover {
     background-color: #D71868;

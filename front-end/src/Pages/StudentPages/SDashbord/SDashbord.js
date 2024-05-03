@@ -1,6 +1,5 @@
-
 import axios from "axios";
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -15,8 +14,6 @@ import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
 import "./SDashbord.css";
 
-
-
 function SDashbord() {
   const [notifications, setNotifications] = useState([]);
   const [notCount, setNotCount] = useState(0);
@@ -26,7 +23,6 @@ function SDashbord() {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
 
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
@@ -45,7 +41,6 @@ function SDashbord() {
         setUser(userData);
       })
       .catch((err) => console.log(err));
-
   }, []);
 
   useEffect(() => {
@@ -55,24 +50,21 @@ function SDashbord() {
     const userID = decodedToken._id;
 
     const checkImageExists = async () => {
-      const imageRef = ref(storage,`studentProfile/${userID}/profile_pic`);
+      const imageRef = ref(storage, `studentProfile/${userID}/profile_pic`);
       try {
         const imageUrl = await getDownloadURL(imageRef);
         setUrl(imageUrl);
       } catch (error) {
-        console.log('Error checking image existence:', error.message);
+        console.log("Error checking image existence:", error.message);
       }
     };
 
     checkImageExists();
   }, []);
 
-
-
   const handleClose = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,41 +132,41 @@ function SDashbord() {
               />
 
             </Link> */}
-           <div className="container3">
-          <div className="container1">
-              <div className="profile_pic">
-              <div className="picture">
-                <Avatar
-                  alt="profile_pic"
-                  src={url}
-                  sx={{ width: 90, height: 90 }}
-                />
+            <div className="containe3">
+              <div className="container1">
+                <div className="profile_pic">
+                  <div className="picture">
+                    <Avatar
+                      alt="profile_pic"
+                      src={url}
+                      sx={{ width: 90, height: 90 }}
+                    />
+                  </div>
+                </div>
+                <div className="student_info">
+                  <div className="name" style={{ marginBottom: "30px" }}>
+                    <p>{user.firstname + " " + user.lastname}</p>
+                  </div>
+                </div>
+                <div className="Notif">
+                <React.Fragment>
+                  <Link variant="outlined" onClick={handleClickOpen}>
+                    <Box sx={{ display: "flex", gap: 2, float: "right" }}>
+                      <Badge badgeContent={notCount}>
+                        <Typography fontSize="1.4rem">🔔</Typography>
+                      </Badge>
+                    </Box>
+                  </Link>
+                  <Popupbox
+                    open={open}
+                    handleClose={handleClose}
+                    notifications={notifications}
+                  />
+                </React.Fragment>
+                </div>
               </div>
+              <div />
             </div>
-            <div className="student_info" >
-              <div className="name" style={{marginBottom:"30px"}}>
-                <p>{user.firstname + " " + user.lastname}</p>
-              </div>
-
-              <React.Fragment >
-                <Link variant="outlined" onClick={handleClickOpen}>
-                  <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                    <Badge badgeContent={notCount}>
-                      <Typography fontSize="1.4rem">🔔</Typography>
-                    </Badge>
-                  </Box>
-                </Link>
-                <Popupbox
-                  open={open}
-                  handleClose={handleClose}
-                  notifications={notifications}
-                />
-              </React.Fragment>
-            </div>
-            </div>
-            <div/>
-            </div>
-
           </Box>
         </Grid>
       </Grid>
