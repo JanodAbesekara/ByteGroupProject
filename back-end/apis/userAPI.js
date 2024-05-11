@@ -16,6 +16,7 @@ import {studentattendenceController,
 
 import {getregisterdesubject} from "../controllers/SubjectRegistercontroller.js";
 
+
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
 router.get("/studenceattendenceget",studentattendencegetController);

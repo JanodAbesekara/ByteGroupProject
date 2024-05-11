@@ -5,7 +5,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import { jwtDecode } from "jwt-decode";
@@ -20,6 +19,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
+
+const ScrollableContent = styled("div")({
+  maxHeight: "600px",
+  overflowY: "auto",
+});
 
 function Openwindow({ open, handleClose, notifications }) {
   const [subject, setSubject] = useState("");
@@ -102,20 +106,21 @@ function Openwindow({ open, handleClose, notifications }) {
       >
         <CloseIcon />
       </IconButton>
-
-      {notifications.map((notification) => {
-        return (
-          <DialogContent dividers>
-            <h3>Title :- {notification.titleofAnn}</h3>
-            Message :- {notification.Announcementmessage}
-            <br></br>
-            <span>Time :- {notification.date.split("T")[0]}</span>
-          </DialogContent>
-        );
-      })}
-
+      <ScrollableContent>
+        {notifications
+          .slice(0)
+          .reverse()
+          .map((notification, index) => (
+            <DialogContent key={index} dividers>
+              <h3 style={{ textAlign: "center", marginBottom: "20px" }}>{notification.titleofAnn}</h3>
+              <h4 style={{ textAlign: "center", marginInline: "30px" }}>{notification.Announcementmessage}</h4>
+              <br></br>
+              <span style={{ float: "right", fontSize: "12px" }}>{notification.date.split("T")[0]}</span>
+            </DialogContent>
+          ))}
+      </ScrollableContent>
       <DialogActions sx={{ display: "flex" }}>
-        <div>
+        <div style={{marginRight:"30px"}} >
           <form onSubmit={handlesubmit}>
             <label htmlFor="title">Title</label>
             <input

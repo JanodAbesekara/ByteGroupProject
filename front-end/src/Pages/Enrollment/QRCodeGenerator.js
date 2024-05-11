@@ -28,8 +28,10 @@ const QRCodeGenerator = ({
 
   // Serialize the user data into a normal format for QR code
   const dataForQRCode = userData
+
     ? 
-     ` Name :- ${userData.firstname} ${userData.lastname}
+    `
+    Name :- ${userData.firstname} ${userData.lastname}
     Email :- ${userData.email}
     phonenumber :- ${userData.phonenumber}
     Degree :- ${userData.degree}
