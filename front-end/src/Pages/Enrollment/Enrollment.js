@@ -13,8 +13,7 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import { jwtDecode } from "jwt-decode";
 import Alert from "@mui/material/Alert";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function Enrollment() {
   const [postdata, setPostData] = useState([]);
@@ -89,8 +88,12 @@ function Enrollment() {
   return (
     <div>
       <Link to="/Classes">
-        <div style={{ marginTop: "30px", marginLeft: "20px" ,cursor:"pointer"  }}>
-        <IoMdArrowRoundBack style={{width:"25px",height:"25px" ,color:"black"}} />
+        <div
+          style={{ marginTop: "30px", marginLeft: "20px", cursor: "pointer" }}
+        >
+          <IoMdArrowRoundBack
+            style={{ width: "25px", height: "25px", color: "black" }}
+          />
         </div>
       </Link>
       <h1>Enroll your Courses</h1>
@@ -159,7 +162,7 @@ function Enrollment() {
                   textAlign: "center",
                 }}
               >
-                Teacher Details
+                Teacher Name
               </TableCell>
               <TableCell
                 sx={{
@@ -168,7 +171,7 @@ function Enrollment() {
                   textAlign: "center",
                 }}
               >
-                Teacher Name
+                Teacher Email
               </TableCell>
               <TableCell
                 sx={{
@@ -195,6 +198,16 @@ function Enrollment() {
                   textAlign: "center",
                 }}
               >
+                Teacher Details
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  borderRight: "2px white solid",
+                  borderLeft: "2px white solid",
+                  textAlign: "center",
+                }}
+              >
                 Enroll
               </TableCell>
             </TableRow>
@@ -203,6 +216,18 @@ function Enrollment() {
             {postdata.map((item, index) =>
               item.profile.map((profileItem, profileIndex) => (
                 <TableRow key={`${index}-${profileIndex}`}>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {item.posts.firstname} {item.posts.lastname}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {item.posts.email}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {profileItem.subject}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {profileItem.medium}
+                  </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     <QRCodeGenerator
                       email={item.posts.email}
@@ -213,15 +238,6 @@ function Enrollment() {
                       experience={profileItem.experience}
                       aboutme={profileItem.aboutme}
                     />
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {item.posts.firstname} {item.posts.lastname}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {profileItem.subject}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {profileItem.medium}
                   </TableCell>
                   <TableCell
                     sx={{
