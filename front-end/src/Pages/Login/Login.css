@@ -45,7 +45,7 @@
   font-family: "Inter", sans-serif;
   font-weight: normal;
   color: #1e2a79;
-  font-size: 20px;
+  font-size: 18px;
   padding-top: 5px;
 }
 
@@ -55,7 +55,9 @@
   margin-top: 5px;
   margin-bottom: 15px;
   padding: 2px 0px 2px 8px;
-  font-size: 16px;
+  font-size: 14px;
+  border: 1px solid gray;
+  border-radius: 6px;
 }
 
 .log_rem {
@@ -66,20 +68,20 @@
 
 .log_rem button {
   padding: 5px 10px 5px 10px;
-  float: left;
-  margin-right: 20px;
   position: relative;
   bottom: 180px;
-  background: linear-gradient(120deg, #616fcb, #2b45eb);
+  background: #2b45eb;
   box-shadow: 0px 1px 10px 0px black;
   border: none;
-  margin-right: 40px;
   width: 120px;
   height: 40px;
   cursor: pointer;
   border-radius: 5px;
   color: white;
-  font-size: 16px;
+  font-size: 19px;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
 }
 
 .log_rem h2 {
@@ -115,6 +117,7 @@
     position: relative;
     right: 50px;
   }
+  
 }
 
 @media (min-width: 553px) and (max-width: 620px) {
@@ -192,6 +195,9 @@
     align-items: center;
     margin-top: 120px;
   }
+  .log_rem button{
+    margin-left: 380px;
+  }
 }
 
 @media (min-width: 720px) and (max-width: 845px) {
@@ -202,6 +208,9 @@
     margin-top: 80px;
     margin-bottom: -50px;
 
+  }
+  .log_rem button{
+    margin-left: 380px;
   }
 }
 
@@ -214,6 +223,9 @@
     margin-bottom: -50px;
 
   }
+  .log_rem button{
+    margin-left: 380px;
+  }
 }
 
 @media (min-width: 845px) and (max-width: 950px) {
@@ -225,6 +237,9 @@
     margin-bottom: -50px;
 
   }
+  .log_rem button{
+    margin-left: 380px;
+  }
 }
 
 @media (min-width: 929px) and (max-width: 1024px) {
@@ -234,11 +249,13 @@
    float: right;
     margin-top: 80px;
     margin-bottom: -50px;
-
+  }
+  .log_rem button{
+    margin-left: 380px;
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 2400px) {
   .lottie{
     width: 400px;
     height: 400px;
@@ -247,5 +264,8 @@
     margin-bottom: -50px;
     margin-right: 50px;
 
+  }
+  .log_rem button{
+    margin-left: 380px;
   }
 }
