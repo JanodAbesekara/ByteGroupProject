@@ -69,7 +69,7 @@ function Astudent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div className="StudentDetal">
+            <div className="StudentDetal" >
               <h3
                 style={{
                   textAlign: "center",

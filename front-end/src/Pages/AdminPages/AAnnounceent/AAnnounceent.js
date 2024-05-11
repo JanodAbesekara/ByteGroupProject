@@ -131,13 +131,13 @@ function AAnnounceent() {
               </form>
             </div>
 
-            <div style={{ marginTop: "150px" }}>
+            <div style={{ marginTop: "150px" , marginBottom:"100px" }}>
               <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
                 Announcements
               </h1>
 
               <TableContainer component={Paper}>
-                <Table sx={{ marginBottom: "100px", paddingRight: "20px" }}>
+                <Table sx={{  paddingRight: "20px" }}>
                   <TableHead>
                     <TableRow>
                       <TableCell

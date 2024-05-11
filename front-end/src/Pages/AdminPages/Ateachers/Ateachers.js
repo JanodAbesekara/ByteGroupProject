@@ -68,7 +68,7 @@ function Ateachers() {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
+          <Box sx={{ marginBottom: "100px" }}>
             <div className="StudentDetail">
               <h3
                 style={{
@@ -83,7 +83,7 @@ function Ateachers() {
             </div>
             {chunks.map((chunk, index) => (
               <TableContainer component={Paper} key={index} sx={{ marginTop: "100px" }}>
-                <Table sx={{ marginBottom: "50px" }}>
+                <Table >
                   <TableHead>
                     <TableRow>
                       <TableCell
