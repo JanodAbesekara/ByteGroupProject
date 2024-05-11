@@ -78,7 +78,10 @@ function AADSmanager() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {ads.map((ad) => (
+                  {ads
+                  .slice(0)
+                  .reverse()
+                  .map((ad) => (
                   <TableRow key={ad.id}>
                     <TableCell sx={{ textAlign: "center" }}>{ad.email}</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>{ad.subject}</TableCell>
