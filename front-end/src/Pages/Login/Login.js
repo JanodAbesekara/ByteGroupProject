@@ -163,13 +163,13 @@ function Login({ setUser, setIsLoggedIn }) {
             type="email"
             name="email"
             onChange={(e) => setusername(e.target.value)}
-            placeholder="Enter your Username"
+            placeholder="Enter your username"
             required
             value={email}
           />
           <br></br>
           <label htmlFor="password">
-            <span style={{ color: "red" }}>*</span>password
+            <span style={{ color: "red" }}>*</span>Password
           </label>
           <br></br>
           <input
