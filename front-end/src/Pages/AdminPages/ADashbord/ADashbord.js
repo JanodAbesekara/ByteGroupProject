@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 import { Grid, Box } from "@mui/material";
 import Navbar from '../../../Component/Navbar/Navbar'
 import Footer from '../../../Component/Footer/Footer'
