@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./Registrationform.css";
-import { Input, Space } from "antd";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
 
@@ -26,6 +25,54 @@ export default function TeachersRegister() {
         role,
         password,
       };
+
+      if (
+        firstname === "" &&
+        lastname === "" &&
+        phonenumber === "" &&
+        email === "" &&
+        password === "" &&
+        role === ""
+      ) {
+        window.alert("Please fill all the fields");
+        return;
+      }
+
+      if (role === "") {
+        window.alert("Please select your role");
+        return;
+      }
+
+      if (phonenumber.length !== 10) {
+        window.alert("Invalid Phone Number");
+        return;
+      }
+
+      if (firstname.length < 3 || lastname.length < 3) {
+        window.alert("Name must contain at least 3 characters");
+        return;
+      }
+
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(email)) {
+        window.alert("Invalid Email");
+        return;
+      }
+
+      if (
+        password.length < 8 &&
+        confirmpassword.length < 8 &&
+        password !== confirmpassword &&
+        !/[A-Z]/.test(password) &&
+        !/[a-z]/.test(password) &&
+        !/[0-9]/.test(password) &&
+        !/[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]/.test(password)
+      ) {
+        window.alert(
+          "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"
+        );
+        return;
+      }
 
       axios
         .post(`/api/auth/register`, data)
