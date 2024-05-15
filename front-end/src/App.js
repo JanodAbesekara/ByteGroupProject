@@ -45,6 +45,7 @@ import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
 import Alertbox from "./Component/Alertbox/Alertbox.js";
 import Content from "./Pages/StudentPages/SSubject/Content"
+import Notifacition from  "./Pages/Notifacition";
    
 function App() {
 
@@ -128,6 +129,7 @@ function App() {
           <Route path="/ComQuises1" element={<ComQuises1 />}/>
           <Route path="/Alertbox " element={<Alertbox />} />
           <Route path="/Content" element={<Content />} />
+          <Route path="/Notifacition" element={<Notifacition />} />
         </Routes>
       </div>
     </>
