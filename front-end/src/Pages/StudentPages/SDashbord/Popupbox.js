@@ -49,9 +49,10 @@ function Popupbox({ open, handleClose, notifications }) {
           .reverse()
           .map((notification, index) => (
             <DialogContent key={index} dividers>
-              <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+              <h2 style={{ textAlign: "center" }}>
                 {notification.TeacheSubject}
               </h2>
+              <h6 style={{ fontSize: "12px",textAlign: "center" , marginBottom: "20px" }}>({notification.mediua})</h6>
               <h3 style={{ marginBottom: "20px" }}>
                 {notification.titleofAnn}
               </h3>
@@ -62,6 +63,7 @@ function Popupbox({ open, handleClose, notifications }) {
               <span style={{ float: "right", fontSize: "12px" }}>
                 {notification.date.split("T")[0]}
               </span>
+              <br></br>
             </DialogContent>
           ))}
       </ScrollableContent>
