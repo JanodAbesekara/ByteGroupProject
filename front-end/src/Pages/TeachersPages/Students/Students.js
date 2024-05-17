@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 
 export default function Students() {
+
   return (
     <div>
       <Navbar />
