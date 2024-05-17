@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 
 function Quisehandle({ subjectquise }) {
+  
   const [setsubjectquise] = useState(subjectquise);
 
   const deletebutton = async (_id) => {

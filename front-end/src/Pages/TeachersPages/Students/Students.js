@@ -4,7 +4,6 @@ import { Grid, Box } from "@mui/material";
 import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import Axios from "axios";
 import {
   TableContainer,
   Paper,
@@ -16,6 +15,7 @@ import {
 } from "@mui/material";
 
 export default function Students() {
+
   return (
     <div>
       <Navbar />
