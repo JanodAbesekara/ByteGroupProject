@@ -88,6 +88,17 @@ export default function Feedback() {
                         fontSize: "16px",
                       }}
                     >
+                      Medium
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#0000B9",
+                        color: "white",
+                        borderRight: "2px solid white",
+                        fontSize: "16px",
+                      }}
+                    >
                       FeedBack
                     </TableCell>
                     <TableCell
@@ -112,6 +123,9 @@ export default function Feedback() {
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {feedback.feedSubject}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {feedback.feedmedium}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {feedback.feedtext}
