@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 function AADSmanager() {
-  const [ads, setAds] = React.useState([]);
+  const [ads, setAds] = useState([]);
 
   useEffect(() => {
     getAds();
