@@ -145,7 +145,6 @@ const TableComponent = ({ rows }) => {
                           textDecoration: "none",
                           color: "black",
                           paddingLeft: "2px",
-                          alignContent: "center",
                         }}
                       >
                         <HtmlTooltip title={audioRows[index].audioTopic}>
