@@ -9,6 +9,7 @@ import userAPI from "./apis/userAPI.js";
 import QuiseAPI from "./apis/QuiseAPI.js";
 import { app, io, server } from "./Socket-io/Socketiosever.js";
 import videoAPI from "./apis/videoAPI.js";
+import assignmentAPI from "./apis/assignmentAPI.js";
 
 dotenv.config();
 
@@ -32,6 +33,8 @@ app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
 app.use("/api/video", videoAPI);
 app.use("/api/Quise", QuiseAPI);
+app.use("/api/assignment", assignmentAPI);
+
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
