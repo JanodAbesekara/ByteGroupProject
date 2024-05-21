@@ -1,52 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import ButtonComponent from './components/ButtonComponent';
+import UploadBox from './components/UploadBox';
 
 
-function ClassContent() {
-  const [count, setCount] = useState(1);
 
-  const handleCount = () => {
-    setCount(count + 1);
-  };
+function App() {
+  const [components, setComponents] = useState([]);
 
-  useEffect(() => {
-    console.log("Lecture", count);
-  }, [count]);
+  const handleClick = () => {
+    setComponents([...components, <UploadBox key={components.length} className="UploadBox" />]);
+  }
 
   return (
-    <>
-      <div style={{ width: "100%", height: "20px" }}>
-        <button onClick={handleCount} style={{}}>
-          Increase Lecture
-        </button>
+    <div className="App">
+      <div className="container">
+        {components}
       </div>
-
-      {[...Array(count)].map((_, index) => (
-        <div
-          key={index}
-          style={{
-            justifyContent: "center",
-            alignContent: "center",
-            display: "flex",
-          }}
-        >
-          <div
-            style={{
-              width: "90%",
-              height: "300px",
-              backgroundColor: "#CADCD9",
-              marginTop: "50px",
-              marginBottom: "50px",
-              borderRadius: "20px",
-            }}
-          >
-            <h5>Lecture {index + 1}</h5>
-          </div>
-        </div>
-      ))}
-
-   
-    </>
+      <div className="container">
+        <ButtonComponent onClick={handleClick} className="ButtonComponent" />
+      </div>
+    </div>
   );
 }
-
-export default ClassContent;
