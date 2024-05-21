@@ -8,7 +8,7 @@ import axios from "axios";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import { Link } from "react-router-dom";

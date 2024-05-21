@@ -1,7 +1,7 @@
 import React from "react";
 import "./Students.css";
 import { Grid, Box } from "@mui/material";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import {

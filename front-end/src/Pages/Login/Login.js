@@ -15,7 +15,6 @@ import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
 import Alert from "@mui/material/Alert";
 
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
   "& .MuiDialogContent-root": {
@@ -50,28 +49,23 @@ function Login({ setUser, setIsLoggedIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!email || !password) {
+    if (!email || !password) {
+      setAlertSeverity("error");
+      setAlertMessage("Please fill in all fields.");
 
-    setAlertSeverity("error");
-    setAlertMessage("Please fill in all fields.");
-
-    return;
+      return;
     }
 
     const data = {
       email,
       password,
     };
-    
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
       setAlertSeverity("error");
       setAlertMessage("Please enter a valid email.");
     }
-
-    
-
 
     axios
       .post(`/api/auth/login`, data)
@@ -88,10 +82,10 @@ function Login({ setUser, setIsLoggedIn }) {
 
           let redirectPath;
 
-          if (jobRole === "Lecturer") {
-            redirectPath = `/TDashbord?$phw=${encodedid}`;
-          } else if (jobRole === "Student") {
+          if (jobRole === "Student") {
             redirectPath = `/SDashbord?$phw=${encodedid}`;
+          } else if (jobRole === "Lecturer") {
+            redirectPath = `/TDashbord?$phw=${encodedid}`;
           } else {
             redirectPath = `/ADashbord?$phw=${encodedid}`;
           }

@@ -34,12 +34,9 @@ app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
 app.use("/api/video", videoAPI);
 app.use("/api/Quise", QuiseAPI);
-<<<<<<< Updated upstream
 app.use("/api/assignment", assignmentAPI);
-
-=======
 app.use("/api/Enrol", EnrolAPI);
->>>>>>> Stashed changes
+
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
