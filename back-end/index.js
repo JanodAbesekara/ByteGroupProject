@@ -6,6 +6,7 @@ import dbConnect from "./config/dbconnecter.js";
 import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
 import userAPI from "./apis/userAPI.js";
+import QuiseAPI from "./apis/QuiseAPI.js";
 import { app, io, server } from "./Socket-io/Socketiosever.js";
 import videoAPI from "./apis/videoAPI.js";
 
@@ -30,7 +31,7 @@ app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
 app.use("/api/video", videoAPI);
-
+app.use("/api/Quise", QuiseAPI);
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
