@@ -1,12 +1,11 @@
-img{
+.upload img{
     
     width: 35px;
     height: 35px;
     margin-left: 40px;
 }
 .learnmate{
-   
-   
+
     background-color:rgb(124, 173, 189) ;
     width: 1400px;
     height: 300px;

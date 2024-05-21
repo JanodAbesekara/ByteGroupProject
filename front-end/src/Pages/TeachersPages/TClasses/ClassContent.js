@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import ButtonComponent from './components/ButtonComponent';
-import UploadBox from './components/UploadBox';
+import ButtonComponent from './Classcontentcomponents/UploadBox';
+import UploadBox from './Classcontentcomponents/ButtonComponent';
 
 
 
-function App() {
+function  Classcontent() {
   const [components, setComponents] = useState([]);
 
   const handleClick = () => {
@@ -22,3 +22,5 @@ function App() {
     </div>
   );
 }
+
+export default Classcontent;

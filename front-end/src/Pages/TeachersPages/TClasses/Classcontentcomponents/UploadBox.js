@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RadioButton from './RadioButton'; 
 import './UploadBox.css';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import app from '../firebase';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../../../firebase";
 
 function UploadBox({ className }) {
   const [saved, setSaved] = useState(false); // State to manage saved status
