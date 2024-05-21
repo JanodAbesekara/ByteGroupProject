@@ -7,6 +7,7 @@ import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
 import userAPI from "./apis/userAPI.js";
 import QuiseAPI from "./apis/QuiseAPI.js";
+import EnrolAPI from "./apis/EnrolAPI.js";
 import { app, io, server } from "./Socket-io/Socketiosever.js";
 import videoAPI from "./apis/videoAPI.js";
 import assignmentAPI from "./apis/assignmentAPI.js";
@@ -33,8 +34,12 @@ app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
 app.use("/api/video", videoAPI);
 app.use("/api/Quise", QuiseAPI);
+<<<<<<< Updated upstream
 app.use("/api/assignment", assignmentAPI);
 
+=======
+app.use("/api/Enrol", EnrolAPI);
+>>>>>>> Stashed changes
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));

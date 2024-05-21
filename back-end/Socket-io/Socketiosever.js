@@ -1,15 +1,19 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-import { postanouncement, getAnnuncements, deleteAnnouncement } from "../controllers/anouncement.js";
+import {postanouncement, getAnnuncements,deleteAnnouncement} from "../controllers/anouncement.js";
 import bodyParser from "body-parser";
-import { createChatController, userChatController, findChatController, addmessageController, getmessageController } from "../controllers/chatContrillers.js";
+import  {createChatController, userChatController,findChatController,addmessageController,getmessageController
+
+}  from "../controllers/chatContrillers.js";
 
 const app = express();
 const server = http.createServer(app);
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const io = new Server(server, {
   cors: {
@@ -26,8 +30,10 @@ io.on("connection", (socket) => {
   });
 });
 
+
+
 app.post("/api/send/notifaction", postanouncement);
-app.get("/api/get/notifaction", getAnnuncements);
+app.get("/api/get/notifaction",  getAnnuncements);
 app.post("/api/delete/notifaction", deleteAnnouncement);
 app.post("/api/createchat", createChatController);
 app.get("/api/createchat/:userId", userChatController); 
@@ -35,5 +41,7 @@ app.get("/api/finduser/:firstId/:secondId", findChatController);
 app.get("/api/message/:chatId", getmessageController);
 app.post("/api/message", addmessageController);
 
-export { app, io, server };
 
+
+
+export { app, io, server };
