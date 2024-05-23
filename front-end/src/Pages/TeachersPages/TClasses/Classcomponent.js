@@ -66,6 +66,8 @@ function Classcomponent({ subjectData }) {
     setLectureCount(fetchedData?.leccount || 0); // Set initial value for edit
   };
 
+  const [subjectDataState] = useState(subjectData);
+
   return (
     <>
       <div
@@ -82,8 +84,16 @@ function Classcomponent({ subjectData }) {
         }}
       >
         <div className="classcom" style={{ width: "95%", border: "none" }}>
+<<<<<<< Updated upstream
          
            
+=======
+          <Link
+            to="/ClassContent"
+            style={{ textDecoration: "none", textTransform: "uppercase" }}
+          >
+              <ClassContent  subjectData={subjectDataState} />
+>>>>>>> Stashed changes
             <p
               style={{
                 width: "100%",
@@ -97,11 +107,11 @@ function Classcomponent({ subjectData }) {
                 fontSize: "25px",
               }}
             >
-              {subjectData.subject}
+              {subjectDataState.subject}
             </p>
           
           <h4 style={{ margin: "4px 0px", color: "#21319c" }}>
-            {subjectData.medium}
+            {subjectDataState.medium}
           </h4>
           <div>
             <h2

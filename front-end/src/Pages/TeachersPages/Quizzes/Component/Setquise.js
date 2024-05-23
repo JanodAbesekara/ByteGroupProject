@@ -16,10 +16,7 @@ export default function CombinedComponent({medium , subject}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Time Range:", timeRange);
-    console.log("Quiz Number:", quizNumber);
-    console.log("Questions:", questions);
-
+  
     const payload = {
       TimeRanges: timeRange,
       QuizeNumber: quizNumber,
@@ -32,7 +29,6 @@ export default function CombinedComponent({medium , subject}) {
   
     const request = axios.post(`/api/Quise/createQuise`, payload);
     request.then((response) => {
-      console.log("Response:", response);
       window.alert(response.data.message);
       window.location.reload();
     });

@@ -86,6 +86,7 @@ function ClassContent({ subjectData }) {
     }
   };
 
+ 
   return (
     <>
       <div
@@ -193,7 +194,9 @@ function ClassContent({ subjectData }) {
           </form>
         </div>
       </div>
-    </>
+
+  </>
+
   );
 }
 

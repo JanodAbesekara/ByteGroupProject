@@ -23,6 +23,7 @@ export default function TClasses() {
         const decodeToken = jwtDecode(token);
         const teacheremail = decodeToken.email;
 
+<<<<<<< Updated upstream
         const response = await axios.get(`/api/user/getsubjectreg`);
         console.log(response.data.data);
         const filterRegsubjects = response.data.data.filter(
@@ -35,6 +36,19 @@ export default function TClasses() {
         setError("Error fetching data: " + error.message);
       }
     };
+=======
+  const fetchregsubjects = async () => {
+    try {
+      const response = await axios.get(`/api/user/getsubjectreg`);
+      const filterRegsubjects = response.data.data.filter(
+        (regsubject) => regsubject.email === teacheremail
+      );
+      setselectsubject(filterRegsubjects);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+>>>>>>> Stashed changes
 
     fetchregsubjects();
   }, []);
