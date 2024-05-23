@@ -3,7 +3,6 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import ClassContent from "./ClassContent";
 
-
 function Classcomponent({ subjectData }) {
   const [lectureCount, setLectureCount] = useState(0); // Initialize with 0
   const [fetchedData, setFetchedData] = useState(null); // Store fetched data
@@ -84,32 +83,22 @@ function Classcomponent({ subjectData }) {
         }}
       >
         <div className="classcom" style={{ width: "95%", border: "none" }}>
-<<<<<<< Updated upstream
-         
-           
-=======
-          <Link
-            to="/ClassContent"
-            style={{ textDecoration: "none", textTransform: "uppercase" }}
+          <p
+            style={{
+              width: "100%",
+              backgroundColor: "#65a1a0",
+              textAlign: "center",
+              padding: "10px 4px",
+              color: "#fff",
+              margin: "4px 0px",
+              border: "none",
+              borderRadius: "7px",
+              fontSize: "25px",
+            }}
           >
-              <ClassContent  subjectData={subjectDataState} />
->>>>>>> Stashed changes
-            <p
-              style={{
-                width: "100%",
-                backgroundColor: "#65a1a0",
-                textAlign: "center",
-                padding: "10px 4px",
-                color: "#fff",
-                margin: "4px 0px",
-                border: "none",
-                borderRadius: "7px",
-                fontSize: "25px",
-              }}
-            >
-              {subjectDataState.subject}
-            </p>
-          
+            {subjectDataState.subject}
+          </p>
+
           <h4 style={{ margin: "4px 0px", color: "#21319c" }}>
             {subjectDataState.medium}
           </h4>
@@ -151,7 +140,7 @@ function Classcomponent({ subjectData }) {
                 {editMode ? "Update" : "Submit"}
               </button>
             </form>
-            
+
             <div style={{ float: "left", marginRight: "50px" }}>
               {fetchedData && ( // Conditionally render details
                 <div>
@@ -176,13 +165,11 @@ function Classcomponent({ subjectData }) {
                 </div>
               )}
             </div>
-           
           </div>
-          <div style={{marginTop:"50px"}}>
-          <ClassContent subjectData={subjectData} />
+          <div style={{ marginTop: "50px" }}>
+            <ClassContent subjectData={subjectData} />
           </div>
         </div>
-        
       </div>
     </>
   );

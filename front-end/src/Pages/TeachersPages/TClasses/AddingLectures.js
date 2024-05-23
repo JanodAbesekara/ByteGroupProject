@@ -10,6 +10,10 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import { FaFilePdf } from "react-icons/fa";
+import { PiVideoFill } from "react-icons/pi";
+import { BiLogoZoom } from "react-icons/bi";
+import { SiMaterialdesignicons } from "react-icons/si";
 
 function AddingLectures({ subjectData }) {
   const [subjectQuiz, setSubjectQuiz] = useState([]);
@@ -90,16 +94,32 @@ function AddingLectures({ subjectData }) {
                     {quise.lesson}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {quise.zoom}
+                    {quise.zoom && (
+                      <a href={quise.zoom} target="_blank" rel="noopener noreferrer">
+                        <BiLogoZoom />
+                      </a>
+                    )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {quise.PDF}
+                    {quise.PDF && (
+                      <a href={quise.PDF} target="_blank" rel="noopener noreferrer">
+                        <FaFilePdf />
+                      </a>
+                    )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {quise.video}
+                    {quise.video && (
+                      <a href={quise.video} target="_blank" rel="noopener noreferrer">
+                        <PiVideoFill />
+                      </a>
+                    )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {quise.otherLink}
+                    {quise.otherLink && (
+                      <a href={quise.otherLink} target="_blank" rel="noopener noreferrer">
+                        <SiMaterialdesignicons />
+                      </a>
+                    )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     <Button
