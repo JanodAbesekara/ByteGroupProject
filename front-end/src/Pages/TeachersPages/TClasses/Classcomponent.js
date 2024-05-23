@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import ClassContent from "./ClassContent";
+
 
 function Classcomponent({ subjectData }) {
   const [lectureCount, setLectureCount] = useState(0); // Initialize with 0
@@ -81,10 +82,8 @@ function Classcomponent({ subjectData }) {
         }}
       >
         <div className="classcom" style={{ width: "95%", border: "none" }}>
-          <Link
-            to="/ClassContent"
-            style={{ textDecoration: "none", textTransform: "uppercase" }}
-          >
+         
+           
             <p
               style={{
                 width: "100%",
@@ -100,7 +99,7 @@ function Classcomponent({ subjectData }) {
             >
               {subjectData.subject}
             </p>
-          </Link>
+          
           <h4 style={{ margin: "4px 0px", color: "#21319c" }}>
             {subjectData.medium}
           </h4>
@@ -142,6 +141,7 @@ function Classcomponent({ subjectData }) {
                 {editMode ? "Update" : "Submit"}
               </button>
             </form>
+            
             <div style={{ float: "left", marginRight: "50px" }}>
               {fetchedData && ( // Conditionally render details
                 <div>
@@ -166,8 +166,13 @@ function Classcomponent({ subjectData }) {
                 </div>
               )}
             </div>
+           
+          </div>
+          <div style={{marginTop:"50px"}}>
+          <ClassContent subjectData={subjectData} />
           </div>
         </div>
+        
       </div>
     </>
   );

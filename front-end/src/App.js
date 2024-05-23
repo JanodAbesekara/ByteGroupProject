@@ -47,6 +47,7 @@ import Alertbox from "./Component/Alertbox/Alertbox.js";
 import Content from "./Pages/StudentPages/SSubject/Content"
 import Notifacition from  "./Pages/Notifacition";
 import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
+import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
    
 function App() {
 
@@ -132,6 +133,7 @@ function App() {
           <Route path="/Content" element={<Content />} />
           <Route path="/Notifacition" element={<Notifacition />} />
           <Route path="/Quisehandle" element={<Quisehandle />} />
+          <Route path="/AddingLectures" element={<AddingLectures />} />
         </Routes>
       </div>
     </>
