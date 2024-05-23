@@ -12,10 +12,8 @@ import {
 import app from "../../../firebase";
 import axios from "axios";
 
-
 function ClassContent({ subjectData }) {
   const [subjectdata] = useState(subjectData);
-
 
   const [saved, setSaved] = useState(false); // State to manage saved status
   const [editMode, setEditMode] = useState(true); // State to manage edit mode
@@ -196,8 +194,7 @@ function ClassContent({ subjectData }) {
         </div>
       </div>
     </>
-
   );
 }
 
-export default Classcontent;
+export default ClassContent;
