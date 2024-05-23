@@ -34,7 +34,7 @@ export default function Feedback() {
           (feedback) => feedback.teacheremail === useremail
         );
         setFeedbackData(filteredFeedback);
-        console.log("Filtered Feedback Data:", filteredFeedback);
+ 
       })
       .catch((error) => {
         console.error("Error fetching feedback data:", error);

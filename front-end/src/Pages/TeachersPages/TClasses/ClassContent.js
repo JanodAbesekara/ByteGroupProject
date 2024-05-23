@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from "react";
 import { FaFilePdf } from "react-icons/fa";
 import { PiVideoFill } from "react-icons/pi";
@@ -86,8 +87,22 @@ function ClassContent({ subjectData }) {
       console.error("Error:", error);
       window.alert(error.response.data.message);
     }
+=======
+import React, {useState} from "react";
+import ButtonCom from './Classcontentcomponents/ButtonComponent';
+import UploadBox from './Classcontentcomponents/UploadBox';
+
+function ClassContent({subjectData}) {
+ 
+  const[subjectDataState] = useState(subjectData);
+  const [components, setComponents] = useState([]);
+
+  const handleClick = () => {
+    setComponents([...components, <UploadBox key={components.length} className="UploadBox" subjectdata={subjectDataState} />]);
+>>>>>>> Stashed changes
   };
 
+ 
   return (
     <>
       <div
@@ -195,9 +210,17 @@ function ClassContent({ subjectData }) {
           </form>
         </div>
       </div>
+<<<<<<< Updated upstream
     </>
 
+=======
+      <div className="container">
+        <ButtonCom onClick={handleClick} className="ButtonComponent" />
+      </div>
+    </div>
+>>>>>>> Stashed changes
   );
 }
 
-export default Classcontent;
+export default ClassContent;
+

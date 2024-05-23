@@ -23,7 +23,6 @@ export default function Assignment() {
           (assignmentSubject) => assignmentSubject.email === userEmail
         );
         setAssignment(filtersubject);
-        console.log(filtersubject);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

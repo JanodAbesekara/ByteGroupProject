@@ -86,7 +86,7 @@ function MyAds() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
+
           setInputs((prev) => ({
             ...prev,
             [fileType]: downloadURL,
