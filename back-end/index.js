@@ -1,16 +1,18 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
-import cros from "cors";
+import dotenv from "dotenv";
+import cors from "cors";
 import bodyParser from "body-parser";
 import dbConnect from "./config/dbconnecter.js";
 import authAPI from "./apis/authAPI.js";
 import emailAPI from "./apis/emailAPI.js";
 import userAPI from "./apis/userAPI.js";
-import { app, io, server } from "./Socket-io/Socketiosever.js";
 import QuiseAPI from "./apis/QuiseAPI.js";
 import EnrolAPI from "./apis/EnrolAPI.js";
+import { app, io, server } from "./Socket-io/Socketiosever.js";
+import videoAPI from "./apis/videoAPI.js";
 import assignmentAPI from "./apis/assignmentAPI.js";
+
+dotenv.config();
 
 // Connection to the database
 dbConnect();
@@ -18,21 +20,23 @@ dbConnect();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cros());
+app.use(cors());
 app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.send(" It's mern ");
+  res.send("It's mern");
 });
 
 // APIs
 app.use("/api/auth", authAPI);
 app.use("/api/email", emailAPI);
 app.use("/api/user", userAPI);
+app.use("/api/video", videoAPI);
 app.use("/api/Quise", QuiseAPI);
 app.use("/api/Enrol",  EnrolAPI);
 app.use("/api/assignment",  assignmentAPI);
+
 
 
 // Port
