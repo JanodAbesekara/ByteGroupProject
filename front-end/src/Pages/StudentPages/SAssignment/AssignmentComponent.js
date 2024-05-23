@@ -1,47 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
 function AssignmentComponent({ assignmentData }) {
-  const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem("answers");
-    return savedAnswers ? JSON.parse(savedAnswers) : [];
-  }); // State for storing selected answers
+  const subjectKey = assignmentData.TeacherSubject;
 
-  const [submitButton, setSubmitButton] = useState(() => {
-    const savedSubmitButton = localStorage.getItem("submitButton");
-    return savedSubmitButton ? JSON.parse(savedSubmitButton) : false;
-  }); // State for controlling submit button
+  const getInitialState = (key, defaultValue) => {
+    const savedState = localStorage.getItem(key);
+    return savedState ? JSON.parse(savedState) : defaultValue;
+  };
 
-  const [remainingTime, setRemainingTime] = useState(() => {
-    const savedRemainingTime = localStorage.getItem("remainingTime");
-    return savedRemainingTime ? JSON.parse(savedRemainingTime) : 0;
-  }); // State for remaining time
-
-  const [showContent, setShowContent] = useState(false); // State for controlling content visibility
-  const [assignmentStarted, setAssignmentStarted] = useState(() => {
-    const savedAssignmentStarted = localStorage.getItem("assignmentStarted");
-    return savedAssignmentStarted ? JSON.parse(savedAssignmentStarted) : false;
-  }); // State for controlling quiz start
-
+  const [answers, setAnswers] = useState(() => getInitialState(`${subjectKey}_answers`, []));
+  const [submitButton, setSubmitButton] = useState(() => getInitialState(`${subjectKey}_submitButton`, false));
+  const [remainingTime, setRemainingTime] = useState(() => getInitialState(`${subjectKey}_remainingTime`, 0));
+  const [showContent, setShowContent] = useState(false);
+  const [assignmentStarted, setAssignmentStarted] = useState(() => getInitialState(`${subjectKey}_assignmentStarted`, false));
   const [timeRange, setTimeRange] = useState(0);
-  const [countdownStarted, setCountdownStarted] = useState(() => {
-    const savedCountdownStarted = localStorage.getItem("countdownStarted");
-    return savedCountdownStarted ? JSON.parse(savedCountdownStarted) : false;
-  });
-
-  const [correctAnswers, setCorrectAnswers] = useState(() => {
-    const savedCorrectAnswers = localStorage.getItem("correctAnswers");
-    return savedCorrectAnswers ? JSON.parse(savedCorrectAnswers) : [];
-  }); // State for correct answers
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
-    const savedCurrentQuestionIndex = localStorage.getItem("currentQuestionIndex");
-    return savedCurrentQuestionIndex ? JSON.parse(savedCurrentQuestionIndex) : 0;
-  }); // State for current question index
-
+  const [countdownStarted, setCountdownStarted] = useState(() => getInitialState(`${subjectKey}_countdownStarted`, false));
+  const [correctAnswers, setCorrectAnswers] = useState(() => getInitialState(`${subjectKey}_correctAnswers`, []));
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => getInitialState(`${subjectKey}_currentQuestionIndex`, 0));
   const [marks, setMarks] = useState("");
-  const [showTime,setShowTime] = useState(false);
+  const [showTime, setShowTime] = useState(false);
+  const [assignmentSubmitted, setAssignmentSubmitted] = useState(() => getInitialState(`${subjectKey}_assignmentSubmitted`, false));
 
   useEffect(() => {
     let timer;
@@ -49,7 +29,7 @@ function AssignmentComponent({ assignmentData }) {
       timer = setInterval(() => {
         setRemainingTime((prevTime) => {
           const newTime = prevTime - 1000;
-          localStorage.setItem("remainingTime", JSON.stringify(newTime));
+          localStorage.setItem(`${subjectKey}_remainingTime`, JSON.stringify(newTime));
           return newTime;
         });
       }, 1000);
@@ -60,28 +40,32 @@ function AssignmentComponent({ assignmentData }) {
   }, [remainingTime, countdownStarted]);
 
   useEffect(() => {
-    localStorage.setItem("answers", JSON.stringify(answers));
+    localStorage.setItem(`${subjectKey}_answers`, JSON.stringify(answers));
   }, [answers]);
 
   useEffect(() => {
-    localStorage.setItem("submitButton", JSON.stringify(submitButton));
+    localStorage.setItem(`${subjectKey}_submitButton`, JSON.stringify(submitButton));
   }, [submitButton]);
 
   useEffect(() => {
-    localStorage.setItem("assignmentStarted", JSON.stringify(assignmentStarted));
+    localStorage.setItem(`${subjectKey}_assignmentStarted`, JSON.stringify(assignmentStarted));
   }, [assignmentStarted]);
 
   useEffect(() => {
-    localStorage.setItem("countdownStarted", JSON.stringify(countdownStarted));
+    localStorage.setItem(`${subjectKey}_countdownStarted`, JSON.stringify(countdownStarted));
   }, [countdownStarted]);
 
   useEffect(() => {
-    localStorage.setItem("correctAnswers", JSON.stringify(correctAnswers));
+    localStorage.setItem(`${subjectKey}_correctAnswers`, JSON.stringify(correctAnswers));
   }, [correctAnswers]);
 
   useEffect(() => {
-    localStorage.setItem("currentQuestionIndex", JSON.stringify(currentQuestionIndex));
+    localStorage.setItem(`${subjectKey}_currentQuestionIndex`, JSON.stringify(currentQuestionIndex));
   }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    localStorage.setItem(`${subjectKey}_assignmentSubmitted`, JSON.stringify(assignmentSubmitted));
+  }, [assignmentSubmitted]);
 
   const startAssignment = async () => {
     const time = assignmentData.TimeRanges;
@@ -91,14 +75,14 @@ function AssignmentComponent({ assignmentData }) {
     setRemainingTime(parseInt(time) * 60 * 1000);
     setCountdownStarted(true);
     setSubmitButton(true);
-    setAssignmentStarted(true); // Set assignment started to true when start button is clicked
+    setAssignmentStarted(true);
     setShowTime(true);
 
-    localStorage.setItem("remainingTime", JSON.stringify(parseInt(time) * 60 * 1000));
-    localStorage.setItem("correctAnswers", JSON.stringify(correctAnswers));
-    localStorage.setItem("countdownStarted", JSON.stringify(true));
-    localStorage.setItem("submitButton", JSON.stringify(true));
-    localStorage.setItem("assignmentStarted", JSON.stringify(true));
+    localStorage.setItem(`${subjectKey}_remainingTime`, JSON.stringify(parseInt(time) * 60 * 1000));
+    localStorage.setItem(`${subjectKey}_correctAnswers`, JSON.stringify(correctAnswers));
+    localStorage.setItem(`${subjectKey}_countdownStarted`, JSON.stringify(true));
+    localStorage.setItem(`${subjectKey}_submitButton`, JSON.stringify(true));
+    localStorage.setItem(`${subjectKey}_assignmentStarted`, JSON.stringify(true));
     console.log(assignmentData);
   };
 
@@ -109,7 +93,7 @@ function AssignmentComponent({ assignmentData }) {
   };
 
   const handleSubmit = () => {
-    setSubmitButton(true);
+    setSubmitButton(false);
     const score = checkAnswers();
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
@@ -127,23 +111,27 @@ function AssignmentComponent({ assignmentData }) {
       .post(`/api/assignment/grade`, mark)
       .then((response) => {
         console.log(response.data.msg);
-       
       })
       .catch((error) => {
         console.log(error.response.data.msg);
       });
 
     // Clear localStorage on submission
-    localStorage.removeItem("remainingTime");
-    localStorage.removeItem("answers");
-    localStorage.removeItem("submitButton");
-    localStorage.removeItem("assignmentStarted");
-    localStorage.removeItem("countdownStarted");
-    localStorage.removeItem("correctAnswers");
-    localStorage.removeItem("currentQuestionIndex");
-    setRemainingTime(0);
+    localStorage.removeItem(`${subjectKey}_remainingTime`);
+    localStorage.removeItem(`${subjectKey}_answers`);
+    localStorage.removeItem(`${subjectKey}_submitButton`);
+    localStorage.removeItem(`${subjectKey}_assignmentStarted`);
+    localStorage.removeItem(`${subjectKey}_countdownStarted`);
+    localStorage.removeItem(`${subjectKey}_correctAnswers`);
+    localStorage.removeItem(`${subjectKey}_currentQuestionIndex`);
 
-     window.location.reload();
+    setRemainingTime(0);
+    setAssignmentSubmitted(true);
+    localStorage.setItem(`${subjectKey}_assignmentSubmitted`, JSON.stringify(true));
+    setShowTime(false);
+
+    // Refresh the page to reflect the changes
+    window.location.reload();
   };
 
   const checkAnswers = () => {
@@ -183,7 +171,7 @@ function AssignmentComponent({ assignmentData }) {
         <div>
           <p
             style={{
-              backgroundColor: "	#27ae60",
+              backgroundColor: "#27ae60",
               borderRadius: "5px",
               padding: "3px 8px",
             }}
@@ -200,7 +188,12 @@ function AssignmentComponent({ assignmentData }) {
             {assignmentData.submedium}</p>
         </div>
       </div>
-      <p
+      
+
+      <div>
+        {!showContent && !assignmentSubmitted && (
+          <div>
+            <p
         style={{
           padding: "3px 8px",
           color:"#000"
@@ -208,9 +201,6 @@ function AssignmentComponent({ assignmentData }) {
       >
         Allocated Time : {assignmentData.TimeRanges} minutes
       </p>
-
-      <div style={{ marginTop: "10px" }}>
-        {!showContent && (
         <button
           onClick={() => {setShowContent(!showContent);}}
           style={{ 
@@ -225,6 +215,7 @@ function AssignmentComponent({ assignmentData }) {
         >
           Show Content
         </button>
+        </div>
 
         )}
 
@@ -357,4 +348,3 @@ function AssignmentComponent({ assignmentData }) {
 }
 
 export default AssignmentComponent;
-
