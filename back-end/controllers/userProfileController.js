@@ -4,14 +4,8 @@ import paymentmodel from "../models/paymentModel.js";
 import studentProfileModel from "../models/studentProfileModel.js";
 
 const userProfileController = async (req, res) => {
-  const { medium ,scheme ,subject, degree, experience, aboutme, email, id  } =
+  const { medium ,scheme ,subject, degree, experience, aboutme, email, id, url  } =
     req.body;
-
-  if (!medium || !scheme ||!subject || !experience || !aboutme || !email ) {
-    return res
-      .status(400)
-      .json({ success: false, msg: "Please fill all the fields" });
-  }
 
   const olduser = await profilemodel.findOne({ email ,subject , medium });
 
@@ -31,6 +25,7 @@ const userProfileController = async (req, res) => {
       aboutme,
       email,
       id,
+      url,
     });
 
     await newprofile.save();
@@ -129,6 +124,38 @@ const studentParentDetailsController = async (req,res) => {
   
 }
 
+const updateUserProfileController = async (req, res) => {
+  const id = req.params.subID; // Get the ID of the profile to update
+  const { degree, experience, aboutme } = req.body; // Extract updated data from request body
+
+  try {
+    // Find the profile by ID
+    const profile = await profilemodel.findByIdAndUpdate(id, {degree, experience, aboutme});
+
+    // If profile doesn't exist, return an error
+    if (!profile) {
+      return res.status(404).json({ success: false, msg: "Profile not found" });
+    }
+    
+    // Return success message
+    return res.status(200).json({ success: true, msg: "Profile updated successfully" });
+  } catch (error) {
+    console.error("An error occurred while updating profile:", error);
+    return res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const deleteEntireCard = async (req,res) => {
+  const id = req.params.deleted;
+  try {
+    await profilemodel.findByIdAndDelete(id);
+    return res.status(200).json({success: true, msg: "Success"});
+  } catch (error) {
+    return res.status(500).json({success:false, msg:"error"});
+  }
+};
+
+
 
 export {
   userProfileController,
@@ -136,5 +163,7 @@ export {
   userOtherDetailsController,
   paymentDetailsController,
   fetchPaymentDetailsController,
-  studentParentDetailsController
+  studentParentDetailsController,
+  updateUserProfileController,
+  deleteEntireCard
 };

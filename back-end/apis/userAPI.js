@@ -5,7 +5,9 @@ import {userProfileController,
         userOtherDetailsController, 
         paymentDetailsController, 
         fetchPaymentDetailsController,
-        studentParentDetailsController } from "../controllers/userProfileController.js";
+        studentParentDetailsController,
+        updateUserProfileController,
+        deleteEntireCard } from "../controllers/userProfileController.js";
 
 import {studentattendenceController, 
         teacherattendenceController, 
@@ -24,20 +26,26 @@ router.post("/teacherlecture", teacherattendenceController);
 router.post("/editlecturecount", editlecturecount);
 router.get("/teacherattendence", displayteacherattendence);
 
+//save payment details of teacher
 router.post("/payment",paymentDetailsController);
 router.get("/payment/:userID",fetchPaymentDetailsController);
 
 
-
+//get user name and details that are entered when the registration
 router.get("/userProfile/:userID" , userDetailsController);
-
+//get teacher's data added from userprofile
 router.get("/dashboard/:userID", userOtherDetailsController);
 
 
 // subject get from registered
 router.get("/getsubjectreg", getregisterdesubject);
-
 //students guardian details
-router.post("/guardian",studentParentDetailsController)
+router.post("/guardian",studentParentDetailsController);
+
+//update users details based on classes
+router.put("/update/:subID",updateUserProfileController);
+// delete subject card
+router.delete("/delete/:deleted",deleteEntireCard);
+
 
 export default router;
