@@ -8,10 +8,9 @@ import axios from "axios";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import AR from "./AR";
 import { Link } from "react-router-dom";
 import Openwindow from "./Openwindow";
 import ClassCard from "./ClassCard";
@@ -49,7 +48,6 @@ export default function Dashbord() {
       })
       .catch((err) => console.log(err));
 
-
   }, []);
 
   useEffect(() => {
@@ -59,12 +57,12 @@ export default function Dashbord() {
     const userID = decodedToken._id;
 
     const checkImageExists = async () => {
-      const imageRef = ref(storage,`teacherProfile/${userID}/profile_pic`);
+      const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
       try {
         const imageUrl = await getDownloadURL(imageRef);
         setUrl(imageUrl);
       } catch (error) {
-        console.log('Error checking image existence:', error.message);
+        console.log("Error checking image existence:", error.message);
       }
     };
 
@@ -156,11 +154,13 @@ export default function Dashbord() {
 
             </div>
           </div>
+
           {selectSubject.map((selectSubjects) => (
               <div key={selectSubjects._id}>
               <ClassCard subjectData={selectSubjects} key={selectSubjects._id} />
               </div>
             ))}
+
         </div>
       </div>
 

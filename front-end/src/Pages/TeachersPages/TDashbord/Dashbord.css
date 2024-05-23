@@ -10,8 +10,23 @@
     position: relative;
 }
 .container3{
-  width: calc(100% - 100px);
+  width: calc(100% - 10px);
   margin-left: 10px;
+}
+.Notificati{
+  position: relative;
+  left: 60%;
+  margin-top: 10px;
+
+}
+#root > div > div > div.head > div.container3 > div > div.Notificati > a > div > span > span{
+    background-color: rgb(9, 9, 156);
+    color: white;
+    font-size: 15px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+
 }
 .container1 {
   display: flex;

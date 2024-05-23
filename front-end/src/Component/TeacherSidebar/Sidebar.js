@@ -47,7 +47,7 @@ export default function Ssidebar() {
   };
 
   if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
-    return null; // Return null if no token exists
+    return null; 
   }
 
   const handleLogout = () => {
@@ -152,7 +152,6 @@ export default function Ssidebar() {
             <span className="sidebar_icon">
               <MdLogout />
             </span>
-
             <span className="sidebar_name">Logout</span>
           </Link>
         </BootstrapTooltip>

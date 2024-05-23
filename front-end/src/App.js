@@ -11,7 +11,7 @@ import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
 import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
-import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx"
+import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx";
 import PaymentDetails from "./Pages/TeachersPages/PaymentDetails/PaymentDetails";
 import Quizzes from "./Pages/TeachersPages/Quizzes/Quizzes";
 import Students from "./Pages/TeachersPages/Students/Students";
@@ -44,21 +44,23 @@ import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
 import Alertbox from "./Component/Alertbox/Alertbox.js";
-import Content from "./Pages/StudentPages/SSubject/Content"
-   
-function App() {
+import Content from "./Pages/StudentPages/SSubject/Content";
+import Notifacition from "./Pages/Notifacition";
+import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
+import ButtonCom from "./Pages/TeachersPages/TClasses/Classcontentcomponents/ButtonComponent.js";
+import RadioButton from "./Pages/TeachersPages/TClasses/Classcontentcomponents/RadioButton.js";
+import UploadBox from "./Pages/TeachersPages/TClasses/Classcontentcomponents/UploadBox";
 
+function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
   const navigate = useNavigate();
 
-  
-
-// const logoutuser = () => {
-//   setUser(null);
-//   setIsLoggedIn(false);
-//   navigate("/Login");
-// };
+  // const logoutuser = () => {
+  //   setUser(null);
+  //   setIsLoggedIn(false);
+  //   navigate("/Login");
+  // };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -122,12 +124,17 @@ function App() {
           <Route path="/Enterquizes" element={<Enterquizes />} />
           <Route path="/Enrollment" element={<Enrollment />} />
           <Route path="/Classcontent" element={<Classcontent />} />
-          <Route path="/Chat" element={<Chat />}/>
+          <Route path="/Chat" element={<Chat />} />
           <Route path="/Openwindow" element={<Openwindow />} />
           <Route path="/Popupbox" element={<Popupbox />} />
-          <Route path="/ComQuises1" element={<ComQuises1 />}/>
+          <Route path="/ComQuises1" element={<ComQuises1 />} />
           <Route path="/Alertbox " element={<Alertbox />} />
           <Route path="/Content" element={<Content />} />
+          <Route path="/Notifacition" element={<Notifacition />} />
+          <Route path="/Quisehandle" element={<Quisehandle />} />
+          <Route path="/ButtonCom" element={<ButtonCom />} />
+          <Route path="/RadioButton" element={<RadioButton />} />
+          <Route path="/UploadBox" element={<UploadBox />} />
         </Routes>
       </div>
     </>

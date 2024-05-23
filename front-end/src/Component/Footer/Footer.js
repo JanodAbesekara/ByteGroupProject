@@ -2,6 +2,8 @@ import "./Footer.css";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
+import Notifacition from "../../Pages/Notifacition";
+
 
 function Footer() {
   const form = useRef();
