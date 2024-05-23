@@ -13,6 +13,7 @@ import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import { Link } from "react-router-dom";
 import Openwindow from "./Openwindow";
+import ClassCard from "./ClassCard";
 
 export default function Dashbord() {
   const [user, setUser] = useState("");
@@ -47,13 +48,6 @@ export default function Dashbord() {
       })
       .catch((err) => console.log(err));
 
-    axios
-      .get(`api/user/dashboard/${userID}`)
-      .then((response) => {
-        const details = response.data;
-        setDetails(details);
-      })
-      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -95,6 +89,31 @@ export default function Dashbord() {
 
   featchNotification();
 
+  //to fetch reistered subjects
+
+  const [selectSubject, setSelectSubject] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodeToken = jwtDecode(token);
+    const teacheremail = decodeToken.email;
+
+    const fetchRegSubjects = async () => {
+      try {
+        const response = await axios.get(`/api/user/getsubjectreg`);
+        console.log(response.data.data);
+        const filterRegsubjects = response.data.data.filter(
+          (regsubject) => regsubject.email === teacheremail
+        );
+        setSelectSubject(filterRegsubjects);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchRegSubjects();
+  }, []);
+
+
   return (
     <div>
       <Navbar />
@@ -117,21 +136,7 @@ export default function Dashbord() {
               <div className="name">
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
-              <div className="info">
-                <p>
-                  <span style={{ color: "darkblue" }}>
-                    {details.degree && <p>{details.degree}</p>}
-                    {details.experience && (
-                      <p>{details.experience} of experience</p>
-                    )}
-                  </span>
-                  <span style={{ color: "#366491", fontStyle: "italic" }}>
-                   <p> {details.aboutme} details about me</p>
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div className="Notificati">
+
               <React.Fragment>
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box sx={{ display: "flex", gap: 2, float: "right" }}>
@@ -146,8 +151,16 @@ export default function Dashbord() {
                   notifications={notifaication}
                 />
               </React.Fragment>
+
             </div>
           </div>
+
+          {selectSubject.map((selectSubjects) => (
+              <div key={selectSubjects._id}>
+              <ClassCard subjectData={selectSubjects} key={selectSubjects._id} />
+              </div>
+            ))}
+
         </div>
       </div>
 

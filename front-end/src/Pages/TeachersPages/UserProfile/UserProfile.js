@@ -20,9 +20,10 @@ function UserProfile() {
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
-  const [showChooseOption, setShowChooseOption] = useState(true);
-
-  const [scheme, setScheme] = useState("");
+  const [showChooseOption, setShowChooseOption] = useState(true); //control visibility
+  const [showScheme, setShowScheme] = useState(true); //control visibility
+  const [subjectOption, setSubjectOption] = useState(true); //control visibility
+  const [scheme, setScheme] = useState(""); //control visibility of "choose scheme"
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -96,37 +97,74 @@ function UserProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const userID = decodedToken._id;
-    setUser(decodedToken);
+    if (!url) {
+      window.alert("Please add profile picture first");
+    } else {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const userID = decodedToken._id;
+      setUser(decodedToken);
 
-    const updatedUser = {
-      ...user,
-      medium: medium,
-      scheme: scheme,
-      subject: subject,
-      degree: degree,
-      experience: experience,
-      aboutme: aboutme,
-      email: userEmail,
-      id: userID,
-    };
+      const validateForm = () => {
+        if (!medium || !scheme || !degree || !experience || !aboutme) {
+          if (!medium) {
+            window.alert("You must select your medium");
+            return false;
+          }
+          if (!scheme) {
+            window.alert("You must select your scheme");
+            return false;
+          }
+          if (!degree) {
+            window.alert("You must select your degree");
+            return false;
+          }
+          if (!experience) {
+            window.alert("You must select your experience");
+            return false;
+          }
+          if (!aboutme) {
+            window.alert("You must select your aboutme");
+            return false;
+          }
+          return false; // Return false to indicate form validation failed
+        }
+        return true; // Return true to indicate form validation passed
+      };
 
-    axios
-      .post(`/api/user/userProfile`, updatedUser)
-      .then((response) => {
-        setSubject((pre) => (pre.length > 0 ? "" : pre));
-        setDegree((pre) => (pre.length > 0 ? "" : pre));
-        setExperience((pre) => (pre.length > 0 ? "" : pre));
-        setAboutMe((pre) => (pre.length > 0 ? "" : pre));
-        window.alert(response.data.msg);
-        console.log(response.data.msg);
-      })
-      .catch((error) => {
-        window.alert(error.response.data.msg);
-        console.log(error.response.data.msg);
-      });
+      if (validateForm) {
+        const updatedUser = {
+          ...user,
+          medium: medium,
+          scheme: scheme,
+          subject: subject,
+          degree: degree,
+          experience: experience,
+          aboutme: aboutme,
+          email: userEmail,
+          id: userID,
+          url: url,
+        };
+
+        console.log(updatedUser);
+        axios
+          .post(`/api/user/userProfile`, updatedUser)
+          .then((response) => {
+            setMedium((pre) => (pre.length > 0 ? "" : pre));
+            setScheme((pre) => (pre.length > 0 ? "" : pre));
+            setSubject((pre) => (pre.length > 0 ? "" : pre));
+            setDegree((pre) => (pre.length > 0 ? "" : pre));
+            setExperience((pre) => (pre.length > 0 ? "" : pre));
+            setAboutMe((pre) => (pre.length > 0 ? "" : pre));
+            window.alert(response.data.msg);
+            console.log(response.data.msg);
+          })
+          .catch((error) => {
+            window.alert(error.response.data.msg);
+            console.log(error.response.data.msg);
+          });
+      }
+    }
   };
 
   return (
@@ -180,8 +218,16 @@ function UserProfile() {
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
                   }}
-                  onChange={(e) => setMedium(e.target.value)}
+                  onChange={(e) => {
+                    setShowScheme(false);
+                    setMedium(e.target.value);
+                  }}
                 >
+                  {showScheme && (
+                    <option value="Choose your scheme">
+                      Choose your Medium
+                    </option>
+                  )}
                   <option value="English">English</option>
                   <option value="Sinhala">Sinhala</option>
                 </select>
@@ -229,16 +275,27 @@ function UserProfile() {
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
                   }}
-                  onChange={(e) => setSubject(e.target.value)}
+                  onChange={(e) => {
+                    setSubjectOption(false);
+                    setSubject(e.target.value);
+                  }}
                 >
                   {scheme === "Grade 5" && (
                     <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">Choose</option>
+                      )}
                       <option value="Grade 5">Grade 5</option>
                     </>
                   )}
 
                   {scheme === "Ordinary Level" && (
                     <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">
+                          Choose your Subject
+                        </option>
+                      )}
                       <option value="Mathematics">Mathematics</option>
                       <option value="Science">Science</option>
                       <option value="English">English</option>
@@ -254,6 +311,11 @@ function UserProfile() {
 
                   {scheme === "Advanced Level" && (
                     <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">
+                          Choose youe Subject
+                        </option>
+                      )}
                       <option value="Physics">Physics</option>
                       <option value="Chemistry">Chemistry</option>
                       <option value="Biology">Biology</option>
@@ -321,7 +383,7 @@ function UserProfile() {
                 <textarea
                   type="text"
                   className="about"
-                  placeholder="Hello I am..."
+                  placeholder="Add something about your self"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
                 ></textarea>
