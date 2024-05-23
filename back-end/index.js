@@ -35,8 +35,6 @@ app.use("/api/Enrol",  EnrolAPI);
 app.use("/api/assignment",  assignmentAPI);
 
 
-
-
 // Port
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
