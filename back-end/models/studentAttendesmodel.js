@@ -16,6 +16,10 @@ const attendennceSchema = new Schema({
         type: String,
         required: true
     },
+    medium:{
+        type: String,
+        required: true
+    },
     teachetmail:{
         type: String,
         required: true

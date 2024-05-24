@@ -2,10 +2,10 @@ import attendennceSchema from "../models/studentAttendesmodel.js";
 import teacherlecture from "../models/TeacherLecturecountmodel.js";
 
 const studentattendenceController = async (req, res) => {
-  const { studentnemail, studentname, subject, teachetmail } = req.body;
+  const { studentnemail, studentname, subject, teachetmail ,medium } = req.body;
 
   // Validate required fields
-  if (!studentnemail || !studentname || !subject || !teachetmail) {
+  if (!studentnemail || !studentname || !subject || !teachetmail || !medium) {
     return res
       .status(400)
       .json({ success: false, msg: "Please fill all the fields" });
@@ -15,7 +15,9 @@ const studentattendenceController = async (req, res) => {
     // Efficiently Find Existing Attendance (if any)
     const existingAttendance = await attendennceSchema.findOne({
       studentnemail,
-      subject, // Filter by subject for subject-specific attendance
+      subject,
+      medium,
+      // Filter by subject for subject-specific attendance
     });
 
     let newCountAttendence;
@@ -35,6 +37,7 @@ const studentattendenceController = async (req, res) => {
         subject,
         countAttendence: newCountAttendence,
         teachetmail,
+        medium,
       });
       await attendance.save();
     }
@@ -123,7 +126,7 @@ const editlecturecount = async (req, res) => {
     const { teacheremail, leccount, media, subject } = req.body;
     teacherlecture
       .updateOne(
-        { teacheremail: teacheremail, subject: subject },
+        { teacheremail: teacheremail, subject: subject , media: media},
         { $set: { leccount: leccount } }
       )
       .then((result) => {

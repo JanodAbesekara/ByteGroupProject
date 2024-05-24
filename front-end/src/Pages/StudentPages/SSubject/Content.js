@@ -1,50 +1,95 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { FaFilePdf } from "react-icons/fa";
+import { PiVideoFill } from "react-icons/pi";
+import { BiLogoZoom } from "react-icons/bi";
+import { SiMaterialdesignicons } from "react-icons/si";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import ComAttendence from "./ComAttendence";
 
-
-function Content() {
-  const [count, setCount] = useState(1);
-
-  const handleCount = () => {
-    setCount(count + 1);
-  };
+function Content({ teachermail, subject, medium }) {
+  const [subjectQuiz, setSubjectQuiz] = useState([]);
+  const [error, setError] = useState(null);
+  const attendenceRef = useRef();
 
   useEffect(() => {
-    console.log("Lecture", count);
-  }, [count]);
+    const fetchSubjectQuiz = async () => {
+      try {
+        const response = await axios.get(`/api/Quise/getlecturematerial`);
+        console.log("passed", teachermail, subject, medium);
+        console.log("Response Data:", response.data.data);
+        const filteredMaterial = response.data.data.filter(
+          (item) =>
+            item.TeacherEmail === teachermail &&
+            item.Teachersubject === subject &&
+            item.Tmedium === medium
+        );
+
+        setSubjectQuiz(filteredMaterial);
+      } catch (error) {
+        setError("Error fetching data: " + error.message);
+      }
+    };
+
+    fetchSubjectQuiz();
+  }, [teachermail, subject, medium]);
+
+  const handleZoomClick = (e) => {
+    e.preventDefault();
+    if (attendenceRef.current) {
+      attendenceRef.current.handleClick();
+    }
+    window.location.href = e.currentTarget.href;
+  };
 
   return (
     <>
-      <div style={{ width: "100%", height: "20px" }}>
-        <button onClick={handleCount} style={{}}>
-          Increase Lecture
-        </button>
-      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        {error && <p>{error}</p>}
+        {subjectQuiz.map((material) => (
+          <div key={material.id} className="content">
+            <div className="content__icon">
+              <p>{material.lesson} </p>
+              <br />
+              <Link to={material.PDF} target="_blank">
+                <FaFilePdf />
+              </Link>
+              <br />
+              <Link to={material.video} target="_blank">
+                <PiVideoFill />
+              </Link>
+              <br />
 
-      {[...Array(count)].map((_, index) => (
-        <div
-          key={index}
-          style={{
-            justifyContent: "center",
-            alignContent: "center",
-            display: "flex",
-          }}
-        >
-          <div
-            style={{
-              width: "90%",
-              height: "300px",
-              backgroundColor: "#CADCD9",
-              marginTop: "50px",
-              marginBottom: "50px",
-              borderRadius: "20px",
-            }}
-          >
-            <h5>Lecture {index + 1}</h5>
+              <Link
+                href={material.zoom}
+                onClick={handleZoomClick}
+                target="_blank"
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <BiLogoZoom />
+                </div>
+              </Link>
+              <br />
+              <Link to={material.otherlink} target="_blank">
+                <SiMaterialdesignicons />
+              </Link>
+              <br />
+              <ComAttendence
+                ref={attendenceRef}
+                teachermail={teachermail}
+                subject={subject}
+                medium={medium}
+              />
+            </div>
           </div>
-        </div>
-      ))}
-
-   
+        ))}
+      </div>
     </>
   );
 }
