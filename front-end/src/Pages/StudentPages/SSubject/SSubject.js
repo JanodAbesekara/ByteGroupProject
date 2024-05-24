@@ -76,15 +76,18 @@ function SSubject() {
               </BootstrapTooltip>
             </Link>
             <>
-              {subjects.map((subject) => (
-                <div key={subject._id}>
-                  <SubjectComponenet
-                    teachermail={subject.teacherEmail}
-                    subject={subject.Ensubject}
-                    medium={subject.Enmedium}
-                  />
-                </div>
-              ))}
+              {subjects
+                .slice(0)
+                .reverse()
+                .map((subject) => (
+                  <div key={subject._id}>
+                    <SubjectComponenet
+                      teachermail={subject.teacherEmail}
+                      subject={subject.Ensubject}
+                      medium={subject.Enmedium}
+                    />
+                  </div>
+                ))}
             </>
           </Box>
         </Grid>

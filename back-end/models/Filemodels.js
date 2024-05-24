@@ -30,6 +30,15 @@ const fileSchema = new Schema(
     discriA: {
       type: String,
     },
+    pdfmedia: {
+      type: String,
+    },
+    videoMedia: {
+      type: String,
+    },
+    audioMedia: {
+      type: String,
+    },
   },
   {
     timestamps: true,

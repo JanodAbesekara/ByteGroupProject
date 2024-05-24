@@ -51,44 +51,46 @@ function Content({ teachermail, subject, medium }) {
           alignContent: "center",
         }}
       >
-        {error && <p>{error}</p>}
-        {subjectQuiz.map((material) => (
-          <div key={material.id} className="content">
-            <div className="content__icon">
-              <p>{material.lesson} </p>
-              <br />
-              <Link to={material.PDF} target="_blank">
-                <FaFilePdf />
-              </Link>
-              <br />
-              <Link to={material.video} target="_blank">
-                <PiVideoFill />
-              </Link>
-              <br />
+        <div>
+          {error && <p>{error}</p>}
+          {subjectQuiz.map((material) => (
+            <div key={material.id} className="content">
+              <div className="content__icon">
+                <p>{material.lesson} </p>
+                <br />
+                <Link to={material.PDF} target="_blank">
+                  <FaFilePdf />
+                </Link>
+                <br />
+                <Link to={material.video} target="_blank">
+                  <PiVideoFill />
+                </Link>
+                <br />
 
-              <Link
-                href={material.zoom}
-                onClick={handleZoomClick}
-                target="_blank"
-              >
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <BiLogoZoom />
-                </div>
-              </Link>
-              <br />
-              <Link to={material.otherlink} target="_blank">
-                <SiMaterialdesignicons />
-              </Link>
-              <br />
-              <ComAttendence
-                ref={attendenceRef}
-                teachermail={teachermail}
-                subject={subject}
-                medium={medium}
-              />
+                <Link
+                  href={material.zoom}
+                  onClick={handleZoomClick}
+                  target="_blank"
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <BiLogoZoom />
+                  </div>
+                </Link>
+                <br />
+                <Link to={material.otherlink} target="_blank">
+                  <SiMaterialdesignicons />
+                </Link>
+                <br />
+                <ComAttendence
+                  ref={attendenceRef}
+                  teachermail={teachermail}
+                  subject={subject}
+                  medium={medium}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );

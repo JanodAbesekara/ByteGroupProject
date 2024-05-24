@@ -42,6 +42,9 @@ const Library = () => {
             pdfSubject: file.pdfS,
             videoSubject: file.videos,
             audioSubject: file.audios,
+            pdfMedia: file.pdfmedia,
+            videomedia: file.videoMedia,
+            audiomedia: file.audioMedia,
           }))}
         />
       </div>

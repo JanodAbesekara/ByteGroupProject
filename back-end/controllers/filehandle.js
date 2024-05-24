@@ -12,6 +12,9 @@ const fileuplodController = async (req, res) => {
     audioUrl,
     audios,
     discriA,
+    pdfmedia,
+    videoMedia,
+    audioMedia,
   } = req.body;
 
   if (!PDFurl && !videoUrl && !audioUrl) {
@@ -29,7 +32,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "PDF already exists" });
       }
 
-      const newPDF = new files({ PDFurl, pdfS, discriP });
+      const newPDF = new files({ PDFurl, pdfS, discriP ,pdfmedia });
 
       await newPDF.save();
       return res
@@ -43,7 +46,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "Video already exists" });
       }
 
-      const newVideo = new files({ videoUrl, videos, discriV });
+      const newVideo = new files({ videoUrl, videos, discriV ,videoMedia});
 
       await newVideo.save();
       return res
@@ -57,7 +60,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "Audio already exists" });
       }
 
-      const newAudio = new files({ audioUrl, audios, discriA });
+      const newAudio = new files({ audioUrl, audios, discriA ,audioMedia});
 
       await newAudio.save();
       return res

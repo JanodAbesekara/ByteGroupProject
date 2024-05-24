@@ -69,19 +69,22 @@ function AddingLectures({ subjectData }) {
                 "Other Link",
                 "Edit",
                 "Delete",
-              ].map((header) => (
-                <TableCell
-                  key={header}
-                  sx={{
-                    textAlign: "center",
-                    backgroundColor: "#317873",
-                    borderRight: "2px white solid",
-                    color: "white",
-                  }}
-                >
-                  {header}
-                </TableCell>
-              ))}
+              ]
+                .slice(0)
+                .reverse()
+                .map((header) => (
+                  <TableCell
+                    key={header}
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "#317873",
+                      borderRight: "2px white solid",
+                      color: "white",
+                    }}
+                  >
+                    {header}
+                  </TableCell>
+                ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -95,28 +98,44 @@ function AddingLectures({ subjectData }) {
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {quise.zoom && (
-                      <a href={quise.zoom} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={quise.zoom}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <BiLogoZoom />
                       </a>
                     )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {quise.PDF && (
-                      <a href={quise.PDF} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={quise.PDF}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <FaFilePdf />
                       </a>
                     )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {quise.video && (
-                      <a href={quise.video} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={quise.video}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <PiVideoFill />
                       </a>
                     )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {quise.otherLink && (
-                      <a href={quise.otherLink} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={quise.otherLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <SiMaterialdesignicons />
                       </a>
                     )}
