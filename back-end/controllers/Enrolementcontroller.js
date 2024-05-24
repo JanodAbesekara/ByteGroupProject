@@ -125,13 +125,39 @@ const getSubjects = async (req, res) => {
 
 const getstudentregistedteachers = async (req, res) => {
   try {
-   
     const enrolteacher = await EnrollmentSchema.find();
 
-     return res.status(200).json({ success: true, data: enrolteacher });
-   
+    return res.status(200).json({ success: true, data: enrolteacher });
   } catch (error) {
-    return res.status(500).json({ success: false, msg: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const logoutfromclass = async (req, res) => {
+  try {
+    const data = req.body;
+
+    const email = data.teacherEmail;
+    const subject = data.Ensubject;
+    const medium = data.Enmedium;
+    const useremail = data.userEmail;
+
+    await EnrollmentSchema.deleteOne({
+      userEmail: useremail,
+      teacherEmail: email,
+      Ensubject: subject,
+      Enmedium: medium,
+    });
+    return res.status(200).json({
+      success: true,
+      msg: `You want to logout from this ${subject} ${medium} medium class`,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
   }
 };
 
@@ -140,4 +166,5 @@ export {
   StudentEnrollment,
   getSubjects,
   getstudentregistedteachers,
+  logoutfromclass,
 };
