@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios"; // Correct import
 import AttendenceChart from "./AttendanceChart";
 
-function DisplayAttendence() {
+function DisplayAttendence({ teachermail, subject, medium }) {
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const useremail = decodedToken.email;
@@ -19,8 +19,9 @@ function DisplayAttendence() {
           const fildata1 = res.data.data;
           const filteredData1 = fildata1.filter(
             (item) =>
-              item.subject === "chemistry" &&
-              item.teacheremail === "janodabesekara91@gmail.com"
+              item.media === medium &&
+              item.subject === subject &&
+              item.teacheremail ===  teachermail
           );
           setDisplayData1(filteredData1);
         })
@@ -38,7 +39,10 @@ function DisplayAttendence() {
           const fildata2 = res.data.data;
           const filteredData2 = fildata2.filter(
             (item) =>
-              item.subject === "chemistry" && item.studentnemail === useremail
+              item.subject === subject &&
+              item.studentnemail === useremail &&
+              item.medium === medium &&
+              item.teachetmail === teachermail
           );
           console.log(filteredData2);
           setDisplayData2(filteredData2);
@@ -58,7 +62,7 @@ function DisplayAttendence() {
       : 0;
 
   return (
-    <div style={{marginTop:"100px"}} >
+    <div style={{marginTop:"10px"}} >
       <h2 style={{marginLeft:"80px",color:"#000080"}}>Attendence</h2>
       <br></br>
       <div  >
