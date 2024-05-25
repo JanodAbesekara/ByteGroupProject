@@ -44,7 +44,10 @@ const TableComponent = ({ rows }) => {
           <h2 style={{ textAlign: "center", margin: "20px 0" }}>{subject}</h2>
           <TableContainer component={Paper}>
             <Table
-              sx={{ borderRight: "2px white solid", borderLeft: "2px white solid" }}
+              sx={{
+                borderRight: "2px white solid",
+                borderLeft: "2px white solid",
+              }}
             >
               <TableHead>
                 <TableRow>
@@ -89,7 +92,8 @@ const TableComponent = ({ rows }) => {
                     subjects[subject].videoRows.length,
                     subjects[subject].audioRows.length
                   ),
-                }).map((_, index) => (
+                })
+                .map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       {subjects[subject].pdfRows[index] && (
@@ -129,7 +133,9 @@ const TableComponent = ({ rows }) => {
                           }}
                         >
                           <HtmlTooltip
-                            title={subjects[subject].videoRows[index].videomedia}
+                            title={
+                              subjects[subject].videoRows[index].videomedia
+                            }
                           >
                             <FaFileVideo
                               style={{
@@ -155,7 +161,9 @@ const TableComponent = ({ rows }) => {
                           }}
                         >
                           <HtmlTooltip
-                            title={subjects[subject].audioRows[index].audiomedia}
+                            title={
+                              subjects[subject].audioRows[index].audiomedia
+                            }
                           >
                             <FaFileAudio
                               style={{
