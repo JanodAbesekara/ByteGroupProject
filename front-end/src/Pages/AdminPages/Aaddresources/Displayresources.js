@@ -119,7 +119,7 @@ function Displayresources() {
                 <TableRow key={file._id}>
                   <TableCell align="center">
                     {file.PDFurl && (
-                      <Link href={file.PDFurl} target="_blank">
+                      <Link to={file.PDFurl} target="_blank">
                         <FaFilePdf
                           style={{
                             color: "#FF0000",
@@ -130,7 +130,7 @@ function Displayresources() {
                       </Link>
                     )}
                     {file.videoUrl && (
-                      <Link href={file.videoUrl} target="_blank">
+                      <Link to={file.videoUrl} target="_blank">
                         <FaFileVideo
                           style={{
                             color: "#0033E7",
@@ -141,7 +141,7 @@ function Displayresources() {
                       </Link>
                     )}
                     {file.audioUrl && (
-                      <Link href={file.audioUrl} target="_blank">
+                      <Link to={file.audioUrl} target="_blank">
                         <FaFileAudio
                           style={{
                             color: "purple",
