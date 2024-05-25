@@ -32,7 +32,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "PDF already exists" });
       }
 
-      const newPDF = new files({ PDFurl, pdfS, discriP ,pdfmedia });
+      const newPDF = new files({ PDFurl, pdfS, discriP, pdfmedia });
 
       await newPDF.save();
       return res
@@ -46,7 +46,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "Video already exists" });
       }
 
-      const newVideo = new files({ videoUrl, videos, discriV ,videoMedia});
+      const newVideo = new files({ videoUrl, videos, discriV, videoMedia });
 
       await newVideo.save();
       return res
@@ -60,7 +60,7 @@ const fileuplodController = async (req, res) => {
           .json({ Success: false, msg: "Audio already exists" });
       }
 
-      const newAudio = new files({ audioUrl, audios, discriA ,audioMedia});
+      const newAudio = new files({ audioUrl, audios, discriA, audioMedia });
 
       await newAudio.save();
       return res
@@ -94,8 +94,8 @@ const fileurlcontroller = async (req, res) => {
 
 const checkold_user = async (req, res) => {
   try {
-    const users = await User.find({}, { email: 1 }); 
-    const emails = users.map(user => user.email);
+    const users = await User.find({}, { email: 1 });
+    const emails = users.map((user) => user.email);
 
     return res.status(200).json({ Success: true, data: emails });
   } catch (err) {
@@ -104,4 +104,24 @@ const checkold_user = async (req, res) => {
   }
 };
 
-export { fileuplodController, fileurlcontroller,checkold_user };
+const deletefilecontroller = async (req, res) => {
+  const { _id } = req.body;
+
+  try {
+    const file = await files.deleteOne({ _id });
+    if (!file) {
+      return res.status(404).json({ Success: false, msg: "File not found" });
+    }
+    return res.status(200).json({ Success: true, msg: "File deleted" });
+  } catch (err) {
+    console.error("Error deleting file:", err);
+    res.status(500).json({ Success: false, msg: "Internal Server Error" });
+  }
+};
+
+export {
+  fileuplodController,
+  fileurlcontroller,
+  checkold_user,
+  deletefilecontroller,
+};

@@ -16,6 +16,7 @@ import {
 } from "firebase/storage";
 import app from "../../../firebase";
 import Alert from "@mui/material/Alert";
+import DisplayResources from "./Displayresources";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -438,6 +439,7 @@ const Aaddresources = () => {
               </Grid>
             </div>
           </Box>
+          <DisplayResources />
         </Grid>
       </Grid>
       <Footer />

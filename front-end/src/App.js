@@ -49,6 +49,8 @@ import Content from "./Pages/StudentPages/SSubject/Content";
 import Notifacition from "./Pages/Notifacition";
 import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
 import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
+import DisplayResources from "./Pages/AdminPages/Aaddresources/Displayresources.js";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -133,6 +135,7 @@ function App() {
           <Route path="/Notifacition" element={<Notifacition />} />
           <Route path="/Quisehandle" element={<Quisehandle />} />
           <Route path="/AddingLectures" element={<AddingLectures />} />
+          <Route path="/DisplayResources" element={<DisplayResources />} />
         </Routes>
       </div>
     </>
