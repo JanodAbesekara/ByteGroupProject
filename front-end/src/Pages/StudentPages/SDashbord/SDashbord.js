@@ -66,9 +66,6 @@ function SDashbord() {
     checkImageExists();
   }, []);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
