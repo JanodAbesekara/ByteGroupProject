@@ -25,6 +25,10 @@ function SDashbord() {
     setOpen(true);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
 
@@ -74,7 +78,7 @@ function SDashbord() {
       const Stuemail = decodedToken.email;
 
       try {
-        const response = await axios.get(`/api/Enrol/getSubject`);
+        const response = await axios.get(`/api/Enrol/getSubject`);     
         const filterdata = response.data.data.filter(
           (item) => item.userEmail === Stuemail
         );
@@ -107,11 +111,11 @@ function SDashbord() {
       } catch (error) {
         console.log(error);
       }
-    };
+    };  
 
     fetchData();
   }, []);
-
+  
   return (
     <div>
       <Navbar />
