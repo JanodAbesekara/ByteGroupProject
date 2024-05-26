@@ -6,17 +6,19 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    "& .MuiDialogContent-root": {
-      padding: theme.spacing(2),
-    },
-    "& .MuiDialogActions-root": {
-      padding: theme.spacing(1),
-    },
-  }));
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
 
+const ScrollableContent = styled("div")({
+  maxHeight: "600px",
+  overflowY: "auto",
+});
 
 function Popupbox({ open, handleClose, notifications }) {
   return (
@@ -41,19 +43,32 @@ function Popupbox({ open, handleClose, notifications }) {
         <CloseIcon />
       </IconButton>
 
-      {notifications.map((notification) => {
-        return (
-          <DialogContent dividers>
-            <h2 style={{textAlign:"center"}}>{notification.TeacheSubject}</h2>
-            <h3>Title :- {notification.titleofAnn}</h3>
-             Message :- {notification.Announcementmessage}  
-              <br></br> 
-            <span> Time :- {notification.date.split("T")[0]}</span>
-          </DialogContent>
-        );
-      })}
+      <ScrollableContent>
+        {notifications
+          .slice(0)
+          .reverse()
+          .map((notification, index) => (
+            <DialogContent key={index} dividers>
+              <h2 style={{ textAlign: "center" }}>
+                {notification.TeacheSubject}
+              </h2>
+              <h6 style={{ fontSize: "12px",textAlign: "center" , marginBottom: "20px" }}>({notification.mediua})</h6>
+              <h3 style={{ marginBottom: "20px" }}>
+                {notification.titleofAnn}
+              </h3>
+              <h4 style={{ textAlign: "center", marginInline: "30px" }}>
+                {notification.Announcementmessage}
+              </h4>
+              <br />
+              <span style={{ float: "right", fontSize: "12px" }}>
+                {notification.date.split("T")[0]}
+              </span>
+              <br></br>
+            </DialogContent>
+          ))}
+      </ScrollableContent>
     </BootstrapDialog>
-  )
+  );
 }
 
-export default Popupbox
+export default Popupbox;

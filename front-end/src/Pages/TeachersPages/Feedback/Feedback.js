@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Feedback.css";
 import { Grid, Box } from "@mui/material";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import { jwtDecode } from "jwt-decode";
@@ -34,7 +34,7 @@ export default function Feedback() {
           (feedback) => feedback.teacheremail === useremail
         );
         setFeedbackData(filteredFeedback);
-        console.log("Filtered Feedback Data:", filteredFeedback);
+ 
       })
       .catch((error) => {
         console.error("Error fetching feedback data:", error);
@@ -88,6 +88,17 @@ export default function Feedback() {
                         fontSize: "16px",
                       }}
                     >
+                      Medium
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#0000B9",
+                        color: "white",
+                        borderRight: "2px solid white",
+                        fontSize: "16px",
+                      }}
+                    >
                       FeedBack
                     </TableCell>
                     <TableCell
@@ -112,6 +123,9 @@ export default function Feedback() {
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {feedback.feedSubject}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {feedback.feedmedium}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {feedback.feedtext}

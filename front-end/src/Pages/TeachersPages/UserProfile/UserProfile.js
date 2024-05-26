@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 

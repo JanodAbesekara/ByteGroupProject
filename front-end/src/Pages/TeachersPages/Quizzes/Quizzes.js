@@ -1,35 +1,55 @@
 import React, { useEffect, useState } from "react";
 import "./Quizzes.css";
 import { Grid, Box } from "@mui/material";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import Setquise from "./Component/Setquise";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import Quisehandle from "./Component/Quisehandle";
 
 export default function Quizzes() {
   const [quise, setquise] = useState([]);
+  const [subjectquise, setsubjectquise] = useState([]);
+
+  const fetchQuse = async () => {
+    try {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const userEmail = decodedToken.email;
+
+      const response = await axios.get(`/api/user/getsubjectreg`);
+      const filtersubject = response.data.data.filter(
+        (quessubject) => quessubject.email === userEmail
+      );
+      setquise(filtersubject);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  fetchQuse();
 
   useEffect(() => {
-    const fetchQuse = async () => {
+    const feactsubjectquise = async () => {
       try {
         const token = localStorage.getItem("MERN_AUTH_TOKEN");
         const decodedToken = jwtDecode(token);
         const userEmail = decodedToken.email;
 
-        const response = await axios.get(`/api/user/getsubjectreg`);
-        const filtersubject = response.data.data.filter(
-          (quessubject) => quessubject.email === userEmail
+        const response = await axios.get(`/api/Quise/getQuise`);
+        const filterquise = response.data.filter(
+          (quessubject) => quessubject.TeacherEmail === userEmail
         );
-        setquise(filtersubject);
-        console.log(filtersubject);
+        setsubjectquise(filterquise);
+        console.log(subjectquise);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchQuse();
-  }, []);
+
+    feactsubjectquise();
+  }, [ quise, subjectquise]);
 
   return (
     <div>
@@ -46,6 +66,8 @@ export default function Quizzes() {
                   <Setquise subject={quises.subject} medium={quises.medium} />
                 </div>
               ))}
+
+            <Quisehandle subjectquise={subjectquise} />
           </Box>
         </Grid>
       </Grid>

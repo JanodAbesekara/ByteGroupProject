@@ -26,7 +26,6 @@ function STeachers() {
 
       try {
         const response = await Axios.get(`/api/Enrol/getteacher`);
-
         const data = response.data.data.filter(
           (item) => item.userEmail === Stuemail
         );
@@ -39,6 +38,18 @@ function STeachers() {
 
     featchsubject();
   }, []);
+
+const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
+    try {
+      const data = { teacherEmail,Ensubject,Enmedium,userEmail };
+     const respond =  await Axios.post(`/api/Enrol/logoutfromclass`, data);
+      window.alert(respond.data.msg);
+      window.location.reload();
+    }catch (error) {
+      console.error("Error during logout:", error);
+      window.alert(error.respond.data.msg);
+    }
+  }
 
   return (
     <div>
@@ -84,6 +95,16 @@ function STeachers() {
                     >
                       Medium
                     </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        backgroundColor: "#317873",
+                        borderRight: "2px white solid",
+                        color: "white",
+                      }}
+                    >
+                     Logout
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -98,6 +119,11 @@ function STeachers() {
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {subjectDetails.Enmedium}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          <button 
+                          onClick={() => handleLogout(subjectDetails.teacherEmail,subjectDetails.Ensubject,subjectDetails.Enmedium,subjectDetails.userEmail)}
+                          >Logout</button>
                         </TableCell>
                       </TableRow>
                     ))}

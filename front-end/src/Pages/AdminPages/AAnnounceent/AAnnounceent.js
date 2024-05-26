@@ -124,7 +124,6 @@ function AAnnounceent() {
                     border: "none",
                     borderRadius: "5px",
                     marginLeft: "10px",
-                    
                   }}
                 >
                   send
@@ -132,13 +131,13 @@ function AAnnounceent() {
               </form>
             </div>
 
-            <div style={{ marginTop: "150px" }}>
+            <div style={{ marginTop: "150px" , marginBottom:"100px" }}>
               <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
                 Announcements
               </h1>
 
               <TableContainer component={Paper}>
-                <Table sx={{ marginBottom: "100px", paddingRight: "20px" }}>
+                <Table sx={{  paddingRight: "20px" }}>
                   <TableHead>
                     <TableRow>
                       <TableCell
@@ -225,52 +224,55 @@ function AAnnounceent() {
                   </TableHead>
                   <TableBody>
                     {announcements &&
-                      announcements.map((announcement) => {
-                        console.log(announcement);
-                        return (
-                          <TableRow key={announcement.id}>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.postedemail}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.TeacheSubject}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.mediua}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.titleofAnn}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.Announcementmessage}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.date.split("T")[0]}
-                            </TableCell>
+                      announcements
+                        .slice(0)
+                        .reverse()
+                        .map((announcement) => {
+                          console.log(announcement);
+                          return (
+                            <TableRow key={announcement.id}>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.postedemail}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.TeacheSubject}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.mediua}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.titleofAnn}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.Announcementmessage}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.date.split("T")[0]}
+                              </TableCell>
 
-                            <TableCell sx={{ textAlign: "center" }}>
-                              {announcement.time}
-                            </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
-                              <button
-                                style={{
-                                  color: "white",
-                                  backgroundColor: "red",
-                                  border: "none",
-                                  padding: "5px",
-                                  boxShadow: "2px 1px 10px 0.5px black",
-                                  borderRadius: "5px",
-                                }}
-                                onClick={() =>
-                                  deleteAnnouncement(announcement._id)
-                                }
-                              >
-                                Delete
-                              </button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
+                              <TableCell sx={{ textAlign: "center" }}>
+                                {announcement.time}
+                              </TableCell>
+                              <TableCell sx={{ textAlign: "center" }}>
+                                <button
+                                  style={{
+                                    color: "white",
+                                    backgroundColor: "red",
+                                    border: "none",
+                                    padding: "5px",
+                                    boxShadow: "2px 1px 10px 0.5px black",
+                                    borderRadius: "5px",
+                                  }}
+                                  onClick={() =>
+                                    deleteAnnouncement(announcement._id)
+                                  }
+                                >
+                                  Delete
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                   </TableBody>
                 </Table>
               </TableContainer>

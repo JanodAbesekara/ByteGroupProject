@@ -11,7 +11,7 @@ import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
 import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
-import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx"
+import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx";
 import PaymentDetails from "./Pages/TeachersPages/PaymentDetails/PaymentDetails";
 import Quizzes from "./Pages/TeachersPages/Quizzes/Quizzes";
 import Students from "./Pages/TeachersPages/Students/Students";
@@ -39,26 +39,29 @@ import Login from "./Pages/Login/Login";
 import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
 import Enrollment from "./Pages/Enrollment/Enrollment";
 import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
+import Classcomponent from "./Pages/TeachersPages/TClasses/Classcomponent.js";
 import Chat from "./Pages/Chat/Chat";
 import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
 import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
 import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
 import Alertbox from "./Component/Alertbox/Alertbox.js";
-import Content from "./Pages/StudentPages/SSubject/Content"
-   
-function App() {
+import Content from "./Pages/StudentPages/SSubject/Content";
+import Notifacition from "./Pages/Notifacition";
+import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
+import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
+import DisplayResources from "./Pages/AdminPages/Aaddresources/Displayresources.js";
 
+
+function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
   const navigate = useNavigate();
 
-  
-
-// const logoutuser = () => {
-//   setUser(null);
-//   setIsLoggedIn(false);
-//   navigate("/Login");
-// };
+  // const logoutuser = () => {
+  //   setUser(null);
+  //   setIsLoggedIn(false);
+  //   navigate("/Login");
+  // };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -122,12 +125,17 @@ function App() {
           <Route path="/Enterquizes" element={<Enterquizes />} />
           <Route path="/Enrollment" element={<Enrollment />} />
           <Route path="/Classcontent" element={<Classcontent />} />
-          <Route path="/Chat" element={<Chat />}/>
+          <Route path="/Classcomponent" element={<Classcomponent />} />
+          <Route path="/Chat" element={<Chat />} />
           <Route path="/Openwindow" element={<Openwindow />} />
           <Route path="/Popupbox" element={<Popupbox />} />
-          <Route path="/ComQuises1" element={<ComQuises1 />}/>
+          <Route path="/ComQuises1" element={<ComQuises1 />} />
           <Route path="/Alertbox " element={<Alertbox />} />
           <Route path="/Content" element={<Content />} />
+          <Route path="/Notifacition" element={<Notifacition />} />
+          <Route path="/Quisehandle" element={<Quisehandle />} />
+          <Route path="/AddingLectures" element={<AddingLectures />} />
+          <Route path="/DisplayResources" element={<DisplayResources />} />
         </Routes>
       </div>
     </>
