@@ -5,7 +5,7 @@ import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
 import ComAttendence from "../SSubject/ComAttendence";
 import DisplayAttendence from "../SSubject/DisplayAttendence";
-import AttendenceChar from "../SSubject/AttendanceChart";
+
 
 function SGrades() {
   return (

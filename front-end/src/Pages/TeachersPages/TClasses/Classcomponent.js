@@ -31,6 +31,7 @@ function Classcomponent({ subjectData }) {
     fetchData();
   }, [subjectData.subject, subjectData.medium]); // Dependency array
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +66,9 @@ function Classcomponent({ subjectData }) {
     setLectureCount(fetchedData?.leccount || 0); // Set initial value for edit
   };
 
+
   const [subjectDataState] = useState(subjectData);
+
 
   return (
     <>

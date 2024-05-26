@@ -30,6 +30,7 @@ function ComQuizes({ quisedata }) {
     setCountdownStarted(true);
     setSubmitButton(true);
     setQuizStarted(true); // Set quiz started to true when start button is clicked
+    console.log(quisedata);
   };
 
   const formatTime = () => {
@@ -37,6 +38,7 @@ function ComQuizes({ quisedata }) {
     const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
+  
 
   const handleSubmmit = () => {
     setSubmitButton(true);
