@@ -15,16 +15,15 @@ function Content({ teachermail, subject, medium }) {
   useEffect(() => {
     const fetchSubjectQuiz = async () => {
       try {
-        const response = await axios.get(`/api/Quise/getlecturematerial`);
-        console.log("passed", teachermail, subject, medium);
-        console.log("Response Data:", response.data.data);
-        const filteredMaterial = response.data.data.filter(
-          (item) =>
-            item.TeacherEmail === teachermail &&
-            item.Teachersubject === subject &&
-            item.Tmedium === medium
-        );
-
+        console.log(teachermail, subject, medium)
+        const patlord = {
+          teachermail : teachermail,
+          subject : subject,
+          medium : medium,
+        }
+        const response = await axios.post(`/api/Test/getlecturematerial`, patlord);
+  
+        const filteredMaterial = response.data.data;
         setSubjectQuiz(filteredMaterial);
       } catch (error) {
         setError("Error fetching data: " + error.message);
