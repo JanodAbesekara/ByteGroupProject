@@ -13,6 +13,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { MdCoPresent } from "react-icons/md";
 import { styled } from "@mui/material/styles";
 import "./Sidebar.css";
 import { jwtDecode } from "jwt-decode";
@@ -47,7 +48,7 @@ export default function Ssidebar() {
   };
 
   if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
-    return null; 
+    return null;
   }
 
   const handleLogout = () => {
@@ -57,11 +58,11 @@ export default function Ssidebar() {
     window.location.reload();
   };
 
-
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const jobRole = decodedToken.role;
-  const encodedid = jobRole === "Lecturer" ? encodeURIComponent(decodedToken._id) : "";
+  const encodedid =
+    jobRole === "Lecturer" ? encodeURIComponent(decodedToken._id) : "";
 
   const sidebarItems = [
     {
@@ -117,6 +118,12 @@ export default function Ssidebar() {
       href: `/Quizzes?$phw=${encodedid}`,
       icon: MdQuiz,
       Title: "Quizzes",
+    },
+    {
+      name: "Attendence",
+      href: `/Attendence?$phw=${encodedid}`,
+      icon: MdCoPresent,
+      Title: "Attendence",
     },
     {
       name: "Students",

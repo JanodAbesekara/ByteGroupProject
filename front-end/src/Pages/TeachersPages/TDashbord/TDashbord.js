@@ -18,7 +18,7 @@ import ClassCard from "./ClassCard";
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
-  const [details, setDetails] = useState("");
+//  const [details, setDetails] = useState("");
   const [notifaication, setNotification] = useState([]);
   const [notCount, setNotCount] = useState(0);
 
