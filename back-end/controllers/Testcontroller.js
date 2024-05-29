@@ -45,57 +45,70 @@ const getlecturematerial = async (req, res) => {
 };
 
 const getNotifacition = async (req, res) => {
-    try {
-        const { email } = req.body;
-    
-        // Fetch enrollments for the user
-        const enrollments = await Enrollment.find({ userEmail: email });
-    
-        // Check if the user has enrollments
-        if (!enrollments.length) {
-          return res
-            .status(404)
-            .json({ success: false, msg: "No enrollments found for the user" });
-        }
-    
-        // Extract job roles from enrollments
-        const uniqueJobRoles = [...new Set(enrollments.map(enrollment => enrollment.jobRole))];
-    
-        if (uniqueJobRoles.length > 1) {
-          return res
-            .status(400)
-            .json({ success: false, msg: "Inconsistent job roles in enrollments" });
-        }
-    
-        // Extract subjects, medium, and teacher emails from enrollments
-        const subjects = enrollments.map((enrollment) => enrollment.Ensubject);
-        const medium = enrollments.map((enrollment) => enrollment.Enmedium);
-        const teacherEmails = enrollments.map(
-          (enrollment) => enrollment.teacherEmail
-        );
-    
-        let announcements;
-    
-        // Fetch announcements based on job role
-        if (uniqueJobRoles[0] === "Admin") {
-          // Fetch all announcements if the user is an Admin
-          announcements = await Announcement.find({});
-        } else {
-          // Fetch announcements for the enrolled subjects
-          announcements = await Announcement.find({
-            TeacheSubject: { $in: subjects },
-            mediua: { $in: medium },
-            postedemail: { $in: teacherEmails },
-          });
-        }
-    
-        // Return the announcements
-        return res.status(200).json({ success: true, announcements });
-      } catch (error) {
-        console.error(error);
-        return res
-          .status(500)
-          .json({ success: false, msg: "Internal Server Error" });
-      }
-    };
-export { quisecontroller, getlecturematerial, getNotifacition };
+  try {
+    const { email } = req.body;
+
+    // Fetch enrollments for the user
+    const enrollments = await Enrollment.find({ userEmail: email });
+
+    const announceme = await Announcement.find({ jobrole: "Admin" });
+
+    // Extract job roles from enrollments
+    const uniqueJobRoles = [
+      ...new Set(enrollments.map((enrollment) => enrollment.jobRole)),
+    ];
+
+    if (uniqueJobRoles.length > 1) {
+      return res
+        .status(400)
+        .json({ success: false, msg: "Inconsistent job roles in enrollments" });
+    }
+
+    // Extract subjects, medium, and teacher emails from enrollments
+    const subjects = enrollments.map((enrollment) => enrollment.Ensubject);
+    const medium = enrollments.map((enrollment) => enrollment.Enmedium);
+    const teacherEmails = enrollments.map(
+      (enrollment) => enrollment.teacherEmail
+    );
+
+    let announcements;
+
+    // Fetch announcements based on job role
+    if (uniqueJobRoles[0] === "Admin") {
+      // Fetch all announcements if the user is an Admin
+      announcements = await Announcement.find({});
+    } else {
+      // Fetch announcements for the enrolled subjects
+      announcements = await Announcement.find({
+        TeacheSubject: { $in: subjects },
+        mediua: { $in: medium },
+        postedemail: { $in: teacherEmails },
+      });
+    }
+
+    // Return the announcements
+    return res.status(200).json({ success: true, announcements, announceme });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+
+
+const getNotificationT = async (req, res) => {
+  try {
+
+    const announcements = await Announcement.find({ jobrole: "Admin" });
+     res.status(200).json({ success: true, announcements });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+
+};
+export { quisecontroller, getlecturematerial, getNotifacition ,getNotificationT  };

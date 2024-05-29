@@ -66,7 +66,6 @@ function SDashbord() {
     checkImageExists();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
@@ -74,44 +73,21 @@ function SDashbord() {
       const Stuemail = decodedToken.email;
 
       try {
-        const response = await axios.get(`/api/Enrol/getSubject`);     
-        const filterdata = response.data.data.filter(
-          (item) => item.userEmail === Stuemail
-        );
-        const newData = filterdata.map((item) => ({
-          subject: item.Ensubject,
-          medium: item.Enmedium,
-          email: item.teacherEmail,
-        }));
+        const notificationResponse = await axios.post(`/api/get/notifaction`, {
+          email: Stuemail,
+        });
+        const { announcements, announceme } = notificationResponse.data;
 
-        setData(newData);
-        console.log(newData);
-
-        const notificationResponse = await axios.get(`/api/get/notifaction`);
-        const announcements = notificationResponse.data.announcements;
-        const filteredMessages = announcements.filter(
-          (item) =>
-            item.jobrole === "Admin" ||
-            (item.jobrole === "Lecturer" &&
-              newData.some(
-                (dataN) =>
-                  dataN.email === item.postedemail &&
-                  dataN.subject === item.TeacheSubject &&
-                  dataN.medium === item.mediua
-              ))
-        );
-
-        setNotifications(filteredMessages);
-        console.log(filteredMessages);
-        setNotCount(filteredMessages.length);
+        setNotifications([...announcements, ...announceme]);
+        setNotCount(announcements.length + announceme.length);
       } catch (error) {
         console.log(error);
       }
-    };  
+    };
 
     fetchData();
   }, []);
-  
+
   return (
     <div>
       <Navbar />
@@ -150,20 +126,20 @@ function SDashbord() {
                   </div>
                 </div>
                 <div className="Notif">
-                <React.Fragment>
-                  <Link variant="outlined" onClick={handleClickOpen}>
-                    <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                      <Badge badgeContent={notCount}>
-                        <Typography fontSize="1.4rem">🔔</Typography>
-                      </Badge>
-                    </Box>
-                  </Link>
-                  <Popupbox
-                    open={open}
-                    handleClose={handleClose}
-                    notifications={notifications}
-                  />
-                </React.Fragment>
+                  <React.Fragment>
+                    <Link variant="outlined" onClick={handleClickOpen}>
+                      <Box sx={{ display: "flex", gap: 2, float: "right" }}>
+                        <Badge badgeContent={notCount}>
+                          <Typography fontSize="1.4rem">🔔</Typography>
+                        </Badge>
+                      </Box>
+                    </Link>
+                    <Popupbox
+                      open={open}
+                      handleClose={handleClose}
+                      notifications={notifications}
+                    />
+                  </React.Fragment>
                 </div>
               </div>
               <div />

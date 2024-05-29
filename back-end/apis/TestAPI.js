@@ -9,8 +9,7 @@ router.post("/quiseadd", quisecontroller);
 // Student side Lecture Material
 router.post("/getlecturematerial", getlecturematerial);
 
-// Student side Notification
-router.post("/getNotifacition", getNotifacition);
+
 
 
 
