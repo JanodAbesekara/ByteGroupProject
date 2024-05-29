@@ -30,7 +30,7 @@ router.get("/studenceattendenceget", studentattendencegetController);
 router.get("/techeralectureget", techerlecturecountget);
 router.post("/teacherlecture", teacherattendenceController);
 router.post("/editlecturecount", editlecturecount);
-router.get("/teacherattendence", displayteacherattendence);
+router.post("/teacherattendence", displayteacherattendence);
 router.get("/getstudentattendence", getstudentattendence);
 
 //save payment details of teacher
@@ -44,7 +44,7 @@ router.get("/userProfile/:userID", userDetailsController);
 router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
-router.get("/getsubjectreg", getregisterdesubject);
+router.post("/getsubjectreg", getregisterdesubject);
 //students guardian details
 
 router.post("/guardian", studentParentDetailsController);

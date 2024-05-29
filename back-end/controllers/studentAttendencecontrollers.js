@@ -104,8 +104,9 @@ const techerlecturecountget = async (req, res) => {
 };
 
 const displayteacherattendence = async (req, res) => {
+   const { teacheremail, subject, media } = req.body;
   try {
-    const teacherattendence = await teacherlecture.find({});
+    const teacherattendence = await teacherlecture.find({ teacheremail, subject, media});
     const oldteacherattendence = await teacherlecture.findOne({
       teacherattendence,
     });

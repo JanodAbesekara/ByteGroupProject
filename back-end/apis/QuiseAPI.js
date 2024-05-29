@@ -9,6 +9,7 @@ import { createAssignmentController } from "../controllers/AssignmentController.
 import {
   addlecturematerial,
   getlecturematerial,
+  deletelecturematerial
 } from "../controllers/Lecturematerialcontroller.js";
 
 
@@ -22,7 +23,8 @@ router.post("/deleteQuise", deleteQuise);
 
 // lecturematerial Api
 router.post("/lecturematerialadd", addlecturematerial);
-router.get("/getlecturematerial", getlecturematerial);
+router.post("/getlecturematerial", getlecturematerial);
+router.post("/deletelecturematerial", deletelecturematerial);
 
 
 export default router;
