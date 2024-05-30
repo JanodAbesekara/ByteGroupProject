@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios"; // Correct import
 import AttendenceChart from "./AttendanceChart";
@@ -11,49 +11,42 @@ function DisplayAttendence({ teachermail, subject, medium }) {
   const [displayData1, setDisplayData1] = useState([]);
   const [displayData2, setDisplayData2] = useState([]);
 
+  const fetchAttendance = () => {
+    axios
+      .post(`/api/user/techeralectureget`, {
+        teacheremail: teachermail,
+        subject: subject,
+        medium: medium,
+      })
+      .then((res) => {
+        const filteredData1 = res.data.data;
+        setDisplayData1(filteredData1);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
-    const fetchAttendance = () => {
-      axios
-        .get(`/api/user/techeralectureget`)
-        .then((res) => {
-          const fildata1 = res.data.data;
-          const filteredData1 = fildata1.filter(
-            (item) =>
-              item.media === medium &&
-              item.subject === subject &&
-              item.teacheremail ===  teachermail
-          );
-          setDisplayData1(filteredData1);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    };
+  fetchAttendance();
 
-    fetchAttendance();
+  const fetchStudentAttendance = () => {
+    axios
+      .post(`/api/user/studenceattendenceget`, {
+        teacheremail: teachermail,
+        subject: subject,
+        medium: medium,
+        studentemail: useremail,
+      })
+      .then((res) => {
+        const filteredData2 = res.data.data;
+        setDisplayData2(filteredData2);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
-    const fetchStudentAttendance = () => {
-      axios
-        .get(`/api/user/studenceattendenceget`)
-        .then((res) => {
-          const fildata2 = res.data.data;
-          const filteredData2 = fildata2.filter(
-            (item) =>
-              item.subject === subject &&
-              item.studentnemail === useremail &&
-              item.medium === medium &&
-              item.teachetmail === teachermail
-          );
-          console.log(filteredData2);
-          setDisplayData2(filteredData2);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    };
-
-    fetchStudentAttendance();
-  
+  fetchStudentAttendance();
 
   // Calculate attendance percentage here
   const attendancePercentage =
@@ -62,11 +55,11 @@ function DisplayAttendence({ teachermail, subject, medium }) {
       : 0;
 
   return (
-    <div style={{marginTop:"10px"}} >
-      <h2 style={{marginLeft:"80px",color:"#000080"}}>Attendence</h2>
+    <div style={{ marginTop: "10px" }}>
+      <h2 style={{ marginLeft: "80px", color: "#000080" }}>Attendence</h2>
       <br></br>
-      <div  >
-      <AttendenceChart value={attendancePercentage}  />
+      <div>
+        <AttendenceChart value={attendancePercentage} />
       </div>
     </div>
   );
