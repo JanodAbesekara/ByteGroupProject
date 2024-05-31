@@ -45,6 +45,7 @@ router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
 router.post("/getsubjectreg", getregisterdesubject);
+
 //students guardian details
 
 router.post("/guardian", studentParentDetailsController);
