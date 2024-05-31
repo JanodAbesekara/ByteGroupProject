@@ -19,10 +19,10 @@ export default function Quizzes() {
       const decodedToken = jwtDecode(token);
       const userEmail = decodedToken.email;
 
-      const response = await axios.get(`/api/user/getsubjectreg`);
-      const filtersubject = response.data.data.filter(
-        (quessubject) => quessubject.email === userEmail
-      );
+      const response = await axios.post(`/api/user/getsubjectreg`, {
+        email: userEmail,
+      });
+      const filtersubject = response.data.data;
       setquise(filtersubject);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -49,7 +49,7 @@ export default function Quizzes() {
     };
 
     feactsubjectquise();
-  }, [ quise, subjectquise]);
+  }, [quise, subjectquise]);
 
   return (
     <div>

@@ -18,10 +18,10 @@ export default function Assignment() {
         const decodedToken = jwtDecode(token);
         const userEmail = decodedToken.email;
 
-        const response = await axios.get(`/api/user/getsubjectreg`);
-        const filtersubject = response.data.data.filter(
-          (assignmentSubject) => assignmentSubject.email === userEmail
-        );
+        const response = await axios.post(`/api/user/getsubjectreg`,{
+          email: userEmail
+        });
+        const filtersubject = response.data.data;
         setAssignment(filtersubject);
       } catch (error) {
         console.error("Error fetching data:", error);
