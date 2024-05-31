@@ -71,13 +71,13 @@ function Openwindow({ open, handleClose, notifications }) {
     const useremail = decodedToken.email;
 
     axios
-      .get(`/api/user/getsubjectreg`)
+      .post(`/api/user/getsubjectreg`,{
+        email: useremail,
+      
+      })
       .then((response) => {
-        console.log(response.data.data);
-        const filteredSubject = response.data.data.filter(
-          (subject) => subject.email === useremail
-        );
-        console.log("Filtered Subject Data:", filteredSubject);
+    
+        const filteredSubject = response.data.data;
         setTeacherSubject(filteredSubject);
       })
       .catch((error) => {
