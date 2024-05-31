@@ -21,7 +21,7 @@ function SQuizzes() {
           email: StuEmail,
         });
         console.log(response);
-        setData(response.data.quizes);
+        setData(response.data.quizzes);
       } catch (error) {
         console.log(error);
       }
