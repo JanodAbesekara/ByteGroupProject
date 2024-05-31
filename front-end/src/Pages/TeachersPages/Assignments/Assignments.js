@@ -7,12 +7,13 @@ import Footer from "../../../Component/Footer/Footer";
 import SetAssignment from "./Component/SetAssignment";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import AllAssignments from "./Component/deleteCreatedAssignments";
 
 export default function Assignment() {
   const [assignment, setAssignment] = useState([]);
 
   useEffect(() => {
-    const fetchQuse = async () => {
+    const fetchAssignment = async () => {
       try {
         const token = localStorage.getItem("MERN_AUTH_TOKEN");
         const decodedToken = jwtDecode(token);
@@ -27,8 +28,31 @@ export default function Assignment() {
         console.error("Error fetching data:", error);
       }
     };
-    fetchQuse();
+    fetchAssignment();
   }, []);
+
+
+    const [createdAssignment, setCreatedAssignment] = useState([]);
+    
+    useEffect(() => {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+        const decodedToken = jwtDecode(token);
+        const userEmail = decodedToken.email;
+
+      axios
+          .get("/api/assignment/getAssignment")
+          .then((response) => {
+            const allAssignments = response.data.filter(
+              (eachAssignment) => eachAssignment.TeacherEmail === userEmail
+            );
+            setCreatedAssignment(allAssignments);
+            console.log(allAssignments);
+          })
+          .catch((error) => {
+            console.log("error");
+          });
+          
+    },[assignment,createdAssignment]);
 
   return (
     <div>
@@ -45,6 +69,7 @@ export default function Assignment() {
                   <SetAssignment subject={assignments.subject} medium={assignments.medium} />
                 </div>
               ))}
+              <AllAssignments createdAssignments={createdAssignment} />
           </Box>
         </Grid>
       </Grid>

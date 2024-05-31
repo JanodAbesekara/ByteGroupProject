@@ -52,7 +52,7 @@ export default function ClassCard(subjectData) {
     if(confirmation ) {
     const id = subjectData.subjectData._id;
     axios
-        .delete(`/api/user/delete/${id}`)
+        .delete(`/api/assignment/delete/${id}`)
         .then((response) => {
           window.alert(response.data.msg);
           window.location.reload();
