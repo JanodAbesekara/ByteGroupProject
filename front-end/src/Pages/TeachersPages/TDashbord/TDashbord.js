@@ -18,12 +18,10 @@ import ClassCard from "./ClassCard";
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
-  //  const [details, setDetails] = useState("");
   const [notifaication, setNotification] = useState([]);
   const [notCount, setNotCount] = useState(0);
-
-  // notofication popup
   const [open, setOpen] = useState(false);
+  const [selectSubject, setSelectSubject] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,7 +31,6 @@ export default function Dashbord() {
     setOpen(false);
   };
 
-  // getting users name
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
@@ -68,24 +65,20 @@ export default function Dashbord() {
     checkImageExists();
   }, []);
 
-  const featchNotification = () => {
-    axios
-      .get("/api/get/Notifactions")
-      .then((response) => {
-        const announcements = response.data.announcements;
-        // Set notification state with filtered messages
-        setNotification(announcements);
-        // Set notification count
-        setNotCount(announcements.length);
-      })
-      .catch((error) => console.log(error));
-  };
+  useEffect(() => {
+    const featchNotification = () => {
+      axios
+        .get("/api/get/Notifactions")
+        .then((response) => {
+          const announcements = response.data.announcements;
+          setNotification(announcements);
+          setNotCount(announcements.length);
+        })
+        .catch((error) => console.log(error));
+    };
 
-  featchNotification();
-
-  //to fetch reistered subjects
-
-  const [selectSubject, setSelectSubject] = useState([]);
+    featchNotification();
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
@@ -94,11 +87,14 @@ export default function Dashbord() {
 
     const fetchRegSubjects = async () => {
       try {
-        const response = await axios.get(`/api/user/getsubjectreg`);
-        console.log(response.data.data);
-        const filterRegsubjects = response.data.data.filter(
-          (regsubject) => regsubject.email === teacheremail
+        const response = await axios.post(
+          `/api/user/getsubjectreg`,
+
+          {
+            email: teacheremail,
+          }
         );
+        const filterRegsubjects = response.data.data;
         setSelectSubject(filterRegsubjects);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -147,17 +143,17 @@ export default function Dashbord() {
             </div>
           </div>
 
-          {selectSubject.map((selectSubjects) => (
-            <div key={selectSubjects._id}>
-              <ClassCard
-                subjectData={selectSubjects}
-                key={selectSubjects._id}
-              />
-            </div>
-          ))}
+          {selectSubject.length > 0 ? (
+            selectSubject.map((selectSubjects) => (
+              <div key={selectSubjects._id}>
+                <ClassCard subjectData={selectSubjects} />
+              </div>
+            ))
+          ) : (
+            <p>No subjects found.</p>
+          )}
         </div>
       </div>
-
       <Footer />
     </div>
   );
