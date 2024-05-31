@@ -11,6 +11,7 @@ import EnrolAPI from "./apis/EnrolAPI.js";
 import { app, io, server } from "./Socket-io/Socketiosever.js";
 import videoAPI from "./apis/videoAPI.js";
 import assignmentAPI from "./apis/assignmentAPI.js";
+import TestAPI from "./apis/TestAPI.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/api/video", videoAPI);
 app.use("/api/Quise", QuiseAPI);
 app.use("/api/Enrol",  EnrolAPI);
 app.use("/api/assignment",  assignmentAPI);
+app.use("/api/Test", TestAPI);
 
 
 

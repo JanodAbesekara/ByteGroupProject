@@ -23,12 +23,11 @@ export default function TClasses() {
         const decodeToken = jwtDecode(token);
         const teacheremail = decodeToken.email;
 
-        const response = await axios.get(`/api/user/getsubjectreg`);
-        console.log(response.data.data);
-        const filterRegsubjects = response.data.data.filter(
-          (regsubject) => regsubject.email === teacheremail
-        );
-        console.log(filterRegsubjects);
+        const response = await axios.post(`/api/user/getsubjectreg`, {
+          email: teacheremail,
+        });
+
+        const filterRegsubjects = response.data.data;
         setselectsubject(filterRegsubjects);
       } catch (error) {
         console.error("Error fetching data: ", error);

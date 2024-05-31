@@ -22,16 +22,12 @@ function AddingLectures({ subjectData }) {
   useEffect(() => {
     const fetchSubjectQuiz = async () => {
       try {
-        const response = await axios.get(`/api/Quise/getlecturematerial`);
-        console.log("Subject Data:", subjectData);
-        console.log("Response Data:", response.data.data);
-        const filteredMaterial = response.data.data.filter(
-          (item) =>
-            item.TeacherEmail === subjectData.email &&
-            item.Teachersubject === subjectData.subject &&
-            item.Tmedium === subjectData.medium
-        );
-        console.log("Filtered Material:", filteredMaterial);
+        const response = await axios.post(`/api/Quise/getlecturematerial`, {
+          teacheremail: subjectData.email,
+          subject: subjectData.subject,
+          medium: subjectData.medium,
+        });
+        const filteredMaterial = response.data.data;
         setSubjectQuiz(filteredMaterial);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,13 +38,17 @@ function AddingLectures({ subjectData }) {
     fetchSubjectQuiz();
   }, [subjectData]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id) => {
+   
     try {
-      await axios.delete(`/api/Quise/deletelecturematerial/${id}`);
-      setSubjectQuiz(subjectQuiz.filter((quise) => quise._id !== id));
+      await axios.post(`/api/Quise/deletelecturematerial `, { _id: _id });
+      setSubjectQuiz((prev) => prev.filter((item) => item._id !== _id));
+      Window.alert("Lecture Deleted Successfully");
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting data:", error);
       setError("Error deleting data: " + error.message);
+      window.alert("Error deleting data: " + error.message);
     }
   };
 
@@ -62,13 +62,13 @@ function AddingLectures({ subjectData }) {
           <TableHead>
             <TableRow>
               {[
-                "Lesson",
-                "Zoom",
-                "PDF",
-                "Video",
-                "Other Link",
-                "Edit",
                 "Delete",
+                "Edit",
+                "Other Link",
+                "Video",
+                "PDF",
+                "Zoom",
+                "Lesson",
               ]
                 .slice(0)
                 .reverse()

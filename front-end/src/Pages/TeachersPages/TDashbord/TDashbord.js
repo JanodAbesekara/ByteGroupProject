@@ -18,7 +18,7 @@ import ClassCard from "./ClassCard";
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
-  const [details, setDetails] = useState("");
+  //  const [details, setDetails] = useState("");
   const [notifaication, setNotification] = useState([]);
   const [notCount, setNotCount] = useState(0);
 
@@ -47,7 +47,6 @@ export default function Dashbord() {
         setUser(userData);
       })
       .catch((err) => console.log(err));
-
   }, []);
 
   useEffect(() => {
@@ -71,18 +70,13 @@ export default function Dashbord() {
 
   const featchNotification = () => {
     axios
-      .get("/api/get/notifaction")
+      .get("/api/get/Notifactions")
       .then((response) => {
         const announcements = response.data.announcements;
-        const filteredMessages = announcements.filter(
-          (item) => item.jobrole === "Admin"
-        );
-
         // Set notification state with filtered messages
-        setNotification(filteredMessages);
-
+        setNotification(announcements);
         // Set notification count
-        setNotCount(filteredMessages.length);
+        setNotCount(announcements.length);
       })
       .catch((error) => console.log(error));
   };
@@ -112,7 +106,6 @@ export default function Dashbord() {
     };
     fetchRegSubjects();
   }, []);
-
 
   return (
     <div>
@@ -151,16 +144,17 @@ export default function Dashbord() {
                   notifications={notifaication}
                 />
               </React.Fragment>
-
             </div>
           </div>
 
           {selectSubject.map((selectSubjects) => (
-              <div key={selectSubjects._id}>
-              <ClassCard subjectData={selectSubjects} key={selectSubjects._id} />
-              </div>
-            ))}
-
+            <div key={selectSubjects._id}>
+              <ClassCard
+                subjectData={selectSubjects}
+                key={selectSubjects._id}
+              />
+            </div>
+          ))}
         </div>
       </div>
 

@@ -50,6 +50,7 @@ import Notifacition from "./Pages/Notifacition";
 import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
 import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
 import DisplayResources from "./Pages/AdminPages/Aaddresources/Displayresources.js";
+import Attendence from "./Pages/TeachersPages/Attendence/Attendence";
 
 
 function App() {
@@ -136,6 +137,7 @@ function App() {
           <Route path="/Quisehandle" element={<Quisehandle />} />
           <Route path="/AddingLectures" element={<AddingLectures />} />
           <Route path="/DisplayResources" element={<DisplayResources />} />
+          <Route path="/Attendence" element={<Attendence />} />
         </Routes>
       </div>
     </>

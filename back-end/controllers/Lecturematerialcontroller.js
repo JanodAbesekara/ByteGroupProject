@@ -46,12 +46,37 @@ const addlecturematerial = async (req, res) => {
 };
 
 const getlecturematerial = async (req, res) => {
+  const { teacheremail, subject, medium } = req.body;
+
   try {
-    const lecturematerials = await lecturematerial.find();
+    const lecturematerials = await lecturematerial.find({
+      TeacherEmail: teacheremail,
+      Teachersubject: subject,
+      Tmedium: medium,
+    });
     res.status(200).json({ success: true, data: lecturematerials });
   } catch (error) {
     res.status(500).json({ success: false, msg: "Server error" });
   }
 };
 
-export { getlecturematerial, addlecturematerial };
+const deletelecturematerial = async (req, res) => {
+  try {
+    const { _id } = req.body;
+  
+    const result = await lecturematerial.findByIdAndDelete({ _id });
+
+    if (result.deletedCount === 0) {
+      return res
+        .status(404)
+        .json({ success: false, msg: "No lecture material found" });
+    } else
+      return res
+        .status(200)
+        .json({ success: true, msg: "Lecture material deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Server error" });
+  }
+};
+
+export { getlecturematerial, addlecturematerial, deletelecturematerial };

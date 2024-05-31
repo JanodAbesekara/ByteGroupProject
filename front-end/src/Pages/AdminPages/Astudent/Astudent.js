@@ -35,7 +35,7 @@ function Astudent() {
   const deleteStudent = (email) => {
     const payload = { email: email };
 
-    Axios.post(`api/auth//studentpost`, payload)
+    Axios.post(`api/auth/studentpost`, payload)
       .then(() => {
         getStudents();
       })

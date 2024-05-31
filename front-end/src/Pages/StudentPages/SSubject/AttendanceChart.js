@@ -1,12 +1,11 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import { Gauge } from '@mui/x-charts/Gauge';
+import * as React from "react";
+import Stack from "@mui/material/Stack";
+import { Gauge } from "@mui/x-charts/Gauge";
 
-export default function BasicGauges({value}) {
-  
+export default function BasicGauges({ value }) {
   return (
-    <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
-      <Gauge width={100} height={100} value={value} /> 
+    <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, md: 3 }}>
+      <Gauge width={100} height={100} value={value} />
     </Stack>
   );
 }

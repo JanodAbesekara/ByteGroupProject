@@ -15,13 +15,12 @@ function Classcomponent({ subjectData }) {
         const decodedToken = jwtDecode(token);
         const userEmail = decodedToken.email;
 
-        const response = await axios.get(`/api/user/teacherattendence`);
-        const filteredData = response.data.data.filter(
-          (item) =>
-            item.subject === subjectData.subject &&
-            item.teacheremail === userEmail &&
-            item.media === subjectData.medium
-        );
+        const response = await axios.post(`/api/user/teacherattendence`, {
+          teacheremail: userEmail,
+          subject: subjectData.subject,
+          media: subjectData.medium,
+        });
+        const filteredData = response.data.data;
         setFetchedData(filteredData[0] || null); // Use first item or null for clarity
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -30,7 +29,6 @@ function Classcomponent({ subjectData }) {
 
     fetchData();
   }, [subjectData.subject, subjectData.medium]); // Dependency array
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,9 +64,7 @@ function Classcomponent({ subjectData }) {
     setLectureCount(fetchedData?.leccount || 0); // Set initial value for edit
   };
 
-
   const [subjectDataState] = useState(subjectData);
-
 
   return (
     <>

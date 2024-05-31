@@ -15,15 +15,16 @@ function Content({ teachermail, subject, medium }) {
   useEffect(() => {
     const fetchSubjectQuiz = async () => {
       try {
-        const response = await axios.get(`/api/Quise/getlecturematerial`);
-        console.log("passed", teachermail, subject, medium);
-        console.log("Response Data:", response.data.data);
-        const filteredMaterial = response.data.data.filter(
-          (item) =>
-            item.TeacherEmail === teachermail &&
-            item.Teachersubject === subject &&
-            item.Tmedium === medium
+        const patlord = {
+          teachermail: teachermail,
+          subject: subject,
+          medium: medium,
+        };
+        const response = await axios.post(
+          `/api/Test/getlecturematerial`,
+          patlord
         );
+        const filteredMaterial = response.data.data;
 
         setSubjectQuiz(filteredMaterial);
       } catch (error) {
@@ -58,28 +59,35 @@ function Content({ teachermail, subject, medium }) {
               <div className="content__icon">
                 <p>{material.lesson} </p>
                 <br />
-                <Link to={material.PDF} target="_blank">
-                  <FaFilePdf />
-                </Link>
+                {material.PDF ? (
+                  <Link to={material.PDF} target="_blank">
+                    <FaFilePdf />
+                  </Link>
+                ) : null}
                 <br />
-                <Link to={material.video} target="_blank">
-                  <PiVideoFill />
-                </Link>
+                {material.video ? (
+                  <Link to={material.video} target="_blank">
+                    <PiVideoFill />
+                  </Link>
+                ) : null}
                 <br />
-
-                <Link
-                  href={material.zoom}
-                  onClick={handleZoomClick}
-                  target="_blank"
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <BiLogoZoom />
-                  </div>
-                </Link>
+                {material.zoom ? (
+                  <Link
+                    to={material.zoom}
+                    onClick={handleZoomClick}
+                    target="_blank"
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <BiLogoZoom />
+                    </div>
+                  </Link>
+                ) : null}
                 <br />
-                <Link to={material.otherlink} target="_blank">
-                  <SiMaterialdesignicons />
-                </Link>
+                {material.otherlink ? (
+                  <Link to={material.otherlink} target="_blank">
+                    <SiMaterialdesignicons />
+                  </Link>
+                ) : null}
                 <br />
                 <ComAttendence
                   ref={attendenceRef}
