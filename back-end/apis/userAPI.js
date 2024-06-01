@@ -10,6 +10,9 @@ import {
   studentParentDetailsController,
   updateUserProfileController,
   deleteEntireCard,
+  Admindeisplay,
+  Admindelete,
+  AdminCrete,
 } from "../controllers/userProfileController.js";
 
 import {
@@ -46,6 +49,11 @@ router.get("/dashboard/:userID", userOtherDetailsController);
 // subject get from registered
 
 router.get("/getsubjectreg", getRegisteredSubject);
+
+// admin display 
+router.get("/admindisplay", Admindeisplay);
+router.post("/admindelete", Admindelete);
+router.post("/admincreate", AdminCrete);
 
 
 //students guardian details

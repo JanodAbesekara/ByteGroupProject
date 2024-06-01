@@ -17,10 +17,17 @@ import { MdDeleteOutline } from "react-icons/md";
 
 function Ateachers() {
   const [teachers, setTeachers] = useState([]);
+  const [totalteachers, settotalteachers] = useState(0);
+  
 
   useEffect(() => {
     getTeachers();
-  }, []);
+
+    for (let i = 0; i < teachers.length; i++) {
+      settotalteachers(teachers.length);
+    }
+
+  }, [ teachers.length ]);
 
   const getTeachers = () => {
     Axios.get(`api/auth/teachermangement`)
@@ -80,6 +87,7 @@ function Ateachers() {
               >
                 <b>Teachers Details</b>
               </h3>
+              <h3>Total Teachers Count : - {totalteachers}</h3>
             </div>
             {chunks.map((chunk, index) => (
               <TableContainer component={Paper} key={index} sx={{ marginTop: "100px" }}>
