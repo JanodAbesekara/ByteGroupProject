@@ -20,7 +20,7 @@ function ComQuizes({ quisedata }) {
       handleSubmmit(); // Automatically submit when time is over
     }
     return () => clearInterval(timer);
-  }, [remainingTime, countdownStarted]);
+  }, [countdownStarted, remainingTime]);
 
   const startQuiz = async () => {
     const timeRangeFromBackend = quisedata.TimeRanges;
@@ -30,7 +30,6 @@ function ComQuizes({ quisedata }) {
     setCountdownStarted(true);
     setSubmitButton(true);
     setQuizStarted(true); // Set quiz started to true when start button is clicked
-    console.log(quisedata);
   };
 
   const formatTime = () => {
@@ -38,7 +37,6 @@ function ComQuizes({ quisedata }) {
     const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
-  
 
   const handleSubmmit = () => {
     setSubmitButton(true);
@@ -100,7 +98,7 @@ function ComQuizes({ quisedata }) {
                               value={aIndex}
                               onChange={() => {
                                 const newAnswers = [...answers];
-                                newAnswers[qIndex] = aIndex + 1;
+                                newAnswers[qIndex] = aIndex;
                                 setAnswers(newAnswers);
                               }}
                             />
@@ -112,7 +110,7 @@ function ComQuizes({ quisedata }) {
                       </ul>
                     </div>
                   ))}
-                  <button type="submit"  disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
+                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
                     Submit
                   </button>
                 </form>
