@@ -25,19 +25,25 @@ const ComAttendence = forwardRef(({ teachermail, subject, medium }, ref) => {
       window.alert(response.data.msg);
     } catch (error) {
       window.alert(error.response.data.msg);
+    } finally {
+      setButtonDisabled(false);
     }
   };
 
   useImperativeHandle(ref, () => ({
     handleClick: () => {
-      handleSubmit(new Event('submit'));
+      handleSubmit(new Event("submit"));
     },
   }));
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <button type="submit" disabled={buttonDisabled}  style={{ visibility: 'hidden' }}>
+        <button
+          type="submit"
+          disabled={buttonDisabled}
+          style={{ visibility: "hidden" }}
+        >
           Attend to lecture
         </button>
       </form>
