@@ -30,6 +30,9 @@ function SAssignment() {
         console.log("error");
       });
 
+    };
+    feachdata();
+
   }, []);
 
   return (

@@ -47,7 +47,7 @@ const quisecontroller = async (req, res) => {
 
     // Extract the subjects, mediums, and teacherEmails from the enrollments
 
-    const enrollmentSets = enrollments.map((enroll) => ({
+    const enrollmentSets = enronments.map((enroll) => ({
       subject: enroll.Ensubject,
       medium: enroll.Enmedium,
       email: enroll.teacherEmail,

@@ -22,7 +22,7 @@ import {
   getstudentattendence,
 } from "../controllers/studentAttendencecontrollers.js";
 
-import { getRegisteredSubject } from "../controllers/SubjectRegistercontroller.js";
+import  getRegisteredSubject  from "../controllers/SubjectRegistercontroller.js";
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
@@ -45,7 +45,7 @@ router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
 
-router.get("/getsubjectreg", getregisterdesubject);
+router.get("/getsubjectreg", getRegisteredSubject);
 
 
 //students guardian details
