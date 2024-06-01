@@ -43,7 +43,7 @@ app.get("/api/finduser/:firstId/:secondId", findChatController);
 app.get("/api/message/:chatId", getmessageController);
 app.post("/api/message", addmessageController);
 app.get("/api/get/Notifactions", getNotificationT);
-
+app.get("/api/get/Notify",getAnnuncements);
 
 
 

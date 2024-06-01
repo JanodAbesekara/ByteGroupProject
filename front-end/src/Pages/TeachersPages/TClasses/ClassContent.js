@@ -77,12 +77,12 @@ function ClassContent({ subjectData }) {
       otherlink,
     };
     try {
-      const response = await axios(`/api/Quise/lecturematerialadd`, paylord);
-      window.alert(response.data.message);
+      await axios.post(`/api/Quise/lecturematerialadd`, paylord);
+      window.alert("Lecture added successfully");
       window.location.reload();
     } catch (error) {
       console.error("Error:", error);
-      window.alert(error.response.data.message);
+      window.alert(" Error occured while adding lecture", error);
     }
   };
 

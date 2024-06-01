@@ -19,26 +19,30 @@ function Afeedbackmanager() {
   const [feedbackData, setFeedbackData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`/api/auth/feedbackget`)
-      .then((response) => {
-        console.log(response.data.data);
-        setFeedbackData(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching feedback data:", error);
-      });
+    const getFeedbackData = async () => {
+      axios
+        .get(`/api/auth/feedbackget`)
+        .then((response) => {
+          console.log(response.data.data);
+          setFeedbackData(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching feedback data:", error);
+        });
+    };
+
+    getFeedbackData();
   }, []);
 
   const handleDelete = async (_id) => {
     try {
-      const response = await axios.post(`/api/auth/deletefeedback`, { _id });
+      await axios.post(`/api/auth/deletefeedback`, { _id });
       setFeedbackData((prevFeedbackData) =>
         prevFeedbackData.filter((feedback) => feedback._id !== _id)
       );
-      window.alert(response.data.message);
+      window.alert("FeedBack Delete Successfully");
     } catch (error) {
-      window.alert(error.response.data.message);
+      window.alert( "Error deleting feedback ", error.message);
     }
   };
 
@@ -120,7 +124,9 @@ function Afeedbackmanager() {
                     feedbackData.map((row) => (
                       <TableRow
                         key={row._id}
-                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.teacheremail}
