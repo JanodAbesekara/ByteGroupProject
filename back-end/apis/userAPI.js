@@ -22,7 +22,7 @@ import {
   getstudentattendence,
 } from "../controllers/studentAttendencecontrollers.js";
 
-import { getregisterdesubject } from "../controllers/SubjectRegistercontroller.js";
+import { getRegisteredSubject } from "../controllers/SubjectRegistercontroller.js";
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
@@ -44,7 +44,9 @@ router.get("/userProfile/:userID", userDetailsController);
 router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
+
 router.get("/getsubjectreg", getregisterdesubject);
+
 
 //students guardian details
 
@@ -52,7 +54,7 @@ router.post("/guardian", studentParentDetailsController);
 
 //update users details based on classes
 router.put("/update/:subID", updateUserProfileController);
-// delete subject card
+// delete entire subject card
 router.delete("/delete/:deleted", deleteEntireCard);
 
 export default router;

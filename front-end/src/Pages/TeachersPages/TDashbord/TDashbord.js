@@ -83,13 +83,15 @@ export default function Dashbord() {
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodeToken = jwtDecode(token);
-    const teacheremail = decodeToken.email;
+    const teacherEmail = decodeToken.email;
 
     const fetchRegSubjects = async () => {
       try {
+
         const response = await axios.get(`/api/user/getsubjectreg`, {
           params: { email: teacheremail },
         });
+
         const filterRegsubjects = response.data.data;
         setSelectSubject(filterRegsubjects);
       } catch (error) {
@@ -98,6 +100,8 @@ export default function Dashbord() {
     };
     fetchRegSubjects();
   }, []);
+
+  console.log(selectSubject);
 
   return (
     <div>

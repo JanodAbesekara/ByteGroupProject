@@ -130,16 +130,7 @@ export default function ClassCard(subjectData) {
           </div>
           <div style={{display: "flex", flexDirection:"row"}}>
           <div style={{color:"#2a28a6", fontWeight:"700",width:"88%"}}>
-          {/* <p style={{ margin: "4px 6px", fontSize: "14px" }}>
-            {subjectData.subjectData.degree}
-          </p>
-          <p style={{ margin: "4px 6px", fontSize: "14px" }}>
-            {subjectData.subjectData.experience}
-          </p>
-          <p style={{ margin: "4px 6px", fontSize: "14px",fontStyle:"italic", color: "#746D69",fontWeight:"500" }}>
-            {subjectData.subjectData.aboutme}
-          </p> */}
-
+        
             {isEditing ? (
                 <>
                   <input
