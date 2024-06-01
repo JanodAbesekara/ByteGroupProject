@@ -71,12 +71,10 @@ function Openwindow({ open, handleClose, notifications }) {
     const useremail = decodedToken.email;
 
     axios
-      .post(`/api/user/getsubjectreg`,{
-        email: useremail,
-      
+      .get(`/api/user/getsubjectreg`, {
+        params: { email: useremail },
       })
       .then((response) => {
-    
         const filteredSubject = response.data.data;
         setTeacherSubject(filteredSubject);
       })
@@ -112,15 +110,21 @@ function Openwindow({ open, handleClose, notifications }) {
           .reverse()
           .map((notification, index) => (
             <DialogContent key={index} dividers>
-              <h3 style={{ textAlign: "center", marginBottom: "20px" }}>{notification.titleofAnn}</h3>
-              <h4 style={{ textAlign: "center", marginInline: "30px" }}>{notification.Announcementmessage}</h4>
+              <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
+                {notification.titleofAnn}
+              </h3>
+              <h4 style={{ textAlign: "center", marginInline: "30px" }}>
+                {notification.Announcementmessage}
+              </h4>
               <br></br>
-              <span style={{ float: "right", fontSize: "12px" }}>{notification.date.split("T")[0]}</span>
+              <span style={{ float: "right", fontSize: "12px" }}>
+                {notification.date.split("T")[0]}
+              </span>
             </DialogContent>
           ))}
       </ScrollableContent>
       <DialogActions sx={{ display: "flex" }}>
-        <div style={{marginRight:"30px"}} >
+        <div style={{ marginRight: "30px" }}>
           <form onSubmit={handlesubmit}>
             <label htmlFor="title">Title</label>
             <input

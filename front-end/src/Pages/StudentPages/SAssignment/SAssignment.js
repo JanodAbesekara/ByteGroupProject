@@ -17,20 +17,19 @@ function SAssignment() {
       const decodedToken = jwtDecode(token);
       const StuEmail = decodedToken.email;
 
-      axios
-        .post(`/api/Test/getAssignment`, {
-          email: StuEmail,
-        })
-        .then((response) => {
-          const allAssignments = response.data.assignments;
-          setAssignment(allAssignments);
-          console.log(allAssignments);
-        })
-        .catch((error) => {
-          console.log("error");
-        });
-    };
-    feachdata();
+
+    axios
+      .get(`/api/Test/getAssignment`, {
+       params: {email: StuEmail}
+      })
+      .then((response) => {
+        const allAssignments = response.data.assignments;
+        setAssignment(allAssignments);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+
   }, []);
 
   return (

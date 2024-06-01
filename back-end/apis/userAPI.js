@@ -26,7 +26,7 @@ import { getRegisteredSubject } from "../controllers/SubjectRegistercontroller.j
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
-router.post("/studenceattendenceget", studentattendencegetController);
+router.get("/studenceattendenceget", studentattendencegetController);
 router.post("/techeralectureget", techerlecturecountget);
 router.post("/teacherlecture", teacherattendenceController);
 router.post("/editlecturecount", editlecturecount);
@@ -44,7 +44,9 @@ router.get("/userProfile/:userID", userDetailsController);
 router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
-router.get("/getsubjectreg/:teacherEmail", getRegisteredSubject);
+
+router.get("/getsubjectreg", getregisterdesubject);
+
 
 //students guardian details
 

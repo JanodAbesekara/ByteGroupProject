@@ -17,8 +17,8 @@ function SQuizzes() {
       const StuEmail = decodedToken.email;
 
       try {
-        const response = await axios.post(`/api/Test/quiseadd`, {
-          email: StuEmail,
+        const response = await axios.get(`/api/Test/quiseadd`, {
+          params: { email: StuEmail}
         });
         console.log(response);
         setData(response.data.quizzes);
