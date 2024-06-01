@@ -1,7 +1,7 @@
 import profileSchema from "../models/userProfileModel.js";
 
 
-const getregisterdesubject = async(req,res) => {
+const getRegisteredSubject = async(req,res) => {
    const { email } = req.query;
 
   try{
@@ -13,4 +13,4 @@ const getregisterdesubject = async(req,res) => {
    
 };
 
-export {getRegisteredSubject};
+export default getRegisteredSubject;
