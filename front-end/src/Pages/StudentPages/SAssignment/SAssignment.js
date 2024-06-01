@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import Ssidebar from "../../../Component/SSidebar/Ssidebar";
-import { useState, useEffect } from "react";
+
 import axios from "axios";
 import AssignmentComponent from "./AssignmentComponent";
 import { jwtDecode } from "jwt-decode";
@@ -12,21 +12,25 @@ function SAssignment() {
   const [assignments, setAssignment] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const StuEmail = decodedToken.email;
+    const feachdata = async () => {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const StuEmail = decodedToken.email;
 
-    axios
-      .post(`/api/Test/getAssignment`, {
-        email: StuEmail,
-      })
-      .then((response) => {
-        const allAssignments = response.data.assignments;
-        setAssignment(allAssignments);
-      })
-      .catch((error) => {
-        console.log("error");
-      });
+      axios
+        .post(`/api/Test/getAssignment`, {
+          email: StuEmail,
+        })
+        .then((response) => {
+          const allAssignments = response.data.assignments;
+          setAssignment(allAssignments);
+          console.log(allAssignments);
+        })
+        .catch((error) => {
+          console.log("error");
+        });
+    };
+    feachdata();
   }, []);
 
   return (

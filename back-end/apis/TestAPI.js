@@ -1,5 +1,8 @@
 import express from "express";
+
 import {quisecontroller,getlecturematerial,getAssignment} from "../controllers/Testcontroller.js";
+
+
 
 const router = express.Router();
 
@@ -11,10 +14,6 @@ router.post("/getlecturematerial", getlecturematerial);
 
 // Student side Assignment
 router.post("/getAssignment", getAssignment);
-
-
-
-
 
 
 export default router;

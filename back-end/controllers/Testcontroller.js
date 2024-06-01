@@ -4,11 +4,8 @@ import lecturematerial from "../models/Lecturematerial.js";
 import Announcement from "../models/Announcementmodel.js";
 import Assignment from "../models/Assignmentmodel.js";
 
-
-
- const getAssignment = async (req, res) => {
-  
-  const {email} = req.body;
+const getAssignment = async (req, res) => {
+  const { email } = req.body;
 
   try {
     // Find enrollments for the given user email
@@ -30,32 +27,27 @@ import Assignment from "../models/Assignmentmodel.js";
     });
 
     res.status(200).json({ success: true, assignments });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
-
-
- };
-
+};
 
 const quisecontroller = async (req, res) => {
   const { email } = req.body;
 
   try {
     // Find enrollments for the given user email
-    const enrollments = await Enrollment.find({ userEmail: email });
+    const enronments = await Enrollment.find({ userEmail: email });
 
     // Extract the subjects, mediums, and teacherEmails from the enrollments
+
     const enrollmentSets = enrollments.map((enroll) => ({
       subject: enroll.Ensubject,
       medium: enroll.Enmedium,
       email: enroll.teacherEmail,
     }));
 
- 
-  
     // Filter quizzes based on extracted subjects, mediums, and teacherEmails
     const quizzes = await Quize.find({
       $or: enrollmentSets.map((enroll) => ({
@@ -152,6 +144,7 @@ const getNotificationT = async (req, res) => {
       .json({ success: false, msg: "Internal Server Error" });
   }
 };
+
 export {
   quisecontroller,
   getlecturematerial,
