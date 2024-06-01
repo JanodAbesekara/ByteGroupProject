@@ -39,12 +39,19 @@ function AddingLectures({ subjectData }) {
   }, [subjectData]);
 
   const handleDelete = async (_id) => {
-   
     try {
-      await axios.post(`/api/Quise/deletelecturematerial `, { _id: _id });
-      setSubjectQuiz((prev) => prev.filter((item) => item._id !== _id));
-      Window.alert("Lecture Deleted Successfully");
-      window.location.reload();
+      const response = await axios.post(`/api/Quise/deletelecturematerial`, {
+        _id,
+      });
+
+      if (response.status === 200) {
+        setSubjectQuiz((prev) => prev.filter((item) => item._id !== _id));
+        window.alert("Lecture Deleted Successfully");
+      } else if (response.status === 404) {
+        window.alert("No lecture material found");
+      } else {
+        window.alert("Unexpected response status: " + response.status);
+      }
     } catch (error) {
       console.error("Error deleting data:", error);
       setError("Error deleting data: " + error.message);
