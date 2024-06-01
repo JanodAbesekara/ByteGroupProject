@@ -17,6 +17,7 @@ import Axios from "axios";
 function ADashbord() {
   const [admins, setAdmins] = useState([]);
   const [admincreate, setAdmincreate] = useState(" ");
+  const [admincount, setAdmincount] = useState(0);
 
   useEffect(() => {
     const getAdmins = async () => {
@@ -30,7 +31,11 @@ function ADashbord() {
     };
 
     getAdmins();
-  }, []);
+
+    for (let i = 0; i < admins.length; i++) {
+      setAdmincount(admins.length);
+    }
+  }, [admins.length]);
 
   const handleDelete = async (_id) => {
     try {
@@ -69,6 +74,7 @@ function ADashbord() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
+            <h2>Total Admin count :- {admincount}</h2>
             <div>
               <h2>Create Admin</h2>
               <form onSubmit={handleSubmit}>
