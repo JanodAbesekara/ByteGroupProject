@@ -17,8 +17,8 @@ function SAssignment() {
     const StuEmail = decodedToken.email;
 
     axios
-      .post(`/api/Test/getAssignment`, {
-        email: StuEmail,
+      .get(`/api/Test/getAssignment`, {
+       params: {email: StuEmail}
       })
       .then((response) => {
         const allAssignments = response.data.assignments;

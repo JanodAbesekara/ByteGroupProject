@@ -8,7 +8,7 @@ import Assignment from "../models/Assignmentmodel.js";
 
  const getAssignment = async (req, res) => {
   
-  const {email} = req.body;
+  const {email} = req.query;
 
   try {
     // Find enrollments for the given user email
@@ -41,7 +41,7 @@ import Assignment from "../models/Assignmentmodel.js";
 
 
 const quisecontroller = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.query;
 
   try {
     // Find enrollments for the given user email
@@ -73,7 +73,7 @@ const quisecontroller = async (req, res) => {
 };
 
 const getlecturematerial = async (req, res) => {
-  const { teachermail, subject, medium } = req.body;
+  const { teachermail, subject, medium } = req.query;
 
   try {
     const lecturematerials = await lecturematerial.find({
@@ -89,7 +89,7 @@ const getlecturematerial = async (req, res) => {
 
 const getNotifacition = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.query;
 
     // Fetch enrollments for the user
     const enrollments = await Enrollment.find({ userEmail: email });

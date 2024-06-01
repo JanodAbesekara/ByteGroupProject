@@ -87,13 +87,9 @@ export default function Dashbord() {
 
     const fetchRegSubjects = async () => {
       try {
-        const response = await axios.post(
-          `/api/user/getsubjectreg`,
-
-          {
-            email: teacheremail,
-          }
-        );
+        const response = await axios.get(`/api/user/getsubjectreg`, {
+          params: { email: teacheremail },
+        });
         const filterRegsubjects = response.data.data;
         setSelectSubject(filterRegsubjects);
       } catch (error) {

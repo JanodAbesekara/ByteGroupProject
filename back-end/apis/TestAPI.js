@@ -4,13 +4,13 @@ import {quisecontroller,getlecturematerial,getAssignment} from "../controllers/T
 const router = express.Router();
 
 // Student side Quise
-router.post("/quiseadd", quisecontroller);
+router.get("/quiseadd", quisecontroller);
 
 // Student side Lecture Material
-router.post("/getlecturematerial", getlecturematerial);
+router.get("/getlecturematerial", getlecturematerial);
 
 // Student side Assignment
-router.post("/getAssignment", getAssignment);
+router.get("/getAssignment", getAssignment);
 
 
 

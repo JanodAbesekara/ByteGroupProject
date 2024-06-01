@@ -15,15 +15,15 @@ function Content({ teachermail, subject, medium }) {
   useEffect(() => {
     const fetchSubjectQuiz = async () => {
       try {
-        const patlord = {
-          teachermail: teachermail,
-          subject: subject,
-          medium: medium,
-        };
-        const response = await axios.post(
-          `/api/Test/getlecturematerial`,
-          patlord
-        );
+
+        const response = await axios.get(
+          `/api/Test/getlecturematerial`,{
+          params: {
+            teachermail: teachermail,
+            subject: subject,
+            medium: medium
+          }
+      });
         const filteredMaterial = response.data.data;
 
         setSubjectQuiz(filteredMaterial);
@@ -38,7 +38,9 @@ function Content({ teachermail, subject, medium }) {
   const handleZoomClick = (e) => {
     e.preventDefault();
     if (attendenceRef.current) {
-      attendenceRef.current.handleClick();
+      attendenceRef.current.handleClick( );
+
+  
     }
     window.location.href = e.currentTarget.href;
   };
@@ -72,15 +74,19 @@ function Content({ teachermail, subject, medium }) {
                 ) : null}
                 <br />
                 {material.zoom ? (
+                  
                   <Link
                     to={material.zoom}
                     onClick={handleZoomClick}
                     target="_blank"
                   >
+                
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <BiLogoZoom />
                     </div>
                   </Link>
+                
+                 
                 ) : null}
                 <br />
                 {material.otherlink ? (

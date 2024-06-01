@@ -1,7 +1,7 @@
 import profileSchema from "../models/userProfileModel.js";
 
 const getregisterdesubject = async(req,res) => {
-   const { email } = req.body;
+   const { email } = req.query;
   try{
     const registedsubjects = await profileSchema.find( { email: email });
     return res.status(200).json({success:true, data:registedsubjects});
