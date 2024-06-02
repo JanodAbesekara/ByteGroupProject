@@ -260,7 +260,9 @@ function Enrollment() {
                       }}
                       style={{
                         color: "white",
-                        padding: "5px",
+                        padding: "5px 10px",
+                        borderRadius: "10px",
+                        border: "none",
                         backgroundColor:
                           selectedCourse === profileItem.subject
                             ? "#ccc"

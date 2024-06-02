@@ -60,7 +60,7 @@ function AAnnounceent() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/api/get/notifaction`);
+      const response = await axios.get(`/api/get/Notify`);
       setAnnouncements(response.data.announcements);
     } catch (error) {
       window.alert(error.response.data.message);
@@ -69,11 +69,11 @@ function AAnnounceent() {
 
   fetchData();
 
-  const deleteAnnouncement = async (_id) => {
+  const deleteAnnouncement = async (id) => {
     try {
-      const response = await axios.post(`/api/delete/notifaction`, { _id });
+      const response = await axios.post(`/api/delete/notifaction`, { _id: id });
+      setAnnouncements( announcements.filter((announcement) => announcement._id !== id));
       window.alert(response.data.message);
-      fetchData();
     } catch (error) {
       window.alert(error.response.data.message);
     }
@@ -131,13 +131,13 @@ function AAnnounceent() {
               </form>
             </div>
 
-            <div style={{ marginTop: "150px" , marginBottom:"100px" }}>
+            <div style={{ marginTop: "150px", marginBottom: "100px" }}>
               <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
                 Announcements
               </h1>
 
               <TableContainer component={Paper}>
-                <Table sx={{  paddingRight: "20px" }}>
+                <Table sx={{ paddingRight: "20px" }}>
                   <TableHead>
                     <TableRow>
                       <TableCell

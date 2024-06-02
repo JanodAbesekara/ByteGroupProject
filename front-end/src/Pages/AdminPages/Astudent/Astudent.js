@@ -17,10 +17,16 @@ import { MdDeleteOutline } from "react-icons/md";
 
 function Astudent() {
   const [students, setStudents] = useState([]);
+  const [totalstu, settotalstu] = useState(0);
 
   useEffect(() => {
     getStudents();
-  }, []);
+
+    for (let i = 0; i < students.length; i++) {
+      settotalstu(students.length);
+    }
+
+  }, [ students.length ]);
 
   const getStudents = () => {
     Axios.get(`api/auth/studentget`)
@@ -80,6 +86,7 @@ function Astudent() {
               >
                 <b>Student Details</b>
               </h3>
+              <h2>Total Student count :- {totalstu}</h2>
             </div>
             {chunks.map((chunk, index) => (
               <TableContainer

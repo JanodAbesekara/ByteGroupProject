@@ -73,12 +73,12 @@ function SDashbord() {
       const Stuemail = decodedToken.email;
 
       try {
-        const notificationResponse = await axios.post(`/api/get/notifaction`, {
-          email: Stuemail,
+        const notificationResponse = await axios.get(`/api/get/notifaction`, {
+          params: { email: Stuemail },
         });
         const { announcements, announceme } = notificationResponse.data;
 
-        setNotifications([...announcements, ...announceme]);
+        setNotifications([...announceme, ...announcements]);
         setNotCount(announcements.length + announceme.length);
       } catch (error) {
         console.log(error);

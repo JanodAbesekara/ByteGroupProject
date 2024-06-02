@@ -19,8 +19,8 @@ export default function Assignment() {
         const decodedToken = jwtDecode(token);
         const userEmail = decodedToken.email;
 
-        const response = await axios.post(`/api/user/getsubjectreg`,{
-          email: userEmail
+        const response = await axios.get(`/api/user/getsubjectreg`, {
+          params: { email: userEmail }
         });
         const filtersubject = response.data.data;
         setAssignment(filtersubject);
@@ -66,7 +66,10 @@ export default function Assignment() {
             {assignment.length > 0 &&
               assignment.map((assignments) => (
                 <div key={assignments._id}>
-                  <SetAssignment subject={assignments.subject} medium={assignments.medium} />
+                  <SetAssignment
+                    subject={assignments.subject}
+                    medium={assignments.medium}
+                  />
                 </div>
               ))}
               <AllAssignments createdAssignments={createdAssignment} />

@@ -9,8 +9,8 @@ function Enterquizes({ setQuestions }) {
     setQuestionCount(count);
     setQuestionsLocal(
       Array.from({ length: count }, () => ({
-        Question: "", 
-        answers: ["", "", "", ""], 
+        Question: "",
+        answers: ["", "", "", ""],
         correctAnswerIndex: 0,
       }))
     );
@@ -18,14 +18,14 @@ function Enterquizes({ setQuestions }) {
 
   const handleQuestionChange = (index, e) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].Question = e.target.value; 
+    updatedQuestions[index].Question = e.target.value;
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
 
   const handleAnswerChange = (questionIndex, answerIndex, e) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answers[answerIndex] =  e.target.value;  // add the ansewr value
+    updatedQuestions[questionIndex].answers[answerIndex] = e.target.value; // add the ansewr value
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
@@ -40,43 +40,68 @@ function Enterquizes({ setQuestions }) {
   };
 
   return (
-    <div >
-      <h3 style={{marginBottom: "6px",color: "#1a7873",textTransform: "uppercase",}}>Question count</h3>
+    <div>
+      <h3
+        style={{
+          marginBottom: "6px",
+          color: "#1a7873",
+          textTransform: "uppercase",
+        }}
+      >
+        Question count
+      </h3>
       <input
-        style={{ 
-          width: "50px", 
+        style={{
+          width: "50px",
           height: "30px",
           borderRadius: "5px",
-          border: "1px solid gray"
-         }}
+          border: "1px solid gray",
+        }}
         placeholder="Enter the Question count"
         type="number"
         value={questionCount}
         onChange={handleQuestionCountChange}
       />
       {questions.map((question, index) => (
-        <div key={index} style={{ marginTop:"20px"}}>
-          <h2 style={{
-            fontSize: "18px",
-            marginBottom: "10px",
-            color: "#1f5c73"
-          }}>Question {index + 1}</h2>
+        <div key={index} style={{ marginTop: "20px" }}>
+          <h2
+            style={{
+              fontSize: "18px",
+              marginBottom: "10px",
+              color: "#1f5c73",
+            }}
+          >
+            Question {index + 1}
+          </h2>
           <input
-            style={{ width: "400px", height: "30px",padding:"10px", borderRadius: "5px", border: "1px solid gray"}}
+            style={{
+              width: "400px",
+              height: "30px",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "1px solid gray",
+            }}
             placeholder="Enter the Question"
             value={question.Question}
             onChange={(e) => handleQuestionChange(index, e)}
           />
-          <h3 style={{marginTop:"20px"}}>Answers</h3>
+          <h3 style={{ marginTop: "20px" }}>Answers</h3>
           <ul>
             {question.answers.map((answer, answerIndex) => (
               <li
                 key={answerIndex}
                 style={{ paddingTop: "10px", paddingBottom: "10px" }}
               >
-                <h6>{answerIndex +1}</h6>
+                <h6>{answerIndex + 1}</h6>
                 <input
-                  sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px",borderRadius: "5px", border: "1px solid gray"}}
+                  sx={{
+                    margin: "10px",
+                    padding: "10px",
+                    width: "400px",
+                    height: "30px",
+                    borderRadius: "5px",
+                    border: "1px solid gray",
+                  }}
                   placeholder={`Enter answer ${answerIndex + 1}`}
                   value={answer}
                   onChange={(e) => handleAnswerChange(index, answerIndex, e)}
@@ -85,13 +110,14 @@ function Enterquizes({ setQuestions }) {
             ))}
           </ul>
           <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-            <label style={{ color: "#474b4d"}}>Select Correct Answer:</label>
+            <label style={{ color: "#474b4d" }}>Select Correct Answer:</label>
             <select
-              style={{ marginLeft: "20px",color: "#474b4d", }}
+              style={{ marginLeft: "20px", color: "#474b4d" }}
               value={question.correctAnswerIndex}
               onChange={(e) => handleCorrectAnswerChange(index, e)}
             >
               {question.answers.map((answer, answerIndex) => (
+                
                 <option key={answerIndex} value={answerIndex}>
                   Answer {answerIndex + 1}
                 </option>

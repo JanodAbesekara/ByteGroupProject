@@ -19,8 +19,8 @@ export default function Quizzes() {
       const decodedToken = jwtDecode(token);
       const userEmail = decodedToken.email;
 
-      const response = await axios.post(`/api/user/getsubjectreg`, {
-        email: userEmail,
+      const response = await axios.get(`/api/user/getsubjectreg`, {
+        params: { email: userEmail }
       });
       const filtersubject = response.data.data;
       setquise(filtersubject);

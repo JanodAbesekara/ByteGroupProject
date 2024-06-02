@@ -31,11 +31,13 @@ function DisplayAttendence({ teachermail, subject, medium }) {
 
   const fetchStudentAttendance = () => {
     axios
-      .post(`/api/user/studenceattendenceget`, {
-        teacheremail: teachermail,
-        subject: subject,
-        medium: medium,
-        studentemail: useremail,
+      .get(`/api/user/studenceattendenceget`, {
+        params: {
+          teacheremail: teachermail,
+          subject: subject,
+          medium: medium,
+          studentemail: useremail,
+        }
       })
       .then((res) => {
         const filteredData2 = res.data.data;

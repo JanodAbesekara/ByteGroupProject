@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, LinearProgress } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  LinearProgress,
+} from "@mui/material";
 import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -30,14 +42,16 @@ function Attendance() {
   }, [useremail]);
 
   const getColor = (percentage) => {
-    if (percentage < 20) {
-      return 'red';
-    } else if (percentage < 50) {
-      return 'yellow';
-    } else if (percentage < 80) {
-      return 'green';
+    if (percentage < 20 && percentage >= 0) {
+      return "red";
+    } else if (percentage < 50 && percentage >= 20) {
+      return "brown";
+    } else if (percentage < 80 && percentage >= 50)  {
+      return "yellow";
+    }else if (percentage <= 100 && percentage >= 80) {
+      return "green";
     } else {
-      return 'blue';
+      return "blue";
     }
   };
 
@@ -61,45 +75,123 @@ function Attendance() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box p={3}>
-            <Typography variant="h4" gutterBottom>Attendance</Typography>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              sx={{ color: "#116FC2", fontSize: "45px" }}
+            >
+              Attendance
+            </Typography>
             {Object.entries(groupedData).map(([key, data]) => {
               const [subject, medium] = key.split("-");
               return (
                 <Box key={key} mb={3}>
-                  <Typography variant="h6">{`Subject: ${subject} - Medium: ${medium}`}</Typography>
-                  <TableContainer component={Paper}>
+                  <Typography variant="h6">{`${subject} `}</Typography>
+                  <Typography variant="h10">{`(${medium} ) `}</Typography>
+                  <TableContainer
+                    component={Paper}
+                    sx={{ marginBottom: "50px", marginTop: "20px" }}
+                  >
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>Student Email</TableCell>
-                          <TableCell>Student Name</TableCell>
-                          <TableCell>Subject</TableCell>
-                          <TableCell>Medium</TableCell>
-                          <TableCell>Teacher Email</TableCell>
-                          <TableCell>Attendance</TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#277EDA",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Student Email
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#277EDA",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Student Name
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#277EDA",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Subject
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#277EDA",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Medium
+                          </TableCell>
+
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#277EDA",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Attendance
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {data.map((item, index) => {
-                          const attendancePercentage = (item.posts.countAttendence / item.profile[0].leccount) * 100;
+                          const attendancePercentage =
+                            (item.posts.countAttendence /
+                              item.profile[0].leccount) *
+                            100;
                           return (
                             <TableRow key={index}>
-                              <TableCell>{item.posts.studentnemail}</TableCell>
-                              <TableCell>{item.posts.studentname}</TableCell>
-                              <TableCell>{item.profile[0].subject}</TableCell>
-                              <TableCell>{item.profile[0].media}</TableCell>
-                              <TableCell>{item.profile[0].teacheremail}</TableCell>
-                              <TableCell>
+                              <TableCell align="center">
+                                {item.posts.studentnemail}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.posts.studentname}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.profile[0].subject}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.profile[0].media}
+                              </TableCell>
+                              <TableCell align="center">
                                 <Box display="flex" alignItems="center">
                                   <Box width="100%" mr={1}>
-                                    <LinearProgress 
-                                      variant="determinate" 
-                                      value={attendancePercentage} 
-                                      style={{ backgroundColor: getColor(attendancePercentage) }} 
+                                    <LinearProgress
+                                      variant="determinate"
+                                      value={attendancePercentage}
+                                      style={{
+                                        backgroundColor:
+                                          getColor(attendancePercentage),
+                                        height: "5px",
+                                      }}
                                     />
                                   </Box>
                                   <Box minWidth={35}>
-                                    <Typography variant="body2" color="textSecondary">
+                                    <Typography
+                                      variant="body2"
+                                      color="textSecondary"
+                                    >
                                       {`${attendancePercentage.toFixed(2)}%`}
                                     </Typography>
                                   </Box>

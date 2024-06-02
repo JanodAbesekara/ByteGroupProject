@@ -12,6 +12,10 @@ import {
   deleteEntireCard,
   studentProfile,
   parentDetails
+  Admindeisplay,
+  Admindelete,
+  AdminCrete,
+
 } from "../controllers/userProfileController.js";
 
 import {
@@ -24,11 +28,11 @@ import {
   getstudentattendence,
 } from "../controllers/studentAttendencecontrollers.js";
 
-import { getRegisteredSubject } from "../controllers/SubjectRegistercontroller.js";
+import  getRegisteredSubject  from "../controllers/SubjectRegistercontroller.js";
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
-router.post("/studenceattendenceget", studentattendencegetController);
+router.get("/studenceattendenceget", studentattendencegetController);
 router.post("/techeralectureget", techerlecturecountget);
 router.post("/teacherlecture", teacherattendenceController);
 router.post("/editlecturecount", editlecturecount);
@@ -46,7 +50,14 @@ router.get("/userProfile/:userID", userDetailsController);
 router.get("/dashboard/:userID", userOtherDetailsController);
 
 // subject get from registered
-router.get("/getsubjectreg/:teacherEmail", getRegisteredSubject);
+
+router.get("/getsubjectreg", getRegisteredSubject);
+
+// admin display 
+router.get("/admindisplay", Admindeisplay);
+router.post("/admindelete", Admindelete);
+router.post("/admincreate", AdminCrete);
+
 
 //students guardian details
 
