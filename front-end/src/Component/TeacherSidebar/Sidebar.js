@@ -52,10 +52,15 @@ export default function Ssidebar() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("MERN_AUTH_TOKEN");
-    history("/Login");
-
-    window.location.reload();
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      localStorage.removeItem("MERN_AUTH_TOKEN");
+      history("/Login");
+      window.location.reload();
+    } else {
+      console.log("No authentication token found. Redirecting to login page.");
+      history("/Login");
+      window.location.reload();
+    }
   };
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");

@@ -95,7 +95,7 @@ function AddingLectures({ subjectData }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {subjectQuiz
+            {subjectQuiz 
               .slice(0)
               .reverse()
               .map((quise) => (
