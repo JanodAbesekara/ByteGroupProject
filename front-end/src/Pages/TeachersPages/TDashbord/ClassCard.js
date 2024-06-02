@@ -94,7 +94,7 @@ export default function ClassCard(subjectData) {
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div className="classcom" style={{ width: "25%", border: "none" }}>
               <Link
-                to="/ClassContent"
+                to="/TClasses"
                 style={{ textDecoration: "none", textTransform: "uppercase" }}
               >
                 <p

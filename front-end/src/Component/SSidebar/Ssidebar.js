@@ -35,7 +35,7 @@ export default function Ssidebar() {
 
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    if (!token || typeof token === "undefined" || token === null) {
+    if (!token || typeof token !== "string") {
       history("/Login");
     }
   }, [history]);
@@ -49,16 +49,31 @@ export default function Ssidebar() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("MERN_AUTH_TOKEN");
-    history("/Login");
-
-    window.location.reload();
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      localStorage.removeItem("MERN_AUTH_TOKEN");
+      history("/Login");
+      window.location.reload();
+    } else {
+      console.log("No authentication token found. Redirecting to login page.");
+      history("/Login");
+      window.location.reload();
+    }
   };
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const jobRole = decodedToken.role;
-  const encodedid = jobRole === "Student" ? encodeURIComponent(decodedToken._id) : "";
+  let decodedToken;
+  let jobRole = "";
+  let encodedid = "";
+
+  try {
+    decodedToken = jwtDecode(token);
+    jobRole = decodedToken.role;
+    encodedid =
+      jobRole === "Student" ? encodeURIComponent(decodedToken._id) : "";
+  } catch (error) {
+    console.error("Invalid token:", error);
+    history("/Login");
+  }
 
   const sidebarItems = [
     {
@@ -125,7 +140,6 @@ export default function Ssidebar() {
                   <span className="sidebar_icon">
                     <Icon />
                   </span>
-
                   <span className="sidebar_name">{name}</span>
                 </Link>
               </BootstrapTooltip>
@@ -137,7 +151,6 @@ export default function Ssidebar() {
             <span className="sidebar_icon">
               <MdLogout />
             </span>
-
             <span className="sidebar_name">Logout</span>
           </Link>
         </BootstrapTooltip>
