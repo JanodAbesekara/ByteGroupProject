@@ -42,11 +42,13 @@ function Attendance() {
   }, [useremail]);
 
   const getColor = (percentage) => {
-    if (percentage < 20) {
+    if (percentage < 20 && percentage >= 0) {
       return "red";
-    } else if (percentage < 50) {
+    } else if (percentage < 50 && percentage >= 20) {
+      return "brown";
+    } else if (percentage < 80 && percentage >= 50)  {
       return "yellow";
-    } else if (percentage < 80) {
+    }else if (percentage <= 100 && percentage >= 80) {
       return "green";
     } else {
       return "blue";
@@ -160,20 +162,28 @@ function Attendance() {
                             100;
                           return (
                             <TableRow key={index}>
-                              <TableCell align="center">{item.posts.studentnemail}</TableCell>
-                              <TableCell align="center">{item.posts.studentname}</TableCell>
-                              <TableCell align="center">{item.profile[0].subject}</TableCell>
-                              <TableCell align="center">{item.profile[0].media}</TableCell>
+                              <TableCell align="center">
+                                {item.posts.studentnemail}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.posts.studentname}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.profile[0].subject}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.profile[0].media}
+                              </TableCell>
                               <TableCell align="center">
                                 <Box display="flex" alignItems="center">
-                                  <Box width="100%"  mr={1}>
+                                  <Box width="100%" mr={1}>
                                     <LinearProgress
                                       variant="determinate"
                                       value={attendancePercentage}
                                       style={{
                                         backgroundColor:
                                           getColor(attendancePercentage),
-                                          height:"5px"
+                                        height: "5px",
                                       }}
                                     />
                                   </Box>
