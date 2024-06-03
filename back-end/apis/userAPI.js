@@ -28,7 +28,7 @@ import {
   getstudentattendence,
 } from "../controllers/studentAttendencecontrollers.js";
 
-import  getRegisteredSubject  from "../controllers/SubjectRegistercontroller.js";
+import  {getRegisteredSubject,getSubject}  from "../controllers/SubjectRegistercontroller.js";
 
 router.post("/userProfile", userProfileController);
 router.post("/studentattendence", studentattendenceController);
@@ -73,5 +73,8 @@ router.get("/name/:studentEmail",studentProfile);
 
 //get specific parent relevant to student
 router.get("/parent/:studentEmail",parentDetails);
+
+//get specific teachers subjects
+router.get("/getsubjects/:teacherEmail",getSubject);
 
 export default router;
