@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import { TableRow, TableCell } from "@mui/material";
 import axios from "axios";
 
-export default function StudentTable({ studentDetails }) {
+const defaultProfilePicUrl =
+  "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg";
+
+ function StudentTable({ studentDetails, profilePicUrl }) {
   const [stuDetails, setStudentDetails] = useState({});
   const [parentDetails, setParentDetails] = useState({});
+
+  const displayPicUrl = profilePicUrl || defaultProfilePicUrl;
 
   const studentEmail = studentDetails.userEmail;
   console.log(studentEmail);
@@ -15,7 +20,7 @@ export default function StudentTable({ studentDetails }) {
         const response = await axios.get(`/api/user/name/${studentEmail}`);
         if (response.data.success) {
           setStudentDetails(response.data.data); // Store the first item in the array
-          console.log(response.data.data);
+          console.log(parentDetails);
         } else {
           console.error("Failed to fetch student details");
         }
@@ -44,17 +49,32 @@ export default function StudentTable({ studentDetails }) {
   return (
     <TableRow>
       <TableCell align="center">
+        {profilePicUrl === "" ? "No Image" : ""}
+        <a 
+        href={displayPicUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        >
+          <img 
+            src={displayPicUrl}
+            alt="profile_image"
+            style={{
+              borderRadius: "50%",
+              width: "50px",
+              height: "50px",
+              cursor: "pointer",
+            }}
+          />
+        </a>
+      </TableCell>
+      <TableCell align="center">
         {stuDetails.firstname} {stuDetails.lastname}
       </TableCell>
-      <TableCell align="center">
-        {studentDetails.userEmail}
-      </TableCell>
-      <TableCell align="center">
-        {parentDetails.email}
-      </TableCell>
-      <TableCell align="center">
-        {parentDetails.mobileNo}
-      </TableCell>
+      <TableCell align="center">{studentDetails.userEmail}</TableCell>
+      <TableCell align="center">{parentDetails.email}</TableCell>
+      <TableCell align="center">{parentDetails.mobileNo}</TableCell>
     </TableRow>
   );
 }
+
+export default StudentTable;
