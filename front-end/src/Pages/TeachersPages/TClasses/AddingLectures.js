@@ -137,9 +137,9 @@ function AddingLectures({ subjectData }) {
                     )}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {quise.otherLink && (
+                    {quise.otherlink && (
                       <a
-                        href={quise.otherLink}
+                        href={quise.otherlink}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
