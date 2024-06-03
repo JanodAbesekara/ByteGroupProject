@@ -20,7 +20,7 @@ export default function Students() {
 
     const fetchRegSubjects = async () => {
       try {
-        const response = await axios.get(`/api/user/getsubjectreg/${teacherEmail}`);
+        const response = await axios.get(`/api/user/getsubjects/${teacherEmail}`);
         const filteredSubjects = response.data.data;
         setSubjects(filteredSubjects);
         
