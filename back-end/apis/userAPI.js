@@ -10,9 +10,12 @@ import {
   studentParentDetailsController,
   updateUserProfileController,
   deleteEntireCard,
+  studentProfile,
+  parentDetails
   Admindeisplay,
   Admindelete,
   AdminCrete,
+
 } from "../controllers/userProfileController.js";
 
 import {
@@ -64,5 +67,11 @@ router.post("/guardian", studentParentDetailsController);
 router.put("/update/:subID", updateUserProfileController);
 // delete entire subject card
 router.delete("/delete/:deleted", deleteEntireCard);
+
+//get specific student
+router.get("/name/:studentEmail",studentProfile);
+
+//get specific parent relevant to student
+router.get("/parent/:studentEmail",parentDetails);
 
 export default router;

@@ -3,6 +3,7 @@ import usermodel from "../models/usermodel.js";
 import paymentmodel from "../models/paymentModel.js";
 import studentProfileModel from "../models/studentProfileModel.js";
 
+
 const userProfileController = async (req, res) => {
   const {
     medium,
@@ -179,6 +180,37 @@ const Admindeisplay = async (req, res) => {
   }
 };
 
+
+const studentProfile = async (req,res) => {
+  const studentEmail = req.params.studentEmail;
+  try {
+      const studentData =  await usermodel.findOne({
+        email: studentEmail,
+      });
+      if (!studentData) {
+        return res.status(404).json({ success: false, msg: "Student not found" });
+      }
+      return res.status(200).json({ success: true, data: studentData });
+  } catch (error) {
+    return res.status(500).json({success:false , msg: "An unexpected error occured"});
+  }
+}
+
+const parentDetails = async (req,res) => {
+  const studentEmail = req.params.studentEmail;
+  try {
+      const parentData = await studentProfileModel.findOne({
+        uEmail:studentEmail,
+      });
+      if (!parentData) {
+        return res.status(404).json({ success: false, msg: "Parent details not found" });
+      }
+      return res.status(200).json({ success: true, data: parentData });
+  } catch (error) {
+    return res.status(500).json({success:false , msg:"An unexpected error occured"});
+  }
+}
+
 const Admindelete = async (req, res) => {
   const { id } = req.body;
   try {
@@ -214,6 +246,7 @@ const AdminCrete = async (req, res) => {
   }
 };
 
+
 export {
   userProfileController,
   userDetailsController,
@@ -223,6 +256,8 @@ export {
   studentParentDetailsController,
   updateUserProfileController,
   deleteEntireCard,
+  studentProfile,
+  parentDetails
   Admindeisplay,
   Admindelete,
   AdminCrete,
