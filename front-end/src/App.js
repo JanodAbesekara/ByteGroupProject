@@ -11,7 +11,7 @@ import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
 import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
 import Feedback from "./Pages/TeachersPages/Feedback/Feedback";
 import Grades from "./Pages/TeachersPages/Grades/Grades";
-import MyAds from "./Pages/TeachersPages/MyAds/MyAds.jsx";
+import MyAds from "./Pages/TeachersPages/MyAds/MyAds";
 import PaymentDetails from "./Pages/TeachersPages/PaymentDetails/PaymentDetails";
 import Quizzes from "./Pages/TeachersPages/Quizzes/Quizzes";
 import Students from "./Pages/TeachersPages/Students/Students";
@@ -51,6 +51,10 @@ import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
 import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
 import DisplayResources from "./Pages/AdminPages/Aaddresources/Displayresources.js";
 import Attendence from "./Pages/TeachersPages/Attendence/Attendence";
+import StudentCard from "./Pages/TeachersPages/Students/StudentCard";
+import StudentTable from "./Pages/TeachersPages/Students/StudentTable.js";
+import Attendance from "./Pages/TeachersPages/Attendence/Attendence";
+
 
 
 function App() {
@@ -138,6 +142,9 @@ function App() {
           <Route path="/AddingLectures" element={<AddingLectures />} />
           <Route path="/DisplayResources" element={<DisplayResources />} />
           <Route path="/Attendence" element={<Attendence />} />
+          <Route path="/StudentCard" element={<StudentCard />} />
+          <Route path="/StudentTable" element={<StudentTable />} />
+          <Route path="/Attendance" element={<Attendance />} />
         </Routes>
       </div>
     </>

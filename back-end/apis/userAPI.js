@@ -11,7 +11,7 @@ import {
   updateUserProfileController,
   deleteEntireCard,
   studentProfile,
-  parentDetails
+  parentDetails,
   Admindeisplay,
   Admindelete,
   AdminCrete,
