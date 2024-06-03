@@ -15,6 +15,7 @@ export default function StudentTable({ studentDetails }) {
         const response = await axios.get(`/api/user/name/${studentEmail}`);
         if (response.data.success) {
           setStudentDetails(response.data.data); // Store the first item in the array
+          console.log(response.data.data);
         } else {
           console.error("Failed to fetch student details");
         }

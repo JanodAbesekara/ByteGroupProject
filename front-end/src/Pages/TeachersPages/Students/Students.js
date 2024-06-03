@@ -23,6 +23,7 @@ export default function Students() {
         const response = await axios.get(`/api/user/getsubjectreg/${teacherEmail}`);
         const filteredSubjects = response.data.data;
         setSubjects(filteredSubjects);
+        
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
