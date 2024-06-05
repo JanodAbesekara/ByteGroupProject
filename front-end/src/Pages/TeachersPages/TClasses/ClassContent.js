@@ -24,6 +24,8 @@ function ClassContent({ subjectData }) {
   const [pdfPerc, setPdfPerc] = useState(0); // State to store PDF upload percentage
   const [videoPerc, setVideoPerc] = useState(0); // State to store video upload percentage
   const [otherlink, setOterlink] = useState(""); // State to store other link
+  const [pdfUrl, setPdfUrl] = useState(""); // State to store PDF URL
+  const [videoUrl, setVideoUrl] = useState(""); // State to store video URL
 
   useEffect(() => {
     if (video) {
@@ -58,6 +60,11 @@ function ClassContent({ subjectData }) {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("DownloadURL -", downloadURL);
+          if (fileType === "pdfUrl") {
+            setPdfUrl(downloadURL);
+          } else {
+            setVideoUrl(downloadURL);
+          }
         });
       }
     );
@@ -72,21 +79,20 @@ function ClassContent({ subjectData }) {
       Tmedium: subjectData.medium,
       lesson,
       zoom,
-      PDF,
-      video,
+      PDF: pdfUrl,
+      video: videoUrl,
       otherlink,
     };
+    console.log(`paylord`, paylord);
     try {
       await axios.post(`/api/Quise/lecturematerialadd`, paylord);
       window.alert("Lecture added successfully");
       window.location.reload();
     } catch (error) {
-      console.error("Error:", error);
-      window.alert(" Error occured while adding lecture", error);
+      window.alert("Error occurred while adding lecture", error);
     }
   };
 
- 
   return (
     <>
       <div
@@ -194,9 +200,7 @@ function ClassContent({ subjectData }) {
           </form>
         </div>
       </div>
-
-  </>
-
+    </>
   );
 }
 
