@@ -21,9 +21,15 @@ export default function Feedback() {
   const [feedbackData, setFeedbackData] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const useremail = decodedToken.email;
+    let useremail;
+
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      useremail = decodedToken.email;
+    } else {
+      useremail = " ";
+    }
 
     axios
       .get(`/api/auth/feedbackget`)

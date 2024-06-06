@@ -14,12 +14,13 @@ export default function Students() {
   const [subjects, setSubjects] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodeToken = jwtDecode(token);
-    const teacherEmail = decodeToken.email;
+
 
     const fetchRegSubjects = async () => {
       try {
+        const token = localStorage.getItem("MERN_AUTH_TOKEN");
+        const decodeToken = jwtDecode(token);
+        const teacherEmail = decodeToken.email;
         const response = await axios.get(`/api/user/getsubjects/${teacherEmail}`);
         const filteredSubjects = response.data.data;
         setSubjects(filteredSubjects);

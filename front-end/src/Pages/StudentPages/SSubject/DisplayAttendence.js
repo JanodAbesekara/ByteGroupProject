@@ -4,10 +4,15 @@ import axios from "axios"; // Correct import
 import AttendenceChart from "./AttendanceChart";
 
 function DisplayAttendence({ teachermail, subject, medium }) {
+
+  let useremail;
+  if( localStorage.getItem("MERN_AUTH_TOKEN")){
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-
+   useremail = decodedToken.email;
+  }else{
+    useremail = " ";
+  }
   const [displayData1, setDisplayData1] = useState([]);
   const [displayData2, setDisplayData2] = useState([]);
 

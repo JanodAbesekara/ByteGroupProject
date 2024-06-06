@@ -21,10 +21,15 @@ import { jwtDecode } from "jwt-decode";
 function MyAds() {
 
 
+  let useremail;
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    useremail = decodedToken.email;
+  } else {
+    useremail = " ";
+  }
 
  
 

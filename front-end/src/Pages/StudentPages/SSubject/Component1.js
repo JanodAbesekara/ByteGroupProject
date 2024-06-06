@@ -5,12 +5,18 @@ import Typography from "@mui/material/Typography";
 import { jwtDecode } from "jwt-decode";
 import Axios from "axios";
 
-function Component1({subject,teachermail, Feedmedium}) {
+function Component1({ subject, teachermail, Feedmedium }) {
   const [value, setValue] = useState(1);
   const [feedtext, setFeedtext] = useState("");
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const studentemail = jwtDecode(token).email;
+  let studentemail;
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    studentemail = decodedToken.email;
+  } else {
+    studentemail = " ";
+  }
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -19,9 +25,9 @@ function Component1({subject,teachermail, Feedmedium}) {
       feedtext,
       value,
       studentemail,
-      teacheremail:teachermail,
-      feedSubject:subject,
-      feedmedium:Feedmedium,
+      teacheremail: teachermail,
+      feedSubject: subject,
+      feedmedium: Feedmedium,
     };
 
     Axios.post("/api/auth/feedbackadd", data)
@@ -40,7 +46,10 @@ function Component1({subject,teachermail, Feedmedium}) {
     <div>
       <div>
         <form>
-          <h2 style={{color:"#000080" , marginBottom:"30px"}}> Enter your feedback</h2>
+          <h2 style={{ color: "#000080", marginBottom: "30px" }}>
+            {" "}
+            Enter your feedback
+          </h2>
           <input
             type="text"
             style={{
