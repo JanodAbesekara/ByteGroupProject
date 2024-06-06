@@ -35,6 +35,7 @@ export default function Assignment() {
     const [createdAssignment, setCreatedAssignment] = useState([]);
     
     useEffect(() => {
+      
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
         const decodedToken = jwtDecode(token);
         const userEmail = decodedToken.email;

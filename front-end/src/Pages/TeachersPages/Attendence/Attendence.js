@@ -19,10 +19,15 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 function Attendance() {
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
+  let useremail;
 
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    useremail = decodedToken.email;
+  } else {
+    useremail = " ";
+  }
   const [attendanceData, setAttendanceData] = useState([]);
 
   useEffect(() => {
@@ -46,9 +51,9 @@ function Attendance() {
       return "red";
     } else if (percentage < 50 && percentage >= 20) {
       return "brown";
-    } else if (percentage < 80 && percentage >= 50)  {
+    } else if (percentage < 80 && percentage >= 50) {
       return "yellow";
-    }else if (percentage <= 100 && percentage >= 80) {
+    } else if (percentage <= 100 && percentage >= 80) {
       return "green";
     } else {
       return "blue";

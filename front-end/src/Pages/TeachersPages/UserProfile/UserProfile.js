@@ -75,15 +75,28 @@ function UserProfile() {
       });
   };
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const userEmail = decodedToken.email;
-  // getting users name
-  useEffect(() => {
+  let userEmail = "";
+
+  if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
+    userEmail = "";
+  } else {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
-    setUser(decodedToken);
-    const userID = decodedToken._id;
+    userEmail = decodedToken.email;
+  }
+
+  // getting users name
+  useEffect(() => {
+    let userID;
+
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      setUser(decodedToken);
+      userID = decodedToken._id;
+    } else {
+      userID = "";
+    }
 
     axios
       .get(`api/user/userProfile/${userID}`)

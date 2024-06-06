@@ -19,8 +19,6 @@ function SProfile() {
   const [email, setEmail] = useState("");
   const [mobileNo, setMobileNo] = useState("");
 
-
-
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
@@ -71,9 +69,15 @@ function SProfile() {
       });
   };
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const userEmail = decodedToken.email;
+  let userEmail;
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    userEmail = decodedToken.email;
+  } else {
+    userEmail = "";
+  }
+
   // getting users name
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
@@ -107,7 +111,7 @@ function SProfile() {
       id: userID,
     };
     console.log("======");
-console.log(updatedUser);
+    console.log(updatedUser);
     axios
       .post(`/api/user/guardian`, updatedUser)
       .then((response) => {
@@ -161,10 +165,10 @@ console.log(updatedUser);
 
           <div className="personal_details">
             <div className="details">
-               <form onSubmit={handleSubmit}> 
-
+              <form onSubmit={handleSubmit}>
                 <lebel htmlFor="Parent/Guardian Full Name">
-                  <span style={{ color: "red" }}>*</span>Parent/Guardian Full Name
+                  <span style={{ color: "red" }}>*</span>Parent/Guardian Full
+                  Name
                 </lebel>
                 <br></br>
                 <input

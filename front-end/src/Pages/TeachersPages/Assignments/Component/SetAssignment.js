@@ -6,9 +6,15 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 export default function CombinedComponent({medium , subject}) {
+
+  let userEmail;
+  if( localStorage.getItem("MERN_AUTH_TOKEN") ){
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
-  const userEmail = decodedToken.email;
+  userEmail = decodedToken.email;
+  }else{
+  userEmail = " ";
+  }
 
   const [timeRange, setTimeRange] = useState("");
   const [questions, setQuestions] = useState([]);

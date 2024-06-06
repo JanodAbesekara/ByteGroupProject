@@ -3,10 +3,18 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const ComAttendence = forwardRef(({ teachermail, subject, medium }, ref) => {
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const firstname = decodedToken.firstname;
-  const lastname = decodedToken.lastname;
+  let firstname;
+  let lastname;
+
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    firstname = decodedToken.firstname;
+    lastname = decodedToken.lastname;
+  } else {
+    firstname = " ";
+    lastname = " ";
+  }
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -15,6 +23,8 @@ const ComAttendence = forwardRef(({ teachermail, subject, medium }, ref) => {
 
     setButtonDisabled(true);
     try {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
       const response = await axios.post("/api/user/studentattendence", {
         studentnemail: decodedToken.email,
         studentname: firstname + " " + lastname,

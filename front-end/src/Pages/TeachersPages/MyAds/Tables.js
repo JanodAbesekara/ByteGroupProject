@@ -13,17 +13,22 @@ import { jwtDecode } from "jwt-decode";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 
-
 function Subject({ selectedPost, setSelectedPost }) {
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
+  let useremail;
+
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    useremail = decodedToken.email;
+  } else {
+    useremail = " ";
+  }
 
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [  ]);
 
   const getPosts = () => {
     axios

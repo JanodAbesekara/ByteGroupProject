@@ -13,10 +13,20 @@ function Content({ teachermail, subject, medium }) {
   const attendenceRef = useRef();
   const formRef = useRef();
 
+
+  let firstname;
+  let lastname;
+
+  if( localStorage.getItem("MERN_AUTH_TOKEN")){
+
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
-  const firstname = decodedToken.firstname;
-  const lastname = decodedToken.lastname;
+   firstname = decodedToken.firstname;
+   lastname = decodedToken.lastname;
+  }else{
+    firstname = " ";
+    lastname = " ";
+  }
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -25,6 +35,8 @@ function Content({ teachermail, subject, medium }) {
 
     setButtonDisabled(true);
     try {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
       const response = await axios.post("/api/user/studentattendence", {
         studentnemail: decodedToken.email,
         studentname: firstname + " " + lastname,

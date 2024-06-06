@@ -37,52 +37,76 @@ function Openwindow({ open, handleClose, notifications }) {
     minute: "2-digit",
   });
 
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-  const role = decodedToken.role;
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const useremail = decodedToken.email;
+
+      axios
+        .get(`/api/user/getsubjectreg`, {
+          params: { email: useremail },
+        })
+        .then((response) => {
+          const filteredSubject = response.data.data;
+          setTeacherSubject(filteredSubject);
+        })
+        .catch((error) => {
+          console.error("Error fetching subject data:", error);
+        });
+    } catch (error) {
+      console.error("Invalid token", error);
+    }
+  }, []);
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      titleofAnn: title,
-      Announcementmessage: message,
-      TeacheSubject: subject.subject,
-      postedemail: useremail,
-      date: currentDate.toISOString().split("T")[0],
-      time: currentTime,
-      jobrole: role,
-      mediua: subject.medium,
-    };
+
+    if (!subject || !title || !message) {
+      window.alert("Please fill in all fields");
+      return;
+    }
+
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+
+    if (!token) {
+      window.alert("No token found");
+      return;
+    }
 
     try {
+      const decodedToken = jwtDecode(token);
+      const useremail = decodedToken.email;
+      const role = decodedToken.role;
+
+      const data = {
+        titleofAnn: title,
+        Announcementmessage: message,
+        TeacheSubject: subject.subject,
+        postedemail: useremail,
+        date: currentDate.toISOString().split("T")[0],
+        time: currentTime,
+        jobrole: role,
+        mediua: subject.medium,
+      };
+
       const response = await axios.post(`/api/send/notifaction`, data);
       window.alert(response.data.message);
-      console.log(data);
       handleClose();
     } catch (error) {
-      window.alert(error.response.data.message);
+      if (error.response && error.response.data) {
+        window.alert(error.response.data.message);
+      } else {
+        window.alert("An error occurred while sending the notification");
+      }
     }
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const useremail = decodedToken.email;
-
-    axios
-      .get(`/api/user/getsubjectreg`, {
-        params: { email: useremail },
-      })
-      .then((response) => {
-        const filteredSubject = response.data.data;
-        setTeacherSubject(filteredSubject);
-      })
-      .catch((error) => {
-        console.error("Error fetching notification data:", error);
-      });
-  }, []);
-
   return (
     <BootstrapDialog
       onClose={handleClose}

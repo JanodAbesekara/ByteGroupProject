@@ -13,26 +13,29 @@ function SAssignment() {
 
   useEffect(() => {
     const feachdata = async () => {
-      const token = localStorage.getItem("MERN_AUTH_TOKEN");
-      const decodedToken = jwtDecode(token);
-      const StuEmail = decodedToken.email;
+      let StuEmail;
 
+      if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+        const token = localStorage.getItem("MERN_AUTH_TOKEN");
+        const decodedToken = jwtDecode(token);
+        StuEmail = decodedToken.email;
+      } else {
+        StuEmail = " ";
+      }
 
-    axios
-      .get(`/api/Test/getAssignment`, {
-       params: {email: StuEmail}
-      })
-      .then((response) => {
-        const allAssignments = response.data.assignments;
-        setAssignment(allAssignments);
-      })
-      .catch((error) => {
-        console.log("error");
-      });
-
+      axios
+        .get(`/api/Test/getAssignment`, {
+          params: { email: StuEmail },
+        })
+        .then((response) => {
+          const allAssignments = response.data.assignments;
+          setAssignment(allAssignments);
+        })
+        .catch((error) => {
+          console.log("error");
+        });
     };
     feachdata();
-
   }, []);
 
   return (
