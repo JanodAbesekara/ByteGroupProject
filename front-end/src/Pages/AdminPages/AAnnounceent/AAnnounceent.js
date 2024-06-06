@@ -16,11 +16,18 @@ import {
 } from "@mui/material";
 
 function AAnnounceent() {
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-  const role = decodedToken.role;
+  let useremail;
+  let role;
 
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    useremail = decodedToken.email;
+    role = decodedToken.role;
+  } else {
+    useremail = "";
+    role = " ";
+  }
   const [Announcementmessage, setAnnouncementmessage] = useState("");
   const [titleofAnn, settitleofAnn] = useState("");
   const [announcements, setAnnouncements] = useState([]);
@@ -72,7 +79,9 @@ function AAnnounceent() {
   const deleteAnnouncement = async (id) => {
     try {
       const response = await axios.post(`/api/delete/notifaction`, { _id: id });
-      setAnnouncements( announcements.filter((announcement) => announcement._id !== id));
+      setAnnouncements(
+        announcements.filter((announcement) => announcement._id !== id)
+      );
       window.alert(response.data.message);
     } catch (error) {
       window.alert(error.response.data.message);
