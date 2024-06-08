@@ -54,6 +54,8 @@ import Attendence from "./Pages/TeachersPages/Attendence/Attendence";
 import StudentCard from "./Pages/TeachersPages/Students/StudentCard";
 import StudentTable from "./Pages/TeachersPages/Students/StudentTable.js";
 import Attendance from "./Pages/TeachersPages/Attendence/Attendence";
+import SubjectCard from "./Pages/StudentPages/SDashbord/SubjectCard";
+import ProfileDisplay from "./Pages/StudentPages/SDashbord/ProfileDisplay";
 
 
 
@@ -145,6 +147,8 @@ function App() {
           <Route path="/StudentCard" element={<StudentCard />} />
           <Route path="/StudentTable" element={<StudentTable />} />
           <Route path="/Attendance" element={<Attendance />} />
+          <Route path="/SubjectCard" element={<SubjectCard />} />
+          <Route path="/ProfileDisplay" element={<ProfileDisplay />} />
         </Routes>
       </div>
     </>
