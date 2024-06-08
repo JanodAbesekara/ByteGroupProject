@@ -1,0 +1,17 @@
+.feedback-container {
+    padding: 20px;
+  }
+  
+  .table-container {
+    margin-bottom: 50px;
+  }
+  
+  .delete-btn {
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 5px;
+    box-shadow: 2px 1px 10px 0.5px black;
+    border-radius: 5px;
+  }
+  
