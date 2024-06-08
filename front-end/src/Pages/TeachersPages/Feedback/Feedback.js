@@ -35,17 +35,34 @@ export default function Feedback() {
       .get(`/api/auth/feedbackget`)
       .then((response) => {
         console.log(response.data.data);
-        // Filter feedback data based on useremail
         const filteredFeedback = response.data.data.filter(
           (feedback) => feedback.teacheremail === useremail
         );
         setFeedbackData(filteredFeedback);
- 
       })
       .catch((error) => {
         console.error("Error fetching feedback data:", error);
       });
   }, []);
+
+  const groupFeedback = (data) => {
+    const grouped = {};
+
+    data.forEach((item) => {
+      const { feedSubject, feedmedium } = item;
+      if (!grouped[feedSubject]) {
+        grouped[feedSubject] = {};
+      }
+      if (!grouped[feedSubject][feedmedium]) {
+        grouped[feedSubject][feedmedium] = [];
+      }
+      grouped[feedSubject][feedmedium].push(item);
+    });
+
+    return grouped;
+  };
+
+  const groupedFeedback = groupFeedback(feedbackData);
 
   return (
     <div>
@@ -59,96 +76,74 @@ export default function Feedback() {
             <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
               Feed Backs
             </h1>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Student Email
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Subject
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Medium
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      FeedBack
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Rating
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {feedbackData.map((feedback) => {
-                    return (
-                      <TableRow key={feedback._id}>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {feedback.studentemail}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {feedback.feedSubject}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {feedback.feedmedium}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {feedback.feedtext}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          <Rating
-                            name="read-only"
-                            value={feedback.value}
-                            readOnly
-                          />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            {Object.keys(groupedFeedback).map((subject) => (
+              <div key={subject}>
+                <h2>{subject}</h2>
+                {Object.keys(groupedFeedback[subject]).map((medium) => (
+                  <TableContainer component={Paper} key={medium} style={{ marginBottom: "20px" }}>
+                    <h3>{medium}</h3>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell
+                            sx={{
+                              textAlign: "center",
+                              backgroundColor: "#0000B9",
+                              color: "white",
+                              borderRight: "2px solid white",
+                              fontSize: "16px",
+                            }}
+                          >
+                            Student Email
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              textAlign: "center",
+                              backgroundColor: "#0000B9",
+                              color: "white",
+                              borderRight: "2px solid white",
+                              fontSize: "16px",
+                            }}
+                          >
+                            FeedBack
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              textAlign: "center",
+                              backgroundColor: "#0000B9",
+                              color: "white",
+                              borderRight: "2px solid white",
+                              fontSize: "16px",
+                            }}
+                          >
+                            Rating
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {groupedFeedback[subject][medium].map((feedback) => (
+                          <TableRow key={feedback._id}>
+                            <TableCell sx={{ textAlign: "center" }}>
+                              {feedback.studentemail}
+                            </TableCell>
+                            <TableCell sx={{ textAlign: "center" }}>
+                              {feedback.feedtext}
+                            </TableCell>
+                            <TableCell sx={{ textAlign: "center" }}>
+                              <Rating
+                                name="read-only"
+                                value={feedback.value}
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ))}
+              </div>
+            ))}
           </Box>
         </Grid>
       </Grid>
