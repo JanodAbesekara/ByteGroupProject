@@ -34,11 +34,11 @@ function SSubject() {
 
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("/api/Enrol/getSubject");
-        console.log(response.data.data);
-        const filteredSubjects = response.data.data.filter(
-          (subject) => subject.userEmail === userEmail
-        );
+        const response = await axios.get("/api/Enrol/getSubject",{
+          params:{userEmail:userEmail},
+        });
+       
+        const filteredSubjects = response.data.data;
 
         setSubjects(filteredSubjects);
       } catch (error) {

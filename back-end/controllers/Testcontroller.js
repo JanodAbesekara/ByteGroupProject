@@ -3,14 +3,10 @@ import Quize from "../models/Quizzesmodels.js";
 import lecturematerial from "../models/Lecturematerial.js";
 import Announcement from "../models/Announcementmodel.js";
 import Assignment from "../models/Assignmentmodel.js";
+import UserProfile from "../models/userProfileModel.js";
 
-
-
-
- const getAssignment = async (req, res) => {
-  
-  const {email} = req.query;
-
+const getAssignment = async (req, res) => {
+  const { email } = req.query;
 
   try {
     // Find enrollments for the given user email
@@ -150,10 +146,27 @@ const getNotificationT = async (req, res) => {
   }
 };
 
+const getprofile = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const profile = await UserProfile.findOne({ email: email });
+    if (!profile) {
+      return res.status(404).json({ success: false, msg: "Profile not found" });
+    }
+    return res.status(200).json({ success: true, data:profile });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   quisecontroller,
   getlecturematerial,
   getNotifacition,
   getNotificationT,
   getAssignment,
+  getprofile,
 };

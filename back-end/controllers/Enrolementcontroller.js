@@ -113,8 +113,9 @@ const StudentEnrollment = async (req, res) => {
 };
 
 const getSubjects = async (req, res) => {
+  const { userEmail } = req.query;
   try {
-    const subjects = await EnrollmentSchema.find();
+    const subjects = await EnrollmentSchema.find({ userEmail: userEmail });
     return res.status(200).json({ success: true, data: subjects });
   } catch (error) {
     return res
@@ -161,21 +162,21 @@ const logoutfromclass = async (req, res) => {
   }
 };
 
-const getEnrollmentDetails = async (req,res) => {
-   const { teacherEmail,subject, medium} = req.params;
-   try{
-    const details =  await EnrollmentSchema.find({
-      teacherEmail : teacherEmail,
-      Ensubject : subject,
-      Enmedium : medium
+const getEnrollmentDetails = async (req, res) => {
+  const { teacherEmail, subject, medium } = req.params;
+  try {
+    const details = await EnrollmentSchema.find({
+      teacherEmail: teacherEmail,
+      Ensubject: subject,
+      Enmedium: medium,
     });
+    return res.status(200).json({ success: true, data: details });
+  } catch (error) {
     return res
-              .status(200).json({success:true , data: details});
-   } catch(error) {
-    return res
-              .status(500).json({success:false ,  msg:"Data getting is failed"})
-   }
-}
+      .status(500)
+      .json({ success: false, msg: "Data getting is failed" });
+  }
+};
 
 export {
   Enrolementcontroller,
@@ -183,5 +184,5 @@ export {
   getSubjects,
   getstudentregistedteachers,
   logoutfromclass,
-  getEnrollmentDetails
+  getEnrollmentDetails,
 };
