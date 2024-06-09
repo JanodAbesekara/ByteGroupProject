@@ -2,7 +2,7 @@ import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
 
 const createAssignmentController = async (req, res) => {
-  const { TeacherEmail, TeacherSubject, question, TimeRanges ,submedium} =
+  const { TeacherEmail, TeacherSubject, question, TimeRanges, submedium } =
     req.body;
 
   try {
@@ -21,13 +21,10 @@ const createAssignmentController = async (req, res) => {
         .json({ message: "At least one question is required" });
     }
     if (question.length > 30 && question.length < 1) {
-      return res
-        .status(400)
-        .json({
-          message: "Maximum 30 questions are allowed and Minimun length 1",
-        });
+      return res.status(400).json({
+        message: "Maximum 30 questions are allowed and Minimun length 1",
+      });
     }
-
 
     const newAssignment = new Assignment({
       TeacherEmail,
@@ -38,9 +35,10 @@ const createAssignmentController = async (req, res) => {
     });
 
     await newAssignment.save();
-    return res
-      .status(201)
-      .json({ message: "Assignment created successfully", assignment: newAssignment });
+    return res.status(201).json({
+      message: "Assignment created successfully",
+      assignment: newAssignment,
+    });
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
@@ -55,21 +53,25 @@ const getAssignmentController = async (req, res) => {
   }
 };
 
-const deleteAssignmentController = async (req,res) => {
+const deleteAssignmentController = async (req, res) => {
   const id = req.params.id;
   try {
     await Assignment.findByIdAndDelete(id);
-    return res.status(200).json({success: true, msg: "Assignment deleted successfully"});
+    return res
+      .status(200)
+      .json({ success: true, msg: "Assignment deleted successfully" });
   } catch (error) {
-    return res.status(500).json({success:false, msg:"error deleting assignment"});
+    return res
+      .status(500)
+      .json({ success: false, msg: "error deleting assignment" });
   }
 };
 
 const gradeController = async (req, res) => {
-  const { email, subject, score, teacherEmail, medium } = req.body;
-
-  let grade;
   try {
+    const { email, subject, score, teacherEmail, medium } = req.body;
+
+    let grade;
     // Determine grade based on score
     if (score > 75) {
       grade = "A";
@@ -83,36 +85,55 @@ const gradeController = async (req, res) => {
       grade = "W";
     }
 
-    // Create and save new marks
-    const newMarks = new GradesModel({
+    // Check if an entry with the same email, subject, teacherEmail, and medium already exists
+    const existingMarks = await GradesModel.findOne({
       email,
       subject,
-      score,
       teacherEmail,
       medium,
-      grade,
     });
 
-    await newMarks.save();
-    return res.status(200).json({ msg: "Marks saved for create Grades" });
+    if (existingMarks) {
+      // Update the existing record
+      existingMarks.score = score;
+      existingMarks.grade = grade;
+      await existingMarks.save();
+      return res.status(200).json({ msg: "Marks updated successfully" });
+    } else {
+      // Create and save new marks
+      const newMarks = new GradesModel({
+        email,
+        subject,
+        score,
+        teacherEmail,
+        medium,
+        grade,
+      });
+
+      await newMarks.save();
+      return res.status(200).json({ msg: "Marks saved successfully" });
+    }
   } catch (error) {
-    return res.status(500).json({ msg: "Marks saving Failed" });
+    return res
+      .status(500)
+      .json({ msg: "Marks saving failed", error: error.message });
   }
 };
 
-const getGrades = async (req,res) => {
+const getGrades = async (req, res) => {
   const userEmail = req.query.email;
   try {
-    const grades = await GradesModel.find({email:userEmail});
+    const grades = await GradesModel.find({ email: userEmail });
     return res.json(grades);
   } catch (error) {
     return res.json("No Grades found");
   }
-}
+};
 
-
-
-
-
-export { createAssignmentController, getAssignmentController,gradeController,deleteAssignmentController,getGrades };
-
+export {
+  createAssignmentController,
+  getAssignmentController,
+  gradeController,
+  deleteAssignmentController,
+  getGrades,
+};
