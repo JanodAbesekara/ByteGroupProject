@@ -15,8 +15,6 @@ import axios from "axios";
 function ClassContent({ subjectData }) {
   const [subjectdata] = useState(subjectData);
 
-  const [saved, setSaved] = useState(false); // State to manage saved status
-  const [editMode, setEditMode] = useState(true); // State to manage edit mode
   const [lesson, setLessonName] = useState(""); // State to store lesson name
   const [zoom, setZoomLink] = useState(""); // State to store zoom link
   const [PDF, setPdf] = useState(null); // State to store PDF file
@@ -117,7 +115,6 @@ function ClassContent({ subjectData }) {
             <input
               type="text"
               placeholder="Enter lecture name"
-              disabled={!editMode}
               value={lesson}
               onChange={(e) => setLessonName(e.target.value)}
               style={{
@@ -138,7 +135,6 @@ function ClassContent({ subjectData }) {
               <input
                 type="text"
                 placeholder="Zoom link"
-                disabled={!editMode}
                 value={zoom}
                 onChange={(e) => setZoomLink(e.target.value)}
               />
@@ -156,7 +152,6 @@ function ClassContent({ subjectData }) {
               <input
                 type="file"
                 accept=".pdf"
-                disabled={!editMode}
                 onChange={(e) => setPdf(e.target.files[0])}
               />
               <br></br>
@@ -172,7 +167,6 @@ function ClassContent({ subjectData }) {
               <input
                 type="file"
                 accept="video/*"
-                disabled={!editMode}
                 onChange={(e) => setVideo(e.target.files[0])}
               />
               <br></br>

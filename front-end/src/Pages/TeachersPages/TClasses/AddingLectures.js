@@ -68,15 +68,7 @@ function AddingLectures({ subjectData }) {
         <Table>
           <TableHead>
             <TableRow>
-              {[
-                "Delete",
-                "Edit",
-                "Other Link",
-                "Video",
-                "PDF",
-                "Zoom",
-                "Lesson",
-              ]
+              {["Delete", "Other Link", "Video", "PDF", "Zoom", "Lesson"]
                 .slice(0)
                 .reverse()
                 .map((header) => (
@@ -95,7 +87,7 @@ function AddingLectures({ subjectData }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {subjectQuiz 
+            {subjectQuiz
               .slice(0)
               .reverse()
               .map((quise) => (
@@ -147,24 +139,7 @@ function AddingLectures({ subjectData }) {
                       </a>
                     )}
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Button
-                      onClick={() => handleDelete(quise._id)}
-                      sx={{
-                        backgroundColor: "#317873",
-                        color: "white",
-                        border: "none",
-                        padding: "5px 10px",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        "&:hover": {
-                          backgroundColor: "#255d5b",
-                        },
-                      }}
-                    >
-                      Edit
-                    </Button>
-                  </TableCell>
+
                   <TableCell sx={{ textAlign: "center" }}>
                     <Button
                       onClick={() => handleDelete(quise._id)}
