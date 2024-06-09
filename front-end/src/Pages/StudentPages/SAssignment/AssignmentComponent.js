@@ -53,7 +53,7 @@ function AssignmentComponent({ assignmentData }) {
         });
       }, 1000);
     } else if (remainingTime === 0 && countdownStarted) {
-      handelsubmit(); // Automatically submit when time is over
+      handleSubmit(); // Automatically submit when time is over
     }
     return () => clearInterval(timer);
   }, [remainingTime, countdownStarted]);
@@ -143,13 +143,13 @@ function AssignmentComponent({ assignmentData }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const handelsubmit = (e) => {
+  const handleSubmit = (e) => {
     e && e.preventDefault();
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const score = checkAnswers();
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
-    const userName =  (decodedToken.firstname+decodedToken.lastname);
+    const userName = decodedToken.firstname + decodedToken.lastname;
     const subject = assignmentData.TeacherSubject;
     const tEmail = assignmentData.TeacherEmail;
     const medium = assignmentData.submedium;
@@ -163,7 +163,7 @@ function AssignmentComponent({ assignmentData }) {
       medium: medium,
       name: userName,
     };
- 
+
     const confirmation = window.confirm("Have you completed successfully?");
     if (confirmation) {
       setSubmitButton(false);
@@ -171,7 +171,7 @@ function AssignmentComponent({ assignmentData }) {
         .post(`/api/assignment/grade`, mark)
         .then((response) => {
           console.log(response.data.msg);
-          
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error.response.data.msg);
@@ -194,8 +194,6 @@ function AssignmentComponent({ assignmentData }) {
       );
       setShowTime(false);
 
-      // Refresh the page to reflect the changes
-      window.location.reload();
     }
   };
 
@@ -298,7 +296,7 @@ function AssignmentComponent({ assignmentData }) {
               margin: "3% 10%",
             }}
           >
-            {!assignmentStarted && ( // Render start button if assignment has not started
+            {!assignmentStarted && (
               <button onClick={startAssignment} style={{ marginTop: "3px" }}>
                 Start Assignment
               </button>
@@ -322,82 +320,45 @@ function AssignmentComponent({ assignmentData }) {
               )}
 
               {assignmentStarted && (
-                <form onSubmit={handelsubmit}>
-                  <div style={{ paddingTop: "40px" }}>
-                    <p>
-                      {currentQuestionIndex + 1}.{" "}
-                      {assignmentData.question[currentQuestionIndex].Question}
-                    </p>
-                    <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
-                      {assignmentData.question[
-                        currentQuestionIndex
-                      ].answers.map((answer, aIndex) => (
-                        <li key={aIndex} style={{ margin: "10px" }}>
-                          <input
-                            type="radio"
-                            id={`answer_${currentQuestionIndex}_${aIndex}`}
-                            name={`answer_${currentQuestionIndex}`}
-                            value={aIndex}
-                            onChange={() => {
-                              const newAnswers = [...answers];
-                              newAnswers[currentQuestionIndex] = aIndex + 1;
-                              setAnswers(newAnswers);
-                            }}
-                            checked={
-                              answers[currentQuestionIndex] === aIndex + 1
-                            }
-                          />
-                          <label
-                            htmlFor={`answer_${currentQuestionIndex}_${aIndex}`}
-                          >
-                            {answer}
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Navigation buttons */}
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <button
-                      type="button"
-                      onClick={prevQuestion}
-                      disabled={currentQuestionIndex === 0}
+                <form onSubmit={(e) => e.preventDefault()}>
+                  {assignmentData.question.map((question, qIndex) => (
+                    <div
+                      key={qIndex}
                       style={{
-                        margin: "4px",
-                        padding: "2px",
+                        backgroundColor: "#C3B091",
+                        borderRadius: "20px",
+                        padding: "40px",
+                        marginBottom: "10px",
+                        marginTop: "10px",
+                        marginInline: "80px",
                       }}
                     >
-                      {"<"}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={nextQuestion}
-                      disabled={
-                        currentQuestionIndex ===
-                        assignmentData.question.length - 1
-                      }
-                      style={{
-                        margin: "4px",
-                        padding: "2px",
-                      }}
-                    >
-                      {">"}
-                    </button>
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={!submitButton || remainingTime === 0}
-                    style={{
-                      margin: "3px",
-                      padding: "3px",
-                      border: "none",
-                      borderRadius: "5px",
-                      backgroundColor: "#103457",
-                      color: "#fff",
-                      boxShadow: "0px 2px 2px 0px",
-                    }}
-                  >
+                      <p>
+                        {qIndex + 1}.{question.Question}
+                      </p>
+                      <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
+                        {question.answers.map((answer, aIndex) => (
+                          <li key={aIndex} style={{ margin: "10px" }}>
+                            <input
+                              type="radio"
+                              id={`answer_${qIndex}_${aIndex}`}
+                              name={`answer_${qIndex}`}
+                              value={aIndex}
+                              onChange={() => {
+                                const newAnswers = [...answers];
+                                newAnswers[qIndex] = aIndex;
+                                setAnswers(newAnswers);
+                              }}
+                            />
+                            <label htmlFor={`answer_${qIndex}_${aIndex}`}>
+                              {answer}
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmit}>
                     Submit
                   </button>
                 </form>

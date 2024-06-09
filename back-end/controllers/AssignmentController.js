@@ -94,7 +94,6 @@ const gradeController = async (req, res) => {
       medium,
       grade,
       name,
-
     });
 
     if (existingMarks) {
