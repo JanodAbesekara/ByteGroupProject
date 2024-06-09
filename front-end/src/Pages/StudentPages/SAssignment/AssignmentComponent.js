@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
 function AssignmentComponent({ assignmentData }) {
@@ -10,34 +10,18 @@ function AssignmentComponent({ assignmentData }) {
     return savedState ? JSON.parse(savedState) : defaultValue;
   };
 
-  const [answers, setAnswers] = useState(() =>
-    getInitialState(`${subjectKey}_answers`, [])
-  );
-  const [submitButton, setSubmitButton] = useState(() =>
-    getInitialState(`${subjectKey}_submitButton`, false)
-  );
-  const [remainingTime, setRemainingTime] = useState(() =>
-    getInitialState(`${subjectKey}_remainingTime`, 0)
-  );
+  const [answers, setAnswers] = useState(() => getInitialState(`${subjectKey}_answers`, []));
+  const [submitButton, setSubmitButton] = useState(() => getInitialState(`${subjectKey}_submitButton`, false));
+  const [remainingTime, setRemainingTime] = useState(() => getInitialState(`${subjectKey}_remainingTime`, 0));
   const [showContent, setShowContent] = useState(false);
-  const [assignmentStarted, setAssignmentStarted] = useState(() =>
-    getInitialState(`${subjectKey}_assignmentStarted`, false)
-  );
+  const [assignmentStarted, setAssignmentStarted] = useState(() => getInitialState(`${subjectKey}_assignmentStarted`, false));
   const [timeRange, setTimeRange] = useState(0);
-  const [countdownStarted, setCountdownStarted] = useState(() =>
-    getInitialState(`${subjectKey}_countdownStarted`, false)
-  );
-  const [correctAnswers, setCorrectAnswers] = useState(() =>
-    getInitialState(`${subjectKey}_correctAnswers`, [])
-  );
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() =>
-    getInitialState(`${subjectKey}_currentQuestionIndex`, 0)
-  );
+  const [countdownStarted, setCountdownStarted] = useState(() => getInitialState(`${subjectKey}_countdownStarted`, false));
+  const [correctAnswers, setCorrectAnswers] = useState(() => getInitialState(`${subjectKey}_correctAnswers`, []));
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => getInitialState(`${subjectKey}_currentQuestionIndex`, 0));
   const [marks, setMarks] = useState("");
   const [showTime, setShowTime] = useState(false);
-  const [assignmentSubmitted, setAssignmentSubmitted] = useState(() =>
-    getInitialState(`${subjectKey}_assignmentSubmitted`, false)
-  );
+  const [assignmentSubmitted, setAssignmentSubmitted] = useState(() => getInitialState(`${subjectKey}_assignmentSubmitted`, false));
 
   useEffect(() => {
     let timer;
@@ -45,10 +29,7 @@ function AssignmentComponent({ assignmentData }) {
       timer = setInterval(() => {
         setRemainingTime((prevTime) => {
           const newTime = prevTime - 1000;
-          localStorage.setItem(
-            `${subjectKey}_remainingTime`,
-            JSON.stringify(newTime)
-          );
+          localStorage.setItem(`${subjectKey}_remainingTime`, JSON.stringify(newTime));
           return newTime;
         });
       }, 1000);
@@ -63,53 +44,34 @@ function AssignmentComponent({ assignmentData }) {
   }, [answers]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_submitButton`,
-      JSON.stringify(submitButton)
-    );
+    localStorage.setItem(`${subjectKey}_submitButton`, JSON.stringify(submitButton));
   }, [submitButton]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_assignmentStarted`,
-      JSON.stringify(assignmentStarted)
-    );
+    localStorage.setItem(`${subjectKey}_assignmentStarted`, JSON.stringify(assignmentStarted));
   }, [assignmentStarted]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_countdownStarted`,
-      JSON.stringify(countdownStarted)
-    );
+    localStorage.setItem(`${subjectKey}_countdownStarted`, JSON.stringify(countdownStarted));
   }, [countdownStarted]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_correctAnswers`,
-      JSON.stringify(correctAnswers)
-    );
+    localStorage.setItem(`${subjectKey}_correctAnswers`, JSON.stringify(correctAnswers));
   }, [correctAnswers]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_currentQuestionIndex`,
-      JSON.stringify(currentQuestionIndex)
-    );
+    localStorage.setItem(`${subjectKey}_currentQuestionIndex`, JSON.stringify(currentQuestionIndex));
   }, [currentQuestionIndex]);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${subjectKey}_assignmentSubmitted`,
-      JSON.stringify(assignmentSubmitted)
-    );
+    // setAssignmentSubmitted(false);
+    localStorage.setItem(`${subjectKey}_assignmentSubmitted`, JSON.stringify(assignmentSubmitted));
   }, [assignmentSubmitted]);
 
   const startAssignment = async () => {
     const time = assignmentData.TimeRanges;
     setTimeRange(time);
-    const correctAnswers = assignmentData.question.map(
-      (question) => question.correctAnswerIndex
-    );
+    const correctAnswers = assignmentData.question.map((question) => question.correctAnswerIndex);
     setCorrectAnswers(correctAnswers);
     setRemainingTime(parseInt(time) * 60 * 1000);
     setCountdownStarted(true);
@@ -117,23 +79,11 @@ function AssignmentComponent({ assignmentData }) {
     setAssignmentStarted(true);
     setShowTime(true);
 
-    localStorage.setItem(
-      `${subjectKey}_remainingTime`,
-      JSON.stringify(parseInt(time) * 60 * 1000)
-    );
-    localStorage.setItem(
-      `${subjectKey}_correctAnswers`,
-      JSON.stringify(correctAnswers)
-    );
-    localStorage.setItem(
-      `${subjectKey}_countdownStarted`,
-      JSON.stringify(true)
-    );
+    localStorage.setItem(`${subjectKey}_remainingTime`, JSON.stringify(parseInt(time) * 60 * 1000));
+    localStorage.setItem(`${subjectKey}_correctAnswers`, JSON.stringify(correctAnswers));
+    localStorage.setItem(`${subjectKey}_countdownStarted`, JSON.stringify(true));
     localStorage.setItem(`${subjectKey}_submitButton`, JSON.stringify(true));
-    localStorage.setItem(
-      `${subjectKey}_assignmentStarted`,
-      JSON.stringify(true)
-    );
+    localStorage.setItem(`${subjectKey}_assignmentStarted`, JSON.stringify(true));
     console.log(assignmentData);
   };
 
@@ -143,16 +93,19 @@ function AssignmentComponent({ assignmentData }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const handleSubmit = (e) => {
-    e && e.preventDefault();
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  const handleSubmit = () => {
+    const confirmation = window.confirm("Have you completed successfully?");
+    if(confirmation){
+    setSubmitButton(false);
     const score = checkAnswers();
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
-    const userName = decodedToken.firstname + decodedToken.lastname;
+    const userName =  (decodedToken.firstname+decodedToken.lastname);
     const subject = assignmentData.TeacherSubject;
     const tEmail = assignmentData.TeacherEmail;
     const medium = assignmentData.submedium;
+
 
     const mark = {
       ...marks,
@@ -162,38 +115,37 @@ function AssignmentComponent({ assignmentData }) {
       teacherEmail: tEmail,
       medium: medium,
       name: userName,
+
     };
+ 
+    
+    axios
+      .post(`/api/assignment/grade`, mark)
+      .then((response) => {
+        console.log(response.data.msg);
+        alert(response.data.msg);
 
-    const confirmation = window.confirm("Have you completed successfully?");
-    if (confirmation) {
-      setSubmitButton(false);
-      axios
-        .post(`/api/assignment/grade`, mark)
-        .then((response) => {
-          console.log(response.data.msg);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error.response.data.msg);
-        });
+      })
+      .catch((error) => {
+        console.log(error.response.data.msg);
+      });
 
-      // Clear localStorage on submission
-      localStorage.removeItem(`${subjectKey}_remainingTime`);
-      localStorage.removeItem(`${subjectKey}_answers`);
-      localStorage.removeItem(`${subjectKey}_submitButton`);
-      localStorage.removeItem(`${subjectKey}_assignmentStarted`);
-      localStorage.removeItem(`${subjectKey}_countdownStarted`);
-      localStorage.removeItem(`${subjectKey}_correctAnswers`);
-      localStorage.removeItem(`${subjectKey}_currentQuestionIndex`);
+    // Clear localStorage on submission
+    localStorage.removeItem(`${subjectKey}_remainingTime`);
+    localStorage.removeItem(`${subjectKey}_answers`);
+    localStorage.removeItem(`${subjectKey}_submitButton`);
+    localStorage.removeItem(`${subjectKey}_assignmentStarted`);
+    localStorage.removeItem(`${subjectKey}_countdownStarted`);
+    localStorage.removeItem(`${subjectKey}_correctAnswers`);
+    localStorage.removeItem(`${subjectKey}_currentQuestionIndex`);
 
-      setRemainingTime(0);
-      setAssignmentSubmitted(true);
-      localStorage.setItem(
-        `${subjectKey}_assignmentSubmitted`,
-        JSON.stringify(true)
-      );
-      setShowTime(false);
+    setRemainingTime(0);
+    setAssignmentSubmitted(true);
+    localStorage.setItem(`${subjectKey}_assignmentSubmitted`, JSON.stringify(true));
+    setShowTime(false);
 
+    // Refresh the page to reflect the changes
+    window.location.reload();
     }
   };
 
@@ -243,45 +195,43 @@ function AssignmentComponent({ assignmentData }) {
           </p>
         </div>
         <div>
-          <p
-            style={{
+          <p style={{
               padding: "3px 8px",
-              color: "#0d09f6",
+              color:"#0d09f6"
             }}
           >
-            {assignmentData.submedium}
-          </p>
+            {assignmentData.submedium}</p>
         </div>
       </div>
+      
 
       <div>
         {!showContent && !assignmentSubmitted && (
           <div>
             <p
-              style={{
-                padding: "3px 8px",
-                color: "#000",
-              }}
-            >
-              Allocated Time : {assignmentData.TimeRanges} minutes
-            </p>
-            <button
-              onClick={() => {
-                setShowContent(!showContent);
-              }}
-              style={{
-                marginLeft: "6px",
-                marginTop: "5px",
-                backgroundColor: "ash",
-                border: "none",
-                borderRadius: "3px",
-                width: "16%",
-                cursor: "pointer",
-              }}
-            >
-              Show Content
-            </button>
-          </div>
+        style={{
+          padding: "3px 8px",
+          color:"#000"
+        }}
+      >
+        Allocated Time : {assignmentData.TimeRanges} minutes
+      </p>
+        <button
+          onClick={() => {setShowContent(!showContent);}}
+          style={{ 
+            marginLeft:"6px",
+            marginTop: "5px",
+            backgroundColor:"ash",
+            border:"none",
+            borderRadius:"3px",
+            width:"16%",
+            cursor:"pointer"
+          }}
+        >
+          Show Content
+        </button>
+        </div>
+
         )}
 
         {showContent && (
@@ -296,69 +246,110 @@ function AssignmentComponent({ assignmentData }) {
               margin: "3% 10%",
             }}
           >
-            {!assignmentStarted && (
-              <button onClick={startAssignment} style={{ marginTop: "3px" }}>
+            {!assignmentStarted && ( // Render start button if assignment has not started
+              <button
+                onClick={startAssignment}
+                style={{ marginTop: "3px" }}
+              >
                 Start Assignment
               </button>
             )}
 
             <div>
-              {showTime && (
-                <p
-                  style={{
-                    float: "right",
-                    backgroundColor: "#ada9a8",
-                    color: "#000",
-                    border: "none",
-                    borderRadius: "5px",
-                    padding: "4px",
-                  }}
-                >
-                  Remaining Time:{" "}
-                  <span style={{ color: "red" }}>{formatTime()}</span>
-                </p>
+            {showTime && (
+              <p
+                style={{
+                  float: "right",
+                  backgroundColor: "#ada9a8",
+                  color: "#000",
+                  border: "none",
+                  borderRadius: "5px",
+                  padding: "4px",
+                }}
+              >
+                Remaining Time: <span style={{ color: "red" }}>{formatTime()}</span>
+              </p>
               )}
 
               {assignmentStarted && (
-                <form onSubmit={(e) => e.preventDefault()}>
-                  {assignmentData.question.map((question, qIndex) => (
-                    <div
-                      key={qIndex}
-                      style={{
-                        backgroundColor: "#C3B091",
-                        borderRadius: "20px",
-                        padding: "40px",
-                        marginBottom: "10px",
-                        marginTop: "10px",
-                        marginInline: "80px",
-                      }}
-                    >
-                      <p>
-                        {qIndex + 1}.{question.Question}
-                      </p>
-                      <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
-                        {question.answers.map((answer, aIndex) => (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <div style={{ paddingTop: "40px" }}>
+                    <p>
+                      {currentQuestionIndex + 1}.{" "}
+                      {assignmentData.question[currentQuestionIndex].Question}
+                    </p>
+                    <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
+                      {assignmentData.question[currentQuestionIndex].answers.map(
+                        (answer, aIndex) => (
                           <li key={aIndex} style={{ margin: "10px" }}>
                             <input
                               type="radio"
-                              id={`answer_${qIndex}_${aIndex}`}
-                              name={`answer_${qIndex}`}
+                              id={`answer_${currentQuestionIndex}_${aIndex}`}
+                              name={`answer_${currentQuestionIndex}`}
                               value={aIndex}
                               onChange={() => {
                                 const newAnswers = [...answers];
-                                newAnswers[qIndex] = aIndex;
+                                newAnswers[currentQuestionIndex] = aIndex;
                                 setAnswers(newAnswers);
                               }}
+                              checked={answers[currentQuestionIndex] === aIndex }
                             />
-                            <label htmlFor={`answer_${qIndex}_${aIndex}`}>
+                            <label
+                              htmlFor={`answer_${currentQuestionIndex}_${aIndex}`}
+                            >
                               {answer}
                             </label>
                           </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmit}>
+                        )
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Navigation buttons */}
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <button
+                      type="button"
+                      onClick={prevQuestion}
+                      disabled={currentQuestionIndex === 0}
+                      style={{
+                        margin: "4px",
+                        padding: "2px",
+                      }}
+                    >
+                      {"<"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={nextQuestion}
+                      disabled={
+                        currentQuestionIndex === assignmentData.question.length - 1
+                      }
+                      style={{
+                        margin: "4px",
+                        padding: "2px",
+                      }}
+                    >
+                      {">"}
+                    </button>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={!submitButton || remainingTime === 0}
+                    onClick={handleSubmit}
+                    style={{
+                      margin: "3px",
+                      padding: "3px",
+                      border: "none",
+                      borderRadius: "5px",
+                      backgroundColor: "#103457",
+                      color: "#fff",
+                      boxShadow: "0px 2px 2px 0px",
+                    }}
+                  >
                     Submit
                   </button>
                 </form>
