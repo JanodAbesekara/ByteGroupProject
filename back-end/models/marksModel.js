@@ -5,12 +5,27 @@ const marksModel = new Schema(
     {
       email: {
         type: String,
+        required: true,
       },
       subject: {
         type: String,
+        required: true,
       },
       score: {
+        type: Number,
+        required: true,
+      },
+      teacherEmail: {
         type: String,
+        required: true,
+      },
+      medium: {
+        type: String,
+        required: true,
+      },
+      grade: {
+        type: String,
+        required: true,
       },
     },
     {
@@ -18,4 +33,4 @@ const marksModel = new Schema(
     }
   );
   
-  export default mongoose.model("marksForGrading", marksModel);
+  export default mongoose.model("marks For Grading", marksModel);

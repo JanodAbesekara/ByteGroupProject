@@ -3,7 +3,7 @@ import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
 function AssignmentComponent({ assignmentData }) {
-  const subjectKey = assignmentData.TeacherSubject;
+  const subjectKey = assignmentData._id;
 
   const getInitialState = (key, defaultValue) => {
     const savedState = localStorage.getItem(key);
@@ -64,6 +64,7 @@ function AssignmentComponent({ assignmentData }) {
   }, [currentQuestionIndex]);
 
   useEffect(() => {
+    // setAssignmentSubmitted(false);
     localStorage.setItem(`${subjectKey}_assignmentSubmitted`, JSON.stringify(assignmentSubmitted));
   }, [assignmentSubmitted]);
 
@@ -93,24 +94,35 @@ function AssignmentComponent({ assignmentData }) {
   };
 
   const handleSubmit = () => {
+    const confirmation = window.confirm("Have you completed successfully?");
+    if(confirmation){
     setSubmitButton(false);
     const score = checkAnswers();
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
     const subject = assignmentData.TeacherSubject;
+    const tEmail = assignmentData.TeacherEmail;
+    const medium = assignmentData.submedium;
+
 
     const mark = {
       ...marks,
       email: userEmail,
       subject: subject,
       score: score,
+      teacherEmail: tEmail,
+      medium: medium,
+
     };
+ 
     
     axios
       .post(`/api/assignment/grade`, mark)
       .then((response) => {
         console.log(response.data.msg);
+        alert(response.data.msg);
+
       })
       .catch((error) => {
         console.log(error.response.data.msg);
@@ -132,6 +144,7 @@ function AssignmentComponent({ assignmentData }) {
 
     // Refresh the page to reflect the changes
     window.location.reload();
+    }
   };
 
   const checkAnswers = () => {
@@ -256,7 +269,7 @@ function AssignmentComponent({ assignmentData }) {
               </p>
               )}
 
-              {assignmentStarted && ( // Render quiz content if quiz has started
+              {assignmentStarted && (
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();

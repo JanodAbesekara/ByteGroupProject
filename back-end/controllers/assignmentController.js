@@ -65,31 +65,54 @@ const deleteAssignmentController = async (req,res) => {
   }
 };
 
-const gradeController = async (req,res) => {
-  const { email,subject,score } = req.body;
-  try{
-    if (!email || !subject || !score){
-      return res
-          .status(403)
-          .json({msg:"All fields are required!"});
+const gradeController = async (req, res) => {
+  const { email, subject, score, teacherEmail, medium } = req.body;
+
+  let grade;
+  try {
+    // Determine grade based on score
+    if (score > 75) {
+      grade = "A";
+    } else if (score > 65 && score <= 75) {
+      grade = "B";
+    } else if (score > 55 && score <= 65) {
+      grade = "C";
+    } else if (score > 45 && score <= 55) {
+      grade = "D";
+    } else {
+      grade = "W";
     }
+
+    // Create and save new marks
     const newMarks = new GradesModel({
       email,
       subject,
       score,
+      teacherEmail,
+      medium,
+      grade,
     });
+
     await newMarks.save();
-    return res
-       .status(200)
-       .json({ msg: "Marks saved for create Grades"});
-  } catch(error) {
-    res .status(500)
-        .json({msg:"Marks saving Failed"});
+    return res.status(200).json({ msg: "Marks saved for create Grades" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Marks saving Failed" });
   }
 };
 
+const getGrades = async (req,res) => {
+  const userEmail = req.query.email;
+  try {
+    const grades = await GradesModel.find({email:userEmail});
+    return res.json(grades);
+  } catch (error) {
+    return res.json("No Grades found");
+  }
+}
 
 
 
-export { createAssignmentController, getAssignmentController,gradeController,deleteAssignmentController };
+
+
+export { createAssignmentController, getAssignmentController,gradeController,deleteAssignmentController,getGrades };
 
