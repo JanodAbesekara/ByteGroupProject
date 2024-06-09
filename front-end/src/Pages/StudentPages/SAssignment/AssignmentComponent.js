@@ -146,14 +146,13 @@ function AssignmentComponent({ assignmentData }) {
   const handelsubmit = (e) => {
     e && e.preventDefault();
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const score = checkAnswers();
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
-
-    const userName =  (decodedToken.fname + decodedToken.lname);
+    const userName =  (decodedToken.firstname+decodedToken.lastname);
     const subject = assignmentData.TeacherSubject;
     const tEmail = assignmentData.TeacherEmail;
     const medium = assignmentData.submedium;
-
 
     const mark = {
       ...marks,
@@ -163,37 +162,16 @@ function AssignmentComponent({ assignmentData }) {
       teacherEmail: tEmail,
       medium: medium,
       name: userName,
-
     };
  
-    
-    axios
-      .post(`/api/assignment/grade`, mark)
-      .then((response) => {
-        console.log(response.data.msg);
-      alert(response.data.msg);
-
-
     const confirmation = window.confirm("Have you completed successfully?");
     if (confirmation) {
       setSubmitButton(false);
-      const score = checkAnswers();
-
-      const mark = {
-        ...marks,
-        email: userEmail,
-        subject: assignmentData.TeacherSubject,
-        score: score,
-        teacherEmail: assignmentData.TeacherEmail,
-        medium: assignmentData.submedium,
-      };
-
       axios
         .post(`/api/assignment/grade`, mark)
         .then((response) => {
           console.log(response.data.msg);
           
-        
         })
         .catch((error) => {
           console.log(error.response.data.msg);

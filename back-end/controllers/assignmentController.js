@@ -70,7 +70,7 @@ const deleteAssignmentController = async (req, res) => {
 const gradeController = async (req, res) => {
 
   try {
-    const { email, subject, score, teacherEmail, medium } = req.body;
+    const { email, subject, score, teacherEmail, medium,name } = req.body;
 
     let grade;
     // Determine grade based on score
@@ -92,6 +92,8 @@ const gradeController = async (req, res) => {
       subject,
       teacherEmail,
       medium,
+      grade,
+      name,
 
     });
 
@@ -110,6 +112,7 @@ const gradeController = async (req, res) => {
         teacherEmail,
         medium,
         grade,
+        name,
       });
 
       await newMarks.save();
