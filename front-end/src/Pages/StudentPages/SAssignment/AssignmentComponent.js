@@ -101,6 +101,7 @@ function AssignmentComponent({ assignmentData }) {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
+    const userName =  (decodedToken.fname + decodedToken.lname);
     const subject = assignmentData.TeacherSubject;
     const tEmail = assignmentData.TeacherEmail;
     const medium = assignmentData.submedium;
@@ -113,6 +114,7 @@ function AssignmentComponent({ assignmentData }) {
       score: score,
       teacherEmail: tEmail,
       medium: medium,
+      name: userName,
 
     };
  
