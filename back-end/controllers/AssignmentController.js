@@ -68,6 +68,7 @@ const deleteAssignmentController = async (req, res) => {
 };
 
 const gradeController = async (req, res) => {
+
   try {
     const { email, subject, score, teacherEmail, medium } = req.body;
 
@@ -91,6 +92,7 @@ const gradeController = async (req, res) => {
       subject,
       teacherEmail,
       medium,
+
     });
 
     if (existingMarks) {
@@ -128,12 +130,24 @@ const getGrades = async (req, res) => {
   } catch (error) {
     return res.json("No Grades found");
   }
+
+}
+
+const getStudentGrades = async (req,res) => {
+  const teacherEmail = req.query.email;
+  const subject = req.query.subject;
+  const medium = req.query.medium;
+  try {
+    const studentGrades = await GradesModel.find({teacherEmail:teacherEmail,subject:subject,medium:medium});
+    return res.json(studentGrades);
+  }
+  catch (error) {
+    return res.json({msg:"An error occured"});
+  }
 };
 
-export {
-  createAssignmentController,
-  getAssignmentController,
-  gradeController,
-  deleteAssignmentController,
-  getGrades,
-};
+
+
+
+
+export { createAssignmentController, getAssignmentController,gradeController,deleteAssignmentController,getGrades,getStudentGrades };

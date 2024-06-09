@@ -149,6 +149,31 @@ function AssignmentComponent({ assignmentData }) {
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
 
+    const userName =  (decodedToken.fname + decodedToken.lname);
+    const subject = assignmentData.TeacherSubject;
+    const tEmail = assignmentData.TeacherEmail;
+    const medium = assignmentData.submedium;
+
+
+    const mark = {
+      ...marks,
+      email: userEmail,
+      subject: subject,
+      score: score,
+      teacherEmail: tEmail,
+      medium: medium,
+      name: userName,
+
+    };
+ 
+    
+    axios
+      .post(`/api/assignment/grade`, mark)
+      .then((response) => {
+        console.log(response.data.msg);
+        alert(response.data.msg);
+
+
     const confirmation = window.confirm("Have you completed successfully?");
     if (confirmation) {
       setSubmitButton(false);
