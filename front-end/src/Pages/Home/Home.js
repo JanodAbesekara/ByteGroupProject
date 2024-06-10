@@ -14,11 +14,6 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <div
-        className="login_m2"
-        style={{ backgroundColor: "#e2e0e0e9", width: "100%", height: "40px" }}
-      >
-      </div>
       <div className="space_area"></div>
       <div className="main_img">
         <h2>{text}</h2>
