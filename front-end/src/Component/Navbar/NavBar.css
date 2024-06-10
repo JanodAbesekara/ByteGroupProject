@@ -7,44 +7,73 @@
 }
 header .im1 {
   background: transparent;
-  width: 150px;
-  height: 150px;
-}
-header {
-  background-color: #f5f4f4;
+  width: 145px;
+  height: 135px;
 }
 nav a {
   margin: 0 5px;
   text-decoration: none;
   color: #797070;
+  font-weight: 417;
+}
+nav a:last-child:hover {
+  color: lightgreen;
 }
 
 nav a:hover {
+  
   color: rgb(238, 144, 37);
 }
 header .nav-btn {
   padding: 5px;
+  margin-top: 8px;
+  margin-left: 18px;
   cursor: pointer;
-  background: transparent;
+  background-color: #17a2b8;
+  width: 39px;
+  height: 39px;
   border: none;
+  border-radius: 5px;
   outline: none;
-  color: #1e1a4f;
+  color: #fff;
   opacity: 0;
   visibility: hidden;
   font-size: 1.8rem;
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
   header .im1 {
-    width: 250px;
+    width: 260px;
     height: 75px;
-    padding-left: 15px;
-    margin-top: 5px;
+    padding-right: 14px;
+    margin-top: 10px;
   }
 
   header nav a {
     position: relative;
-    bottom: 100px;
+  }
+  header nav a:last-child {
+    order: -1;
+    align-self: flex-end;
+    border-bottom: none;
+    padding-right: 10px;
+    padding-left: 3px;
+    padding-top: 3px;
+    border-radius: 5px;
+    color: #fff;
+    width: 50px;
+    height: 25px;
+    background-color: #899cff;
+    margin-top: 30px;
+    margin-bottom: 50px;
+
   }
   header nav {
     position: fixed;
@@ -54,10 +83,10 @@ header .nav-btn {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center;
+    background-color: #fff;
     gap: 1.5rem;
-    background-color: #e7ebf9;
     transition: 0.2s;
     transform: translateY(-210vh);
     z-index: 2;
@@ -65,7 +94,11 @@ header .nav-btn {
 
   header nav a {
     position: relative;
-    bottom: 100px;
+    bottom: 200px;
+    border-bottom: 1px solid gray;
+    border-width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   header .responsive_nav {
     transform: none;
@@ -74,18 +107,19 @@ header .nav-btn {
   header .nav-btn {
     visibility: visible;
     opacity: 1;
-    float: right;
-    position: relative;
+    float: left;
+    left: 0px;
+    position: absolute;
     top: 20px;
-    padding-right: 20px;
+    padding-right: 10px;
     z-index: 2;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   header .im1 {
-    width: 275px;
-    height: 100px;
+    width: 280px;
+    height: 86px;
     padding-left: 3px;
     margin-top: 8px;
   }
@@ -93,6 +127,7 @@ header .nav-btn {
     float: right;
     position: relative;
     top: 40px;
+    margin-right: 8px;
   }
   nav a {
     padding-left: 7px;
@@ -109,10 +144,6 @@ header .nav-btn {
     width: 310px;
     height: 100px;
     margin: 5px 20px;
-  }
-
-  header {
-    background-color: #f5f4f4;
   }
 
   nav {
@@ -145,9 +176,9 @@ header .nav-btn {
     bottom: 55px;
     left: 150px;
   }
-  header {
+  /* header {
     background-color: #f5f4f4;
-  }
+  } */
 
   nav {
     position: relative;
