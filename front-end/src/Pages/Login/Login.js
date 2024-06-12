@@ -120,16 +120,6 @@ function Login({ setUser, setIsLoggedIn }) {
       <Navbar />
       <div className="login_main">
         <div
-          className="login_m2"
-          style={{
-            backgroundColor: "#e2e0e0e9",
-            width: "100%",
-            height: "40px",
-          }}
-        >
-          {" "}
-        </div>
-        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -143,74 +133,99 @@ function Login({ setUser, setIsLoggedIn }) {
             {alertMessage}
           </Alert>
         </div>
-        <div className="login_h3">
-          <h2>Login</h2>
+
+        {/* div1 */}
+        <div className="login_heading">
+          <h2>Welcome to Dream Learn Academy Portal</h2>
         </div>
-        <Lottie animationData={animatio} className="lottie" />
-        <form className="login_label" onSubmit={handleSubmit}>
-          <label htmlFor="Username_or_Email">
-            <span style={{ color: "red" }}>*</span>Username
-          </label>
-          <br></br>
-          <input
-            className="Name"
-            type="email"
-            name="email"
-            onChange={(e) => setusername(e.target.value)}
-            placeholder="Enter your username"
-            required
-            value={email}
-          />
-          <br></br>
-          <label htmlFor="password">
-            <span style={{ color: "red" }}>*</span>Password
-          </label>
-          <br></br>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(e) => setpassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-          <div className="log_rem">
-            <button type="submit" value="Login">
-              Login
-            </button>
-            <br></br>
-            <br></br>
-            <h2>
-              Forgot password?{" "}
-              <Link variant="outlined" onClick={handleClickOpen}>
-                Click here to reset
-              </Link>
-            </h2>
-            <BootstrapDialog
-              onClose={handleClose}
-              aria-labelledby="customized-dialog-title"
-              open={open}
-            >
-              <IconButton
-                aria-label="close"
-                onClick={handleClose}
-                sx={{
-                  position: "absolute",
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-              <Forgetpassword />
-            </BootstrapDialog>
-            <br></br>
-            <h4>
-              New ?<Link to="/Registrationform">Create An Account </Link>
-            </h4>
+
+        <div className="sub_main">
+          {/* div2 */}
+          <div className="login_form">
+            <form onSubmit={handleSubmit}>
+              <div className="login_input">
+                <label htmlFor="Email ID">
+                  <span style={{ color: "red" }}>*</span>Email ID
+                </label>
+                <br></br>
+                <input
+                  className="Name"
+                  type="email"
+                  name="email"
+                  onChange={(e) => setusername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                  value={email}
+                />
+                <br></br>
+                <label htmlFor="password">
+                  <span style={{ color: "red" }}>*</span>Password
+                </label>
+                <br></br>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  required
+                  onChange={(e) => setpassword(e.target.value)}
+                  placeholder="Enter your password"
+                />
+              </div>
+
+              <div className="login_pass">
+                <div className="login_pass_sub">
+                  <div className="login_reset">
+                    <p>
+                      <Link variant="outlined" onClick={handleClickOpen}>
+                        Forgot password?
+                      </Link>
+                    </p>
+                    <BootstrapDialog
+                      onClose={handleClose}
+                      aria-labelledby="customized-dialog-title"
+                      open={open}
+                    >
+                      <IconButton
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                          position: "absolute",
+                          right: 8,
+                          top: 8,
+                          color: (theme) => theme.palette.grey[500],
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                      <Forgetpassword />
+                    </BootstrapDialog>
+                    <br></br>
+                  </div>
+                  <div className="login_button">
+                    <button type="submit" value="Login">
+                      Login
+                    </button>
+                  </div>
+                </div>
+                <div className="new_acc_create">
+                  <p>Don't Have An Account?</p>
+                  <p className="create">
+                    <Link
+                      to="/Registrationform"
+                      style={{ color: "#fff", textDecoration: "none" }}
+                    >
+                      Register
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+          {/* div3 */}
+          <div className="animation_lottie">
+            <Lottie animationData={animatio} className="lottie" />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
