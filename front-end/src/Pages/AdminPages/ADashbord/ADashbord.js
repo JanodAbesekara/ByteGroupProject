@@ -13,6 +13,7 @@ import {
   TableBody,
 } from "@mui/material";
 import Axios from "axios";
+import "./ADashbord.css";
 
 function ADashbord() {
   const [admins, setAdmins] = useState([]);
@@ -53,6 +54,11 @@ function ADashbord() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(admincreate === " "){
+      window.alert("Please enter email address");
+      return;
+    }
     try {
       await Axios.post(`/api/user/admincreate`, {
         email: admincreate,
@@ -74,18 +80,24 @@ function ADashbord() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <h2>Total Admin count :- {admincount}</h2>
             <div>
-              <h2>Create Admin</h2>
-              <form onSubmit={handleSubmit}>
-                <label>Enter The EmailAddress : - </label>
-                <input
-                  type="email"
-                  placeholder="Enter Email Address"
-                  onChange={(e) => setAdmincreate(e.target.value)}
-                />
-                <button type="submit"> Submit </button>
-              </form>
+              <div className="Count_AD">
+                <h2>Admin count :- {admincount}</h2>
+              </div>
+
+              <div className="Form_Ad">
+                <h3>Create Admins</h3>
+                <form onSubmit={handleSubmit}>
+                  <label>EmailAddress : - </label>
+                  <input
+                    type="email"
+                    placeholder="Enter Email Address"
+                    onChange={(e) => setAdmincreate(e.target.value)}
+                  />
+                  <br></br>
+                  <button type="submit"> Submit </button>
+                </form>
+              </div>
             </div>
             <div className="StudentDetal">
               <h3
