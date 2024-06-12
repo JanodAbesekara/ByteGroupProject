@@ -35,6 +35,22 @@ function SGrades() {
          })
   },[]);
 
+  const getBackgroundColor = (grade) => {
+    if (grade === 'W') {
+      return "#ff0000"; // red
+    } else if (grade ==='D') {
+      return "#ff8000"; // orange
+    } else if (grade ==='C') {
+      return "#ffff00"; // yellow
+    } else if (grade ==='B') {
+      return "#80ff00"; // light green
+    } else if (grade ==='A') {
+      return "#00ff00"; // green
+    }else{
+      return "#ffffff"; // white
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -90,7 +106,7 @@ function SGrades() {
                   <TableCell sx={{ textAlign: "center" }}>
                     {eachOne.medium}
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center", backgroundColor: getBackgroundColor(eachOne.grade), }}>
                     {eachOne.grade}
                   </TableCell>
                 </TableRow>

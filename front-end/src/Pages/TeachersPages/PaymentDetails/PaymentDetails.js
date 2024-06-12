@@ -19,6 +19,7 @@ export default function PaymentDetails() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     userID = decodedToken._id;
+    
   } else {
     userID = " ";
   }
