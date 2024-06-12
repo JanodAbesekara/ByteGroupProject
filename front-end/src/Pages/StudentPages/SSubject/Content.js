@@ -5,25 +5,24 @@ import { BiLogoZoom } from "react-icons/bi";
 import { SiMaterialdesignicons } from "react-icons/si";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function Content({ teachermail, subject, medium }) {
   const [subjectQuiz, setSubjectQuiz] = useState([]);
   const [error, setError] = useState(null);
   const attendenceRef = useRef();
   const formRef = useRef();
-
+  const [Showmatrila, setShowmatrila] = useState(false);
 
   let firstname;
   let lastname;
 
-  if( localStorage.getItem("MERN_AUTH_TOKEN")){
-
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-   firstname = decodedToken.firstname;
-   lastname = decodedToken.lastname;
-  }else{
+  if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    firstname = decodedToken.firstname;
+    lastname = decodedToken.lastname;
+  } else {
     firstname = " ";
     lastname = " ";
   }
@@ -81,60 +80,80 @@ function Content({ teachermail, subject, medium }) {
     }
   };
 
+  const handelShowMat = () => {
+    setShowmatrila(!Showmatrila);
+  };
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <div>
-          {error && <p>{error}</p>}
-          {subjectQuiz.map((material) => (
-            <div key={material.id} className="content">
-              <div className="content__icon">
-                <p>{material.lesson} </p>
-                <br />
-                {material.PDF && (
-                  <Link to={material.PDF} target="_blank">
-                    <FaFilePdf />
-                  </Link>
-                )}
-                <br />
-                {material.video && (
-                  <Link to={material.video} target="_blank">
-                    <PiVideoFill />
-                  </Link>
-                )}
-                <br />
-                {material.zoom && (
-                  <>
-                    <form ref={formRef} onSubmit={handleSubmit}>
-                      <button type="submit" disabled={buttonDisabled} style={{ display: "none" }}>
-                        Attend to lecture
-                      </button>
-                    </form>
-                    <Link to="#" onClick={(e) => handleZoomClick(e, material.zoom)} target="_blank">
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <BiLogoZoom />
-                      </div>
-                    </Link>
-                  </>
-                )}
-                <br />
-                {material.otherlink && (
-                  <Link to={material.otherlink} target="_blank">
-                    <SiMaterialdesignicons />
-                  </Link>
-                )}
-                <br />
-              </div>
-            </div>
-          ))}
+      <button onClick={handelShowMat}>ShowContent</button>
+
+      {Showmatrila && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <div>
+            {error && <p>{error}</p>}
+            {subjectQuiz
+              .slice()
+              .reverse()
+              .map((material) => (
+                <div key={material.id} className="content">
+                  <div className="content__icon">
+                    <p>{material.lesson} </p>
+                    <br />
+                    {material.PDF && (
+                      <Link to={material.PDF} target="_blank">
+                        <FaFilePdf />
+                      </Link>
+                    )}
+                    <br />
+                    {material.video && (
+                      <Link to={material.video} target="_blank">
+                        <PiVideoFill />
+                      </Link>
+                    )}
+                    <br />
+                    {material.zoom && (
+                      <>
+                        <form ref={formRef} onSubmit={handleSubmit}>
+                          <button
+                            type="submit"
+                            disabled={buttonDisabled}
+                            style={{ display: "none" }}
+                          >
+                            Attend to lecture
+                          </button>
+                        </form>
+                        <Link
+                          to="#"
+                          onClick={(e) => handleZoomClick(e, material.zoom)}
+                          target="_blank"
+                        >
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <BiLogoZoom />
+                          </div>
+                        </Link>
+                      </>
+                    )}
+                    <br />
+                    {material.otherlink && (
+                      <Link to={material.otherlink} target="_blank">
+                        <SiMaterialdesignicons />
+                      </Link>
+                    )}
+                    <br />
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
