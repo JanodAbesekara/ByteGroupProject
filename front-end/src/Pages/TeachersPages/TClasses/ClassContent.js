@@ -21,7 +21,7 @@ function ClassContent({ subjectData }) {
   const [video, setVideo] = useState(null); // State to store video file
   const [pdfPerc, setPdfPerc] = useState(0); // State to store PDF upload percentage
   const [videoPerc, setVideoPerc] = useState(0); // State to store video upload percentage
-  const [otherlink, setOterlink] = useState(""); // State to store other link
+  const [otherlink, setOtherlink] = useState(""); // State to store other link
   const [pdfUrl, setPdfUrl] = useState(""); // State to store PDF URL
   const [videoUrl, setVideoUrl] = useState(""); // State to store video URL
   const [showForm, setShowForm] = useState(false); // State to toggle form visibility
@@ -95,29 +95,45 @@ function ClassContent({ subjectData }) {
   const ClicktoShow = () => {
     setShowForm(!showForm);
   };
+  const ClicktoHide = () => {
+    setShowForm(false);
+  };
+  const style = {
+    padding: "4px",
+    border: "none",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    borderRadius: "3px",
+    display: "flex",
+    flexDirection: "column"
+  };
+
 
   return (
     <>
-      <button onClick={ClicktoShow}>Click to Add</button>
+      {!showForm ?
+      <button onClick={ClicktoShow} style={style}>Click to Add</button> : <button onClick={ClicktoHide} style={style}>Hide</button> }
       {showForm && (
         <div
           style={{
             justifyContent: "center",
             alignContent: "center",
             display: "flex",
+            backgroundColor: "#CADCD9",
+            borderRadius: "20px",
+            
           }}
         >
           <div
             style={{
               width: "90%",
               height: "300px",
-              backgroundColor: "#CADCD9",
               marginTop: "50px",
               marginBottom: "50px",
-              borderRadius: "20px",
+              display: "flex"
             }}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>
               <label>Lecture Name</label>
               <input
                 type="text"
@@ -125,18 +141,18 @@ function ClassContent({ subjectData }) {
                 value={lesson}
                 onChange={(e) => setLessonName(e.target.value)}
                 style={{
-                  width: "20%",
-                  height: "30px",
-                  borderRadius: "5px",
-                  border: "1px solid gray",
+                  marginBottom: "5px",
+                  height: "26px",
+                  paddingLeft: "5px",
+                  border: "1px solid gray"
                 }}
               />
-              <div>
+              <div style={{display: "flex", flexDirection: "column"}}>
                 <BiLogoZoom
                   style={{
                     color: "#2A629A",
-                    width: "20px",
-                    height: "20px",
+                    width: "25px",
+                    height: "25px",
                   }}
                 />
                 <input
@@ -144,14 +160,22 @@ function ClassContent({ subjectData }) {
                   placeholder="Zoom link"
                   value={zoom}
                   onChange={(e) => setZoomLink(e.target.value)}
+                  style={{
+                    marginTop: "5px",
+                    marginBottom: "5px",
+                    height: "26px",
+                    paddingLeft: "5px",
+                    border: "1px solid gray"
+                  }}
                 />
 
-                <br></br>
+                
                 <FaFilePdf
                   style={{
                     color: "#FF0000",
                     width: "20px",
                     height: "20px",
+                    marginBottom: "5px",
                   }}
                 />
                 {pdfPerc > 0 && "Uploading : " + pdfPerc + "%"}
@@ -160,13 +184,17 @@ function ClassContent({ subjectData }) {
                   type="file"
                   accept=".pdf"
                   onChange={(e) => setPdf(e.target.files[0])}
+                  style={{
+                    marginBottom: "5px",
+                  }}
                 />
-                <br></br>
+                
                 <PiVideoFill
                   style={{
                     color: "Blue",
                     width: "20px",
                     height: "20px",
+                    marginBottom: "5px",
                   }}
                 />
                 {videoPerc > 0 && "Uploading : " + videoPerc + "%"}
@@ -175,29 +203,42 @@ function ClassContent({ subjectData }) {
                   type="file"
                   accept="video/*"
                   onChange={(e) => setVideo(e.target.files[0])}
+                  style={{
+                    marginBottom: "5px",
+                  }}
                 />
-                <br></br>
+                
                 <SiMaterialdesignicons
                   style={{
                     color: "Blue",
                     width: "20px",
                     height: "20px",
+                    marginBottom: "5px",
                   }}
                 />
 
                 <input
                   type="text"
                   placeholder="Any drive link added here"
-                  onChange={(e) => setOterlink(e.target.value)}
+                  onChange={(e) => setOtherlink(e.target.value)}
                   style={{
-                    width: "20%",
-                    height: "30px",
-                    borderRadius: "5px",
-                    border: "1px solid gray",
+                    marginTop: "5px",
+                    marginBottom: "10px",
+                    height: "26px",
+                    paddingLeft: "5px",
+                    border: "1px solid gray"
                   }}
                 />
               </div>
-              <button type="submit">Submit</button>
+              <button type="submit"
+                      style={{
+                        color: "#fff",
+                        padding: "4px 0px",
+                        backgroundColor: "rgb(164, 166, 179)",
+                        border: "none",
+                        borderRadius: "3px"
+                      }}
+              >Submit</button>
             </form>
           </div>
         </div>
