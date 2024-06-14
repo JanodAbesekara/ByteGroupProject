@@ -61,10 +61,10 @@ function AddingLectures({ subjectData }) {
 
   return (
     <div>
-      <h2>{subjectData.subject}</h2>
-      <h3>{subjectData.medium}</h3>
+      {/* <h2>{subjectData.subject}</h2>
+      <h3>{subjectData.medium}</h3> */}
       {error && <p>{error}</p>}
-      <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
+      <TableContainer component={Paper} sx={{ marginBottom: "20px" }}>
         <Table>
           <TableHead>
             <TableRow>
