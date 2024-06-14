@@ -125,7 +125,7 @@ export default function Dashbord() {
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
 
-              <React.Fragment>
+              <div className="Noti_T">
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box sx={{ display: "flex", gap: 2, float: "right" }}>
                     <Badge badgeContent={notCount}>
@@ -138,7 +138,7 @@ export default function Dashbord() {
                   handleClose={handleClose}
                   notifications={notifaication}
                 />
-              </React.Fragment>
+             </div>
             </div>
           </div>
 

@@ -18,7 +18,6 @@
   left: 60%;
   margin-top: 10px;
 }
-
 #root
   > div
   > div
@@ -26,6 +25,7 @@
   > div.container3
   > div.container1
   > div.teacher_info
+  > div.Noti_T
   > a
   > div
   > span
@@ -156,6 +156,10 @@
     width: 65%;
     left: 0;
   }
+  .Noti_T {
+    position: relative;
+    bottom: 130px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -176,5 +180,10 @@
   }
   .teacher_info {
     padding-left: 80px;
+  }
+  .Noti_T {
+    position: relative;
+    bottom: 20px;
+    left: 100%;
   }
 }
