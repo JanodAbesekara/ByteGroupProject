@@ -85,7 +85,7 @@ function Classcomponent({ subjectData }) {
           <p
             style={{
               width: "100%",
-              backgroundColor: "#65a1a0",
+              backgroundColor: "#007bff",
               textAlign: "center",
               padding: "10px 4px",
               color: "#fff",
@@ -98,7 +98,7 @@ function Classcomponent({ subjectData }) {
             {subjectDataState.subject}
           </p>
 
-          <h4 style={{ margin: "4px 0px", color: "#21319c" }}>
+          <h4 style={{ margin: "4px 0px", color: "#ffc107" }}>
             {subjectDataState.medium}
           </h4>
           <div>
@@ -165,7 +165,7 @@ function Classcomponent({ subjectData }) {
               )}
             </div>
           </div>
-          <div style={{ marginTop: "50px" }}>
+          <div style={{ marginTop: "20px" }}>
             <ClassContent subjectData={subjectData} />
           </div>
         </div>

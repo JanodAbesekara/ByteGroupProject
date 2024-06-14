@@ -48,15 +48,28 @@ export default function Grades() {
          {selectSubject.length > 0 ? (
             selectSubject.map((subjectData) => (
               <div key={subjectData._id}>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop:"10px", paddingLeft:"5px" }}>
-                  <p>{subjectData.subject}</p>
-                  <p>{subjectData.medium}</p>
+                <div 
+                    style={{ 
+                            display: "flex", 
+                            justifyContent: "center",
+                            alignItem: "center", 
+                            marginTop:"30px",
+                            marginLeft: "6px",
+                            padding: "8px", 
+                            backgroundColor: "lightblue",
+                            color: "darkblue",
+                            fontWeight: "600",
+                            fontSize: "18px" 
+                            }}>
+
+                  <p>{subjectData.subject} ({subjectData.medium})</p>
+                 
                 </div>
                 <GradesComponent subjectDetails={subjectData} />
               </div>
             ))
           ) : (
-            <p>No subjects found.</p>
+            <p>No subjects here.</p>
           )}
       </Box>
     </Grid>

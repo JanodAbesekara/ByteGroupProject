@@ -3,7 +3,7 @@ import axios from "axios";
 import "./UserProfile.css";
 import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; // Adjust the import for jwt-decode
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
@@ -20,15 +20,18 @@ function UserProfile() {
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
-  const [showChooseOption, setShowChooseOption] = useState(true); //control visibility
-  const [showScheme, setShowScheme] = useState(true); //control visibility
-  const [subjectOption, setSubjectOption] = useState(true); //control visibility
-  const [scheme, setScheme] = useState(""); //control visibility of "choose scheme"
+  const [showChooseOption, setShowChooseOption] = useState(true); // control visibility
+  const [showScheme, setShowScheme] = useState(true); // control visibility
+  const [subjectOption, setSubjectOption] = useState(true); // control visibility
+  const [scheme, setScheme] = useState(""); // control visibility of "choose scheme"
+
+  const [clicked, setClicked] = useState(true); //control profile picture uploding button
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
+      setUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -73,17 +76,19 @@ function UserProfile() {
       .catch((error) => {
         console.log(error.message);
       });
+
+    setClicked(true);
   };
 
-  let userEmail = "";
+  // let userEmail = "";
 
-  if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
-    userEmail = "";
-  } else {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    userEmail = decodedToken.email;
-  }
+  // if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
+  //   userEmail = "";
+  // } else {
+  //   const token = localStorage.getItem("MERN_AUTH_TOKEN");
+  //   const decodedToken = jwtDecode(token);
+  //   userEmail = decodedToken.email;
+  // }
 
   // getting users name
   useEffect(() => {
@@ -116,6 +121,7 @@ function UserProfile() {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
       const decodedToken = jwtDecode(token);
       const userID = decodedToken._id;
+      const userEmail = decodedToken.email;
       setUser(decodedToken);
 
       const validateForm = () => {
@@ -163,14 +169,9 @@ function UserProfile() {
         axios
           .post(`/api/user/userProfile`, updatedUser)
           .then((response) => {
-            setMedium((pre) => (pre.length > 0 ? "" : pre));
-            setScheme((pre) => (pre.length > 0 ? "" : pre));
-            setSubject((pre) => (pre.length > 0 ? "" : pre));
-            setDegree((pre) => (pre.length > 0 ? "" : pre));
-            setExperience((pre) => (pre.length > 0 ? "" : pre));
-            setAboutMe((pre) => (pre.length > 0 ? "" : pre));
             window.alert(response.data.msg);
             console.log(response.data.msg);
+            window.location.reload();
           })
           .catch((error) => {
             window.alert(error.response.data.msg);
@@ -203,10 +204,18 @@ function UserProfile() {
                   src={url}
                   sx={{ width: 90, height: 90 }}
                 />
-                <button onClick={() => fileInputRef.current.click()}>
-                  Change
-                </button>
-                <button onClick={handleSave}>Save</button>
+                {clicked ? (
+                  <button
+                    onClick={() => {
+                      fileInputRef.current.click();
+                      setClicked(!clicked);
+                    }}
+                  >
+                    Change
+                  </button>
+                ) : (
+                  <button onClick={handleSave}>Save</button>
+                )}
               </div>
             </div>
             <div className="teacher_info">
@@ -219,9 +228,9 @@ function UserProfile() {
           <div className="personal_details">
             <div className="details">
               <form onSubmit={handleSubmit}>
-                <lebel htmlFor="medium">
+                <label htmlFor="medium">
                   <span style={{ color: "red" }}>*</span>Medium
-                </lebel>
+                </label>
                 <br />
                 <select
                   style={{
@@ -247,9 +256,9 @@ function UserProfile() {
                 <br />
                 <br />
 
-                <lebel htmlFor="scheme">
+                <label htmlFor="scheme">
                   <span style={{ color: "red" }}>*</span>Scheme
-                </lebel>
+                </label>
                 <br />
                 <select
                   style={{
@@ -276,9 +285,9 @@ function UserProfile() {
                 <br />
                 <br />
 
-                <lebel htmlFor="subject">
+                <label htmlFor="subject">
                   <span style={{ color: "red" }}>*</span>Subject
-                </lebel>
+                </label>
                 <br></br>
                 <select
                   style={{
@@ -315,7 +324,7 @@ function UserProfile() {
                       <option value="History">History</option>
                       <option value="Music">Music</option>
                       <option value="Geography">Geography</option>
-                      <option value="Heath Studies">Health Studies</option>
+                      <option value="Health Studies">Health Studies</option>
                       <option value="Arts">Arts</option>
                       <option value="IT">IT</option>
                       <option value="Civic">Civic</option>
@@ -326,7 +335,7 @@ function UserProfile() {
                     <>
                       {subjectOption && (
                         <option value="Choose your scheme">
-                          Choose youe Subject
+                          Choose your Subject
                         </option>
                       )}
                       <option value="Physics">Physics</option>
@@ -357,7 +366,7 @@ function UserProfile() {
                       <option value="Media">Media</option>
                       <option value="Agriculture">Agriculture</option>
                       <option value="Hindi">Hindi</option>
-                      <option value="Germen">Germen</option>
+                      <option value="German">German</option>
                       <option value="Japanese">Japanese</option>
                     </>
                   )}
@@ -365,9 +374,9 @@ function UserProfile() {
                 <br />
 
                 <br></br>
-                <lebel htmlFor="degree">
+                <label htmlFor="degree">
                   <span style={{ color: "red" }}>*</span>Degree
-                </lebel>
+                </label>
                 <br></br>
                 <input
                   type="text"
@@ -377,9 +386,9 @@ function UserProfile() {
                   onChange={(e) => setDegree(e.target.value)}
                 ></input>
                 <br></br>
-                <lebel htmlFor="experience">
+                <label htmlFor="experience">
                   <span style={{ color: "red" }}>*</span>Experience
-                </lebel>
+                </label>
                 <br></br>
                 <input
                   type="text"
@@ -389,14 +398,14 @@ function UserProfile() {
                   onChange={(e) => setExperience(e.target.value)}
                 ></input>
                 <br></br>
-                <lebel htmlFor="aboutMe">
+                <label htmlFor="aboutMe">
                   <span style={{ color: "red" }}>*</span>About me
-                </lebel>
+                </label>
                 <br></br>
                 <textarea
                   type="text"
                   className="about"
-                  placeholder="Add something about your self"
+                  placeholder="Add something about yourself"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
                 ></textarea>
