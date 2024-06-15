@@ -63,6 +63,17 @@ function AddingLectures({ subjectData }) {
   const HandleShow = () => {
     setShowForm(!showForm);
   };
+  const HandleHide = () => {
+    setShowForm(false);
+  };
+
+  const style = {
+    backgroundColor: "#28a745",
+    padding: "4px",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px"
+  }
 
   return (
     <div>
@@ -79,8 +90,6 @@ function AddingLectures({ subjectData }) {
                     <TableCell
                       key={header}
                       sx={{
-                        textAlign: "center",
-                        backgroundColor: "#317873",
                         borderRight: "2px white solid",
                         color: "white",
                       }}
@@ -143,6 +152,7 @@ function AddingLectures({ subjectData }) {
                   <TableCell sx={{ textAlign: "center" }}>
                     <Button
                       onClick={() => handleDelete(quise._id)}
+
                       sx={{
                         backgroundColor: "#317873",
                         color: "white",

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import ProfileDisplay from "./ProfileDisplay";
+import { Link } from "react-router-dom";
+
 import {
   TableContainer,
   Paper,
@@ -12,7 +14,7 @@ import {
   TableBody,
 } from "@mui/material";
 
-function SubjectCard() {
+export default function SubjectCard() {
   const [Subjects, setSubjects] = useState([]);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function SubjectCard() {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <h1>Subjects</h1>
         <TableContainer component={Paper}>
           <Table>
@@ -62,9 +64,72 @@ function SubjectCard() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+
+
+      </div> */}
+
+<div>
+    {Subjects.map((subject) => (
+      <div
+        style={{
+          paddingLeft: "5%",
+          paddingRight: "5%",
+        }}
+        key={subject._id}
+      >
+        <div
+          style={{
+            alignContent: "center",
+            display: "flex",
+            flexDirection: "column",
+            marginBottom: "20px",
+            marginTop: "20px",
+            backgroundColor: "#d5edd6",
+            border: "none",
+            borderRadius: "10px",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div className="classcom" style={{ width: "25%", border: "none" }}>
+              <Link
+                to="/SSubject"
+                style={{ textDecoration: "none", textTransform: "uppercase" }}
+              >
+                <p
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#1A8FE3",
+                    textAlign: "center",
+                    padding: "5px 1px",
+                    color: "#fff",
+                    margin: "0px",
+                    border: "none",
+                    borderRadius: "7px",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {subject.Ensubject}
+                </p>
+              </Link>
+            </div>
+            <div style={{ paddingLeft: "10px", paddingTop: "4px" }}>
+              <p
+                style={{
+                  margin: "4px 0px",
+                  color: "#F37933",
+                  fontWeight: "bold",
+                  marginRight: "10px",
+                }}
+              >
+                {subject.Enmedium}
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+    ))}
+    </div>
     </div>
   );
 }
-
-export default SubjectCard;
