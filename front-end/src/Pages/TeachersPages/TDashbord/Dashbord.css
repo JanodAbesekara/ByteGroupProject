@@ -25,6 +25,25 @@
   > div.container3
   > div.container1
   > div.teacher_info
+  > div.notifications_icon
+  > a
+  > div
+  > span
+  > span {
+  background-color: rgb(9, 9, 156);
+  color: white;
+  font-size: 15px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+}
+#root
+  > div
+  > div
+  > div.head
+  > div.container3
+  > div.container1
+  > div.teacher_info
   > div.Noti_T
   > a
   > div
@@ -183,7 +202,6 @@
   }
 }
 
-
 @media (min-width: 1025px) {
   .profile_pic {
     padding-left: 30px;
@@ -198,4 +216,3 @@
     left: 100%;
   }
 }
-

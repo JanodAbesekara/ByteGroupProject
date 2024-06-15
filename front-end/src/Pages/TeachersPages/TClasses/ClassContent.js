@@ -117,8 +117,8 @@ function ClassContent({ subjectData }) {
               borderRadius: "20px",
             }}
           >
-            <form onSubmit={handleSubmit}>
-              <label>Lecture Name</label>
+            <form onSubmit={handleSubmit} style={{marginLeft:"50px",marginTop:"50px"}}>
+              <label >Lecture Name</label>
               <input
                 type="text"
                 placeholder="Enter lecture name"
