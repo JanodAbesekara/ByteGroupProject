@@ -148,8 +148,10 @@ const getNotificationT = async (req, res) => {
 
 const getprofile = async (req, res) => {
   try {
-    const { email } = req.query;
-    const profile = await UserProfile.findOne({ email: email });
+    const email = req.query.email;
+    const subject = req.query.subject;
+    const medium = req.query.medium;
+    const profile = await UserProfile.findOne({ medium:medium , subject:subject, email: email});
     if (!profile) {
       return res.status(404).json({ success: false, msg: "Profile not found" });
     }

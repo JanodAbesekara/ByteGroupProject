@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import ProfileDisplay from "./ProfileDisplay";
 import { Link } from "react-router-dom";
-
-import {
-  TableContainer,
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "@mui/material";
+import ProfileDisplay from "./ProfileDisplay";
 
 export default function SubjectCard() {
   const [Subjects, setSubjects] = useState([]);
@@ -38,98 +28,80 @@ export default function SubjectCard() {
     fetchSubjects();
   }, []);
 
+  console.log(Subjects);
+
   return (
     <div>
-      {/* <div>
-        <h1>Subjects</h1>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Subject</TableCell>
-                <TableCell>Medium</TableCell>
-                <TableCell>Teacher Email</TableCell>
-                <TableCell>Profile</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Subjects.map((subject) => (
-                <TableRow key={subject._id}>
-                  <TableCell>{subject.Ensubject}</TableCell>
-                  <TableCell>{subject.Enmedium}</TableCell>
-                  <TableCell>{subject.teacherEmail}</TableCell>
-                 <TableCell><ProfileDisplay teacherEmail={subject.teacherEmail}/></TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-
-      </div> */}
-
-<div>
-    {Subjects.map((subject) => (
-      <div
-        style={{
-          paddingLeft: "5%",
-          paddingRight: "5%",
-        }}
-        key={subject._id}
-      >
-        <div
-          style={{
-            alignContent: "center",
-            display: "flex",
-            flexDirection: "column",
-            marginBottom: "20px",
-            marginTop: "20px",
-            backgroundColor: "#d5edd6",
-            border: "none",
-            borderRadius: "10px",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div className="classcom" style={{ width: "25%", border: "none" }}>
-              <Link
-                to="/SSubject"
-                style={{ textDecoration: "none", textTransform: "uppercase" }}
-              >
-                <p
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#1A8FE3",
-                    textAlign: "center",
-                    padding: "5px 1px",
-                    color: "#fff",
-                    margin: "0px",
-                    border: "none",
-                    borderRadius: "7px",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                  }}
+      <div>
+        {Subjects.map((subject) => (
+          <div
+            style={{
+              paddingLeft: "5%",
+              paddingRight: "5%",
+            }}
+            key={subject._id}
+          >
+            <div
+              style={{
+                alignContent: "center",
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: "20px",
+                marginTop: "20px",
+                backgroundColor: "#d5edd6",
+                border: "none",
+                borderRadius: "10px",
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div
+                  className="classcom"
+                  style={{ width: "40%", border: "none" }}
                 >
-                  {subject.Ensubject}
-                </p>
-              </Link>
-            </div>
-            <div style={{ paddingLeft: "10px", paddingTop: "4px" }}>
-              <p
-                style={{
-                  margin: "4px 0px",
-                  color: "#F37933",
-                  fontWeight: "bold",
-                  marginRight: "10px",
-                }}
-              >
-                {subject.Enmedium}
-              </p>
+                  <Link
+                    to="/SSubject"
+                    style={{
+                      textDecoration: "none",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    <p
+                      style={{
+                        display:"flex",
+                        width: "100%",
+                        backgroundColor: "#1A8FE3",
+                        textAlign: "center",
+                        padding: "5px 3px",
+                        color: "#fff",
+                        margin: "0px",
+                        border: "none",
+                        borderRadius: "6px",
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {subject.Ensubject}
+                    </p>
+                  </Link>
+                </div>
+                <div style={{ paddingLeft: "10px", paddingTop: "2px" }}>
+                  <p
+                    style={{
+                      margin: "4px 0px",
+                      color: "#F37933",
+                      fontWeight: "600",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {subject.Enmedium}
+                  </p>
+                </div>
+              </div>
+              <ProfileDisplay email={subject.teacherEmail} subject={subject.Ensubject} medium={subject.Enmedium}/>
             </div>
           </div>
-        </div>
-        </div>
-    ))}
-    </div>
+        ))}
+      </div>
     </div>
   );
 }
