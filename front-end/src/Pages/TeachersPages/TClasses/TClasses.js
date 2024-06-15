@@ -24,7 +24,7 @@ export default function TClasses() {
         const teacheremail = decodeToken.email;
 
         const response = await axios.get(`/api/user/getsubjectreg`, {
-          params: { email: teacheremail }
+          params: { email: teacheremail },
         });
 
         const filterRegsubjects = response.data.data;
@@ -46,7 +46,7 @@ export default function TClasses() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
+          <Box sx={{ marginBottom: "20px" }}>
             {error && <p>{error}</p>}
             {selectsubject.map((selectsubjects) => (
               <div key={selectsubjects._id}>

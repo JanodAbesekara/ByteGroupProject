@@ -13,6 +13,8 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+
 
 function AADSmanager() {
   const [ads, setAds] = useState([]);
@@ -128,6 +130,7 @@ function AADSmanager() {
                   <TableCell sx={{ textAlign: "center" }}>{ad.subject}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>{ad.medium}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
+                    <Link to={ad.photosURL}>
                     <img
                       src={ad.photosURL}
                       alt="This is a post add"
@@ -137,6 +140,7 @@ function AADSmanager() {
                         cursor: "pointer",
                       }}
                     />
+                    </Link>
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     <button
