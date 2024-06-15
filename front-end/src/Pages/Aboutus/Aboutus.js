@@ -10,11 +10,6 @@ export default function Aboutus() {
   return (
     <div>
       <Navbar />
-      <div
-        className="login_m2"
-        style={{ backgroundColor: "#e2e0e0e9", width: "100%", height: "40px" }}
-      ></div>
-
       <div className="aboutus_h3">
         <h2>About us</h2>
       </div>

@@ -52,7 +52,7 @@ export default function GradeComponent(subjectDetails) {
 
   return (
     <div>
-      <TableContainer component={Paper} sx={{ margin: "10px 5px" }}>
+      <TableContainer component={Paper} sx={{ margin: "3px 5px" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -92,13 +92,15 @@ export default function GradeComponent(subjectDetails) {
           <TableBody>
             {studentGrades.map((student) => (
               <TableRow key={student._id}>
-                <TableCell sx={{ textAlign: "center" }}>
+                <TableCell sx={{ textAlign: "center", color: "gray" }}>
                   {student.name}
                 </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
+                <TableCell sx={{ textAlign: "center", color: "gray" }}>
                   {student.email}
                 </TableCell>
-                <TableCell sx={{ textAlign: "center" ,   backgroundColor: getBackgroundColor(student.grade),}}>
+
+                <TableCell sx={{ textAlign: "center" , color: "gray", fontWeight: "500",  backgroundColor: getBackgroundColor(student.grade),}}>
+
                   {student.grade}
                 </TableCell>
               </TableRow>

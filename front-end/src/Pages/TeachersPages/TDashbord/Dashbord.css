@@ -66,6 +66,9 @@
   font-family: "Inter", sans-serif;
   padding-top: 15px;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .teacher_info .name {
   padding-left: 8px;
@@ -162,7 +165,7 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) {
   .profile_pic {
     padding-left: 20px;
     width: 10%;
@@ -170,8 +173,16 @@
   .teacher_info {
     width: 90%;
     padding-left: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .notifications_icon {
+    float: right;
+    margin-left: 100px;
   }
 }
+
 
 @media (min-width: 1025px) {
   .profile_pic {
@@ -187,3 +198,4 @@
     left: 100%;
   }
 }
+
