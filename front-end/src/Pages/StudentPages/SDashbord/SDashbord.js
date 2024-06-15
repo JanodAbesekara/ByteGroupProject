@@ -135,7 +135,6 @@ function SDashbord() {
               <div />
             </div>
             <div>
-              <h2>Enrolled Subjects</h2>
                <SubjectCard />
             </div>
           </Box>
