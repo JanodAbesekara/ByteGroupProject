@@ -133,8 +133,8 @@ function ClassContent({ subjectData }) {
               display: "flex"
             }}
           >
-            <form onSubmit={handleSubmit} style={{marginLeft:"50px",marginTop:"50px"}}>
-              <label >Lecture Name</label>
+            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>
+              <label>Lecture Name</label>
               <input
                 type="text"
                 placeholder="Enter lecture name"

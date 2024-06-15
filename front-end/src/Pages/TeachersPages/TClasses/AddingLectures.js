@@ -78,18 +78,23 @@ function AddingLectures({ subjectData }) {
   return (
     <div>
       {error && <p>{error}</p>}
-      <button onClick={HandleShow}>ShowTable</button>
+
+      {!showForm ? 
+      <button onClick={HandleShow} style={style}>Show Added Contents</button> : <button onClick={HandleHide} style={style}>Hide Contents</button> }
       {showForm && (
-        <TableContainer component={Paper} sx={{ marginBottom: "20px" }}>
+        <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
           <Table>
             <TableHead>
               <TableRow>
                 {["Delete", "Other Link", "Video", "PDF", "Zoom", "Lesson"]
+                  .slice(0)
                   .reverse()
                   .map((header) => (
                     <TableCell
                       key={header}
                       sx={{
+                        textAlign: "center",
+                        backgroundColor: "#317873",
                         borderRight: "2px white solid",
                         color: "white",
                       }}
@@ -100,76 +105,79 @@ function AddingLectures({ subjectData }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {subjectQuiz.reverse().map((quise) => (
-                <TableRow key={quise._id}>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {quise.lesson}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {quise.zoom && (
-                      <a
-                        href={quise.zoom}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <BiLogoZoom />
-                      </a>
-                    )}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {quise.PDF && (
-                      <a
-                        href={quise.PDF}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaFilePdf />
-                      </a>
-                    )}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {quise.video && (
-                      <a
-                        href={quise.video}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <PiVideoFill />
-                      </a>
-                    )}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {quise.otherlink && (
-                      <a
-                        href={quise.otherlink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <SiMaterialdesignicons />
-                      </a>
-                    )}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Button
-                      onClick={() => handleDelete(quise._id)}
+              {subjectQuiz
+                .slice(0)
+                .reverse()
+                .map((quise) => (
+                  <TableRow key={quise._id}>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {quise.lesson}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {quise.zoom && (
+                        <a
+                          href={quise.zoom}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <BiLogoZoom />
+                        </a>
+                      )}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {quise.PDF && (
+                        <a
+                          href={quise.PDF}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaFilePdf />
+                        </a>
+                      )}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {quise.video && (
+                        <a
+                          href={quise.video}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <PiVideoFill />
+                        </a>
+                      )}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {quise.otherlink && (
+                        <a
+                          href={quise.otherlink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <SiMaterialdesignicons />
+                        </a>
+                      )}
+                    </TableCell>
 
-                      sx={{
-                        backgroundColor: "#317873",
-                        color: "white",
-                        border: "none",
-                        padding: "5px 10px",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        "&:hover": {
-                          backgroundColor: "#255d5b",
-                        },
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell sx={{ textAlign: "center" }}>
+                      <Button
+                        onClick={() => handleDelete(quise._id)}
+                        sx={{
+                          backgroundColor: "#317873",
+                          color: "white",
+                          border: "none",
+                          padding: "5px 10px",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          "&:hover": {
+                            backgroundColor: "#255d5b",
+                          },
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
