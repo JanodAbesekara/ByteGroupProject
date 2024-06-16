@@ -6,6 +6,7 @@ import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import Displaypyment from "./Displaypyment";
 
 export default function PaymentDetails() {
   const [bank, setBank] = useState("");
@@ -19,23 +20,28 @@ export default function PaymentDetails() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     userID = decodedToken._id;
-    
   } else {
     userID = " ";
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const TeacherEmail = decodedToken.email;
     if (accountNo === confirmAccount) {
       const paymentDetails = {
         id: userID,
         bank: bank,
         accountNo: accountNo,
+        TeacherEmail: TeacherEmail,
       };
 
       axios
         .post(`api/user/payment`, paymentDetails)
         .then((response) => {
           window.alert(response.data.msg);
+          window.location.reload();
         })
         .catch((error) => {
           window.alert(error.response.data.msg);
@@ -62,9 +68,7 @@ export default function PaymentDetails() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box
-            sx={{ width: "100%", height: "1000px", backgroundColor: "Ashe" }}
-          >
+          <Box>
             <div className="personal_details">
               <div className="text">
                 <p
@@ -98,6 +102,7 @@ export default function PaymentDetails() {
                     value={bank}
                     onChange={(e) => setBank(e.target.value)}
                   >
+                    <option value=" ">Select Your Bank</option>
                     <option value="Sampath Bank">Sampath Bank</option>
                     <option value="Commercial Bank">Commercial Bank</option>
                     <option value="Peoples Bank">Peoples Bank</option>
@@ -161,6 +166,7 @@ export default function PaymentDetails() {
                 )}
               </span>
             </div>
+            <Displaypyment />
           </Box>
         </Grid>
       </Grid>

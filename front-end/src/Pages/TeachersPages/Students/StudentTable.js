@@ -5,7 +5,7 @@ import axios from "axios";
 const defaultProfilePicUrl =
   "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg";
 
- function StudentTable({ studentDetails, profilePicUrl }) {
+function StudentTable({ studentDetails, profilePicUrl }) {
   const [stuDetails, setStudentDetails] = useState({});
   const [parentDetails, setParentDetails] = useState({});
 
@@ -50,12 +50,8 @@ const defaultProfilePicUrl =
     <TableRow>
       <TableCell align="center">
         {profilePicUrl === "" ? "No Image" : ""}
-        <a 
-        href={displayPicUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        >
-          <img 
+        <a href={displayPicUrl} target="_blank" rel="noopener noreferrer">
+          <img
             src={displayPicUrl}
             alt="profile_image"
             style={{

@@ -3,7 +3,6 @@ import usermodel from "../models/usermodel.js";
 import paymentmodel from "../models/paymentModel.js";
 import studentProfileModel from "../models/studentProfileModel.js";
 
-
 const userProfileController = async (req, res) => {
   const {
     medium,
@@ -15,6 +14,7 @@ const userProfileController = async (req, res) => {
     email,
     id,
     url,
+    classpees,
   } = req.body;
 
   const olduser = await profilemodel.findOne({ email, subject, medium });
@@ -36,6 +36,7 @@ const userProfileController = async (req, res) => {
       email,
       id,
       url,
+      classpees,
     });
 
     await newprofile.save();
@@ -73,7 +74,7 @@ const userOtherDetailsController = async (req, res) => {
 };
 
 const paymentDetailsController = async (req, res) => {
-  const { bank, accountNo, id } = req.body;
+  const { bank, accountNo, id, TeacherEmail } = req.body;
   if (!bank || !accountNo) {
     return res.json({ success: false, msg: "Missing something" });
   }
@@ -82,8 +83,16 @@ const paymentDetailsController = async (req, res) => {
       id,
       bank,
       accountNo,
+      TeacherEmail,
     });
     await paymentDetails.save();
+
+    const olddetails = await usermodel.findOne({ email: TeacherEmail });
+
+    if (olddetails) {
+      return res.json({ success: false, msg: "Already filled the Fields " });
+    }
+
     return res.json({ success: true, msg: "Saved successfully" });
   } catch (error) {
     return res.json({ success: false, msg: "Internal Sever Error" });
@@ -132,7 +141,7 @@ const studentParentDetailsController = async (req, res) => {
 
 const updateUserProfileController = async (req, res) => {
   const id = req.params.subID; // Get the ID of the profile to update
-  const { degree, experience, aboutme } = req.body; // Extract updated data from request body
+  const { degree, experience, aboutme, classpees } = req.body; // Extract updated data from request body
 
   try {
     // Find the profile by ID
@@ -140,6 +149,7 @@ const updateUserProfileController = async (req, res) => {
       degree,
       experience,
       aboutme,
+      classpees,
     });
 
     // If profile doesn't exist, return an error
@@ -180,36 +190,41 @@ const Admindeisplay = async (req, res) => {
   }
 };
 
-
-const studentProfile = async (req,res) => {
+const studentProfile = async (req, res) => {
   const studentEmail = req.params.studentEmail;
   try {
-      const studentData =  await usermodel.findOne({
-        email: studentEmail,
-      });
-      if (!studentData) {
-        return res.status(404).json({ success: false, msg: "Student not found" });
-      }
-      return res.status(200).json({ success: true, data: studentData });
+    const studentData = await usermodel.findOne({
+      email: studentEmail,
+    });
+    if (!studentData) {
+      return res.status(404).json({ success: false, msg: "Student not found" });
+    }
+    return res.status(200).json({ success: true, data: studentData });
   } catch (error) {
-    return res.status(500).json({success:false , msg: "An unexpected error occured"});
+    return res
+      .status(500)
+      .json({ success: false, msg: "An unexpected error occured" });
   }
-}
+};
 
-const parentDetails = async (req,res) => {
+const parentDetails = async (req, res) => {
   const studentEmail = req.params.studentEmail;
   try {
-      const parentData = await studentProfileModel.findOne({
-        uEmail:studentEmail,
-      });
-      if (!parentData) {
-        return res.status(404).json({ success: false, msg: "Parent details not found" });
-      }
-      return res.status(200).json({ success: true, data: parentData });
+    const parentData = await studentProfileModel.findOne({
+      uEmail: studentEmail,
+    });
+    if (!parentData) {
+      return res
+        .status(404)
+        .json({ success: false, msg: "Parent details not found" });
+    }
+    return res.status(200).json({ success: true, data: parentData });
   } catch (error) {
-    return res.status(500).json({success:false , msg:"An unexpected error occured"});
+    return res
+      .status(500)
+      .json({ success: false, msg: "An unexpected error occured" });
   }
-}
+};
 
 const Admindelete = async (req, res) => {
   const { id } = req.body;
@@ -225,27 +240,32 @@ const Admindelete = async (req, res) => {
 
 const AdminCrete = async (req, res) => {
   const { email } = req.body;
-  
+
   try {
     const existingUser = await usermodel.findOne({ email: email });
-    
+
     if (existingUser) {
       existingUser.role = "Admin";
       await existingUser.save();
-      return res.status(200).json({ success: true, msg: "Role updated to Admin" });
+      return res
+        .status(200)
+        .json({ success: true, msg: "Role updated to Admin" });
     } else {
       const newAdmin = new usermodel({
         email: email,
         role: "Admin",
       });
       await newAdmin.save();
-      return res.status(200).json({ success: true, msg: "Successfully created Admin" });
+      return res
+        .status(200)
+        .json({ success: true, msg: "Successfully created Admin" });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, msg: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
   }
 };
-
 
 export {
   userProfileController,
