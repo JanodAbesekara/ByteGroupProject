@@ -67,20 +67,22 @@ function SSubject() {
                   style={{
                     marginBottom: "50px",
                     marginTop: "50px",
-                    marginLeft: "85%",
+                    marginLeft: "75%",
                     padding: "5px 15px ",
+                    border:"none",
+                    backgroundColor:"#28a745",
+                    color:"#fff",
+                    borderRadius:"3px"
                   }}
                 >
-                  More Courses
+                  More Subjects
                 </button>
               </BootstrapTooltip>
             </Link>
             <>
-              {subjects
-                .slice(0)
-                .reverse()
+              {subjects              
                 .map((subject) => (
-                  <div key={subject._id}>
+                  <div key={subject._id} style={{marginLeft:"30px", marginRight:"30px"}}>
                     <SubjectComponenet
                       teachermail={subject.teacherEmail}
                       subject={subject.Ensubject}

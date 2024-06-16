@@ -84,77 +84,92 @@ function Content({ teachermail, subject, medium }) {
     setShowmatrila(!Showmatrila);
   };
   return (
-    <>
-      <button onClick={handelShowMat}>ShowContent</button>
-
-      {Showmatrila && (
-        <div
+    <div>
+      <div>
+        <button
+          onClick={handelShowMat}
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignContent: "center",
+            marginTop: "20px",
+            marginBlock: "10px",
+            backgroundColor: "#007bff",
+            border: "none",
+            borderRadius: "5px",
+            padding: "3px",
+            color: "#fff",
           }}
         >
-          <div>
-            {error && <p>{error}</p>}
-            {subjectQuiz
-              .slice()
-              .reverse()
-              .map((material) => (
-                <div key={material.id} className="content">
-                  <div className="content__icon">
-                    <p>{material.lesson} </p>
-                    <br />
-                    {material.PDF && (
-                      <Link to={material.PDF} target="_blank">
-                        <FaFilePdf />
-                      </Link>
-                    )}
-                    <br />
-                    {material.video && (
-                      <Link to={material.video} target="_blank">
-                        <PiVideoFill />
-                      </Link>
-                    )}
-                    <br />
-                    {material.zoom && (
-                      <>
-                        <form ref={formRef} onSubmit={handleSubmit}>
-                          <button
-                            type="submit"
-                            disabled={buttonDisabled}
-                            style={{ display: "none" }}
-                          >
-                            Attend to lecture
-                          </button>
-                        </form>
-                        <Link
-                          to="#"
-                          onClick={(e) => handleZoomClick(e, material.zoom)}
-                          target="_blank"
-                        >
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <BiLogoZoom />
-                          </div>
+          Materials
+        </button>
+
+        {Showmatrila && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <div>
+              {error && <p>{error}</p>}
+              {subjectQuiz
+                .slice()
+                .reverse()
+                .map((material) => (
+                  <div key={material.id} className="content">
+                    <div className="content__icon">
+                      <p>{material.lesson} </p>
+                      <br />
+                      {material.PDF && (
+                        <Link to={material.PDF} target="_blank">
+                          <FaFilePdf />
                         </Link>
-                      </>
-                    )}
-                    <br />
-                    {material.otherlink && (
-                      <Link to={material.otherlink} target="_blank">
-                        <SiMaterialdesignicons />
-                      </Link>
-                    )}
-                    <br />
+                      )}
+                      <br />
+                      {material.video && (
+                        <Link to={material.video} target="_blank">
+                          <PiVideoFill />
+                        </Link>
+                      )}
+                      <br />
+                      {material.zoom && (
+                        <>
+                          <form ref={formRef} onSubmit={handleSubmit}>
+                            <button
+                              type="submit"
+                              disabled={buttonDisabled}
+                              style={{ display: "none" }}
+                            >
+                              Attend to lecture
+                            </button>
+                          </form>
+                          <Link
+                            to="#"
+                            onClick={(e) => handleZoomClick(e, material.zoom)}
+                            target="_blank"
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <BiLogoZoom />
+                            </div>
+                          </Link>
+                        </>
+                      )}
+                      <br />
+                      {material.otherlink && (
+                        <Link to={material.otherlink} target="_blank">
+                          <SiMaterialdesignicons />
+                        </Link>
+                      )}
+                      <br />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 }
 
