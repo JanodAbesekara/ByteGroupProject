@@ -90,6 +90,7 @@ export default function GradeComponent(subjectDetails) {
             </TableRow>
           </TableHead>
           <TableBody>
+         
             {studentGrades.map((student) => (
               <TableRow key={student._id}>
                 <TableCell sx={{ textAlign: "center", color: "gray" }}>

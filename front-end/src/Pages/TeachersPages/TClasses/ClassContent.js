@@ -105,19 +105,14 @@ function ClassContent({ subjectData }) {
     color: "#fff",
     borderRadius: "3px",
     display: "flex",
+    flexDirection: "column"
   };
+
 
   return (
     <>
-      {!showForm ? (
-        <button onClick={ClicktoShow} style={style}>
-          Click to Add
-        </button>
-      ) : (
-        <button onClick={ClicktoHide} style={style}>
-          Hide
-        </button>
-      )}
+      {!showForm ?
+      <button onClick={ClicktoShow} style={style}>Click to Add</button> : <button onClick={ClicktoHide} style={style}>Hide</button> }
       {showForm && (
         <div
           style={{
@@ -126,6 +121,7 @@ function ClassContent({ subjectData }) {
             display: "flex",
             backgroundColor: "#CADCD9",
             borderRadius: "20px",
+            
           }}
         >
           <div
@@ -134,13 +130,10 @@ function ClassContent({ subjectData }) {
               height: "300px",
               marginTop: "50px",
               marginBottom: "50px",
-              display: "flex",
+              display: "flex"
             }}
           >
-            <form
-              onSubmit={handleSubmit}
-              style={{ display: "flex", flexDirection: "column" }}
-            >
+            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>
               <label>Lecture Name</label>
               <input
                 type="text"
@@ -151,10 +144,10 @@ function ClassContent({ subjectData }) {
                   marginBottom: "5px",
                   height: "26px",
                   paddingLeft: "5px",
-                  border: "1px solid gray",
+                  border: "1px solid gray"
                 }}
               />
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{display: "flex", flexDirection: "column"}}>
                 <BiLogoZoom
                   style={{
                     color: "#2A629A",
@@ -172,10 +165,11 @@ function ClassContent({ subjectData }) {
                     marginBottom: "5px",
                     height: "26px",
                     paddingLeft: "5px",
-                    border: "1px solid gray",
+                    border: "1px solid gray"
                   }}
                 />
 
+                
                 <FaFilePdf
                   style={{
                     color: "#FF0000",
@@ -194,7 +188,7 @@ function ClassContent({ subjectData }) {
                     marginBottom: "5px",
                   }}
                 />
-
+                
                 <PiVideoFill
                   style={{
                     color: "Blue",
@@ -213,7 +207,7 @@ function ClassContent({ subjectData }) {
                     marginBottom: "5px",
                   }}
                 />
-
+                
                 <SiMaterialdesignicons
                   style={{
                     color: "Blue",
@@ -232,22 +226,19 @@ function ClassContent({ subjectData }) {
                     marginBottom: "10px",
                     height: "26px",
                     paddingLeft: "5px",
-                    border: "1px solid gray",
+                    border: "1px solid gray"
                   }}
                 />
               </div>
-              <button
-                type="submit"
-                style={{
-                  color: "#fff",
-                  padding: "4px 0px",
-                  backgroundColor: "rgb(164, 166, 179)",
-                  border: "none",
-                  borderRadius: "3px",
-                }}
-              >
-                Submit
-              </button>
+              <button type="submit"
+                      style={{
+                        color: "#fff",
+                        padding: "4px 0px",
+                        backgroundColor: "rgb(164, 166, 179)",
+                        border: "none",
+                        borderRadius: "3px"
+                      }}
+              >Submit</button>
             </form>
           </div>
         </div>

@@ -56,7 +56,10 @@ import StudentTable from "./Pages/TeachersPages/Students/StudentTable.js";
 import Attendance from "./Pages/TeachersPages/Attendence/Attendence";
 import SubjectCard from "./Pages/StudentPages/SDashbord/SubjectCard";
 import ProfileDisplay from "./Pages/StudentPages/SDashbord/ProfileDisplay";
-
+import Paycard from "./Pages/StudentPages/Payment/PayCard.js";
+import PaymentDisplay from "./Pages/StudentPages/Payment/PaymentdisplayTable.js";
+import Stupayment from "./Pages/TeachersPages/PaymentDetails/Displaypyment.js";
+import Payementmanage from "./Pages/AdminPages/Paymentmanage/PaymenetManage";
 
 
 function App() {
@@ -149,6 +152,10 @@ function App() {
           <Route path="/Attendance" element={<Attendance />} />
           <Route path="/SubjectCard" element={<SubjectCard />} />
           <Route path="/ProfileDisplay" element={<ProfileDisplay />} />
+          <Route path="/Paycard" element={<Paycard />} />
+          <Route path="/PaymentDisplay" element={<PaymentDisplay />} />
+          <Route path="/Stupayment" element={<Stupayment />} />
+          <Route path="/Payementmanage" element={<Payementmanage />} />
         </Routes>
       </div>
     </>

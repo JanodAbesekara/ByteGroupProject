@@ -125,8 +125,10 @@ export default function Dashbord() {
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
 
+
               <div className="notifications_icon">
               <React.Fragment>
+
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box>
                     <Badge badgeContent={notCount}>
@@ -139,8 +141,10 @@ export default function Dashbord() {
                   handleClose={handleClose}
                   notifications={notifaication}
                 />
+
               </React.Fragment>
               </div>
+
             </div>
           </div>
 

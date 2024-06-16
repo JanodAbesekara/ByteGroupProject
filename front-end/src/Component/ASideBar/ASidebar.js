@@ -13,6 +13,7 @@ import { IoMdHeadset } from "react-icons/io";
 import { RiDashboard3Fill } from "react-icons/ri";
 import "./ASidebar.css";
 import { jwtDecode } from "jwt-decode";
+import { MdPayment } from "react-icons/md";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -108,6 +109,12 @@ export default function Ssidebar() {
       icon: PiStudent,
       Title: "Students",
     },
+    {
+      name: "Payment",
+      href: `/Payementmanage?$phw=${encodedid}`,
+      icon: MdPayment,
+      Title: "Payment",
+    }
   ];
 
   return (
