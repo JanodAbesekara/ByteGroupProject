@@ -1,45 +1,36 @@
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
-const profileSchema = new Schema(
+const StudentpaymentStatesSchema = new Schema(
   {
+    stuemail: {
+      type: String,
+      required: true,
+    },
+    TeacherEmail: {
+      type: String,
+      required: true,
+    },
+    Subject: {
+      type: String,
+      required: true,
+    },
     medium: {
       type: String,
       required: true,
     },
-    scheme: {
+    Bankname: {
       type: String,
       required: true,
     },
-    subject: {
+    AccountNum: {
       type: String,
       required: true,
     },
-    degree: {
-      type: String,
-    },
-    experience: {
+    photourl: {
       type: String,
       required: true,
-    },
-    aboutme: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    classpees: {
-      type: String,
-      required: true,
-    },
-    id: {
-      type: String,
-    },
-    url: {
-      type: String,
     },
   },
   {
@@ -47,4 +38,7 @@ const profileSchema = new Schema(
   }
 );
 
-export default mongoose.model("profile", profileSchema);
+export default mongoose.model(
+  "StudentpaymentStates",
+  StudentpaymentStatesSchema
+);

@@ -4,6 +4,8 @@ import lecturematerial from "../models/Lecturematerial.js";
 import Announcement from "../models/Announcementmodel.js";
 import Assignment from "../models/Assignmentmodel.js";
 import UserProfile from "../models/userProfileModel.js";
+import Payment from "../models/paymentModel.js";
+import StudentpayemtStates from "../models/StudentpayemtStates.js";
 
 const getAssignment = async (req, res) => {
   const { email } = req.query;
@@ -151,16 +153,156 @@ const getprofile = async (req, res) => {
     const email = req.query.email;
     const subject = req.query.subject;
     const medium = req.query.medium;
-    const profile = await UserProfile.findOne({ medium:medium , subject:subject, email: email});
+    const profile = await UserProfile.findOne({
+      medium: medium,
+      subject: subject,
+      email: email,
+    });
     if (!profile) {
       return res.status(404).json({ success: false, msg: "Profile not found" });
     }
-    return res.status(200).json({ success: true, data:profile });
+    return res.status(200).json({ success: true, data: profile });
   } catch (error) {
     console.error(error);
     return res
       .status(500)
       .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const getdetails = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    // Find enrollments for the given user email
+    const enrollments = await Enrollment.find({ userEmail: email });
+
+    // Extract subject details from enrollments
+    const subjectdetails = enrollments.map((enroll) => ({
+      subject: enroll.Ensubject,
+      medium: enroll.Enmedium,
+      email: enroll.teacherEmail,
+    }));
+
+    // Find user profiles based on subject details
+    const details = await UserProfile.find({
+      $or: subjectdetails.map((enroll) => ({
+        subject: enroll.subject,
+        medium: enroll.medium,
+        email: enroll.email,
+      })),
+    });
+
+    // Find payment details based on subject details
+    const payment = await Payment.find({
+      $or: subjectdetails.map((enroll) => ({
+        TeacherEmail: enroll.email,
+      })),
+    });
+
+    // Create a map of teacher emails to payment details
+    const paymentMap = payment.reduce((map, pay) => {
+      map[pay.TeacherEmail] = pay;
+      return map;
+    }, {});
+
+    // Combine details and payment based on teacher email
+    const combinedDetails = details.map((detail) => {
+      return {
+        ...detail._doc,
+        payment: paymentMap[detail.email] || null,
+      };
+    });
+
+    res.status(200).json({ success: true, data: combinedDetails });
+  } catch (error) {
+    console.error("Error fetching details:", error);
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const poststudentpayment = async (req, res) => {
+  const {
+    stuemail,
+    TeacherEmail,
+    Subject,
+    medium,
+    Bankname,
+    AccountNum,
+    photourl,
+  } = req.body;
+  try {
+    const payment = new StudentpayemtStates({
+      stuemail,
+      TeacherEmail,
+      Subject,
+      medium,
+      Bankname,
+      AccountNum,
+      photourl,
+    });
+    await payment.save();
+    res
+      .status(200)
+      .json({ success: true, msg: "Payment details uploaded successfully" });
+  } catch (error) {
+    console.error("An error has occured !", error);
+    res.status(500).json({ success: false, msg: "Internal Sever Error" });
+  }
+};
+
+const getdertails = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const enrollments = await StudentpayemtStates.find({
+      stuemail: email,
+    });
+    return res.status(200).json({ success: true, data: enrollments });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const getdertailsofStu = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const enrollments = await StudentpayemtStates.find({
+      TeacherEmail: email,
+    });
+    return res.status(200).json({ success: true, data: enrollments });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const displayAllpayment = async (req, res) => {
+  try {
+    const payment = await StudentpayemtStates.find({});
+    return res.status(200).json({ success: true, data: payment });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const removeStudentNotpayed = async (req, res) => {
+  try {
+    const { userEmail, teacherEmail, Ensubject, Enmedium } = req.body;
+    console.log(req.body);
+    await Enrollment.findOneAndDelete({
+      userEmail: userEmail,
+      teacherEmail: teacherEmail,
+      Ensubject: Ensubject,
+      Enmedium: Enmedium,
+    });
+
+    if (!Enrollment) {
+      return res.status(404).json({ success: false, msg: "Student not found" });
+    }
+    res
+      .status(200)
+      .json({ success: true, msg: "Student removed successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
 
@@ -171,4 +313,10 @@ export {
   getNotificationT,
   getAssignment,
   getprofile,
+  getdetails,
+  poststudentpayment,
+  getdertails,
+  getdertailsofStu,
+  displayAllpayment,
+  removeStudentNotpayed,
 };

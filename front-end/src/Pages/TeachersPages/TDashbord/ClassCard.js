@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState  } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export default function ClassCard(subjectData) {
@@ -8,6 +8,7 @@ export default function ClassCard(subjectData) {
     degree: subjectData.subjectData.degree,
     experience: subjectData.subjectData.experience,
     aboutme: subjectData.subjectData.aboutme,
+    classpees: subjectData.subjectData.classpees,
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -28,6 +29,7 @@ export default function ClassCard(subjectData) {
       degree: editedData.degree,
       experience: editedData.experience,
       aboutme: editedData.aboutme,
+      classpees: editedData.classpees,
     };
 
     axios
@@ -163,6 +165,17 @@ export default function ClassCard(subjectData) {
                       width: "100%",
                     }}
                   />
+                  <input
+                    type="text"
+                    name="classpees"
+                    value={editedData.classpees}
+                    onChange={handleInputChange}
+                    style={{
+                      margin: "4px 6px",
+                      fontSize: "14px",
+                      width: "100%",
+                    }}
+                  />
                 </>
               ) : (
                 <>
@@ -171,6 +184,9 @@ export default function ClassCard(subjectData) {
                   </p>
                   <p style={{ margin: "4px 6px", fontSize: "14px" }}>
                     {editedData.experience}
+                  </p>
+                  <p style={{ margin: "4px 6px", fontSize: "14px" }}>
+                    {editedData.classpees}
                   </p>
                   <p
                     style={{

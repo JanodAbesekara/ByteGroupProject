@@ -114,6 +114,7 @@ export default function StudentCard({ subject }) {
               >
                 Parents Phone
               </TableCell>
+           
             </TableRow>
           </TableHead>
           <TableBody>
@@ -122,6 +123,7 @@ export default function StudentCard({ subject }) {
                 key={user._id}
                 studentDetails={user}
                 profilePicUrl={subject.profilePicUrl}
+               
               />
             ))}
           </TableBody>

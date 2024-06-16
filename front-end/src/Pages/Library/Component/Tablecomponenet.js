@@ -13,6 +13,7 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
+
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -24,6 +25,8 @@ const HtmlTooltip = styled(({ className, ...props }) => (
     border: "1px solid #dadde9",
   },
 }));
+
+
 
 const TableComponent = ({ rows }) => {
   const subjects = rows.reduce((acc, row) => {
@@ -92,8 +95,7 @@ const TableComponent = ({ rows }) => {
                     subjects[subject].videoRows.length,
                     subjects[subject].audioRows.length
                   ),
-                })
-                .map((_, index) => (
+                }).map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       {subjects[subject].pdfRows[index] && (

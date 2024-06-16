@@ -24,7 +24,7 @@ function UserProfile() {
   const [showScheme, setShowScheme] = useState(true); // control visibility
   const [subjectOption, setSubjectOption] = useState(true); // control visibility
   const [scheme, setScheme] = useState(""); // control visibility of "choose scheme"
-
+  const [classpees, setClasspees] = useState(""); // control visibility of "choose scheme"
   const [clicked, setClicked] = useState(true); //control profile picture uploding button
 
   // Function to handle image upload
@@ -80,17 +80,6 @@ function UserProfile() {
     setClicked(true);
   };
 
-  // let userEmail = "";
-
-  // if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
-  //   userEmail = "";
-  // } else {
-  //   const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  //   const decodedToken = jwtDecode(token);
-  //   userEmail = decodedToken.email;
-  // }
-
-  // getting users name
   useEffect(() => {
     let userID;
 
@@ -125,7 +114,7 @@ function UserProfile() {
       setUser(decodedToken);
 
       const validateForm = () => {
-        if (!medium || !scheme || !degree || !experience || !aboutme) {
+        if (!medium || !scheme || !degree || !experience || !aboutme ) {
           if (!medium) {
             window.alert("You must select your medium");
             return false;
@@ -163,6 +152,7 @@ function UserProfile() {
           email: userEmail,
           id: userID,
           url: url,
+          classpees:classpees,
         };
 
         console.log(updatedUser);
@@ -396,6 +386,18 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={experience}
                   onChange={(e) => setExperience(e.target.value)}
+                ></input>
+                <br></br>
+                <label htmlFor="experience">
+                  <span style={{ color: "red" }}>*</span>Classfees
+                </label>
+                <br></br>
+                <input
+                  type="text"
+                  className="exp"
+                  placeholder="Enter here"
+                  value={classpees}
+                  onChange={(e) => setClasspees(e.target.value)}
                 ></input>
                 <br></br>
                 <label htmlFor="aboutMe">
