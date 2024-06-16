@@ -81,7 +81,7 @@ function Component1({ subject, teachermail, Feedmedium }) {
             />
           </Box>
 
-          <button type="submit" onClick={handlesubmit}>
+          <button type="submit" onClick={handlesubmit} style={{padding:"3px", borderRadius:"3px", border:"1px solid gray", color:""}}>
             Submit
           </button>
         </form>
