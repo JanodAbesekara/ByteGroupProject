@@ -7,6 +7,7 @@ import Axios from "axios";
 
 function Component1({ subject, teachermail, Feedmedium }) {
   const [value, setValue] = useState(1);
+  const [clicked,setClicked] = useState(false);
   const [feedtext, setFeedtext] = useState("");
 
   let studentemail;
@@ -44,10 +45,13 @@ function Component1({ subject, teachermail, Feedmedium }) {
 
   return (
     <div>
-      <div>
+      <div> <button onClick={()  => {
+        setClicked(!clicked);
+      }}
+      style={{backgroundColor:"#007bff", border:"none",borderRadius:"5px", padding:"3px", color:"#fff"}}>Add Feedbacks</button>
+      {clicked && (
         <form>
-          <h2 style={{ color: "#000080", marginBottom: "30px" }}>
-            {" "}
+          <h2 style={{ color: "#000080", marginBottom: "15px", marginTop:"10px", fontSize:"15px" }}>
             Enter your feedback
           </h2>
           <input
@@ -60,7 +64,7 @@ function Component1({ subject, teachermail, Feedmedium }) {
               paddingRight: "8px",
               width: "250px",
             }}
-            placeholder="type hear.."
+            placeholder="Type here.."
             onChange={(e) => setFeedtext(e.target.value)}
           />
           <Box
@@ -68,7 +72,6 @@ function Component1({ subject, teachermail, Feedmedium }) {
               "& > legend": { mt: 2 },
             }}
           >
-            <Typography component="legend">Reating</Typography>
             <Rating
               name="simple-controlled"
               value={value}
@@ -82,6 +85,7 @@ function Component1({ subject, teachermail, Feedmedium }) {
             Submit
           </button>
         </form>
+        )}
       </div>
     </div>
   );

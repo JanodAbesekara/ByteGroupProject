@@ -87,7 +87,7 @@ function Enrollment() {
 
   return (
     <div>
-      <Link to="/Classes">
+      <Link to="/SSubject">
         <div
           style={{ marginTop: "30px", marginLeft: "20px", cursor: "pointer" }}
         >

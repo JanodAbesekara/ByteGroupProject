@@ -11,37 +11,54 @@ function SubjectComponenet({ teachermail, subject, medium }) {
     <div>
       <div
         style={{
-          width: "99%",
-          marginright: "5px",
+          
+          marginLeft: "15px",
           marginRight: "10px",
-          marginBottom: "80px",
-          paddingTop: "2px",
+          marginBottom: "100px",
+          paddingBlock:"20px",
           borderRadius: "20px",
           backgroundColor: "#B9D9EB",
+          
         }}
       >
-        <h1>{subject}</h1>
-        <h3>{teachermail}</h3>
-        <h3>{medium}</h3>
-        <div style={{ marginLeft: "80%" }}>
-          <DisplayAttendence
-            teachermail={teachermail}
-            subject={subject}
-            medium={medium}
-          />
-        </div>
-        <div style={{ marginLeft: "20px", marginTop: "-150px" }}>
+        <p style={{ textAlign:"center",
+                    marginBottom: "15px",
+                    fontSize: "30px",
+                    fontWeight: "700",
+                    fontFamily:"Teko, sans-serif",
+                    color: "rgb(12, 78, 139)",
+                    wordSpacing: "5px",
+                    letterSpacing: "2px"
+
+      }}>{subject}  <span style={{fontSize:"18px",color:"#fd7e14"}}>({medium})</span></p>
+      <div style={{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between"
+      }}>
+      <div style={{display:"flex", flexDirection:"column"}}>
+        <div style={{ marginLeft: "20px", marginTop: "0px" }}>
           <Component1
             teachermail={teachermail}
             subject={subject}
             Feedmedium={medium}
           />
         </div>
+        <div style={{ marginLeft: "20px"}}>
         <Content
           teachermail={teachermail}
           subject={subject}
           medium={medium}
-        />
+        /></div>
+        </div>
+        <div>
+          <DisplayAttendence
+            teachermail={teachermail}
+            subject={subject}
+            medium={medium}
+          />
+        </div>
+      </div>
       </div>
     </div>
   );

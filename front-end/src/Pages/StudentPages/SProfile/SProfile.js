@@ -18,11 +18,14 @@ function SProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNo, setMobileNo] = useState("");
+  const [clicked, setClicked] = useState(true); //control profile picture uploding button
+
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
+      setUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -150,10 +153,18 @@ function SProfile() {
                   src={url}
                   sx={{ width: 90, height: 90 }}
                 />
-                <button onClick={() => fileInputRef.current.click()}>
-                  Change
-                </button>
-                <button onClick={handleSave}>Save</button>
+                 {clicked ? (
+                  <button
+                    onClick={() => {
+                      fileInputRef.current.click();
+                      setClicked(!clicked);
+                    }}
+                  >
+                    Change
+                  </button>
+                ) : (
+                  <button onClick={handleSave}>Save</button>
+                )}
               </div>
             </div>
             <div className="student_info">
