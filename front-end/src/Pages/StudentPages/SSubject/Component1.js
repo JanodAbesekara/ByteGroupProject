@@ -7,6 +7,7 @@ import Axios from "axios";
 
 function Component1({ subject, teachermail, Feedmedium }) {
   const [value, setValue] = useState(1);
+  const [clicked, setClicked] = useState(false);
   const [feedtext, setFeedtext] = useState("");
 
   let studentemail;
@@ -45,43 +46,74 @@ function Component1({ subject, teachermail, Feedmedium }) {
   return (
     <div>
       <div>
-        <form>
-          <h2 style={{ color: "#000080", marginBottom: "30px" }}>
-            {" "}
-            Enter your feedback
-          </h2>
-          <input
-            type="text"
-            style={{
-              height: "80px",
-              paddingTop: "10px",
-              paddingBottom: "60px",
-              paddingLeft: "8px",
-              paddingRight: "8px",
-              width: "250px",
-            }}
-            placeholder="type hear.."
-            onChange={(e) => setFeedtext(e.target.value)}
-          />
-          <Box
-            sx={{
-              "& > legend": { mt: 2 },
-            }}
-          >
-            <Typography component="legend">Reating</Typography>
-            <Rating
-              name="simple-controlled"
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
+        {" "}
+        <button
+          onClick={() => {
+            setClicked(!clicked);
+          }}
+          style={{
+            backgroundColor: "#007bff",
+            border: "none",
+            borderRadius: "5px",
+            padding: "3px",
+            color: "#fff",
+          }}
+        >
+          Add Feedbacks
+        </button>
+        {clicked && (
+          <form>
+            <h2
+              style={{
+                color: "#000080",
+                marginBottom: "15px",
+                marginTop: "10px",
+                fontSize: "15px",
               }}
+            >
+              Enter your feedback
+            </h2>
+            <input
+              type="text"
+              style={{
+                height: "80px",
+                paddingTop: "10px",
+                paddingBottom: "60px",
+                paddingLeft: "8px",
+                paddingRight: "8px",
+                width: "250px",
+              }}
+              placeholder="Type here.."
+              onChange={(e) => setFeedtext(e.target.value)}
             />
-          </Box>
+            <Box
+              sx={{
+                "& > legend": { mt: 2 },
+              }}
+            >
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
+            </Box>
 
-          <button type="submit" onClick={handlesubmit}>
-            Submit
-          </button>
-        </form>
+            <button
+              type="submit"
+              onClick={handlesubmit}
+              style={{
+                padding: "3px",
+                borderRadius: "3px",
+                border: "1px solid gray",
+                color: "",
+              }}
+            >
+              Submit
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

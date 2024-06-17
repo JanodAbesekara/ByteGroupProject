@@ -13,7 +13,6 @@ function PaymentHis() {
 
   useEffect(() => {
     const fetchData = async () => {
-     
       try {
         const token = localStorage.getItem("MERN_AUTH_TOKEN");
         const decodedToken = jwtDecode(token);

@@ -62,10 +62,8 @@ function DisplayAttendence({ teachermail, subject, medium }) {
       : 0;
 
   return (
-    <div style={{ marginTop: "10px" }}>
-      <h2 style={{ marginLeft: "80px", color: "#000080" }}>Attendence</h2>
-      <br></br>
-      <div>
+    <div>
+      <div style={{marginRight:"40px"}}>
         <AttendenceChart value={attendancePercentage} />
       </div>
     </div>

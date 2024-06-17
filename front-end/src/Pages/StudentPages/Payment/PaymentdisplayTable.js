@@ -13,6 +13,7 @@ import axios from "axios";
 
 function PaymentdisplayTable() {
   const [PaymentData, setPaymentData] = useState([]);
+  const [visible,setVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +21,11 @@ function PaymentdisplayTable() {
       const decodedToken = jwtDecode(token);
       const email = decodedToken.email;
       try {
-        const response = await axios.get("/api/Test/getdertails", {
+        const response = await axios.get("/api/Test/getdetails", {
           params: { email },
         });
         setPaymentData(response.data.data);
+        setVisible(response.data.success);
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
       }
@@ -32,6 +34,7 @@ function PaymentdisplayTable() {
   }, []);
 
   const style = {
+
     textAlign: "center",
     backgroundColor: "#317873",
     borderRight: "2px white solid",
@@ -41,13 +44,16 @@ function PaymentdisplayTable() {
   return (
     <div>
       <TableContainer component={Paper} sx={{ marginBottom: "30px" }}>
+
         <Table>
           <TableHead>
             <TableRow>
               <TableCell sx={style}>Teacher Email</TableCell>
               <TableCell sx={style}>Subject</TableCell>
               <TableCell sx={style}>Medium</TableCell>
-              <TableCell sx={style}>Recit</TableCell>
+
+              <TableCell sx={style}>Receipt</TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,10 +61,12 @@ function PaymentdisplayTable() {
                 .reverse()
                 .map((Payment, index) => (
               <TableRow key={index}>
+
                 <TableCell align="center">{Payment.TeacherEmail}</TableCell>
                 <TableCell align="center">{Payment.Subject}</TableCell>
                 <TableCell align="center">{Payment.medium}</TableCell>
                 <TableCell align="center">
+
                   <a href={Payment.photourl}>
                     <img
                       src={Payment.photourl}
@@ -75,6 +83,7 @@ function PaymentdisplayTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      )}
     </div>
   );
 }
