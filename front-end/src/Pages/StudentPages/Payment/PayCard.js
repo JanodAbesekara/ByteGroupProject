@@ -77,8 +77,12 @@ function PayCard({ regdetal }) {
 
   return (
     <div>
-      <form onSubmit={handlesubmit}>
+      <div style={{paddingLeft:"10px", display:"flex"}}>
+      <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column"}}>
         {recpec > 0 && "Uploading : " + recpec + "%"}
+        <div>
+        <lebel style={{fontSize :"14px", fontWight:"700"}}>PAYMENT RECEIPT : </lebel>
+        
         <input
           type="file"
           accept="image/*"
@@ -87,10 +91,14 @@ function PayCard({ regdetal }) {
             marginBottom: "5px",
           }}
         />
-        <button type="submit" name="submit">
-          Submit
+        </div>
+        <div>
+        <button type="submit" name="submit" style={{padding:"2px",}}>
+          Upload
         </button>
+        </div>
       </form>
+      </div>
     </div>
   );
 }

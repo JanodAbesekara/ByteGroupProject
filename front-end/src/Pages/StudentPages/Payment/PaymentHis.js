@@ -13,7 +13,6 @@ function PaymentHis() {
 
   useEffect(() => {
     const fetchData = async () => {
-     
       try {
         const token = localStorage.getItem("MERN_AUTH_TOKEN");
         const decodedToken = jwtDecode(token);
@@ -31,6 +30,24 @@ function PaymentHis() {
 
     fetchData(); // Call the function
   }, []);
+
+  const style = {
+    textAlign: "center",
+    marginBottom: "15px",
+    fontSize: "25px",
+    fontWeight: "700",
+    fontFamily: "Teko, sans-serif",
+    color: "#fff",
+    wordSpacing: "5px",
+    letterSpacing: "2px",
+    backgroundColor: "#3498DB",
+    borderRadius:"4px"
+  };
+
+  const menuStyle = {
+    color: "#28a745",
+    fontWeight:"650"
+  }
   return (
     <div>
       <Navbar />
@@ -44,24 +61,49 @@ function PaymentHis() {
               {RegTeachers.map((RegT, index) => (
                 <div
                   key={index}
-                  style={{ margin: "50px", border: "2px solid black" }}
+                  style={{
+                    margin: "50px",
+                    border: "1px solid #F8F9F9",
+                    padding: "10px",
+                    backgroundColor: "#EAEDED",
+                    borderRadius:"3px"
+                  }}
                 >
-                  <h2>{RegT.email}</h2>
-                  <h2>{RegT.subject}</h2>
-                  <h2>{RegT.medium}</h2>
-                  <h2>{RegT.payment.bank}</h2>
-                  <h2>{RegT.payment.accountNo}</h2>
-                  <h2>{RegT.classpees}</h2>
-                  <img
-                    src={RegT.profilePicUrl}
+                  <p style={style}>
+                    {RegT.subject}
+                    <span style={{ fontSize: "15px", color: "#fd7e14" }}>
+                      ({RegT.medium})
+                    </span>
+                  </p>
+                  <p
                     style={{
-                      width: "80px",
-                      height: "80px",
-                      borderRadius: "100%",
+                      paddingBottom: "5px",
+                      color: "#1193C7",
+                      fontWeight: "bold",
+                      fontSize: "15px",
                     }}
-                    alert="padsa_img"
-                  />
+                  >
+                    Payment Details
+                  </p>
+                  <div
+                    style={{
+                      marginLeft: "10px",
+                      paddingLeft: "10px",
+                      backgroundColor: "#fff",
+                      paddingTop: "8px",
+                      paddingBottom: "8px",
+                      fontSize:"13px",
+                      marginBlock:"10px"
+                    }}
+                  >
+                    <p><span style={menuStyle}>Teacher Email</span> : <span style={{color:"gray"}}>{RegT.email}</span></p>
+                    <p><span style={menuStyle}>Bank Name</span> : <span style={{color:"gray"}}>{RegT.payment.bank}</span></p>
+                    <p><span style={menuStyle}>Account Number</span> : <span style={{color:"#000", fontWeight:"500"}}>{RegT.payment.accountNo}</span></p>
+                    <p><span style={menuStyle}>Fees Amount</span> : <span style={{color:"#dc3545", fontWeight:"500"}}>Rs.{RegT.classpees}</span></p>
+                  </div>
+                  <div>
                   <PayCard regdetal={RegT} />
+                  </div>
                 </div>
               ))}
             </div>
