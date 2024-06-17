@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "./Resetpassword.css";
@@ -20,6 +20,24 @@ export default function Resetpassword() {
     const { email } = jwtDecode(token);
     console.log(email + ":" + passwordN + ":" + passwordC);
 
+    if (
+      passwordN.length < 8 &&
+      !/[A-Z]/.test(passwordN) &&
+      !/[a-z]/.test(passwordN) &&
+      !/[0-9]/.test(passwordN) &&
+      !/[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]/.test(passwordN)
+    ) {
+      setError(
+        "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"
+      );
+      return;
+    }
+
+    if (passwordN !== passwordC) {
+      setError("Passwords do not match");
+      return;
+    }
+
     axios
       .post("/api/auth/resetpassword", {
         email,
@@ -29,10 +47,14 @@ export default function Resetpassword() {
       .then((res) => {
         window.alert(res.data.msg);
         console.log(res.data);
+        if (res.data.success) {
+          window.close();
+        } else {
+          window.location.reload();
+        }
       })
       .catch((err) => {
-        // Use setError instead of width.alert
-        window.alert(err.response.data.msg);
+        setError(err.response?.data?.msg || "An error occurred");
         console.log(err.response);
       });
   };
@@ -43,9 +65,10 @@ export default function Resetpassword() {
         .get(`/api/auth/verifyToken?token=${token}`)
         .then((res) => {
           setIsTokenVerified(true);
+          Navigate("/");
         })
         .catch((err) => {
-          setError(err.response.data.msg);
+          console.log(err);
         });
     }
   }, [token]);

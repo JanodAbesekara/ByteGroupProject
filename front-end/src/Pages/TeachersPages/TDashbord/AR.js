@@ -39,10 +39,9 @@ const QRCodeGenerator = () => {
       });
   }, []);
 
-  // Serialize the user data array into nomal format 
+  // Serialize the user data array into nomal format
   const dataForQRCode = userData
-    ?
-`Name:- ${userData.username}
+    ? `Name:- ${userData.username}
 Email:- ${userData.email}
 Phonenumber:- ${userData.Phonenumber}`
     : "";

@@ -10,3 +10,8 @@
     color: red;
     font-size: 18px;
 }
+
+
+.subject-link:hover {
+    background-color: #D71868;
+  }

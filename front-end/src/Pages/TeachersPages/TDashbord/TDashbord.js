@@ -1,22 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./Dashbord.css";
 import Avatar from "@mui/material/Avatar";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../firebase";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import AR from "./AR";
+import { Link } from "react-router-dom";
+import Openwindow from "./Openwindow";
+import ClassCard from "./ClassCard";
 
 export default function Dashbord() {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState(null);
-  const [details, setDetails] = useState("");
+  const [notifaication, setNotification] = useState([]);
+  const [notCount, setNotCount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [selectSubject, setSelectSubject] = useState([]);
 
-  // getting users name
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
@@ -24,28 +38,69 @@ export default function Dashbord() {
     const userID = decodedToken._id;
 
     axios
-      .get(`api/user/userProfile/${userID}`)  
+      .get(`api/user/userProfile/${userID}`)
       .then((response) => {
         const userData = response.data;
         setUser(userData);
       })
       .catch((err) => console.log(err));
-
-
-      // Fetch the image URL from localStorage when the component mounts
-    const storedUrl = localStorage.getItem("profileImageUrl");
-    setUrl(storedUrl);
-
-
-    axios
-      .get(`api/user/dashboard/${userID}`)
-      .then((response) => {
-        const details = response.data;
-        setDetails(details);
-      })
-      .catch((error) => console.log(error));
-    
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
+    const checkImageExists = async () => {
+      const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log("Error checking image existence:", error.message);
+      }
+    };
+
+    checkImageExists();
+  }, []);
+
+  useEffect(() => {
+    const featchNotification = () => {
+      axios
+        .get("/api/get/Notifactions")
+        .then((response) => {
+          const announcements = response.data.announcements;
+          setNotification(announcements);
+          setNotCount(announcements.length);
+        })
+        .catch((error) => console.log(error));
+    };
+
+    featchNotification();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodeToken = jwtDecode(token);
+    const teacherEmail = decodeToken.email;
+
+    const fetchRegSubjects = async () => {
+      try {
+        const response = await axios.get(`/api/user/getsubjectreg`, {
+          params: { email: teacherEmail },
+        });
+
+        const filterRegsubjects = response.data.data;
+        setSelectSubject(filterRegsubjects);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchRegSubjects();
+  }, []);
+
+  console.log(selectSubject);
 
   return (
     <div>
@@ -69,26 +124,41 @@ export default function Dashbord() {
               <div className="name">
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
-              <div className="info">
 
 
-              <p><span style={{color: "#de162d", fontSize: "22px", fontWeight: "bold"}}>Chemistry</span></p>
-                <p><span style={{color: "darkblue"}}>Universiy of mortuwa</span><br/> 
-                   <span style={{color: "#366491", fontStyle: "italic"}}>hellow</span> </p>
+              <div className="notifications_icon">
+              <React.Fragment>
 
+                <Link variant="outlined" onClick={handleClickOpen}>
+                  <Box>
+                    <Badge badgeContent={notCount}>
+                      <Typography fontSize="1.4rem">🔔</Typography>
+                    </Badge>
+                  </Box>
+                </Link>
+                <Openwindow
+                  open={open}
+                  handleClose={handleClose}
+                  notifications={notifaication}
+                />
 
+              </React.Fragment>
               </div>
-              <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                <Badge badgeContent="2">
-                  <Typography fontSize="xl">🔔</Typography>
-                </Badge>
-              </Box>
+
             </div>
           </div>
-          <AR imageUrl={url} />
+
+          {selectSubject.length > 0 ? (
+            selectSubject.map((selectSubjects) => (
+              <div key={selectSubjects._id}>
+                <ClassCard subjectData={selectSubjects} />
+              </div>
+            ))
+          ) : (
+            <p>No subjects found.</p>
+          )}
         </div>
       </div>
-
       <Footer />
     </div>
   );

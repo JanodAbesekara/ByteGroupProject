@@ -1,14 +1,18 @@
 .L_label {
-  font-size: 15px;
-  background-color: #d6d9d9;
+  font-size: 20px;
   text-align: center;
   padding: 15px;
   margin-bottom: 100px;
+  background-color: #d7e5f4;
+  margin: 0 50px;
+  margin-bottom: 70px;
 }
 .L_label h2 {
+  text-align: center;
   color: #1a6ab4;
   word-spacing: 7px;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .filter {
   margin: 50px 0px 50px 0px;

@@ -9,10 +9,6 @@ export default function Contactus() {
   return (
     <div className="contact">
       <Navbar />
-      <div
-        className="login_m2"
-        style={{ backgroundColor: "#e2e0e0e9", width: "100%", height: "40px" }}
-      ></div>
       <div className="contact_h3">
         <h2>Contact us</h2>
       </div>

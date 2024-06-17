@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "npm i"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box } from "@mui/material";
-import Navbar from "../../../Component/Navbar/Navbar";
-import Footer from "../../../Component/Footer/Footer";
-import ASideBar from "../../../Component/ASideBar/ASidebar"; // Fix import statement
 import axios from "axios";
 import {
+  Grid,
+  Box,
   TableContainer,
   Paper,
   Table,
@@ -13,32 +11,73 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import Navbar from "../../../Component/Navbar/Navbar";
+import Footer from "../../../Component/Footer/Footer";
+import ASideBar from "../../../Component/ASideBar/ASidebar";
 import Rating from "@mui/material/Rating";
 
+import "./Afeedbackmanager.css"; // Import CSS file for styles
+
 function Afeedbackmanager() {
-  const [feedbackData, setFeedbackData] = useState([]);
+  const [groupedFeedbackData, setGroupedFeedbackData] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`/api/auth/feedbackget`)
-      .then((response) => {
-        console.log(response.data.data);
-        setFeedbackData(response.data.data);
-      })
-      .catch((error) => {
+    const getFeedbackData = async () => {
+      try {
+        const response = await axios.get(`/api/auth/feedbackget`);
+        const feedbackData = response.data.data;
+        const groupedData = groupFeedbackData(feedbackData);
+        setGroupedFeedbackData(groupedData);
+      } catch (error) {
         console.error("Error fetching feedback data:", error);
-      });
+      }
+    };
+
+    getFeedbackData();
   }, []);
+
+  const groupFeedbackData = (data) => {
+    const groupedData = {};
+
+    data.forEach((feedback) => {
+      const { teacheremail, feedSubject, feedmedium } = feedback;
+      if (!groupedData[teacheremail]) {
+        groupedData[teacheremail] = {};
+      }
+      if (!groupedData[teacheremail][feedSubject]) {
+        groupedData[teacheremail][feedSubject] = {};
+      }
+      if (!groupedData[teacheremail][feedSubject][feedmedium]) {
+        groupedData[teacheremail][feedSubject][feedmedium] = [];
+      }
+      groupedData[teacheremail][feedSubject][feedmedium].push(feedback);
+    });
+
+    return groupedData;
+  };
 
   const handleDelete = async (_id) => {
     try {
-      const response = await axios.post(`/api/auth/deletefeedback`, { _id });
-      setFeedbackData((prevFeedbackData) =>
-        prevFeedbackData.filter((feedback) => feedback._id !== _id)
-      );
-      window.alert(response.data.message);
+      await axios.post(`/api/auth/deletefeedback`, { _id });
+      setGroupedFeedbackData((prevGroupedData) => {
+        const newGroupedData = { ...prevGroupedData };
+        Object.keys(newGroupedData).forEach((teacheremail) => {
+          Object.keys(newGroupedData[teacheremail]).forEach((feedSubject) => {
+            Object.keys(newGroupedData[teacheremail][feedSubject]).forEach(
+              (feedmedium) => {
+                newGroupedData[teacheremail][feedSubject][feedmedium] =
+                  newGroupedData[teacheremail][feedSubject][feedmedium].filter(
+                    (feedback) => feedback._id !== _id
+                  );
+              }
+            );
+          });
+        });
+        return newGroupedData;
+      });
+      window.alert("Feedback Deleted Successfully");
     } catch (error) {
-      window.alert(error.response.data.message);
+      window.alert("Error deleting feedback: " + error.message);
     }
   };
 
@@ -50,126 +89,90 @@ function Afeedbackmanager() {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
-            <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
-              FeedBack Management
-            </h1>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Teacher Email
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Student Email
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Feedback Text
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Star count
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        backgroundColor: "#0000B9",
-                        color: "white",
-                        borderRight: "2px solid white",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Action
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {feedbackData.length > 0 ? (
-                    feedbackData.map((row) => (
-                      <TableRow
-                        key={row._id}
-                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      >
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {row.teacheremail}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {row.studentemail}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          {row.feedtext}
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          <Rating
-                            name="simple-controlled"
-                            value={row.value}
-                            onChange={(event, newValue) => {}}
-                            readOnly
-                          />
-                        </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
-                          <button
-                            style={{
-                              color: "white",
-                              backgroundColor: "red",
-                              border: "none",
-                              padding: "5px",
-                              boxShadow: "2px 1px 10px 0.5px black",
-                              borderRadius: "5px",
-                            }}
-                            onClick={() => handleDelete(row._id)}
-                          >
-                            Delete
-                          </button>
-                        </TableCell>
-                      </TableRow>
+          <Box className="feedback-container">
+            <h1>Feedback Management</h1>
+            {Object.keys(groupedFeedbackData).length > 0 ? (
+              Object.keys(groupedFeedbackData).map((teacheremail) =>
+                Object.keys(groupedFeedbackData[teacheremail]).map(
+                  (feedSubject) =>
+                    Object.keys(
+                      groupedFeedbackData[teacheremail][feedSubject]
+                    ).map((feedmedium) => (
+                      <div key={`${teacheremail}-${feedSubject}-${feedmedium}`}>
+                        <h2>
+                          {teacheremail} - {feedSubject} - {feedmedium}
+                        </h2>
+                        <TableContainer
+                          component={Paper}
+                          className="table-container"
+                        >
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                {[
+                                  "Teacher Email",
+                                  "Subject",
+                                  "Medium",
+                                  "Student Email",
+                                  "Feedback Text",
+                                  "Star count",
+                                  "Action",
+                                ].map((header) => (
+                                  <TableCell
+                                    sx={{
+                                      textAlign: "center",
+                                      backgroundColor: "#0000B9",
+                                      color: "white",
+                                      borderRight: "2px solid white",
+                                      fontSize: "16px",
+                                    }}
+                                    key={header}
+                                  >
+                                    {header}
+                                  </TableCell>
+                                ))}
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {groupedFeedbackData[teacheremail][feedSubject][
+                                feedmedium
+                              ].map((row) => (
+                                <TableRow key={row._id}>
+                                  <TableCell sx={{ textAlign: "center" }}>{row.teacheremail}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>{row.feedSubject}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>{row.feedmedium}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>{row.studentemail}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>{row.feedtext}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    <Rating
+                                      name="simple-controlled"
+                                      value={row.value}
+                                      readOnly
+                                    />
+                                  </TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    <button
+                                      className="delete-btn"
+                                      onClick={() => handleDelete(row._id)}
+                                    >
+                                      Delete
+                                    </button>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </div>
                     ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={5} sx={{ textAlign: "center" }}>
-                        No feedbacks available
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                )
+              )
+            ) : (
+              <p>No feedbacks available</p>
+            )}
           </Box>
         </Grid>
       </Grid>
-
       <Footer />
     </div>
   );

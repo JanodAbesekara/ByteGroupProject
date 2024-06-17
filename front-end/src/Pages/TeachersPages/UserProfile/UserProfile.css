@@ -34,7 +34,12 @@
   letter-spacing: 0.5px;
   margin-top: 8px;
   cursor: pointer;
-  box-shadow: 0 1.5px 5px #2d2d2d;
+  box-shadow: 0 3px 0px #2d2d2d;
+}
+
+.profile_pic .picture button:hover {
+  color: #eaeaea;
+  opacity: 0.7;
 }
 
 .teacher_info {
@@ -104,6 +109,11 @@
   cursor: pointer;
   box-shadow: 0 1.5px 5px #2d2d2d; 
 }
+.personal_details button:hover {
+  color: #eaeaea;
+  opacity: 0.7;
+  transition: 0.3s;
+}
 
 
 @media only screen and (min-width: 300px)and (max-width: 768px) {
@@ -135,7 +145,7 @@
 }
 
 
-@media (min-width:769px)  and (max-width:1024px){
+@media screen and (min-width:769px)  and (max-width:1024px){
   .profile_pic{
     padding-left: 20px;
     width: 10%;

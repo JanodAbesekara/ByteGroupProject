@@ -2,20 +2,24 @@ import React from "react";
 import "./Home.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 export default function Home() {
+  const [text] = useTypewriter({
+    words: ["Dream Learn Academy"], // Use 'words' instead of 'word'
+    loop: true,
+    typeSpeed: 100,
+  });
+
   return (
     <div>
       <Navbar />
-      <div
-        className="login_m2"
-        style={{ backgroundColor: "#e2e0e0e9", width: "100%", height: "40px" }}
-      >
-        {" "}
-      </div>
       <div className="space_area"></div>
       <div className="main_img">
-        <h2>Dream Learn Academy</h2>
+        <h2>{text}</h2>
+        <span>
+          <Cursor />
+        </span>
         <p>
           Welcome to Dream Learn Academy, At DreamLearn, we're dedicated to
           helping students excel in their academic journey. Our personalized
@@ -27,14 +31,13 @@ export default function Home() {
       </div>
       <div className="main_icons">
         <div className="icons">
-          <img src="./logos/teacher.png" alt="teacher panel"></img>
-          <img src="./logos/parent.png" alt="parent controlling"></img>
-          <img src="./logos/quiz.png" alt="tquiz img"></img>
-          <img src="./logos/service.png" alt="services"></img>
-          <img src="./logos/feedback.png" alt="feedback" className="h1"></img>
+          <img src="./logos/teacher.png" alt="teacher panel" />
+          <img src="./logos/parent.png" alt="parent controlling" />
+          <img src="./logos/quiz.png" alt="quiz" />
+          <img src="./logos/service.png" alt="services" />
+          <img src="./logos/feedback.png" alt="feedback" className="h1" />
         </div>
       </div>
-
       <Footer />
     </div>
   );

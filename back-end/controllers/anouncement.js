@@ -1,4 +1,6 @@
 import Announcement from "../models/Announcementmodel.js";
+import EnrollmentSchema from "../models/Enrollmentmdels.js";
+
 
 const postanouncement = async (req, res) => {
   const {
@@ -9,6 +11,7 @@ const postanouncement = async (req, res) => {
     date,
     time,
     jobrole,
+    mediua,
   } = req.body;
   try {
     if (
@@ -17,7 +20,8 @@ const postanouncement = async (req, res) => {
       !Announcementmessage ||
       !titleofAnn ||
       !date ||
-      !time
+      !time 
+     
     ) {
       return res
         .status(400)
@@ -31,6 +35,7 @@ const postanouncement = async (req, res) => {
         date,
         time,
         jobrole,
+        mediua,
       });
       await newannouncement.save();
       return res
@@ -59,8 +64,8 @@ const getAnnuncements = async (req, res) => {
 
 const deleteAnnouncement = async (req, res) => {
   try {
-    const { id } = req.body;
-    await Announcement.deleteOne({ id });
+    const { _id } = req.body;
+    await Announcement.deleteOne({ _id  });
     return res
       .status(200)
       .json({ success: true, message: "Announcement deleted successfully" });

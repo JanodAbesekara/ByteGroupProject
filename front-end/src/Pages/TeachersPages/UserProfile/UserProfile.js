@@ -3,16 +3,11 @@ import axios from "axios";
 import "./UserProfile.css";
 import Avatar from "@mui/material/Avatar";
 import { storage } from "../../../firebase";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; // Adjust the import for jwt-decode
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Sidebar from "../TeacherSidebar/SideBar/Sidebar";
+import Sidebar from "../../../Component/TeacherSidebar/Sidebar";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
-import { io } from "socket.io-client";
-
-
-
-
 
 function UserProfile() {
   const [image, setImage] = useState(null);
@@ -20,37 +15,56 @@ function UserProfile() {
   const [user, setUser] = useState("");
   const fileInputRef = useRef(null);
 
+  const [medium, setMedium] = useState("");
   const [subject, setSubject] = useState("");
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
-
-  const [isUploaded, setIsUploaded] = useState(false);
+  const [showChooseOption, setShowChooseOption] = useState(true); // control visibility
+  const [showScheme, setShowScheme] = useState(true); // control visibility
+  const [subjectOption, setSubjectOption] = useState(true); // control visibility
+  const [scheme, setScheme] = useState(""); // control visibility of "choose scheme"
+  const [classpees, setClasspees] = useState(""); // control visibility of "choose scheme"
+  const [clicked, setClicked] = useState(true); //control profile picture uploding button
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
+      setUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
 
   useEffect(() => {
-    // Fetch the image URL from localStorage when the component mounts
-    const storedUrl = localStorage.getItem("profileImageUrl");
-    if (storedUrl) {
-      setUrl(storedUrl);
-    }
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+
+    const checkImageExists = async () => {
+      const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
+      try {
+        const imageUrl = await getDownloadURL(imageRef);
+        setUrl(imageUrl);
+      } catch (error) {
+        console.log("Error checking image existence:", error.message);
+      }
+    };
+
+    checkImageExists();
   }, []);
 
   const handleSave = () => {
-    const imageRef = ref(storage, "profile_pic");
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken);
+    const userID = decodedToken._id;
+    const imageRef = ref(storage, `teacherProfile/${userID}/profile_pic`);
 
     uploadBytes(imageRef, image)
       .then(() => {
         getDownloadURL(imageRef)
           .then((url) => {
-            // Save the image URL to localStorage
-            localStorage.setItem("profileImageUrl", url);
             setUrl(url);
             window.alert("Image uploaded successfully!");
           })
@@ -62,74 +76,100 @@ function UserProfile() {
       .catch((error) => {
         console.log(error.message);
       });
+
+    setClicked(true);
   };
-  const profilePicUrl = localStorage.getItem("profileImageUrl");
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const userEmail = decodedToken.email;
-  // getting users name
+
   useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    setUser(decodedToken);
-    const userID = decodedToken._id;
+    let userID;
+
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      setUser(decodedToken);
+      userID = decodedToken._id;
+    } else {
+      userID = "";
+    }
 
     axios
-        .get(`api/user/userProfile/${userID}`)
-        .then((response)=>{
-          const userData = response.data;
-          setUser(userData);
-        })
-        .catch((error)=>console.log(error));
+      .get(`api/user/userProfile/${userID}`)
+      .then((response) => {
+        const userData = response.data;
+        setUser(userData);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const handleSubmit = (e) => {
-
-    setSubject((pre) => (pre.length > 0 ? "" : pre));
-    setDegree((pre) => (pre.length > 0 ? "" : pre));
-    setExperience((pre) => (pre.length > 0 ? "" : pre));
-    setAboutMe((pre) => (pre.length > 0 ? "" : pre));
-
     e.preventDefault();
 
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-    const decodedToken = jwtDecode(token);
-    const userID = decodedToken._id;
-    setUser(decodedToken);
+    if (!url) {
+      window.alert("Please add profile picture first");
+    } else {
+      const token = localStorage.getItem("MERN_AUTH_TOKEN");
+      const decodedToken = jwtDecode(token);
+      const userID = decodedToken._id;
+      const userEmail = decodedToken.email;
+      setUser(decodedToken);
 
-    const updatedUser = {
-      ...user,
-      subject: subject,
-      degree: degree,
-      experience: experience,
-      aboutme: aboutme,
-      email: userEmail,
-      profilePicUrl: profilePicUrl,
-      id: userID,
-    };
+      const validateForm = () => {
+        if (!medium || !scheme || !degree || !experience || !aboutme ) {
+          if (!medium) {
+            window.alert("You must select your medium");
+            return false;
+          }
+          if (!scheme) {
+            window.alert("You must select your scheme");
+            return false;
+          }
+          if (!degree) {
+            window.alert("You must select your degree");
+            return false;
+          }
+          if (!experience) {
+            window.alert("You must select your experience");
+            return false;
+          }
+          if (!aboutme) {
+            window.alert("You must select your aboutme");
+            return false;
+          }
+          return false; // Return false to indicate form validation failed
+        }
+        return true; // Return true to indicate form validation passed
+      };
 
+      if (validateForm) {
+        const updatedUser = {
+          ...user,
+          medium: medium,
+          scheme: scheme,
+          subject: subject,
+          degree: degree,
+          experience: experience,
+          aboutme: aboutme,
+          email: userEmail,
+          id: userID,
+          url: url,
+          classpees:classpees,
+        };
 
-    axios
-      .post(`/api/user/userProfile`, updatedUser)
-      .then(() => {
-        setIsUploaded(true);
-        window.alert("Successfully updated!");
-        console.log("data updated successfully");
-      })
-      .catch(() => {
-        console.log("error");
-        window.alert("Data update failed!");
-      });
-  };
-
-  useEffect(() => {
-    // Check if the details have been uploaded when the component mounts
-    const uploaded = localStorage.getItem("detailsUploaded");
-    if (uploaded === "true") {
-      setIsUploaded(true);
+        console.log(updatedUser);
+        axios
+          .post(`/api/user/userProfile`, updatedUser)
+          .then((response) => {
+            window.alert(response.data.msg);
+            console.log(response.data.msg);
+            window.location.reload();
+          })
+          .catch((error) => {
+            window.alert(error.response.data.msg);
+            console.log(error.response.data.msg);
+          });
+      }
     }
-  }, []);
-
+  };
 
   return (
     <div>
@@ -154,10 +194,18 @@ function UserProfile() {
                   src={url}
                   sx={{ width: 90, height: 90 }}
                 />
-                <button onClick={() => fileInputRef.current.click()}>
-                  Change
-                </button>
-                <button onClick={handleSave}>Save</button>
+                {clicked ? (
+                  <button
+                    onClick={() => {
+                      fileInputRef.current.click();
+                      setClicked(!clicked);
+                    }}
+                  >
+                    Change
+                  </button>
+                ) : (
+                  <button onClick={handleSave}>Save</button>
+                )}
               </div>
             </div>
             <div className="teacher_info">
@@ -170,21 +218,155 @@ function UserProfile() {
           <div className="personal_details">
             <div className="details">
               <form onSubmit={handleSubmit}>
-                <lebel htmlFor="subject">
+                <label htmlFor="medium">
+                  <span style={{ color: "red" }}>*</span>Medium
+                </label>
+                <br />
+                <select
+                  style={{
+                    height: "36px",
+                    width: "300px",
+                    borderRadius: "5px",
+                    border: "0.5px solid #10155b4d",
+                    cursor: "pointer",
+                  }}
+                  onChange={(e) => {
+                    setShowScheme(false);
+                    setMedium(e.target.value);
+                  }}
+                >
+                  {showScheme && (
+                    <option value="Choose your scheme">
+                      Choose your Medium
+                    </option>
+                  )}
+                  <option value="English">English</option>
+                  <option value="Sinhala">Sinhala</option>
+                </select>
+                <br />
+                <br />
+
+                <label htmlFor="scheme">
+                  <span style={{ color: "red" }}>*</span>Scheme
+                </label>
+                <br />
+                <select
+                  style={{
+                    height: "36px",
+                    width: "300px",
+                    borderRadius: "5px",
+                    border: "0.5px solid #10155b4d",
+                    cursor: "pointer",
+                  }}
+                  onChange={(e) => {
+                    setScheme(e.target.value);
+                    setShowChooseOption(false);
+                  }}
+                >
+                  {showChooseOption && (
+                    <option value="Choose your scheme">
+                      Choose your Scheme
+                    </option>
+                  )}
+                  <option value="Grade 5">Grade 5</option>
+                  <option value="Ordinary Level">Ordinary Level</option>
+                  <option value="Advanced Level">Advanced Level</option>
+                </select>
+                <br />
+                <br />
+
+                <label htmlFor="subject">
                   <span style={{ color: "red" }}>*</span>Subject
-                </lebel>
+                </label>
                 <br></br>
-                <input
-                  type="text"
-                  className="subject"
-                  placeholder="Enter here"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                ></input>
+                <select
+                  style={{
+                    height: "36px",
+                    width: "200px",
+                    borderRadius: "5px",
+                    border: "0.5px solid #10155b4d",
+                    cursor: "pointer",
+                  }}
+                  onChange={(e) => {
+                    setSubjectOption(false);
+                    setSubject(e.target.value);
+                  }}
+                >
+                  {scheme === "Grade 5" && (
+                    <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">Choose</option>
+                      )}
+                      <option value="Grade 5">Grade 5</option>
+                    </>
+                  )}
+
+                  {scheme === "Ordinary Level" && (
+                    <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">
+                          Choose your Subject
+                        </option>
+                      )}
+                      <option value="Mathematics">Mathematics</option>
+                      <option value="Science">Science</option>
+                      <option value="English">English</option>
+                      <option value="History">History</option>
+                      <option value="Music">Music</option>
+                      <option value="Geography">Geography</option>
+                      <option value="Health Studies">Health Studies</option>
+                      <option value="Arts">Arts</option>
+                      <option value="IT">IT</option>
+                      <option value="Civic">Civic</option>
+                    </>
+                  )}
+
+                  {scheme === "Advanced Level" && (
+                    <>
+                      {subjectOption && (
+                        <option value="Choose your scheme">
+                          Choose your Subject
+                        </option>
+                      )}
+                      <option value="Physics">Physics</option>
+                      <option value="Chemistry">Chemistry</option>
+                      <option value="Biology">Biology</option>
+                      <option value="Combined Maths">Combined Maths</option>
+                      <option value="Mathematics">Mathematics</option>
+                      <option value="Bio System Technology">
+                        Bio System Technology
+                      </option>
+                      <option value="Engineering Technology">
+                        Engineering Technology
+                      </option>
+                      <option value="Science for Technology">
+                        Science for Technology
+                      </option>
+                      <option value="Information Technology">
+                        Information Technology
+                      </option>
+                      <option value="Economics">Economics</option>
+                      <option value="Business Studies">Business Studies</option>
+                      <option value="Accounting">Accounting</option>
+                      <option value="Political Science">
+                        Political Science
+                      </option>
+                      <option value="Buddhism Culture">Buddhism Culture</option>
+                      <option value="Sinhala">Sinhala</option>
+                      <option value="Media">Media</option>
+                      <option value="Agriculture">Agriculture</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="German">German</option>
+                      <option value="Japanese">Japanese</option>
+                    </>
+                  )}
+                </select>
+                <br />
+
                 <br></br>
-                <lebel htmlFor="degree">
+                <label htmlFor="degree">
                   <span style={{ color: "red" }}>*</span>Degree
-                </lebel>
+                </label>
                 <br></br>
                 <input
                   type="text"
@@ -194,9 +376,9 @@ function UserProfile() {
                   onChange={(e) => setDegree(e.target.value)}
                 ></input>
                 <br></br>
-                <lebel htmlFor="experience">
+                <label htmlFor="experience">
                   <span style={{ color: "red" }}>*</span>Experience
-                </lebel>
+                </label>
                 <br></br>
                 <input
                   type="text"
@@ -206,14 +388,26 @@ function UserProfile() {
                   onChange={(e) => setExperience(e.target.value)}
                 ></input>
                 <br></br>
-                <lebel htmlFor="aboutMe">
+                <label htmlFor="experience">
+                  <span style={{ color: "red" }}>*</span>Classfees
+                </label>
+                <br></br>
+                <input
+                  type="text"
+                  className="exp"
+                  placeholder="Enter here"
+                  value={classpees}
+                  onChange={(e) => setClasspees(e.target.value)}
+                ></input>
+                <br></br>
+                <label htmlFor="aboutMe">
                   <span style={{ color: "red" }}>*</span>About me
-                </lebel>
+                </label>
                 <br></br>
                 <textarea
                   type="text"
                   className="about"
-                  placeholder="Hello I am..."
+                  placeholder="Add something about yourself"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
                 ></textarea>
@@ -222,10 +416,8 @@ function UserProfile() {
                   <button type="submit" value="saveDetails">
                     Save
                   </button>
-                  <br/><br/>
-                  {isUploaded && <p style={{
-                    color: "#0a6e1e"
-                  }}>You have uploaded your details!</p>}
+                  <br />
+                  <br />
                 </div>
               </form>
             </div>

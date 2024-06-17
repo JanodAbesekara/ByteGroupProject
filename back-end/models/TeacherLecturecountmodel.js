@@ -11,8 +11,8 @@ const teacherlecture = new Schema(
       type: String,
       required: true,
     },
-    time:{
-      type: Number,
+    media:{
+      type: String,
       required: true,
     },
     leccount: {
