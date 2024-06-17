@@ -48,6 +48,7 @@ function PaymentHis() {
     color: "#28a745",
     fontWeight:"650"
   }
+
   return (
     <div>
       <Navbar />
