@@ -1,3 +1,149 @@
+// import React, { useState, useEffect } from "react";
+
+// function ComQuizes({ quisedata }) {
+//   const [answers, setAnswers] = useState([]); // State for storing selected answers
+//   const [submitButton, setSubmitButton] = useState(false); // State for controlling submit button
+//   const [remainingTime, setRemainingTime] = useState(0); // State for remaining time
+//   const [showContent, setShowContent] = useState(false); // State for controlling content visibility
+//   const [quizStarted, setQuizStarted] = useState(false); // State for controlling quiz start 
+//   const [timeRange, setTimeRange] = useState(0);
+//   const [countdownStarted, setCountdownStarted] = useState(false);
+//   const [correctAnswers, setCorrectAnswers] = useState([]); // State for correct answers
+
+//   useEffect(() => {
+//     let timer;
+//     if (countdownStarted && remainingTime > 0) {
+//       timer = setInterval(() => {
+//         setRemainingTime((prevTime) => prevTime - 1000);
+//       }, 1000);
+//     } else if (remainingTime === 0 && countdownStarted) {
+//       handleSubmmit(); // Automatically submit when time is over
+//     }
+//     return () => clearInterval(timer);
+//   }, [countdownStarted, remainingTime]);
+
+//   const startQuiz = async () => {
+//     const timeRangeFromBackend = quisedata.TimeRanges;
+//     setTimeRange(timeRangeFromBackend);
+//     setCorrectAnswers(quisedata.question.map((question) => question.correctAnswerIndex));
+//     setRemainingTime(timeRangeFromBackend * 60 * 1000);
+//     setCountdownStarted(true);
+//     setSubmitButton(true);
+//     setQuizStarted(true); // Set quiz started to true when start button is clicked
+//   };
+
+//   const formatTime = () => {
+//     const minutes = Math.floor(remainingTime / (1000 * 60));
+//     const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+//     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+//   };
+
+//   const handleSubmmit = () => {
+//     setSubmitButton(true);
+//     const score = checkAnswers();
+//     window.alert(`Your score is ${score} %`);
+//     window.location.reload();
+//   };
+
+//   const checkAnswers = () => {
+//     let score = 0;
+//     for (let i = 0; i < correctAnswers.length; i++) {
+//       if (answers[i] === correctAnswers[i]) {
+//         score++;
+//       }
+//     }
+//     return (score / correctAnswers.length) * 100;
+//   };
+
+//   return (
+//     <>
+//       <div style={{}}>
+//         <button onClick={() => setShowContent(!showContent)} style={{marginTop:"10px", marginLeft:"5px"}}>
+//           {showContent ? "Hide Content" : "Show Content"}
+//         </button>
+
+//         {showContent && (
+//           <div style={{
+//             backgroundColor: "#fff",
+//             padding: "35px",
+//             border: "none",
+//             borderRadius: "6px",
+//             color: "#000",
+//             width: "80%",
+//             margin: "3% 10%",
+//           }}>
+//             {!quizStarted && ( // Render start button if quiz has not started
+//               <button onClick={startQuiz} style={{marginTop:"3px"}}>Start Quiz</button>
+//             )}
+
+//             <div>
+//               {showContent && quizStarted &&(
+//             <p
+//                 style={{
+//                   float: "right",
+//                   backgroundColor: "#ada9a8",
+//                   color: "#000",
+//                   border: "none",
+//                   borderRadius: "5px",
+//                   padding: "4px",
+//                   marginBottom:"10px"
+//                 }}
+//               >
+//                 Remaining Time: <span style={{ color: "red" }}>{formatTime()}</span>
+//               </p>
+//               )}
+
+//               {quizStarted && ( // Render quiz content if quiz has started
+//                 <form onSubmit={(e) => { e.preventDefault(); }}>
+//                   {quisedata.question.map((question, qIndex) => (
+//                     <div
+//                       key={qIndex}
+//                       style={{
+//                         paddingTop:"40px"
+//                       }}
+//                     >
+//                       <p>
+//                         {qIndex + 1}.{question.Question}
+//                       </p>
+//                       <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
+//                         {question.answers.map((answer, aIndex) => (
+//                           <li key={aIndex} style={{ margin: "10px" }}>
+//                             <input
+//                               type="radio"
+//                               id={`answer_${qIndex}_${aIndex}`}
+//                               name={`answer_${qIndex}`}
+//                               value={aIndex}
+//                               onChange={() => {
+//                                 const newAnswers = [...answers];
+//                                 newAnswers[qIndex] = aIndex;
+//                                 setAnswers(newAnswers);
+//                               }}
+//                             />
+//                             <label htmlFor={`answer_${qIndex}_${aIndex}`}>
+//                               {answer}
+//                             </label>
+//                           </li>
+//                         ))}
+//                       </ul>
+//                     </div>
+//                   ))}
+//                   <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
+//                     Submit
+//                   </button>
+//                 </form>
+//               )}
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
+
+// export default ComQuizes;
+
+
+
 import React, { useState, useEffect } from "react";
 
 function ComQuizes({ quisedata }) {
@@ -5,10 +151,11 @@ function ComQuizes({ quisedata }) {
   const [submitButton, setSubmitButton] = useState(false); // State for controlling submit button
   const [remainingTime, setRemainingTime] = useState(0); // State for remaining time
   const [showContent, setShowContent] = useState(false); // State for controlling content visibility
-  const [quizStarted, setQuizStarted] = useState(false); // State for controlling quiz start 
+  const [quizStarted, setQuizStarted] = useState(false); // State for controlling quiz start
   const [timeRange, setTimeRange] = useState(0);
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]); // State for correct answers
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // State for tracking current question index
 
   useEffect(() => {
     let timer;
@@ -17,7 +164,7 @@ function ComQuizes({ quisedata }) {
         setRemainingTime((prevTime) => prevTime - 1000);
       }, 1000);
     } else if (remainingTime === 0 && countdownStarted) {
-      handleSubmmit(); // Automatically submit when time is over
+      handleSubmit(); // Automatically submit when time is over
     }
     return () => clearInterval(timer);
   }, [countdownStarted, remainingTime]);
@@ -38,7 +185,7 @@ function ComQuizes({ quisedata }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const handleSubmmit = () => {
+  const handleSubmit = () => {
     setSubmitButton(true);
     const score = checkAnswers();
     window.alert(`Your score is ${score} %`);
@@ -55,62 +202,132 @@ function ComQuizes({ quisedata }) {
     return (score / correctAnswers.length) * 100;
   };
 
+  // Function to handle next question
+  const nextQuestion = () => {
+    if (currentQuestionIndex < quisedata.question.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  // Function to handle previous question
+  const prevQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  };
+
   return (
     <>
-      <div style={{marginTop:"20px"}}>
-        <button onClick={() => setShowContent(!showContent)} style={{marginTop:"20px"}}>
+      <div>
+        {!quizStarted && (
+        <button onClick={() => setShowContent(!showContent)} style={{ marginTop: "10px", marginLeft: "5px" }}>
           {showContent ? "Hide Content" : "Show Content"}
         </button>
+        )}
 
         {showContent && (
-          <div style={{backgroundColor:"white",padding:"20px"}}>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "35px",
+              border: "none",
+              borderRadius: "6px",
+              color: "#000",
+              width: "80%",
+              margin: "3% 10%",
+            }}
+          >
             {!quizStarted && ( // Render start button if quiz has not started
-              <button onClick={startQuiz} style={{marginTop:"20px",marginBottom:"30px"}}>Start Quiz</button>
+              <button onClick={startQuiz} style={{ marginTop: "3px" }}>Start Quiz</button>
             )}
 
             <div>
-              <p>Time: {formatTime()}</p>
+              {showContent && quizStarted && (
+                <p
+                  style={{
+                    float: "right",
+                    backgroundColor: "#ada9a8",
+                    color: "#000",
+                    border: "none",
+                    borderRadius: "5px",
+                    padding: "4px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Remaining Time: <span style={{ color: "red" }}>{formatTime()}</span>
+                </p>
+              )}
 
               {quizStarted && ( // Render quiz content if quiz has started
                 <form onSubmit={(e) => { e.preventDefault(); }}>
-                  {quisedata.question.map((question, qIndex) => (
-                    <div
-                      key={qIndex}
+                  <div
+                    key={currentQuestionIndex}
+                    style={{
+                      paddingTop: "40px",
+                    }}
+                  >
+                    <p>
+                      {currentQuestionIndex + 1}. {quisedata.question[currentQuestionIndex].Question}
+                    </p>
+                    <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
+                      {quisedata.question[currentQuestionIndex].answers.map((answer, aIndex) => (
+                        <li key={aIndex} style={{ margin: "10px" }}>
+                          <input
+                            type="radio"
+                            id={`answer_${currentQuestionIndex}_${aIndex}`}
+                            name={`answer_${currentQuestionIndex}`}
+                            value={aIndex}
+                            onChange={() => {
+                              const newAnswers = [...answers];
+                              newAnswers[currentQuestionIndex] = aIndex;
+                              setAnswers(newAnswers);
+                            }}
+                            checked={answers[currentQuestionIndex] === aIndex}
+                          />
+                          <label htmlFor={`answer_${currentQuestionIndex}_${aIndex}`}>
+                            {answer}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Navigation buttons */}
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <button
+                      type="button"
+                      onClick={prevQuestion}
+                      disabled={currentQuestionIndex === 0}
                       style={{
-                        backgroundColor: "#C3B091",
-                        borderRadius: "20px",
-                        padding: "40px",
-                        marginBottom: "10px",
-                        marginTop: "10px",
-                        marginInline: "80px",
+                        margin: "4px",
+                        padding: "2px",
                       }}
                     >
-                      <p>
-                        {qIndex + 1}.{question.Question}
-                      </p>
-                      <ul style={{ marginTop: "20px", marginBottom: "20px" }}>
-                        {question.answers.map((answer, aIndex) => (
-                          <li key={aIndex} style={{ margin: "10px" }}>
-                            <input
-                              type="radio"
-                              id={`answer_${qIndex}_${aIndex}`}
-                              name={`answer_${qIndex}`}
-                              value={aIndex}
-                              onChange={() => {
-                                const newAnswers = [...answers];
-                                newAnswers[qIndex] = aIndex;
-                                setAnswers(newAnswers);
-                              }}
-                            />
-                            <label htmlFor={`answer_${qIndex}_${aIndex}`}>
-                              {answer}
-                            </label>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
+                      {"<"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={nextQuestion}
+                      disabled={currentQuestionIndex === quisedata.question.length - 1}
+                      style={{
+                        margin: "4px",
+                        padding: "2px",
+                      }}
+                    >
+                      {">"}
+                    </button>
+                  </div>
+                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmit}
+                          style={{
+                            width:"auto",
+                            margin: "3px",
+                            padding: "3px",
+                            border: "none",
+                            borderRadius: "5px",
+                            backgroundColor: "#103457",
+                            color: "#fff",
+                            boxShadow: "0px 2px 2px 0px",
+                          }}>
                     Submit
                   </button>
                 </form>
@@ -124,3 +341,4 @@ function ComQuizes({ quisedata }) {
 }
 
 export default ComQuizes;
+

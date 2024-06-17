@@ -214,17 +214,18 @@ function AssignmentComponent({ assignmentData }) {
           color:"#000"
         }}
       >
-        Allocated Time : {assignmentData.TimeRanges} minutes
+        Allocated Time : <span style={{color:"red"}}>{assignmentData.TimeRanges} minutes</span>
       </p>
         <button
           onClick={() => {setShowContent(!showContent);}}
           style={{ 
             marginLeft:"6px",
             marginTop: "5px",
-            backgroundColor:"ash",
+            backgroundColor:"#abcdef",
             border:"none",
             borderRadius:"3px",
-            width:"16%",
+            width:"auto",
+            padding: "2px",
             cursor:"pointer"
           }}
         >

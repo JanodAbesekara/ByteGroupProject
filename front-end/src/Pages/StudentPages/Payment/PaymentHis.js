@@ -71,7 +71,7 @@ function PaymentHis() {
                 >
                   <p style={style}>
                     {RegT.subject}
-                    <span style={{ fontSize: "15px", color: "#fd7e14" }}>
+                    <span style={{ fontSize: "14px", color: "#FFD700" }}>
                       ({RegT.medium})
                     </span>
                   </p>

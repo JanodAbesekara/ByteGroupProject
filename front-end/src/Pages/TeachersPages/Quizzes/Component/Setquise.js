@@ -5,28 +5,26 @@ import Enterquizes from "./Enterquizes";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
-export default function CombinedComponent({medium , subject}) {
-  const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  const decodedToken = jwtDecode(token);
-  const useremail = decodedToken.email;
-
+export default function CombinedComponent({ medium, subject }) {
   const [timeRange, setTimeRange] = useState("");
   const [quizNumber, setQuizNumber] = useState("");
   const [questions, setQuestions] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
+
     const payload = {
       TimeRanges: timeRange,
       QuizeNumber: quizNumber,
       question: questions,
       TeacherEmail: useremail,
-      TeacherSubject:subject,
-      submedium:  medium,
+      TeacherSubject: subject,
+      submedium: medium,
     };
 
-  
     const request = axios.post(`/api/Quise/createQuise`, payload);
     request.then((response) => {
       window.alert(response.data.message);
@@ -43,6 +41,7 @@ export default function CombinedComponent({medium , subject}) {
       <div
         style={{
           marginRight: "20px",
+          marginLeft: "20px",
           boxShadow: "2px 2px 10px 2px #888888",
           borderRadius: "5px",
           padding: "20px",
@@ -52,23 +51,29 @@ export default function CombinedComponent({medium , subject}) {
           backgroundColor: "#eef2ed",
         }}
       >
+        <h2
+          style={{
+            textTransform: "uppercase",
+            color: "#2439bf",
+            fontSize: "25px",
+          }}
+        >
+          {subject}
+        </h2>
 
-          <h2 style={{
-          textTransform: "uppercase",
-          color: "#2439bf",
-          fontSize: "25px",
-          
-      }}>{subject}</h2>
-  
-        <h2 style={{
-          fontSize: "15px",
-          paddingTop: "4px",
-          fontWeight: "bold",
-          color: "#0e5e5a",
-          marginBottom:"10px",
-        }}>{medium}</h2>
-        
-<hr/>
+        <h2
+          style={{
+            fontSize: "15px",
+            paddingTop: "4px",
+            fontWeight: "bold",
+            color: "#0e5e5a",
+            marginBottom: "10px",
+          }}
+        >
+          {medium}
+        </h2>
+
+        <hr />
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "20px", marginTop: "20px" }}>
@@ -80,8 +85,6 @@ export default function CombinedComponent({medium , subject}) {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <Enterquizes setQuestions={setQuestions} />
@@ -96,10 +99,12 @@ export default function CombinedComponent({medium , subject}) {
               borderRadius: "5px",
               fontSize: "20px",
               marginLeft: "50px",
+              display: "flex",
+              width: "auto",
             }}
           >
             {" "}
-            <CgSoftwareUpload/>
+            <CgSoftwareUpload />
           </button>
         </form>
       </div>

@@ -81,7 +81,7 @@ function PayCard({ regdetal }) {
       <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column"}}>
         {recpec > 0 && "Uploading : " + recpec + "%"}
         <div>
-        <lebel style={{fontSize :"14px", fontWight:"700"}}>PAYMENT RECEIPT : </lebel>
+        <lebel style={{fontSize :"14px", fontWight:"700", color:"#BDB76B"}}>PAYMENT RECEIPT : </lebel>
         
         <input
           type="file"
@@ -89,11 +89,12 @@ function PayCard({ regdetal }) {
           onChange={(e) => setPhoto(e.target.files[0])}
           style={{
             marginBottom: "5px",
+            color:"#999999"
           }}
         />
         </div>
         <div>
-        <button type="submit" name="submit" style={{padding:"2px",}}>
+        <button type="submit" name="submit" style={{padding:"2px",backgroundColor:"#5dbea3",color:"#fff", border:"none", borderRadius:"3px"}}>
           Upload
         </button>
         </div>

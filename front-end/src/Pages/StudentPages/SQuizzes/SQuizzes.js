@@ -18,7 +18,7 @@ function SQuizzes() {
 
       try {
         const response = await axios.get(`/api/Test/quiseadd`, {
-          params: { email: StuEmail}
+          params: { email: StuEmail },
         });
         console.log(response);
         setData(response.data.quizzes);
@@ -49,21 +49,62 @@ function SQuizzes() {
                 <div
                   style={{
                     width: "80%",
-                    height: "60%",
-                    backgroundColor: "#C3B091",
-                    padding: "40px",
-                    borderRadius: "20px",
-                    marginTop: "40px",
-                    marginBottom: "30px",
-                    boxShadow: "2px 4px 8px 0.5px black",
+                    backgroundColor: "#F0F8FF",
+                    margin: "35px",
+                   
+                    color: "#000",
+                    padding: "3%",
+                    border: "none",
+                    borderRadius: "7px",
+                    boxShadow:
+                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                 >
-                  <p style={{ textAlign: "center" }}>
-                    Quizzes :- {quiz.QuizeNumber}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#fff",
+                        backgroundColor: "#27ae60",
+                        borderRadius: "5px",
+                        padding: "3px 8px",
+                      }}
+                    >
+                      {quiz.TeacherSubject}
+                    </p>
+                    <p
+                      style={{
+                        padding: "3px 8px",
+                        color: "#0d09f6",
+                      }}
+                    >
+                      {quiz.submedium}
+                    </p>
+                  </div>
+                  <p
+                    style={{
+                      padding: "3px 8px",
+                      color: "#A9A9A9",
+                      fontSize: "13px",
+                      
+                    }}
+                  >
+                    Quiz No : {quiz.QuizeNumber}
                   </p>
-                  <p>Subject :- {quiz.TeacherSubject}</p>
-                  <p>Medium :- {quiz.submedium}</p>
-                  <p>Time range :- {quiz.TimeRanges} minutes</p>
+                  <p
+                    style={{
+                      padding: "3px 8px",
+                      color: "#000",
+                      fontSize: "13px",
+                    }}
+                  >
+                    Allocated Time : <span style={{color:"#FF0000"}}>{quiz.TimeRanges} minutes</span>
+                  </p>{" "}
                   <ComQuizes1 quisedata={quiz} />
                 </div>
               </div>
