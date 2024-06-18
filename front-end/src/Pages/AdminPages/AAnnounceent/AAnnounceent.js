@@ -102,9 +102,10 @@ function AAnnounceent() {
     }, {});
   };
 
+
   const renderAnnouncementsTable = (announcements, title) => (
     <div style={{ marginBottom: "50px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>{title}</h2>
+    <a  href={`mailto:${title}`} ><h2 style={{ textAlign: "center", marginBottom: "20px" }}>{title}</h2></a>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

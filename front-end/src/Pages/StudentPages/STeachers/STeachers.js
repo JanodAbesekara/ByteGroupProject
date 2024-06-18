@@ -112,7 +112,8 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                     subjectdetal.map((subjectDetails, index) => (
                       <TableRow key={index}>
                         <TableCell sx={{ textAlign: "center" }}>
-                          {subjectDetails.teacherEmail}
+                          <a href={`mailto:{subjectDetails.teacherEmail}`}>
+                          {subjectDetails.teacherEmail}</a>
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {subjectDetails.Ensubject}

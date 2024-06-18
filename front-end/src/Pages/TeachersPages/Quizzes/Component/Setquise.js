@@ -12,9 +12,12 @@ export default function CombinedComponent({ medium, subject }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const useremail = decodedToken.email;
+    sentnotifsacition();
+
 
     const payload = {
       TimeRanges: timeRange,
@@ -34,6 +37,39 @@ export default function CombinedComponent({ medium, subject }) {
       console.error("Error:", error);
       window.alert(error.response.data.message);
     });
+  };
+
+  const sentnotifsacition = async (e) => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
+    const currentDate = new Date();
+    const currentTime = currentDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    try {
+      const paylod = {
+        titleofAnn: `New Quise Number ${quizNumber} `,
+        Announcementmessage: "You have new Quise to solve",
+        postedemail: useremail,
+        TeacheSubject: subject,
+        mediua: medium,
+        date: currentDate.toISOString().split("T")[0],
+        time: currentTime,
+        jobrole: "Lecturer",
+      };
+
+      const response = await axios.post(`/api/send/notifaction`, paylod);
+      console.log(response.data.message);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        window.alert(error.response.data.message);
+      } else {
+        window.alert("An error occurred while sending the notification");
+      }
+    }
   };
 
   return (
@@ -60,6 +96,7 @@ export default function CombinedComponent({ medium, subject }) {
         >
           {subject}
         </h2>
+
 
         <h2
           style={{

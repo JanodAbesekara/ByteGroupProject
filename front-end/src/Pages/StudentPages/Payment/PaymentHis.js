@@ -41,13 +41,14 @@ function PaymentHis() {
     wordSpacing: "5px",
     letterSpacing: "2px",
     backgroundColor: "#3498DB",
-    borderRadius:"4px"
+    borderRadius: "4px",
   };
 
   const menuStyle = {
     color: "#28a745",
-    fontWeight:"650"
-  }
+    fontWeight: "650",
+  };
+
   return (
     <div>
       <Navbar />
@@ -66,7 +67,7 @@ function PaymentHis() {
                     border: "1px solid #F8F9F9",
                     padding: "10px",
                     backgroundColor: "#EAEDED",
-                    borderRadius:"3px"
+                    borderRadius: "3px",
                   }}
                 >
                   <p style={style}>
@@ -92,17 +93,35 @@ function PaymentHis() {
                       backgroundColor: "#fff",
                       paddingTop: "8px",
                       paddingBottom: "8px",
-                      fontSize:"13px",
-                      marginBlock:"10px"
+                      fontSize: "13px",
+                      marginBlock: "10px",
                     }}
                   >
-                    <p><span style={menuStyle}>Teacher Email</span> : <span style={{color:"gray"}}>{RegT.email}</span></p>
-                    <p><span style={menuStyle}>Bank Name</span> : <span style={{color:"gray"}}>{RegT.payment.bank}</span></p>
-                    <p><span style={menuStyle}>Account Number</span> : <span style={{color:"#000", fontWeight:"500"}}>{RegT.payment.accountNo}</span></p>
-                    <p><span style={menuStyle}>Fees Amount</span> : <span style={{color:"#dc3545", fontWeight:"500"}}>Rs.{RegT.classpees}</span></p>
+                    <p>
+                      <span style={menuStyle}>Teacher Email</span> :{" "}
+                      <span style={{ color: "gray" }}>
+                        <a href={`mailto:${RegT.email}`} style={{ color: "gray" ,textDecoration:"none"}}>{RegT.email}</a>
+                        </span>
+                    </p>
+                    <p>
+                      <span style={menuStyle}>Bank Name</span> :{" "}
+                      <span style={{ color: "gray" }}>{RegT.payment.bank}</span>
+                    </p>
+                    <p>
+                      <span style={menuStyle}>Account Number</span> :{" "}
+                      <span style={{ color: "#000", fontWeight: "500" }}>
+                        {RegT.payment.accountNo}
+                      </span>
+                    </p>
+                    <p>
+                      <span style={menuStyle}>Fees Amount</span> :{" "}
+                      <span style={{ color: "#dc3545", fontWeight: "500" }}>
+                        Rs.{RegT.classpees}
+                      </span>
+                    </p>
                   </div>
                   <div>
-                  <PayCard regdetal={RegT} />
+                    <PayCard regdetal={RegT} />
                   </div>
                 </div>
               ))}

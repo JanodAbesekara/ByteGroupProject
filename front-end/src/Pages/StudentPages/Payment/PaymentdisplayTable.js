@@ -13,7 +13,6 @@ import axios from "axios";
 
 function PaymentdisplayTable() {
   const [PaymentData, setPaymentData] = useState([]);
-  const [visible,setVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,11 +20,11 @@ function PaymentdisplayTable() {
       const decodedToken = jwtDecode(token);
       const email = decodedToken.email;
       try {
-        const response = await axios.get("/api/Test/getdetails", {
+        const response = await axios.get("/api/Test/getdertails", {
           params: { email },
         });
         setPaymentData(response.data.data);
-        setVisible(response.data.success);
+        console.log("details" + response.data.data);
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
       }
@@ -34,50 +33,52 @@ function PaymentdisplayTable() {
   }, []);
 
   const style = {
-      textAlign: "center",
-      backgroundColor: "#317873",
-      borderRight: "2px white solid",
-      color: "white",
-  }
-  console.log(PaymentData);
+    textAlign: "center",
+    backgroundColor: "#317873",
+    borderRight: "2px white solid",
+    color: "white",
+  };
 
   return (
     <div>
-      {visible && (
-      <TableContainer component={Paper} sx={{marginBottom:"30px", marginLeft:"4px"}}>
+      <TableContainer component={Paper} sx={{ marginBottom: "30px" }}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell sx={style}>Teacher Email</TableCell>
               <TableCell sx={style}>Subject</TableCell>
               <TableCell sx={style}>Medium</TableCell>
+
               <TableCell sx={style}>Receipt</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {PaymentData.map((Payment, index) => (
-              <TableRow key={index}>
-                <TableCell>{Payment.email}</TableCell>
-                <TableCell>{Payment.subject}</TableCell>
-                <TableCell>{Payment.medium}</TableCell>
-                <TableCell>
-                  <a href={Payment.photourl}>
-                    <img
-                      src={Payment.photourl}
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                      }}
-                      alt="image_url"
-                    />
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
+            {PaymentData.slice(0)
+              .reverse()
+              .map((Payment, index) => (
+                <TableRow key={index}>
+                  <TableCell align="center">
+                    <a href={Payment.TeacherEmail}>{Payment.TeacherEmail}</a>
+                  </TableCell>
+                  <TableCell align="center">{Payment.Subject}</TableCell>
+                  <TableCell align="center">{Payment.medium}</TableCell>
+                  <TableCell align="center">
+                    <a href={Payment.photourl}>
+                      <img
+                        src={Payment.photourl}
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                        }}
+                        alt="image_url"
+                      />
+                    </a>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
-      )}
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 import app from "../../../firebase";
 import axios from "axios";
 
+
 function ClassContent({ subjectData }) {
   const [subjectdata] = useState(subjectData);
 
@@ -72,6 +73,7 @@ function ClassContent({ subjectData }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    sentnotifsacition();
     const paylord = {
       TeacherEmail: subjectData.email,
       Teachersubject: subjectData.subject,
@@ -106,6 +108,37 @@ function ClassContent({ subjectData }) {
     borderRadius: "3px",
     display: "flex",
     flexDirection: "column"
+  };
+
+  const sentnotifsacition = async (e) => {
+
+    const currentDate = new Date();
+    const currentTime = currentDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    try {
+      const paylod = {
+        titleofAnn: `New Lecture material `,
+        Announcementmessage: `You have new lecture material ${subjectData.subject}  in ${subjectData.medium} solve`,
+        postedemail: subjectData.email,
+        TeacheSubject: subjectData.subject,
+        mediua: subjectData.medium,
+        date: currentDate.toISOString().split("T")[0],
+        time: currentTime,
+        jobrole: "Lecturer",
+      };
+
+      const response = await axios.post(`/api/send/notifaction`, paylod);
+      console.log(response.data.message);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        window.alert(error.response.data.message);
+      } else {
+        window.alert("An error occurred while sending the notification");
+      }
+    }
   };
 
 
