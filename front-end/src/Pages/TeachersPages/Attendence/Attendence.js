@@ -168,7 +168,8 @@ function Attendance() {
                           return (
                             <TableRow key={index}>
                               <TableCell align="center">
-                                {item.posts.studentnemail}
+                                <a href={`mailto:${item.posts.studentnemail}`}>
+                                {item.posts.studentnemail}</a>
                               </TableCell>
                               <TableCell align="center">
                                 {item.posts.studentname}

@@ -14,6 +14,7 @@ import {
   TableBody,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import "./AADSmanager.css";
 
 
 function AADSmanager() {
@@ -73,7 +74,9 @@ function AADSmanager() {
     const emailGroups = getEmailGroups();
     return Object.keys(emailGroups).map((email) => (
       <Box key={email}>
-        <h2>{email} </h2>
+     
+     
+       <a href={`mailto:${email}`} style={{color:"black",textDecoration:"none"}}> <h2>{email} </h2></a>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>

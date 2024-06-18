@@ -17,6 +17,7 @@ import {
 import app from "../../../firebase";
 import Alert from "@mui/material/Alert";
 import DisplayResources from "./Displayresources";
+import AlertBox from "../../../Component/Alertbox/Alertbox";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -55,6 +56,16 @@ const Aaddresources = () => {
 
   const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
   const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
+
+
+  const [Alertdata, setAlertdata] = useState({
+    show: false,
+    message: "",
+    type: "",
+    description: "",
+  }); // State for alert box
+  const [triggerNotification, setTriggerNotification] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,6 +150,13 @@ const Aaddresources = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAlertdata({
+      show: true,
+      message: `Resource Uploded`,
+      type: "success",
+      description: `Your Uplord File to KnowdgleBase Succfully !`,
+    });
+    setTriggerNotification(true);
     setInputs({
       ...inputs,
       pdfS: pdfS,
@@ -154,6 +172,12 @@ const Aaddresources = () => {
     setSubmitButton(true);
   };
 
+  const resetNotification = () => {
+    setTriggerNotification(false);
+ 
+  };
+
+
   return (
     <div>
       <Navbar />
@@ -162,12 +186,13 @@ const Aaddresources = () => {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Alert
-            severity={alertSeverity}
-            sx={{ width: "100%", textAlign: "center", margin: "auto" }}
-          >
-            {alertMessage}
-          </Alert>
+        {Alertdata.show && (
+          <AlertBox
+            data={Alertdata}
+            triggerNotification={triggerNotification}
+            resetNotification={resetNotification}
+          />
+        )}
           <Box sx={{ width: "100%", height: "1000px" }}>
             <h1>File upload</h1>
             <div className="Resourses">
