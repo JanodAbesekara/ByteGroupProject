@@ -186,7 +186,7 @@ export default function ClassCard(subjectData) {
                     {editedData.experience}
                   </p>
                   <p style={{ margin: "4px 6px", fontSize: "14px" }}>
-                    {editedData.classpees}
+                  Rs.{editedData.classpees}.00
                   </p>
                   <p
                     style={{

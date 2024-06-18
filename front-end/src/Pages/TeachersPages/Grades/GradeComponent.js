@@ -97,7 +97,8 @@ export default function GradeComponent(subjectDetails) {
                   {student.name}
                 </TableCell>
                 <TableCell sx={{ textAlign: "center", color: "gray" }}>
-                  {student.email}
+                  <a href={`mailto:${student.email}`}>
+                  {student.email}</a>
                 </TableCell>
 
                 <TableCell sx={{ textAlign: "center" , color: "gray", fontWeight: "500",  backgroundColor: getBackgroundColor(student.grade),}}>

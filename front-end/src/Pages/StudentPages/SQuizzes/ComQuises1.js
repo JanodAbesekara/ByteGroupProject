@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
+import AlertBox from "../../../Component/Alertbox/Alertbox";
 
 function ComQuizes({ quisedata }) {
   const [answers, setAnswers] = useState([]); // State for storing selected answers
   const [submitButton, setSubmitButton] = useState(false); // State for controlling submit button
   const [remainingTime, setRemainingTime] = useState(0); // State for remaining time
   const [showContent, setShowContent] = useState(false); // State for controlling content visibility
-  const [quizStarted, setQuizStarted] = useState(false); // State for controlling quiz start 
+  const [quizStarted, setQuizStarted] = useState(false); // State for controlling quiz start
   const [timeRange, setTimeRange] = useState(0);
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]); // State for correct answers
+
+  const [Alertdata, setAlertdata] = useState({
+    show: false,
+    message: "",
+    type: "",
+    description: "",
+  }); // State for alert box
+  const [triggerNotification, setTriggerNotification] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -20,16 +29,18 @@ function ComQuizes({ quisedata }) {
       handleSubmmit(); // Automatically submit when time is over
     }
     return () => clearInterval(timer);
-  }, [countdownStarted, remainingTime]);
+  }, [countdownStarted, remainingTime ]);
 
   const startQuiz = async () => {
     const timeRangeFromBackend = quisedata.TimeRanges;
     setTimeRange(timeRangeFromBackend);
-    setCorrectAnswers(quisedata.question.map((question) => question.correctAnswerIndex));
+    setCorrectAnswers(
+      quisedata.question.map((question) => question.correctAnswerIndex)
+    );
     setRemainingTime(timeRangeFromBackend * 60 * 1000);
     setCountdownStarted(true);
+    setQuizStarted(true);
     setSubmitButton(true);
-    setQuizStarted(true); // Set quiz started to true when start button is clicked
   };
 
   const formatTime = () => {
@@ -38,12 +49,25 @@ function ComQuizes({ quisedata }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const handleSubmmit = () => {
+  const handleSubmmit = (e) => {
+    e.preventDefault();
+
     setSubmitButton(true);
     const score = checkAnswers();
-    window.alert(`Your score is ${score} %`);
-    window.location.reload();
+    // window.alert(`Your score is ${score} %`);
+    setAlertdata({
+      show: true,
+      message: `Quise Result`,
+      type: "success",
+      description: `Your score is ${score} %`,
+    });
+    setTriggerNotification(true);
+    setQuizStarted(false);
+    // window.location.reload();
+
+    console.log("first");
   };
+
 
   const checkAnswers = () => {
     let score = 0;
@@ -55,24 +79,45 @@ function ComQuizes({ quisedata }) {
     return (score / correctAnswers.length) * 100;
   };
 
+  const resetNotification = () => {
+    setTriggerNotification(false);
+    setCountdownStarted(false);
+    setShowContent(false);
+  };
+
   return (
     <>
-      <div style={{marginTop:"20px"}}>
-        <button onClick={() => setShowContent(!showContent)} style={{marginTop:"20px"}}>
+      <div style={{ marginTop: "20px" }}>
+        {Alertdata.show && (
+          <AlertBox
+            data={Alertdata}
+            triggerNotification={triggerNotification}
+            resetNotification={resetNotification}
+          />
+        )}
+        <button
+          onClick={() => setShowContent(!showContent)}
+          style={{ marginTop: "20px" }}
+        >
           {showContent ? "Hide Content" : "Show Content"}
         </button>
 
         {showContent && (
-          <div style={{backgroundColor:"white",padding:"20px"}}>
-            {!quizStarted && ( // Render start button if quiz has not started
-              <button onClick={startQuiz} style={{marginTop:"20px",marginBottom:"30px"}}>Start Quiz</button>
+          <div style={{ backgroundColor: "white", padding: "20px" }}>
+            {!quizStarted && ( 
+              <button
+                onClick={startQuiz}
+                style={{ marginTop: "20px", marginBottom: "30px" }}
+              >
+                Start Quiz
+              </button>
             )}
 
             <div>
               <p>Time: {formatTime()}</p>
 
-              {quizStarted && ( // Render quiz content if quiz has started
-                <form onSubmit={(e) => { e.preventDefault(); }}>
+              {quizStarted && ( 
+                <form onSubmit={handleSubmmit}>
                   {quisedata.question.map((question, qIndex) => (
                     <div
                       key={qIndex}
@@ -110,7 +155,12 @@ function ComQuizes({ quisedata }) {
                       </ul>
                     </div>
                   ))}
-                  <button type="submit" disabled={!submitButton || remainingTime === 0} onClick={handleSubmmit}>
+                  <button
+                    type="submit"
+                    disabled={
+                      !submitButton || remainingTime === 0 || !quizStarted
+                    }
+                  >
                     Submit
                   </button>
                 </form>
