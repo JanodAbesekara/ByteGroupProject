@@ -89,8 +89,9 @@ const getNotifacition = async (req, res) => {
     // Fetch enrollments for the user
     const enrollments = await Enrollment.find({ userEmail: email });
 
-    const announceme = await Announcement.find({ jobrole: "Admin" });
+     const announceme = await Announcement.find({ jobrole: "Admin" });
 
+    
     // Extract job roles from enrollments
     const uniqueJobRoles = [
       ...new Set(enrollments.map((enrollment) => enrollment.jobRole)),
