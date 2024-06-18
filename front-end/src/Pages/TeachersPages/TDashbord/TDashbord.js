@@ -110,29 +110,36 @@ export default function Dashbord() {
           <Sidebar />
         </div>
         <div className="container3">
-          <div className="container1">
-            <div className="profile_pic">
-              <div className="picture">
+          <div className="container1" style={{display:"flex", 
+          flexDirection:"row",
+          justifyContent:"space-between",
+          width:"auto",
+          margin:"10px",
+          padding: "10px"
+          }}>
+          <div className="teacher_info" style={{display:"flex", 
+          flexDirection:"row",
+          textAlign:"center",
+          padding:"0"
+          }}>
+              <div className="picture" style={{height:"auto", width:"auto"}} >
                 <Avatar
                   alt="profile_pic"
                   src={url}
-                  sx={{ width: 90, height: 90 }}
                 />
               </div>
-            </div>
-            <div className="teacher_info">
-              <div className="name">
+              <div className="name" style={{display:"flex",paddingLeft:"3px",paddingTop:"10px", fontSize:"14px"}}>
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
+              </div>
 
-
+            
               <div className="notifications_icon">
               <React.Fragment>
-
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box>
                     <Badge badgeContent={notCount}>
-                      <Typography fontSize="1.4rem">🔔</Typography>
+                      <Typography fontSize="1.0rem">🔔</Typography>
                     </Badge>
                   </Box>
                 </Link>
@@ -141,9 +148,8 @@ export default function Dashbord() {
                   handleClose={handleClose}
                   notifications={notifaication}
                 />
-
               </React.Fragment>
-              </div>
+              
 
             </div>
           </div>

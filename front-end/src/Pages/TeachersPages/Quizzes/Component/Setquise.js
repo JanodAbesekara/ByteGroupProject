@@ -18,6 +18,7 @@ export default function CombinedComponent({ medium, subject }) {
     const useremail = decodedToken.email;
     sentnotifsacition();
 
+
     const payload = {
       TimeRanges: timeRange,
       QuizeNumber: quizNumber,
@@ -76,6 +77,7 @@ export default function CombinedComponent({ medium, subject }) {
       <div
         style={{
           marginRight: "20px",
+          marginLeft: "20px",
           boxShadow: "2px 2px 10px 2px #888888",
           borderRadius: "5px",
           padding: "20px",
@@ -94,6 +96,7 @@ export default function CombinedComponent({ medium, subject }) {
         >
           {subject}
         </h2>
+
 
         <h2
           style={{
@@ -119,8 +122,6 @@ export default function CombinedComponent({ medium, subject }) {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <Enterquizes setQuestions={setQuestions} />
@@ -135,6 +136,8 @@ export default function CombinedComponent({ medium, subject }) {
               borderRadius: "5px",
               fontSize: "20px",
               marginLeft: "50px",
+              display: "flex",
+              width: "auto",
             }}
           >
             {" "}

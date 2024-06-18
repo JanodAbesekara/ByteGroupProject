@@ -89,17 +89,18 @@ export default function ClassCard(subjectData) {
             backgroundColor: "#d5edd6",
             border: "none",
             borderRadius: "10px",
+            boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
           }}
         >
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <div className="classcom" style={{ width: "25%", border: "none" }}>
+            <div className="classcom" style={{ width: "auto", border: "none" }}>
               <Link
                 to="/TClasses"
                 style={{ textDecoration: "none", textTransform: "uppercase" }}
               >
                 <p
                   style={{
-                    width: "100%",
+                    width: "auto",
                     backgroundColor: "#1A8FE3",
                     textAlign: "center",
                     padding: "5px 1px",
@@ -107,7 +108,7 @@ export default function ClassCard(subjectData) {
                     margin: "0px",
                     border: "none",
                     borderRadius: "7px",
-                    fontSize: "18px",
+                    fontSize: "16px",
                     fontWeight: "bold",
                   }}
                 >
@@ -204,7 +205,7 @@ export default function ClassCard(subjectData) {
             </div>
             <div
               style={{
-                width: "12%",
+                width: "auto",
                 display: "flex",
                 flexDirection: "column",
                 paddingRight: "5px",
@@ -216,7 +217,7 @@ export default function ClassCard(subjectData) {
                     margin: "5px",
                     border: "none",
                     borderRadius: "6px",
-                    backgroundColor: "#4de84a",
+                    backgroundColor: "green",
                     color: "#fff",
                     padding: "3px 0px",
                   }}
@@ -230,7 +231,7 @@ export default function ClassCard(subjectData) {
                     margin: "5px",
                     border: "none",
                     borderRadius: "6px",
-                    backgroundColor: "green",
+                    backgroundColor: "#4de84a",
                     color: "#fff",
                     padding: "3px 0px",
                   }}

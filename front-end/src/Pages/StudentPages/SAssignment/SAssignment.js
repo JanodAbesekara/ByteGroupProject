@@ -51,12 +51,13 @@ function SAssignment() {
               <div
                 key={assignment._id}
                 style={{
-                  backgroundColor: "#9fbbdd",
-                  margin: "15px",
+                  backgroundColor: "#F0F8FF",
+                  margin: "35px",
                   color: "#fff",
                   padding: "3%",
                   border: "none",
                   borderRadius: "7px",
+                  boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }}
               >
                 <AssignmentComponent

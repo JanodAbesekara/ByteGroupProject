@@ -75,11 +75,11 @@ function Enterquizes({ setQuestions }) {
           </h2>
           <input
             style={{
-              width: "400px",
+              width: "auto",
               height: "30px",
               padding: "10px",
               borderRadius: "5px",
-              border: "1px solid gray",
+              border: "1px solid gray"
             }}
             placeholder="Enter the Question"
             value={question.Question}
