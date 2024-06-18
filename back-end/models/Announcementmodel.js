@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const announcementSchema = new Schema(
@@ -14,13 +14,13 @@ const announcementSchema = new Schema(
     TeacheSubject: {
       type: String,
       default: function () {
-        return this.jobrole === 'Admin' ? 'System change' : '';
+        return this.jobrole === "Admin" ? "System change" : "";
       },
     },
     mediua: {
       type: String,
       default: function () {
-        return this.jobrole === 'Admin' ? 'System' : '';
+        return this.jobrole === "Admin" ? "System" : "";
       },
     },
     Announcementmessage: {
@@ -45,7 +45,5 @@ const announcementSchema = new Schema(
   }
 );
 
-
-
-const Announcement = mongoose.model('Announcement', announcementSchema);
+const Announcement = mongoose.model("Announcement", announcementSchema);
 export default Announcement;
