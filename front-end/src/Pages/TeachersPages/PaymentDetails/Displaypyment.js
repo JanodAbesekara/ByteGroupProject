@@ -58,7 +58,11 @@ function DisplayPayment() {
                   <TableBody>
                     {paymentData[subject][medium].map((payment, index) => (
                       <TableRow key={index}>
-                        <TableCell>{payment.stuemail}</TableCell>
+                        <TableCell>
+                          <a href={`mailto:${payment.stuemail}`}>
+                            {payment.stuemail}
+                          </a>
+                        </TableCell>
                         <TableCell>
                           <a href={payment.photourl}>
                             <img

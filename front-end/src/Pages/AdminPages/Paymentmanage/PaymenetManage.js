@@ -63,9 +63,8 @@ function PaymenetManage() {
       userEmail: stuemail,
     };
 
-
     try {
-        console.log(paylord);
+      console.log(paylord);
       axios.post(`/api/Test/removeStudentpayment`, paylord);
       window.alert("Succefully Removed");
       // window.location.reload();
@@ -176,32 +175,35 @@ function PaymenetManage() {
                                 </TableRow>
                               </TableHead>
                               <TableBody>
-                                {payments.map((payment, index) => (
-                                  <TableRow key={index}>
-                                    <TableCell>
-                                      {payment.TeacherEmail}
-                                    </TableCell>
-                                    <TableCell>{payment.stuemail}</TableCell>
-                                    <TableCell>{payment.Subject}</TableCell>
-                                    <TableCell>{payment.medium}</TableCell>
-                                    <TableCell>
-                                      {payment.Bankname} <br /> (
-                                      {payment.AccountNum})
-                                    </TableCell>
-                                    <TableCell>
-                                      <a href={payment.photourl}>
-                                        <img
-                                          src={payment.photourl}
-                                          style={{
-                                            width: "80px",
-                                            height: "80px",
-                                          }}
-                                          alt="image_url"
-                                        />
-                                      </a>
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
+                                {payments
+                                  .slice(0)
+                                  .reverse()
+                                  .map((payment, index) => (
+                                    <TableRow key={index}>
+                                      <TableCell>
+                                        {payment.TeacherEmail}
+                                      </TableCell>
+                                      <TableCell>{payment.stuemail}</TableCell>
+                                      <TableCell>{payment.Subject}</TableCell>
+                                      <TableCell>{payment.medium}</TableCell>
+                                      <TableCell>
+                                        {payment.Bankname} <br /> (
+                                        {payment.AccountNum})
+                                      </TableCell>
+                                      <TableCell>
+                                        <a href={payment.photourl}>
+                                          <img
+                                            src={payment.photourl}
+                                            style={{
+                                              width: "80px",
+                                              height: "80px",
+                                            }}
+                                            alt="image_url"
+                                          />
+                                        </a>
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
                               </TableBody>
                             </Table>
                           </TableContainer>

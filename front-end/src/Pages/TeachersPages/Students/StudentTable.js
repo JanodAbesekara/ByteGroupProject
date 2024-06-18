@@ -66,9 +66,17 @@ function StudentTable({ studentDetails, profilePicUrl }) {
       <TableCell align="center">
         {stuDetails.firstname} {stuDetails.lastname}
       </TableCell>
-      <TableCell align="center">{studentDetails.userEmail}</TableCell>
-      <TableCell align="center">{parentDetails.email}</TableCell>
-      <TableCell align="center">{parentDetails.mobileNo}</TableCell>
+      <TableCell align="center">
+        <a href={`mailto:${studentDetails.userEmail}`}>
+          {studentDetails.userEmail}
+        </a>
+      </TableCell>
+      <TableCell align="center">
+        <a href={`mailto:${parentDetails.email}`}>
+        {parentDetails.email}</a></TableCell>
+      <TableCell align="center">
+      <a href={`tel:${parentDetails.mobileNo}`}>{parentDetails.mobileNo}</a>
+      </TableCell>
     </TableRow>
   );
 }

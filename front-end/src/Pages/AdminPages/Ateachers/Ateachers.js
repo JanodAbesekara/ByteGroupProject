@@ -18,7 +18,6 @@ import { MdDeleteOutline } from "react-icons/md";
 function Ateachers() {
   const [teachers, setTeachers] = useState([]);
   const [totalteachers, settotalteachers] = useState(0);
-  
 
   useEffect(() => {
     getTeachers();
@@ -26,8 +25,7 @@ function Ateachers() {
     for (let i = 0; i < teachers.length; i++) {
       settotalteachers(teachers.length);
     }
-
-  }, [ teachers.length ]);
+  }, [teachers.length]);
 
   const getTeachers = () => {
     Axios.get(`api/auth/teachermangement`)
@@ -90,8 +88,12 @@ function Ateachers() {
               <h3>Total Teachers Count : - {totalteachers}</h3>
             </div>
             {chunks.map((chunk, index) => (
-              <TableContainer component={Paper} key={index} sx={{ marginTop: "100px" }}>
-                <Table >
+              <TableContainer
+                component={Paper}
+                key={index}
+                sx={{ marginTop: "100px" }}
+              >
+                <Table>
                   <TableHead>
                     <TableRow>
                       <TableCell
@@ -154,10 +156,18 @@ function Ateachers() {
                   <TableBody>
                     {chunk.map((teacher, index) => (
                       <TableRow key={index}>
-                        <TableCell align="center">{teacher.firstname} {teacher.lastname}</TableCell>
-                        <TableCell align="center">{teacher.email}</TableCell>
-                        <TableCell align="center">{teacher.phonenumber}</TableCell>
-                        <TableCell align="center">{new Date(teacher.updatedAt).toLocaleDateString()}</TableCell>
+                        <TableCell align="center">
+                          {teacher.firstname} {teacher.lastname}
+                        </TableCell>
+                        <TableCell align="center">
+                          <a href={`mailto:${teacher.email}`}>
+                           {teacher.email} </a></TableCell>
+                        <TableCell align="center">
+                          {teacher.phonenumber}
+                        </TableCell>
+                        <TableCell align="center">
+                          {new Date(teacher.updatedAt).toLocaleDateString()}
+                        </TableCell>
                         <TableCell align="center">
                           <button
                             style={{
@@ -170,7 +180,9 @@ function Ateachers() {
                               border: "none",
                               boxShadow: "2px 1px 10px 0.5px black",
                             }}
-                            onClick={() => handleDeleteConfirmation(teacher.email)}
+                            onClick={() =>
+                              handleDeleteConfirmation(teacher.email)
+                            }
                           >
                             Delete
                             <MdDeleteOutline />

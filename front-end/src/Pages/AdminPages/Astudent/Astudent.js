@@ -160,7 +160,9 @@ function Astudent() {
                         <TableCell align="center">
                           {student.firstname} {student.lastname}
                         </TableCell>
-                        <TableCell align="center">{student.email}</TableCell>
+                        <TableCell align="center">
+                          <a href={`mailto:${student.email}`}>
+                          {student.email}</a></TableCell>
                         <TableCell align="center">
                           {student.phonenumber}
                         </TableCell>

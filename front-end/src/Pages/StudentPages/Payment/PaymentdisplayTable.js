@@ -13,7 +13,7 @@ import axios from "axios";
 
 function PaymentdisplayTable() {
   const [PaymentData, setPaymentData] = useState([]);
- 
+
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
@@ -24,8 +24,7 @@ function PaymentdisplayTable() {
           params: { email },
         });
         setPaymentData(response.data.data);
-        console.log("details"+response.data.data);
-        
+        console.log("details" + response.data.data);
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
       }
@@ -34,7 +33,6 @@ function PaymentdisplayTable() {
   }, []);
 
   const style = {
-
     textAlign: "center",
     backgroundColor: "#317873",
     borderRight: "2px white solid",
@@ -44,7 +42,6 @@ function PaymentdisplayTable() {
   return (
     <div>
       <TableContainer component={Paper} sx={{ marginBottom: "30px" }}>
-
         <Table>
           <TableHead>
             <TableRow>
@@ -53,37 +50,35 @@ function PaymentdisplayTable() {
               <TableCell sx={style}>Medium</TableCell>
 
               <TableCell sx={style}>Receipt</TableCell>
-
             </TableRow>
           </TableHead>
           <TableBody>
-            {PaymentData
-                .reverse()
-                .map((Payment, index) => (
-              <TableRow key={index}>
-
-                <TableCell align="center">{Payment.TeacherEmail}</TableCell>
-                <TableCell align="center">{Payment.Subject}</TableCell>
-                <TableCell align="center">{Payment.medium}</TableCell>
-                <TableCell align="center">
-
-                  <a href={Payment.photourl}>
-                    <img
-                      src={Payment.photourl}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                      }}
-                      alt="image_url"
-                    />
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
+            {PaymentData.slice(0)
+              .reverse()
+              .map((Payment, index) => (
+                <TableRow key={index}>
+                  <TableCell align="center">
+                    <a href={Payment.TeacherEmail}>{Payment.TeacherEmail}</a>
+                  </TableCell>
+                  <TableCell align="center">{Payment.Subject}</TableCell>
+                  <TableCell align="center">{Payment.medium}</TableCell>
+                  <TableCell align="center">
+                    <a href={Payment.photourl}>
+                      <img
+                        src={Payment.photourl}
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                        }}
+                        alt="image_url"
+                      />
+                    </a>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
-      
     </div>
   );
 }

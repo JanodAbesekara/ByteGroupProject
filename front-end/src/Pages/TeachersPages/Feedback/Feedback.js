@@ -124,7 +124,8 @@ export default function Feedback() {
                         {groupedFeedback[subject][medium].map((feedback) => (
                           <TableRow key={feedback._id}>
                             <TableCell sx={{ textAlign: "center" }}>
-                              {feedback.studentemail}
+                              <a href={`malito:${feedback.studentemail}`}>
+                              {feedback.studentemail}</a>
                             </TableCell>
                             <TableCell sx={{ textAlign: "center" }}>
                               {feedback.feedtext}
