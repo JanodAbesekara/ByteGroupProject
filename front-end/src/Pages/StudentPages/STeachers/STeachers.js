@@ -39,17 +39,17 @@ function STeachers() {
     featchsubject();
   }, []);
 
-const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
+  const handleLogout = async (teacherEmail, Ensubject, Enmedium, userEmail) => {
     try {
-      const data = { teacherEmail,Ensubject,Enmedium,userEmail };
-     const respond =  await Axios.post(`/api/Enrol/logoutfromclass`, data);
+      const data = { teacherEmail, Ensubject, Enmedium, userEmail };
+      const respond = await Axios.post(`/api/Enrol/logoutfromclass`, data);
       window.alert(respond.data.msg);
       window.location.reload();
-    }catch (error) {
+    } catch (error) {
       console.error("Error during logout:", error);
       window.alert(error.respond.data.msg);
     }
-  }
+  };
 
   return (
     <div>
@@ -103,7 +103,7 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                         color: "white",
                       }}
                     >
-                     Logout
+                      Logout
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -113,7 +113,8 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                       <TableRow key={index}>
                         <TableCell sx={{ textAlign: "center" }}>
                           <a href={`mailto:{subjectDetails.teacherEmail}`}>
-                          {subjectDetails.teacherEmail}</a>
+                            {subjectDetails.teacherEmail}
+                          </a>
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {subjectDetails.Ensubject}
@@ -122,9 +123,27 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                           {subjectDetails.Enmedium}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
-                          <button 
-                          onClick={() => handleLogout(subjectDetails.teacherEmail,subjectDetails.Ensubject,subjectDetails.Enmedium,subjectDetails.userEmail)}
-                          >Logout</button>
+                          <button
+                            onClick={() =>
+                              handleLogout(
+                                subjectDetails.teacherEmail,
+                                subjectDetails.Ensubject,
+                                subjectDetails.Enmedium,
+                                subjectDetails.userEmail
+                              )
+                            }
+                            style={{
+                              backgroundColor: "#B72922",
+                              color: "white",
+                              border: "none",
+                              padding: "10px 20px",
+                              cursor: "pointer",
+                              borderRadius: "10px",
+                              boxShadow:"0 5px 20px rgba(154,160,185,.05)",
+                            }}
+                          >
+                            Logout
+                          </button>
                         </TableCell>
                       </TableRow>
                     ))}
