@@ -51,7 +51,6 @@ function SQuizzes() {
                     width: "80%",
                     backgroundColor: "#F0F8FF",
                     margin: "35px",
-                   
                     color: "#000",
                     padding: "3%",
                     border: "none",

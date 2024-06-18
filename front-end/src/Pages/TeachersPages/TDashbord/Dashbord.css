@@ -9,22 +9,13 @@
   display: flex;
   position: relative;
 }
-.container3 {
-  width: calc(100% - 10px);
-  margin-left: 10px;
-}
-.Notificati {
-  position: relative;
-  left: 60%;
-  margin-top: 10px;
-}
+
 #root
   > div
   > div
   > div.head
   > div.container3
   > div.container1
-  > div.teacher_info
   > div.notifications_icon
   > a
   > div
@@ -32,187 +23,44 @@
   > span {
   background-color: rgb(9, 9, 156);
   color: white;
-  font-size: 15px;
-  border-radius: 50%;
-  text-align: center;
-  padding: 5px;
-}
-#root
-  > div
-  > div
-  > div.head
-  > div.container3
-  > div.container1
-  > div.teacher_info
-  > div.Noti_T
-  > a
-  > div
-  > span
-  > span {
-  background-color: rgb(9, 9, 156);
-  color: white;
-  font-size: 15px;
+  font-size: 10px;
   border-radius: 50%;
   text-align: center;
   padding: 5px;
 }
 
 .container1 {
-  display: flex;
-  margin: 25px;
-  padding: 25px;
+  width: auto;
+  height: auto;
   font-family: "Inter", sans-serif;
   border: 0.5px solid rgb(197, 197, 197, 0.1);
   background-color: #ececec;
   border-radius: 5px;
 }
 
-.profile_pic .picture button {
-  margin-left: 14px;
-  height: 17px;
-  width: 60px;
-  color: #fff;
-  background-color: #239a9a;
-  border: none;
-  border-radius: 5px;
-  letter-spacing: 0.5px;
-  margin-top: 8px;
-  cursor: pointer;
-  box-shadow: 0 1.5px 5px #2d2d2d;
-}
-
-.teacher_info {
-  font-family: "Inter", sans-serif;
-  padding-top: 15px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.teacher_info .name {
+.name {
   padding-left: 8px;
   color: #1a6a84;
-  font-size: 29px;
+  font-size: 25px;
   font-weight: bold;
 }
-.teacher_info .name::first-letter {
+.name::first-letter {
   text-transform: uppercase;
 }
-.teacher_info .info {
-  padding-left: 0px;
-}
-.teacher_info .info p {
-  padding: 6px;
-}
-.personal_details {
-  margin: 25px;
-  padding: 10px;
-}
-.details {
-  margin: 10px 0;
-}
-.details {
-  color: #1a6a84;
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-}
-.details lebel,
-.details input {
-  display: block;
-  margin-bottom: 0;
-}
-.details input {
-  width: 60%;
-  padding: 8px;
-  border-radius: 5px;
-  box-sizing: border-box;
-  border: 0.5px solid rgb(16, 21, 91, 0.3);
-}
-.details textarea {
-  width: 60%;
-  max-width: 100%;
-  height: 100px;
-  left: 0;
-  border-radius: 5px;
-  resize: vertical;
-  box-sizing: border-box;
-  border: 0.5px solid rgb(16, 21, 91, 0.3);
-}
-.personal_details button {
-  width: 50px;
-  height: 22px;
-  background-color: #157777;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  letter-spacing: 0.5px;
-  margin-top: 10px;
-  cursor: pointer;
-  box-shadow: 0 1.5px 5px #2d2d2d;
-}
+
 
 @media only screen and (min-width: 300px) and (max-width: 768px) {
-  .container1 {
-    flex-direction: column;
-  }
-  .profile_pic .picture {
-    display: flex;
-    flex-direction: column;
-  }
-  .profile_pic .picture button {
-    width: 55px;
-    height: 20px;
-    font-size: 10px;
-    margin-left: 16px;
-    margin-top: 15px;
-  }
-  .teacher_info {
-    font-size: 13px;
-    padding-top: 20px;
-  }
-  .info {
-    padding: 0px;
-  }
-  .details textarea {
-    width: 65%;
-    left: 0;
-  }
-  .Noti_T {
-    position: relative;
-    bottom: 130px;
+  .name p {
+    font-size: 18px;
   }
 }
 
 @media screen and (min-width: 769px) {
-  .profile_pic {
-    padding-left: 20px;
-    width: 10%;
-  }
-  .teacher_info {
-    width: 90%;
-    padding-left: 90px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+
   .notifications_icon {
     float: right;
-    margin-left: 100px;
   }
 }
 
-@media (min-width: 1025px) {
-  .profile_pic {
-    padding-left: 30px;
-    width: 10%;
-  }
-  .teacher_info {
-    padding-left: 80px;
-  }
-  .Noti_T {
-    position: relative;
-    bottom: 20px;
-    left: 100%;
-  }
-}
+
+
