@@ -12,13 +12,13 @@ function ComQuizes({ quisedata }) {
   const [correctAnswers, setCorrectAnswers] = useState([]); // State for correct answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // State for tracking current question index
 
-  const [Alertdata, setAlertdata] = useState({
-    show: false,
-    message: "",
-    type: "",
-    description: "",
-  }); // State for alert box
-  const [triggerNotification, setTriggerNotification] = useState(false);
+  // const [Alertdata, setAlertdata] = useState({
+  //   show: false,
+  //   message: "",
+  //   type: "",
+  //   description: "",
+  // }); // State for alert box
+  // const [triggerNotification, setTriggerNotification] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -53,18 +53,21 @@ function ComQuizes({ quisedata }) {
   const handleSubmit = () => {
     setSubmitButton(true);
     const score = checkAnswers();
-    // window.alert(`Your score is ${score} %`);
-    setAlertdata({
-      show: true,
-      message: `Quise Result`,
-      type: "success",
-      description: `Your score is ${score} %`,
-    });
-    setTriggerNotification(true);
+    window.alert(`Your score is ${score} %`);
+    // setAlertdata({
+    //   show: true,
+    //   message: `Quise Result`,
+    //   type: "success",
+    //   description: `Your score is ${score} %`,
+    // });
+    // setTriggerNotification(true);
     setQuizStarted(false);
-    // window.location.reload();
+    setCountdownStarted(false);
+    setShowContent(false);
+    
+    window.location.reload();
 
-    console.log("first");
+    
   };
 
   const checkAnswers = () => {
@@ -89,23 +92,23 @@ function ComQuizes({ quisedata }) {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
-
-    const resetNotification = () => {
-      setTriggerNotification(false);
-      setCountdownStarted(false);
-      setShowContent(false);
-    };
+  };
+    // const resetNotification = () => {
+    //   setTriggerNotification(false);
+    //   setCountdownStarted(false);
+    //   setShowContent(false);
+    // };
 
     return (
       <>
         <div>
-          {Alertdata.show && (
+          {/* {Alertdata.show && (
             <AlertBox
               data={Alertdata}
               triggerNotification={triggerNotification}
               resetNotification={resetNotification}
-            />
-          )}
+            /> 
+          )} */}
           {!quizStarted && (
             <button
               onClick={() => setShowContent(!showContent)}
@@ -249,5 +252,5 @@ function ComQuizes({ quisedata }) {
       </>
     );
   };
-}
+
 export default ComQuizes;
