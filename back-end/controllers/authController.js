@@ -59,7 +59,7 @@ const registerController = async (req, res) => {
 
     // generated token
     const token = tokengenerator({ email: newUser.email });
-    const link = "http://" + req.hostname + "/VerifyEmail?token=" + token;
+    const link = "https://byte-group-project.vercel.app/VerifyEmail?token=" + token;
 
     const sendMail = await sendVerificationEmail(newUser.email, link);
 
@@ -144,7 +144,7 @@ const forgotpasswordController = async (req, res) => {
   }
 
   const token = tokengenerator({ email: oldUser.email });
-  const link = "http://" + req.hostname + "/Resetpassword?token=" + token;
+  const link = "https://byte-group-project.vercel.app/Resetpassword?token=" + token;
 
   const sendMail = await sendForgotPasswordEmail(oldUser.email, link);
 
