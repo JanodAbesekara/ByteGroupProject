@@ -21,10 +21,15 @@ dbConnect();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({
+
+// CORS configuration
+const corsOptions = {
   origin: 'https://byte-group-project.vercel.app',
-}));
-app.use(express.json());
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Routes
 app.get("/", (req, res) => {
@@ -42,6 +47,5 @@ app.use("/api/assignment", assignmentAPI);
 app.use("/api/Test", TestAPI);
 
 // Port
-
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server port ${port}`));
