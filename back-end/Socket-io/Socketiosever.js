@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://byte-group-project.vercel.app", "http://localhost:3000"],
+    origin: ["https://byte-group-project.vercel.app"],
     methods: ["GET", "POST"],
   },
 });
