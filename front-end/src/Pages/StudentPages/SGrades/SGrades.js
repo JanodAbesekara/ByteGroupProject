@@ -98,7 +98,9 @@ function SGrades() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {grades.map((eachOne) => (
+            {grades
+            .slice(0)
+            .reverse().map((eachOne) => (
                 <TableRow>
                   <TableCell sx={{ textAlign: "center" }}>
                     {eachOne.subject}

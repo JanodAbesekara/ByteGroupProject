@@ -1,6 +1,7 @@
 import profileSchema from "../models/userProfileModel.js";
 import userSchema from "../models/usermodel.js";
 import EnrollmentSchema from "../models/Enrollmentmdels.js";
+import marksModel from "../models/marksModel.js";
 
 const Enrolementcontroller = async (req, res) => {
   try {
@@ -145,12 +146,21 @@ const logoutfromclass = async (req, res) => {
     const medium = data.Enmedium;
     const useremail = data.userEmail;
 
+
+    
     await EnrollmentSchema.deleteOne({
       userEmail: useremail,
       teacherEmail: email,
       Ensubject: subject,
       Enmedium: medium,
     });
+
+    await marksModel.deleteOne({
+      email: useremail,
+      teacherEmail: email,
+      subject: subject,
+      medium: medium,
+    })
     return res.status(200).json({
       success: true,
       msg: `You want to logout from this ${subject} ${medium} medium class`,

@@ -33,7 +33,10 @@ export default function SubjectCard() {
   return (
     <div>
       <div>
-        {Subjects.map((subject) => (
+        {Subjects
+        .slice(0)
+        .reverse()
+        .map((subject) => (
           <div
             style={{
               paddingLeft: "5%",
