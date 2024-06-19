@@ -33,7 +33,7 @@ app.use(cors(corsOptions));
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("It's mern");
+  res.send("It's mern3");
 });
 
 // APIs
