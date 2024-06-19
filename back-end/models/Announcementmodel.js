@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const announcementSchema = new Schema(
@@ -14,13 +14,13 @@ const announcementSchema = new Schema(
     TeacheSubject: {
       type: String,
       default: function () {
-        return this.jobrole === 'Admin' ? 'System change' : '';
+        return this.jobrole === "Admin" ? "System change" : "";
       },
     },
     mediua: {
       type: String,
       default: function () {
-        return this.jobrole === 'Admin' ? 'System' : '';
+        return this.jobrole === "Admin" ? "System" : "";
       },
     },
     Announcementmessage: {
@@ -39,6 +39,10 @@ const announcementSchema = new Schema(
       type: String,
       required: true,
     },
+    expiresAt: {
+      type: Date,
+      default: () => new Date(Date.now() + 5 * 24 * 60 * 60 * 1000) // 5 days from now
+    }
   },
   {
     timestamps: true,
@@ -46,6 +50,8 @@ const announcementSchema = new Schema(
 );
 
 
+// Create TTL index on expiresAt field to automatically delete documents after 5 days
+announcementSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 5 * 24 * 60 * 60 * 1000 });
 
-const Announcement = mongoose.model('Announcement', announcementSchema);
+const Announcement = mongoose.model("Announcement", announcementSchema);
 export default Announcement;

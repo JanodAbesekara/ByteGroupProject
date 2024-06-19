@@ -1,3 +1,4 @@
+import { now } from "mongoose";
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
 
@@ -47,6 +48,9 @@ const createAssignmentController = async (req, res) => {
 const getAssignmentController = async (req, res) => {
   try {
     const assignment = await Assignment.find();
+
+  
+
     res.status(200).json(assignment);
   } catch (error) {
     res.status(404).json({ message: error.message });
