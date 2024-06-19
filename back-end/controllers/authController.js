@@ -144,7 +144,7 @@ const forgotpasswordController = async (req, res) => {
   }
 
   const token = tokengenerator({ email: oldUser.email });
-  const link = "http://" + req.hostname + ":3000/Resetpassword?token=" + token;
+  const link = "http://" + req.hostname + "/Resetpassword?token=" + token;
 
   const sendMail = await sendForgotPasswordEmail(oldUser.email, link);
 
