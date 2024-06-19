@@ -21,7 +21,9 @@ dbConnect();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: 'https://byte-group-project.vercel.app',
+}));
 app.use(express.json());
 
 // Routes
