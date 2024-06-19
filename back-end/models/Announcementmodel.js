@@ -39,11 +39,19 @@ const announcementSchema = new Schema(
       type: String,
       required: true,
     },
+    expiresAt: {
+      type: Date,
+      default: () => new Date(Date.now() + 5 * 24 * 60 * 60 * 1000) // 5 days from now
+    }
   },
   {
     timestamps: true,
   }
 );
+
+
+// Create TTL index on expiresAt field to automatically delete documents after 5 days
+announcementSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 5 * 24 * 60 * 60 * 1000 });
 
 const Announcement = mongoose.model("Announcement", announcementSchema);
 export default Announcement;
