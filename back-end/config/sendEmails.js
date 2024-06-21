@@ -22,7 +22,7 @@ const sendVerificationEmail = async (senderAddress, link) => {
       html: `
       
   <p>Click the link below to verify your email address.</p>
-    <a href="${link}"> <img src="https://p7.hiclipart.com/preview/867/950/447/computer-icons-email-icloud-email.jpg"/> </a>
+    <a href="${link}"> Click Hear </a>
    
       `,
     });
