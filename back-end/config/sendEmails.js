@@ -73,7 +73,45 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
       from: process.env.SENDeMAIL,
       to: senderAddress,
       subject: "Reset Password",
-      html: `Please reset your password by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`,
+      html: `
+      
+      <!DOCTYPE html>
+<html>
+  <head>
+    <title>Reset Your password</title>
+   
+  </head>
+  <style>
+  h2{
+    text-align: center;
+    color: blue;
+  }
+    .HQ{
+      justify-content: center;
+      align-content: center;
+      display: flex;
+    }
+    button{
+      color: white;
+      background-color: green;
+      border: none;
+      padding: 4px 8px;
+      box-shadow: 1px 1px 4px 0.5px black;
+      cursor: pointer;
+    }
+    button:visite{
+      color:yellow;
+      background-color: blue;
+    }
+  </style>
+  <body>
+    <h2>Click to Reset your Password</h2>
+    <div class="HQ">
+    <a href="${link}"> <button>Reset</button></a>
+    </div>
+  </body>
+</html>
+      `,
     });
   } catch (e) {
     error = true;
