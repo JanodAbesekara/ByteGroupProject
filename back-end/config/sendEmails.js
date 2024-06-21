@@ -21,9 +21,58 @@ const sendVerificationEmail = async (senderAddress, link) => {
       subject: "Verify Email",
       html: `
       
-  <p>Click the link below to verify your email address.</p>
-    <a href="${link}"> Click Hear </a>
-   
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Verify Email!</title>
+      <style>
+        body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          font-family: Arial, sans-serif;
+        }
+    
+        h2 {
+          text-align: center;
+          color: blue;
+        }
+    
+        .HQ {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+        }
+    
+        button {
+          color: white;
+          background-color: green;
+          border: none;
+          padding: 10px 20px;
+          box-shadow: 1px 1px 4px 0.5px black;
+          cursor: pointer;
+          font-size: 16px;
+          text-decoration: none;
+        }
+    
+        a:visited button {
+          color: yellow;
+          background-color: blue;
+        }
+      </style>
+    </head>
+    <body>
+      <h2>Click the button to Verify your account</h2>
+      <div class="HQ">
+      <a href="${link}"> <button>Verify</button></a>
+      </div>
+    </body>
+    </html>
+    
       `,
     });
   } catch (e) {
