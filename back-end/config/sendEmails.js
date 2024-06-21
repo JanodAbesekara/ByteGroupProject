@@ -20,7 +20,6 @@ const sendVerificationEmail = async (senderAddress, link) => {
       to: senderAddress,
       subject: "Verify Email",
       html: `
-      
       <!DOCTYPE html>
       <html>
         <head>
@@ -53,8 +52,7 @@ const sendVerificationEmail = async (senderAddress, link) => {
         <body>
           <h2>Click the button to Verify your account</h2>
           <div class="HQ">
-            
-          <a href="${link}"> <button>Verify</button></a>
+           <a href="${link}"> <button>Verify</button></a>
           </div>
         </body>
       </html>
