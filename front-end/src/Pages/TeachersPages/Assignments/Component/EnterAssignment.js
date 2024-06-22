@@ -9,7 +9,7 @@ function EnterAssignment({ setQuestions }) {
     setQuestionCount(count);
     setQuestionsLocal(
       Array.from({ length: count }, () => ({
-        Question: "",              // Changed from 'text' to 'Question'
+        Question: "", // Changed from 'text' to 'Question'
         answers: ["", "", "", ""], // Lowercased 'answers'
         correctAnswerIndex: 0,
       }))
@@ -41,42 +41,71 @@ function EnterAssignment({ setQuestions }) {
   };
 
   return (
-    <div style={{}}>
-      <p style={{marginBottom: "6px",color: "#1a7873",textTransform: "uppercase", fontWeight:"bold"}}>Question count</p>
+    <div style={{width:"auto", display:"flex", flexDirection:"column"}}>
+      <p
+        style={{
+          marginBottom: "6px",
+          color: "#337AB7",
+          textTransform: "uppercase",
+          fontWeight: "bold",
+        }}
+      >
+        Question count
+      </p>
       <input
-        style={{ 
-          width: "50px", 
+        style={{
+          width: "50px",
           height: "30px",
           borderRadius: "5px",
-          border: "1px solid gray"
-         }}
+          border: "1px solid gray",
+          display:"flex"
+        }}
         placeholder="Enter the Question count"
         type="number"
         value={questionCount}
         onChange={handleQuestionCountChange}
       />
       {questions.map((question, index) => (
-        <div key={index} style={{ marginTop:"20px"}}>
-          <h2 style={{
-            fontSize: "18px",
-            marginBottom: "10px",
-            color: "#1f5c73"
-          }}>Question {index + 1}</h2>
+        <div key={index} style={{ marginTop: "20px",display:"flex", flexDirection:"column", width:"auto" }}>
+          <h2
+            style={{
+              fontSize: "18px",
+              marginBottom: "10px",
+              color: "#337AB7",
+            }}
+          >
+            Question {index + 1}
+          </h2>
           <input
-            style={{ width: "400px", height: "30px",padding:"10px", borderRadius: "5px", border: "1px solid gray"}}
+            style={{
+              height: "30px",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "1px solid gray",
+              width:"auto",
+            }}
             placeholder="Enter the Question"
             value={question.Question}
             onChange={(e) => handleQuestionChange(index, e)}
           />
-          <h3 style={{marginTop:"20px"}}>Answers</h3>
+          <h3 style={{ marginTop: "20px", color:"#337AB7" }}>Answers</h3>
           <ul>
             {question.answers.map((answer, answerIndex) => (
               <li
                 key={answerIndex}
-                style={{ paddingTop: "10px", paddingBottom: "10px" }}
+                style={{ paddingTop: "10px", paddingBottom: "10px", width:"auto", display:"flex", flexDirection:"column" }}
               >
                 <input
-                  sx={{ margin: "10px" ,padding:"10px", width: "400px", height: "30px",borderRadius: "5px", border: "1px solid gray"}}
+                  style={{
+                    margin: "5px 0",
+                    padding: "5px",
+                    height: "30px",
+                    borderRadius: "5px",
+                    border: "1px solid gray",
+                    width:"auto",
+                    display:"flex"
+
+                  }}
                   placeholder={`Enter answer ${answerIndex + 1}`}
                   value={answer}
                   onChange={(e) => handleAnswerChange(index, answerIndex, e)}
@@ -85,9 +114,9 @@ function EnterAssignment({ setQuestions }) {
             ))}
           </ul>
           <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-            <label style={{ color: "#474b4d"}}>Select Correct Answer:</label>
+            <label style={{ color: "#474b4d" }}>Select Correct Answer:</label>
             <select
-              style={{ marginLeft: "20px",color: "#474b4d", }}
+              style={{ marginLeft: "20px", color: "#474b4d" }}
               value={question.correctAnswerIndex}
               onChange={(e) => handleCorrectAnswerChange(index, e)}
             >

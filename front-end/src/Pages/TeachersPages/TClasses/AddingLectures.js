@@ -68,11 +68,13 @@ function AddingLectures({ subjectData }) {
   };
 
   const style = {
-    backgroundColor: "#28a745",
+    backgroundColor: "#337ab7",
     padding: "4px",
     color: "#fff",
     border: "none",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    marginLeft: "20px",
+    marginBottom:"15px"
   }
 
   return (
@@ -80,7 +82,7 @@ function AddingLectures({ subjectData }) {
       {error && <p>{error}</p>}
 
       {!showForm ? 
-      <button onClick={HandleShow} style={style}>Show Added Contents</button> : <button onClick={HandleHide} style={style}>Hide Contents</button> }
+      <button onClick={HandleShow} style={style}>Added Contents</button> : <button onClick={HandleHide} style={style}>Hide Contents</button> }
       {showForm && (
         <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
           <Table>

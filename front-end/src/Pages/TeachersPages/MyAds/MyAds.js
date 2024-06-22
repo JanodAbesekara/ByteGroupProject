@@ -15,6 +15,7 @@ import app from "../../../firebase";
 import axios from "axios";
 import Tables from "./Tables";
 import { jwtDecode } from "jwt-decode";
+import "./MyAds.css";
 
 function MyAds() {
   let useremail;
@@ -121,36 +122,46 @@ function MyAds() {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
             <Grid container>
-              <Grid item md={6} sm={6} xs={12}>
+              <Grid item md={6} sm={6} xs={12} sx={{margin:"10px", width:"auto"}}>
                 <div
                   className="main-myadd"
                   style={{
                     display: "flex",
+                    flexDirection:"column",
                     alignItems: "center",
                     justifyContent: "center",
+                    marginLeft:"23px",
+                    width:"auto",
                   }}
                 >
                   <form
                     onSubmit={handleSubmit}
                     style={{
-                      padding: "10px 30px",
-                      backgroundColor: " #DFF1F9",
-                      borderRadius: "20px",
                       marginTop: "50px",
+                      display:"flex",
+                      flexDirection:"column",
+                      width:"auto",
                     }}
                   >
-                    <div className="maindiv">
+                    <div className="maindiv" style={{
+                      borderRadius: "5px",
+                      padding:"20px",
+                      backgroundColor: " #F0F8FF",
+                      boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+
+                    }}>
                       <h2
                         style={{
                           textAlign: "center",
-                          marginTop: "50px",
+                          marginTop: "20px",
                           marginBottom: "20px",
+                          color:"#5cb85c"
                         }}
                       >
                         Post New Add
                       </h2>
                       <div className="adsdetal">
-                        <h3>Subject</h3>
+                        <h3 style={{color:"#016ecd"}}>Subject</h3>
                         <select
                           name="class"
                           className="select"
@@ -195,7 +206,7 @@ function MyAds() {
                         </select>
 
                         <br></br>
-                        <h4>Select Education Level</h4>
+                        <h4 style={{color:"#016ecd"}}>Select Education Level</h4>
                         <br></br>
                         <input
                           type="radio"
@@ -204,7 +215,7 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label>Grade 5</label>
+                        <label style={{color:"gray"}}>Grade 5</label>
                         <br></br>
                         <input
                           type="radio"
@@ -213,7 +224,7 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label> O/L</label>
+                        <label style={{color:"gray"}}> O/L</label>
 
                         <br></br>
                         <input
@@ -223,11 +234,11 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label>A/L</label>
+                        <label style={{color:"gray"}}>A/L</label>
 
                         <br></br>
                         <br></br>
-                        <h4>Mediem</h4>
+                        <h4 style={{color:"#016ecd"}}>Medium</h4>
                         <br></br>
                         <input
                           type="radio"
@@ -236,7 +247,7 @@ function MyAds() {
                           onChange={(e) => setMediem(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label>Shinhala</label>
+                        <label>Sinhala</label>
 
                         <br></br>
                         <input
@@ -272,7 +283,7 @@ function MyAds() {
                             borderRadius: "5px",
                             border: "none",
                             color: "white",
-                            marginLeft: "60px",
+                            marginLeft: "20px",
                           }}
                           disabled={!uplodpost}
                         >
@@ -289,31 +300,30 @@ function MyAds() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    width:"auto"
                   }}
                 >
-                  <div>
-                    <h2 style={{ marginTop: "100px", marginBottom: "50px" }}>
+                  <div stye={{justifyContent:"center", width:"auto", display:"flex"}}>
+                    <h2 style={{ marginTop: "80px", marginBottom: "50px", width:"auto", display:"flex", textAlign:"center", paddingLeft:"40px",color:"#5cb85c"}}>
                       Instructions to add posts
                     </h2>
 
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      <span style={{color:"red"}}>*</span>. Add your most recent posts
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      <span style={{color:"red"}}>*</span>. This will be your passion.
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      <span style={{color:"red"}}>*</span>. This post will be displayed to students and parents.
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      <span style={{color:"red"}}>*</span>. Add creative and attractive post
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      <span style={{color:"red"}}>*</span>. This post will make you teaching color
                     </p>
-                    <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
-                    </p>
+                    
                   </div>
                 </div>
               </Grid>
@@ -322,9 +332,10 @@ function MyAds() {
               <h2
                 style={{
                   textAlign: "center",
-                  fontSize: "35px",
+                  fontSize: "30px",
                   color: "#104781",
-                  marginTop: "100px",
+                  marginTop: "30px",
+                  paddingLeft:"15px",
                 }}
               >
                 Posted Adds

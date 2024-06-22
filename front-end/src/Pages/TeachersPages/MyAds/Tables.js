@@ -68,7 +68,7 @@ function Subject({ selectedPost, setSelectedPost }) {
 
   return (
     <div>
-      <TableContainer component={Paper} sx={{marginTop:"100px"}}>
+      <TableContainer component={Paper} sx={{marginTop:"30px", display:"flex",width:"auto", paddingLeft:"20px"}}>
         <Table >
           <TableHead>
             <TableRow sx={{ marginBottom: "60px", backgroundColor: "#B5DFCA" }}>

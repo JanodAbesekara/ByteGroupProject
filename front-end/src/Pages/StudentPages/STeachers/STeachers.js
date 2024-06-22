@@ -60,8 +60,8 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <h1>Enrolled Teachers</h1>
-            <TableContainer component={Paper}>
+            <h1 style={{fontSize:"30px", marginTop:"45px", paddingTop:"20px"}}>Enrolled Teachers</h1>
+            <TableContainer component={Paper} sx={{ margin: "15px 0px" }}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -112,7 +112,8 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                     subjectdetal.map((subjectDetails, index) => (
                       <TableRow key={index}>
                         <TableCell sx={{ textAlign: "center" }}>
-                          <a href={`mailto:{subjectDetails.teacherEmail}`}>
+                          <a href={`mailto:{subjectDetails.teacherEmail}`}
+                             style={{textDecoration:"none"}}>
                           {subjectDetails.teacherEmail}</a>
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
@@ -124,6 +125,14 @@ const handleLogout = async (teacherEmail,Ensubject,Enmedium,userEmail) => {
                         <TableCell sx={{ textAlign: "center" }}>
                           <button 
                           onClick={() => handleLogout(subjectDetails.teacherEmail,subjectDetails.Ensubject,subjectDetails.Enmedium,subjectDetails.userEmail)}
+                          style={{
+                            backgroundColor: "red",
+                            border: "none",
+                            borderRadius: "5px",
+                            padding: "3px",
+                            color: "#fff",
+                            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                          }}
                           >Logout</button>
                         </TableCell>
                       </TableRow>

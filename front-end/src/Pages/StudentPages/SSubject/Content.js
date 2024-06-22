@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaFilePdf } from "react-icons/fa";
+import { IoVideocam } from "react-icons/io5";
+import { CgPlayButtonR } from "react-icons/cg";
+import { FaVideo } from "react-icons/fa6";
 import { PiVideoFill } from "react-icons/pi";
 import { BiLogoZoom } from "react-icons/bi";
 import { SiMaterialdesignicons } from "react-icons/si";
@@ -12,7 +15,7 @@ function Content({ teachermail, subject, medium }) {
   const [error, setError] = useState(null);
   const attendenceRef = useRef();
   const formRef = useRef();
-  const [Showmatrila, setShowmatrila] = useState(false);
+  const [Showmaterial, setShowmaterial] = useState(false);
 
   let firstname;
   let lastname;
@@ -81,7 +84,7 @@ function Content({ teachermail, subject, medium }) {
   };
 
   const handelShowMat = () => {
-    setShowmatrila(!Showmatrila);
+    setShowmaterial(!Showmaterial);
   };
   return (
     <div>
@@ -96,12 +99,13 @@ function Content({ teachermail, subject, medium }) {
             borderRadius: "5px",
             padding: "3px",
             color: "#fff",
+            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           }}
         >
           Materials
         </button>
 
-        {Showmatrila && (
+        {Showmaterial && (
           <div
             style={{
               display: "flex",
@@ -115,22 +119,13 @@ function Content({ teachermail, subject, medium }) {
                 .slice()
                 .reverse()
                 .map((material) => (
-                  <div key={material.id} className="content">
-                    <div className="content__icon">
-                      <p>{material.lesson} </p>
-                      <br />
-                      {material.PDF && (
-                        <Link to={material.PDF} target="_blank">
-                          <FaFilePdf />
-                        </Link>
-                      )}
-                      <br />
-                      {material.video && (
-                        <Link to={material.video} target="_blank">
-                          <PiVideoFill />
-                        </Link>
-                      )}
-                      <br />
+                  <div key={material.id} className="content" style={{backgroundColor:"#fff", margin:"8px", padding:"10px", borderRadius:"3px", width:"auto"}}>
+                    <div className="content__icon" style={{display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+
+                      <p style={{fontWeight:"500", fontSize:"14px"}}>{material.lesson} </p>
+                     
+                     
+                     
                       {material.zoom && (
                         <>
                           <form ref={formRef} onSubmit={handleSubmit}>
@@ -148,20 +143,32 @@ function Content({ teachermail, subject, medium }) {
                             target="_blank"
                           >
                             <div
-                              style={{ display: "flex", alignItems: "center" }}
+                              style={{ display: "flex", alignItems: "center", color:"blue", marginTop:"12px", marginBottom:"14px", paddingLeft:"2px" }}
                             >
-                              <BiLogoZoom />
+                              <IoVideocam />
                             </div>
                           </Link>
                         </>
                       )}
-                      <br />
+    
+                      {material.PDF && (
+                        <Link to={material.PDF} target="_blank" style={{color:"red", marginBottom:"14px"}}>
+                          <FaFilePdf />
+                        </Link>
+                      )}
+                     
+                      {material.video && (
+                        <Link to={material.video} target="_blank" style={{marginBottom:"14px"}}>
+                          <CgPlayButtonR />
+                        </Link>
+                      )}
+                     
                       {material.otherlink && (
                         <Link to={material.otherlink} target="_blank">
                           <SiMaterialdesignicons />
                         </Link>
                       )}
-                      <br />
+                     
                     </div>
                   </div>
                 ))}

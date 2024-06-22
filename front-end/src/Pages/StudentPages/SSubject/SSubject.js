@@ -67,12 +67,13 @@ function SSubject() {
                   style={{
                     marginBottom: "50px",
                     marginTop: "50px",
-                    marginLeft: "75%",
-                    padding: "5px 15px ",
+                    marginLeft: "45px",
+                    padding: "5px 10px ",
                     border:"none",
                     backgroundColor:"#28a745",
                     color:"#fff",
-                    borderRadius:"3px"
+                    borderRadius:"3px",
+                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                 >
                   More Subjects

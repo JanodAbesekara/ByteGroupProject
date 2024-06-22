@@ -93,6 +93,7 @@ function ComQuizes({ quisedata }) {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
+  };
 
   const resetNotification = () => {
     setTriggerNotification(false);
@@ -236,4 +237,3 @@ function ComQuizes({ quisedata }) {
 }
 
 export default ComQuizes;
-

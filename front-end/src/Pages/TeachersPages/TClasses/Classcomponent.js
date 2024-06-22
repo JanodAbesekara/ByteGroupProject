@@ -73,38 +73,41 @@ function Classcomponent({ subjectData }) {
           justifyContent: "center",
           alignContent: "center",
           display: "flex",
+          flexDirection:"column",
+          marginRight:"10px",
           marginBottom: "50px",
           marginTop: "50px",
-          backgroundColor: "#dfebea",
+          backgroundColor: "#F0F8FF",
           padding: "33px 20px",
           border: "none",
           borderRadius: "10px",
+          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
         }}
       >
         <div className="classcom" style={{ width: "95%", border: "none" }}>
           <p
             style={{
               width: "100%",
-              backgroundColor: "#007bff",
+              backgroundColor: "#27ae60",
               textAlign: "center",
-              padding: "10px 4px",
+              padding: "5px 2px",
               color: "#fff",
               margin: "4px 0px",
               border: "none",
               borderRadius: "7px",
-              fontSize: "25px",
+              fontSize: "23px",
             }}
           >
             {subjectDataState.subject}
           </p>
 
-          <h4 style={{ margin: "4px 0px", color: "#ffc107" }}>
+          <p style={{ margin: "4px 0px", color: "#337ab7" }}>
             {subjectDataState.medium}
-          </h4>
+          </p>
           <div>
             <h2
               style={{
-                fontSize: "20px",
+                fontSize: "18px",
                 fontWeight: "normal",
                 color: "#594f4f",
                 padding: "5px 0px",
@@ -112,7 +115,7 @@ function Classcomponent({ subjectData }) {
             >
               <span style={{ color: "red" }}>*</span>Add Class Days Count
             </h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"auto"}}>
               <input
                 style={{
                   margin: "3px 0px 10px",
@@ -133,6 +136,8 @@ function Classcomponent({ subjectData }) {
                   backgroundColor: "#a4a6b3",
                   border: "1px solid gray",
                   borderRadius: "5px",
+                  width:"60px",
+                  boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                 }}
                 type="submit"
               >
@@ -156,6 +161,9 @@ function Classcomponent({ subjectData }) {
                       backgroundColor: "#a4a6b3",
                       border: "1px solid gray",
                       color: "#fff",
+                      width:"auto",
+                      marginBottom:"8px",
+                      boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                     }}
                     onClick={handleEdit}
                   >

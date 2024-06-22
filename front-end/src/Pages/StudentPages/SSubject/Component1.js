@@ -57,6 +57,8 @@ function Component1({ subject, teachermail, Feedmedium }) {
             borderRadius: "5px",
             padding: "3px",
             color: "#fff",
+            width: "auto",
+            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           }}
         >
           Add Feedbacks
@@ -68,20 +70,21 @@ function Component1({ subject, teachermail, Feedmedium }) {
                 color: "#000080",
                 marginBottom: "15px",
                 marginTop: "10px",
-                fontSize: "15px",
+                fontSize: "14px",
+                textAlign:"center",
               }}
             >
               Enter your feedback
             </h2>
             <input
               type="text"
-              style={{
-                height: "80px",
+              style={{ 
+                height: "60px",
                 paddingTop: "10px",
                 paddingBottom: "60px",
                 paddingLeft: "8px",
-                paddingRight: "8px",
-                width: "250px",
+                width: "30%",
+                display:"flex",
               }}
               placeholder="Type here.."
               onChange={(e) => setFeedtext(e.target.value)}
@@ -104,10 +107,10 @@ function Component1({ subject, teachermail, Feedmedium }) {
               type="submit"
               onClick={handlesubmit}
               style={{
-                padding: "3px",
+                padding: "2px",
                 borderRadius: "3px",
                 border: "1px solid gray",
-                color: "",
+                width:"auto"
               }}
             >
               Submit

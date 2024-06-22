@@ -102,13 +102,16 @@
   color: #515050;
 }
 .new_acc_create .create {
+  text-align: center;
   margin-top: 13px;
-  padding: 5px 5px;
-  width: 72px;
+  padding: 4px 5px;
+  width: 90px;
   height: 32px;
   background-color: #20c997;
   border: none;
   border-radius: 4px;
+  box-shadow: 0px 0px 2px 0px gray;
+
 }
 .new_acc_create .create:hover{
   color: #e2e2e2;
