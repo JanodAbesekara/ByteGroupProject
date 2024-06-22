@@ -26,7 +26,7 @@ function EnterAssignment({ setQuestions }) {
   const handleAnswerChange = (questionIndex, answerIndex, e) => {
     const updatedQuestions = [...questions];
     updatedQuestions[questionIndex].answers[answerIndex] =
-      e.target.value(); // Lowercased 'answers'
+      e.target.value; // add the ansewr value
     setQuestionsLocal(updatedQuestions);
     setQuestions(updatedQuestions); // Update parent state
   };
