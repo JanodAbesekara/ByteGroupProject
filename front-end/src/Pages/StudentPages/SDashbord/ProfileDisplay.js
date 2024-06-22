@@ -50,9 +50,9 @@ function ProfileDisplay({ email, subject, medium }) {
           }}
         >
           {teacher && (
-            <Link to={teacher.profilePicUrl || defaultImage}>
+            <Link to={teacher.url || defaultImage}>
               <img
-                src={teacher.profilePicUrl || defaultImage}
+                src={teacher.url || defaultImage}
                 alt="Profile"
                 style={{ borderRadius: "90%", width: "38px", height: "38px" }}
               />
