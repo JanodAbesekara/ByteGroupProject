@@ -297,22 +297,22 @@ function MyAds() {
                     </h2>
 
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * you must add your medium and subject
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * Post width grater than 400px and height grater than 400px 
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * You can add your profile in to post 
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * You must select  the subject  correctly
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * Don't add any fake detales to the post
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      * asdsadafdafsa
+                      * Give breaf idea about you class using the post
                     </p>
                   </div>
                 </div>
