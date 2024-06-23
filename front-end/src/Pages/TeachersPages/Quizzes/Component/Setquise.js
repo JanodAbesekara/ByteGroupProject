@@ -78,13 +78,16 @@ export default function CombinedComponent({ medium, subject }) {
         style={{
           marginRight: "20px",
           marginLeft: "20px",
-          boxShadow: "2px 2px 10px 2px #888888",
+          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           borderRadius: "5px",
-          padding: "20px",
-          marginTop: "100px",
+          padding: "10px",
+          marginTop: "60px",
           paddingBottom: "50px",
-          marginBottom: "100px",
-          backgroundColor: "#eef2ed",
+          marginBottom: "60px",
+          backgroundColor: "#F0F8FF",
+          displa:"flex",
+          flexDirection:"column",
+          width:"auto"
         }}
       >
         <h2
@@ -112,8 +115,9 @@ export default function CombinedComponent({ medium, subject }) {
 
         <hr />
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+        <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column",width:"auto"}}>
+          <div style={{ marginBottom: "20px", marginTop: "20px"
+                     }}>
             <InputTimerange
               setTimeRange={setTimeRange}
               setQuizNumber={setQuizNumber}
@@ -130,18 +134,16 @@ export default function CombinedComponent({ medium, subject }) {
             type="submit"
             style={{
               marginTop: "20px",
-              padding: "5px 30px",
-              boxShadow: "2px 2px 10px 2px #888888",
+              padding: "4px 5px",
+              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
               border: "none",
               borderRadius: "5px",
-              fontSize: "20px",
-              marginLeft: "50px",
+              fontSize: "14px",
               display: "flex",
-              width: "auto",
+              width: "58px",
             }}
           >
-            {" "}
-            <CgSoftwareUpload />
+            Submit
           </button>
         </form>
       </div>

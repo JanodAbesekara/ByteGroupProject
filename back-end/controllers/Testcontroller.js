@@ -163,6 +163,7 @@ const getprofile = async (req, res) => {
       return res.status(404).json({ success: false, msg: "Profile not found" });
     }
     return res.status(200).json({ success: true, data: profile });
+   
   } catch (error) {
     console.error(error);
     return res

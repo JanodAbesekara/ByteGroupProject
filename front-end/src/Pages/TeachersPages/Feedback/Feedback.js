@@ -74,7 +74,7 @@ export default function Feedback() {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
             <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
-              Feed Backs
+              Feedbacks
             </h1>
             {Object.keys(groupedFeedback).map((subject) => (
               <div key={subject}>

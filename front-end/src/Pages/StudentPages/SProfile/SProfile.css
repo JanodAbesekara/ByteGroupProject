@@ -26,7 +26,7 @@
   height: 17px;
   width: 60px;
   color: #fff;
-  background-color: #239a9a;
+  background-color: #39a0ca;
   border: none;
   border-radius: 5px;
   letter-spacing: 0.5px;
@@ -101,6 +101,10 @@
   margin-top: 10px;
   cursor: pointer;
   box-shadow: 0 1.5px 5px #2d2d2d; 
+}
+
+.btn-2 button{
+  background-color: #39a0ca;
 }
 
 

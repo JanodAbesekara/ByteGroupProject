@@ -86,14 +86,14 @@ export default function ClassCard(subjectData) {
             flexDirection: "column",
             marginBottom: "20px",
             marginTop: "20px",
-            backgroundColor: "#d5edd6",
+            backgroundColor: "#F0F8FF",
             border: "none",
             borderRadius: "10px",
             boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div className="classcom" style={{ width: "auto", border: "none" }}>
+          <div >
+            <div className="classcom" >
               <Link
                 to="/TClasses"
                 style={{ textDecoration: "none", textTransform: "uppercase" }}
@@ -101,22 +101,22 @@ export default function ClassCard(subjectData) {
                 <p
                   style={{
                     width: "auto",
-                    backgroundColor: "#1A8FE3",
+                    backgroundColor: "#27ae60",
                     textAlign: "center",
                     padding: "5px 1px",
                     color: "#fff",
                     margin: "0px",
                     border: "none",
                     borderRadius: "7px",
-                    fontSize: "16px",
-                    fontWeight: "bold",
+                    fontSize: "15px",
+                    fontWeight: "500",
                   }}
                 >
-                  {subjectData.subjectData.subject}
+                  {subjectData.subjectData.subject} <span style={{fontSize:"12px", fontWeight:"400"}}>({subjectData.subjectData.medium})</span>
                 </p>
               </Link>
             </div>
-            <div style={{ paddingLeft: "10px", paddingTop: "4px" }}>
+            {/* <div style={{ paddingLeft: "10px", paddingTop: "3px" }}>
               <p
                 style={{
                   margin: "4px 0px",
@@ -125,9 +125,9 @@ export default function ClassCard(subjectData) {
                   marginRight: "10px",
                 }}
               >
-                {subjectData.subjectData.medium}
+                
               </p>
-            </div>
+            </div> */}
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={{ color: "#2a28a6", fontWeight: "700", width: "88%" }}>
@@ -140,7 +140,7 @@ export default function ClassCard(subjectData) {
                     onChange={handleInputChange}
                     style={{
                       margin: "4px 6px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   />
@@ -151,7 +151,7 @@ export default function ClassCard(subjectData) {
                     onChange={handleInputChange}
                     style={{
                       margin: "4px 6px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   />
@@ -162,7 +162,7 @@ export default function ClassCard(subjectData) {
                     onChange={handleInputChange}
                     style={{
                       margin: "4px 6px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   />
@@ -173,26 +173,26 @@ export default function ClassCard(subjectData) {
                     onChange={handleInputChange}
                     style={{
                       margin: "4px 6px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   />
                 </>
               ) : (
                 <>
-                  <p style={{ margin: "4px 6px", fontSize: "14px" }}>
+                  <p style={{ margin: "4px 6px", fontSize: "13px" }}>
                     {editedData.degree}
                   </p>
-                  <p style={{ margin: "4px 6px", fontSize: "14px" }}>
+                  <p style={{ margin: "4px 6px", fontSize: "13px" }}>
                     {editedData.experience}
                   </p>
-                  <p style={{ margin: "4px 6px", fontSize: "14px" }}>
+                  <p style={{ margin: "4px 6px", fontSize: "13px" }}>
                   Rs.{editedData.classpees}.00
                   </p>
                   <p
                     style={{
                       margin: "4px 6px",
-                      fontSize: "14px",
+                      fontSize: "13px",
                       fontStyle: "italic",
                       color: "#746D69",
                       fontWeight: "500",
@@ -231,9 +231,10 @@ export default function ClassCard(subjectData) {
                     margin: "5px",
                     border: "none",
                     borderRadius: "6px",
-                    backgroundColor: "#4de84a",
+                    backgroundColor: "#999999",
                     color: "#fff",
-                    padding: "3px 0px",
+                    padding: "2px 3px",
+                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                   onClick={handleEdit}
                 >
@@ -248,7 +249,8 @@ export default function ClassCard(subjectData) {
                   borderRadius: "6px",
                   backgroundColor: "red",
                   color: "#fff",
-                  padding: "3px 0px",
+                  padding: "2px 3px",
+                  boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                 }}
               >
                 Delete

@@ -11,7 +11,6 @@
 }
 .container3{
   width: calc(100% - 100px);
-  margin-left: 10px;
 }
 .container1 {
   display: flex;
@@ -62,10 +61,7 @@
 .teacher_info .info p {
   padding: 6px;
 }
-.personal_details{
-  margin: 25px;
-  padding: 10px;
-}
+
 .details{
   margin: 10px 0;
 }
@@ -88,9 +84,8 @@
   border: 0.5px solid #10155b4d;
 }
 .details textarea{
-  width: 60%;
-  max-width: 100%;
-  height: 100px;
+  width: auto;
+  height: 50px;
   left: 0;
   border-radius: 5px;
   resize: vertical;
@@ -138,10 +133,7 @@
   .info{
     padding: 0px;
   }
-  .details textarea{
-    width: 65%;
-    left: 0;
-  }
+
 }
 
 

@@ -212,7 +212,7 @@ function Login({ setUser, setIsLoggedIn }) {
                   <p className="create">
                     <Link
                       to="/Registrationform"
-                      style={{ color: "#fff", textDecoration: "none",fontSize:"20px", }}
+                      style={{ color: "#fff", textDecoration: "none",fontSize:"20px",width:"auto" }}
                     >
                       Register
                     </Link>
