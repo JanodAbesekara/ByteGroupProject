@@ -155,6 +155,7 @@ function AAnnounceent() {
 
   const systemChanges = announcements.filter(
     (announcement) => announcement.TeacheSubject === "System changes"
+    
   );
 
   const announcementsByEmail = groupByEmail(

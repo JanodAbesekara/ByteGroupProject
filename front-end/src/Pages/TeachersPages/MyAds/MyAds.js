@@ -309,6 +309,7 @@ function MyAds() {
                     </h2>
 
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
+
                       <span style={{color:"red"}}>*</span>. Add your most recent posts
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
@@ -322,6 +323,7 @@ function MyAds() {
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
                       <span style={{color:"red"}}>*</span>. This post will make you teaching color
+
                     </p>
                     
                   </div>

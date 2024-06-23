@@ -114,6 +114,14 @@
   text-align: center;
   padding: 5px;
 }
+#root > div > div > div.MuiGrid-root.MuiGrid-container.css-1d3bbye > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-9\.8.MuiGrid-grid-sm-10\.5.MuiGrid-grid-md-11\.25.css-1arou7t > div > div.containe3 > div.container1 > div.Notif > a > div > span > span{
+  background-color: rgb(9, 9, 156);
+  color: white;
+  font-size: 15px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+}
 
 @media only screen and (min-width: 300px)and (max-width: 768px) {
   .container1{

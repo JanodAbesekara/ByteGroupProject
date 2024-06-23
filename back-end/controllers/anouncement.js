@@ -1,7 +1,6 @@
 import Announcement from "../models/Announcementmodel.js";
 import EnrollmentSchema from "../models/Enrollmentmdels.js";
 
-
 const postanouncement = async (req, res) => {
   const {
     postedemail,
@@ -20,8 +19,7 @@ const postanouncement = async (req, res) => {
       !Announcementmessage ||
       !titleofAnn ||
       !date ||
-      !time 
-     
+      !time
     ) {
       return res
         .status(400)
@@ -53,6 +51,7 @@ const postanouncement = async (req, res) => {
 const getAnnuncements = async (req, res) => {
   try {
     const announcements = await Announcement.find();
+
     return res.status(200).json({ success: true, announcements });
   } catch (err) {
     console.log(err);
@@ -65,7 +64,7 @@ const getAnnuncements = async (req, res) => {
 const deleteAnnouncement = async (req, res) => {
   try {
     const { _id } = req.body;
-    await Announcement.deleteOne({ _id  });
+    await Announcement.deleteOne({ _id });
     return res
       .status(200)
       .json({ success: true, message: "Announcement deleted successfully" });

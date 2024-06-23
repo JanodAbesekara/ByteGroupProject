@@ -73,6 +73,7 @@ export default function Dashbord() {
           const announcements = response.data.announcements;
           setNotification(announcements);
           setNotCount(announcements.length);
+          console.log(announcements);
         })
         .catch((error) => console.log(error));
     };

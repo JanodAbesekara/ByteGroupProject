@@ -59,7 +59,7 @@ const registerController = async (req, res) => {
 
     // generated token
     const token = tokengenerator({ email: newUser.email });
-    const link = "http://" + req.hostname + ":3000/VerifyEmail?token=" + token;
+    const link = `https://byte-group-project.vercel.app/VerifyEmail?token=`+ token;
 
     const sendMail = await sendVerificationEmail(newUser.email, link);
 
@@ -71,7 +71,7 @@ const registerController = async (req, res) => {
     } else {
       return res
         .status(201)
-        .json({ success: true, msg: "Successfully registered" });
+        .json({ success: true, msg: "Successfully registered Click the verify Email" });
     }
   } catch (error) {
     console.error("Error during user registration:", error);
@@ -144,7 +144,7 @@ const forgotpasswordController = async (req, res) => {
   }
 
   const token = tokengenerator({ email: oldUser.email });
-  const link = "http://" + req.hostname + ":3000/Resetpassword?token=" + token;
+  const link = "https://byte-group-project.vercel.app/Resetpassword?token=" + token;
 
   const sendMail = await sendForgotPasswordEmail(oldUser.email, link);
 
@@ -153,7 +153,7 @@ const forgotpasswordController = async (req, res) => {
       .status(201)
       .json({ success: true, msg: "Error in sending verification email" });
   } else {
-    return res.status(201).json({ success: true, msg: "Email sent" });
+    return res.status(201).json({ success: true, msg: "Reset password Email sent" });
   }
 };
 
@@ -224,7 +224,13 @@ const resetpasswordController = async (req, res) => {
 const getuserdetails = async (req, res) => {
   try {
     const details = await User.find({});
+
     const olddetails = await User.findOne({ details });
+
+    if (!olddetails) {
+      return res.status(404).json({ success: false, msg: "User not found" });
+    }
+
     return res.status(200).json({ success: true, data: details });
   } catch (error) {
     console.error("Error during user registration:", error);
