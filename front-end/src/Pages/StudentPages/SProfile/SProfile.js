@@ -175,10 +175,10 @@ function SProfile() {
           </div>
 
           <div className="personal_details">
-            <div className="details">
+            <div className="details" style={{width:"auto", display:"flex"}}>
               <form onSubmit={handleSubmit}>
                 <lebel htmlFor="Parent/Guardian Full Name">
-                  <span style={{ color: "red" }}>*</span>Parent/Guardian Full
+                  <span style={{ color: "red", width:"auto"}}>*</span>Parent/Guardian Full
                   Name
                 </lebel>
                 <br></br>

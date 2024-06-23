@@ -25,7 +25,7 @@ function SAssignment() {
 
       axios
         .get(`/api/Test/getAssignment`, {
-          params: { email: StuEmail },
+          params: { email: StuEmail }
         })
         .then((response) => {
           const allAssignments = response.data.assignments;

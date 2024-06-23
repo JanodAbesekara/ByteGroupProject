@@ -72,9 +72,9 @@ const deleteAssignmentController = async (req, res) => {
 };
 
 const gradeController = async (req, res) => {
-
   try {
-    const { email, subject, score, teacherEmail, medium,name } = req.body;
+    const { email, subject, score, teacherEmail, medium, name, status } =
+      req.body;
 
     let grade;
     // Determine grade based on score
@@ -98,7 +98,6 @@ const gradeController = async (req, res) => {
       medium,
       grade,
       name,
-
     });
 
     if (existingMarks) {
@@ -117,6 +116,7 @@ const gradeController = async (req, res) => {
         medium,
         grade,
         name,
+        status,
       });
 
       await newMarks.save();
@@ -137,24 +137,58 @@ const getGrades = async (req, res) => {
   } catch (error) {
     return res.json("No Grades found");
   }
+};
 
-}
-
-const getStudentGrades = async (req,res) => {
+const getStudentGrades = async (req, res) => {
   const teacherEmail = req.query.email;
   const subject = req.query.subject;
   const medium = req.query.medium;
   try {
-    const studentGrades = await GradesModel.find({teacherEmail:teacherEmail,subject:subject,medium:medium});
+    const studentGrades = await GradesModel.find({
+      teacherEmail: teacherEmail,
+      subject: subject,
+      medium: medium,
+    });
     return res.json(studentGrades);
-  }
-  catch (error) {
-    return res.json({msg:"An error occured"});
+  } catch (error) {
+    return res.json({ msg: "An error occured" });
   }
 };
 
+const checkAvailability = async (req, res) => {
+  const { email, teacherEmail, medium, subject } = req.query;
 
+  try {
+    const fetchedDetails = await GradesModel.findOne({
+      email: email,
+      subject: subject,
+      teacherEmail: teacherEmail,
+      medium: medium,
+    });
+    if (fetchedDetails) {
+      return res.status(200).json({ success: true, data: fetchedDetails });
+    } else {
+      return res
+        .status(200)
+        .json({ success: false, msg: "Requested data is not available in the server" });
+    }
+    
+  } catch (error) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        msg: "Unexpected error occured",
+      });
+  }
+};
 
-
-
-export { createAssignmentController, getAssignmentController,gradeController,deleteAssignmentController,getGrades,getStudentGrades };
+export {
+  createAssignmentController,
+  getAssignmentController,
+  gradeController,
+  deleteAssignmentController,
+  getGrades,
+  getStudentGrades,
+  checkAvailability,
+};

@@ -46,7 +46,7 @@ export default function TClasses() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box sx={{ marginBottom: "20px" }}>
+          <Box sx={{ marginBottom: "20px", marginLeft:"40px " }}>
             {error && <p>{error}</p>}
             {selectsubject.map((selectsubjects) => (
               <div key={selectsubjects._id}>

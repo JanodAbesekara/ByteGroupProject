@@ -92,6 +92,15 @@ function ComQuizes({ quisedata }) {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
+
+  };
+
+  const resetNotification = () => {
+    setTriggerNotification(false);
+    setCountdownStarted(false);
+    setShowContent(false);
+
+
   };
     // const resetNotification = () => {
     //   setTriggerNotification(false);
