@@ -34,14 +34,17 @@ const StudentpaymentStatesSchema = new Schema(
     },
     createdAt: { 
       type: Date, 
-      default: Date.now, 
-      expires: '20d'  // TTL index to expire documents after 20 days
+      default: Date.now,
+      index: { expires: '20d' } // TTL index to expire documents after 20 days
     }
   },
   {
     timestamps: true,
   }
 );
+
+// Ensure that the TTL index is created
+StudentpaymentStatesSchema.index({ createdAt: 1 }, { expireAfterSeconds: 20 * 24 * 60 * 60 });
 
 export default mongoose.model(
   "StudentpaymentStates",
