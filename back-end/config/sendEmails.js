@@ -83,9 +83,9 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
         <body>
           <h2 style="text-align:center;color:blue">Click to Reset your Password</h2>
          
-          <p style="text-align:center;font-size:15px"> Click the   <a href="${link}" style="background-color:green;color:white;text-decoration:none;padding:4px 10px">
+          <p style="text-align:center;font-size:15px"> <a href="${link}" style="background-color:green; color:white; text-decoration:none; padding:5px 10px; border-radius:20px;  box-shadow: 1px 1px 5px 0.4px black;">
                   Reset
-                    </a> to Reset Your password</p> 
+                    </a></p> 
         
         </body>
       </html>
