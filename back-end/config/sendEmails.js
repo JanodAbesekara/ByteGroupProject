@@ -32,7 +32,6 @@ const sendVerificationEmail = async (senderAddress, link) => {
           
            <p style="text-align:center;font-size:15px">  <a href="${link}" style="background-color:green; color:white; text-decoration:none; padding:5px 10px; border-radius:20px;  box-shadow: 1px 1px 5px 0.4px black;">
            Verify</a></p> 
-         
         </body>
       </html>
       `,
