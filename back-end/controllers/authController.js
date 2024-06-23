@@ -71,7 +71,7 @@ const registerController = async (req, res) => {
     } else {
       return res
         .status(201)
-        .json({ success: true, msg: "Successfully registered" });
+        .json({ success: true, msg: "Successfully registered Click the verify Email" });
     }
   } catch (error) {
     console.error("Error during user registration:", error);
@@ -153,7 +153,7 @@ const forgotpasswordController = async (req, res) => {
       .status(201)
       .json({ success: true, msg: "Error in sending verification email" });
   } else {
-    return res.status(201).json({ success: true, msg: "Email sent" });
+    return res.status(201).json({ success: true, msg: "Reset password Email sent" });
   }
 };
 
