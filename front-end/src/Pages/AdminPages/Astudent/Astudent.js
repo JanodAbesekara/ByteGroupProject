@@ -17,10 +17,16 @@ import { MdDeleteOutline } from "react-icons/md";
 
 function Astudent() {
   const [students, setStudents] = useState([]);
+  const [totalstu, settotalstu] = useState(0);
 
   useEffect(() => {
     getStudents();
-  }, []);
+
+    for (let i = 0; i < students.length; i++) {
+      settotalstu(students.length);
+    }
+
+  }, [ students.length ]);
 
   const getStudents = () => {
     Axios.get(`api/auth/studentget`)
@@ -35,7 +41,7 @@ function Astudent() {
   const deleteStudent = (email) => {
     const payload = { email: email };
 
-    Axios.post(`api/auth//studentpost`, payload)
+    Axios.post(`api/auth/studentpost`, payload)
       .then(() => {
         getStudents();
       })
@@ -54,6 +60,12 @@ function Astudent() {
     }
   };
 
+  // Divide students into chunks of 10
+  const chunks = [];
+  for (let i = 0; i < students.length; i += 40) {
+    chunks.push(students.slice(i, i + 40));
+  }
+
   return (
     <div>
       <Navbar />
@@ -63,7 +75,7 @@ function Astudent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div className="StudentDetal">
+            <div className="StudentDetal" >
               <h3
                 style={{
                   textAlign: "center",
@@ -74,109 +86,115 @@ function Astudent() {
               >
                 <b>Student Details</b>
               </h3>
+              <h2>Total Student count :- {totalstu}</h2>
             </div>
-            <TableContainer component={Paper} sx={{ marginTop: "100px" }}>
-              <Table sx={{ marginBottom: "50px" }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      align="center"
-                      style={{
-                        color: "white",
-                        backgroundColor: "#124076",
-                        borderRight: "2px white solid",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Student Name
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      style={{
-                        color: "white",
-                        backgroundColor: "#124076",
-                        borderRight: "2px white solid",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Email
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      style={{
-                        color: "white",
-                        backgroundColor: "#124076",
-                        borderRight: "2px white solid",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Contact No
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      style={{
-                        color: "white",
-                        backgroundColor: "#124076",
-                        borderRight: "2px white solid",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Date of Join
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      style={{
-                        color: "white",
-                        backgroundColor: "#124076",
-                        borderRight: "2px white solid",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Delete
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {students.map((student) => (
-                    <TableRow key={student.id}>
-                      <TableCell align="center">
-                        {student.firstname}
-                        {"  "}
-                        {student.lastname}
+            {chunks.map((chunk, index) => (
+              <TableContainer
+                key={index}
+                component={Paper}
+                sx={{ marginTop: "100px" }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell
+                        align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "18px",
+                        }}
+                      >
+                        Student Name
                       </TableCell>
-                      <TableCell align="center">{student.email}</TableCell>
-                      <TableCell align="center">
-                        {student.phonenumber}
+                      <TableCell
+                        align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "18px",
+                        }}
+                      >
+                        Email
                       </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        {new Date(student.updatedAt).toLocaleDateString()}
+                      <TableCell
+                        align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "18px",
+                        }}
+                      >
+                        Contact No
                       </TableCell>
-                      <TableCell align="center">
-                        <button
-                          style={{
-                            padding: "2px 10px",
-                            fontSize: "15px",
-                            marginLeft: "10px",
-                            backgroundColor: "Red",
-                            color: "White",
-                            borderRadius: "5px",
-                            border: "none",
-                            boxShadow: "2px 1px 10px 0.5px black",
-                          }}
-                          onClick={() =>
-                            handleDeleteConfirmation(student.email)
-                          }
-                        >
-                          Delete
-                          <MdDeleteOutline />
-                        </button>
+                      <TableCell
+                        align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "18px",
+                        }}
+                      >
+                        Date of Join
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "18px",
+                        }}
+                      >
+                        Delete
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  </TableHead>
+                  <TableBody>
+                    {chunk.map((student) => (
+                      <TableRow key={student.id}>
+                        <TableCell align="center">
+                          {student.firstname} {student.lastname}
+                        </TableCell>
+                        <TableCell align="center">
+                          <a href={`mailto:${student.email}`}>
+                          {student.email}</a></TableCell>
+                        <TableCell align="center">
+                          {student.phonenumber}
+                        </TableCell>
+                        <TableCell align="center">
+                          {new Date(student.updatedAt).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell align="center">
+                          <button
+                            style={{
+                              padding: "2px 10px",
+                              fontSize: "15px",
+                              marginLeft: "10px",
+                              backgroundColor: "Red",
+                              color: "White",
+                              borderRadius: "5px",
+                              border: "none",
+                              boxShadow: "2px 1px 10px 0.5px black",
+                            }}
+                            onClick={() =>
+                              handleDeleteConfirmation(student.email)
+                            }
+                          >
+                            Delete
+                            <MdDeleteOutline />
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ))}
           </Box>
         </Grid>
       </Grid>

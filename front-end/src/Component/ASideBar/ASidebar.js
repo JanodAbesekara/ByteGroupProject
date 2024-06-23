@@ -13,6 +13,7 @@ import { IoMdHeadset } from "react-icons/io";
 import { RiDashboard3Fill } from "react-icons/ri";
 import "./ASidebar.css";
 import { jwtDecode } from "jwt-decode";
+import { MdPayment } from "react-icons/md";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -32,43 +33,38 @@ export default function Ssidebar() {
   const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(true);
   const history = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    if (!token || typeof token === "undefined" || token === null) {
+      history("/Login");
+    }
+  }, [history]);
+
   const toggleSidebarCollapseHandler = () => {
     setIsCollapsedSidebar((prev) => !prev);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("MERN_AUTH_TOKEN");
-  
-    
-    if (!token || typeof token === "undefined" || token === null) {
-      
-      history("/Login"); 
-    } else {
-      try {
-        const decodedToken = jwtDecode(token);
-        const expirationTime = decodedToken.exp * 1000; 
-        const currentTime = Date.now();
-  
-        if (currentTime > expirationTime) {
-          handleLogout(); 
-        }
-      } catch (error) {
-        history("/Login"); 
-      }
-    }
-  }, []);
+  if (!localStorage.getItem("MERN_AUTH_TOKEN")) {
+    return null;
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem("MERN_AUTH_TOKEN");
-    history("/Login");
-
-    window.location.reload();
+    if (localStorage.getItem("MERN_AUTH_TOKEN")) {
+      localStorage.removeItem("MERN_AUTH_TOKEN");
+      history("/Login");
+      window.location.reload();
+    } else {
+      console.log("No authentication token found. Redirecting to login page.");
+      history("/Login");
+      window.location.reload();
+    }
   };
 
   const token = localStorage.getItem("MERN_AUTH_TOKEN");
   const decodedToken = jwtDecode(token);
   const jobRole = decodedToken.role;
-  const encodedid = jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
+  const encodedid =
+    jobRole === "Admin" ? encodeURIComponent(decodedToken._id) : "";
 
   const sidebarItems = [
     {
@@ -113,6 +109,12 @@ export default function Ssidebar() {
       icon: PiStudent,
       Title: "Students",
     },
+    {
+      name: "Payment",
+      href: `/Payementmanage?$phw=${encodedid}`,
+      icon: MdPayment,
+      Title: "Payment",
+    }
   ];
 
   return (

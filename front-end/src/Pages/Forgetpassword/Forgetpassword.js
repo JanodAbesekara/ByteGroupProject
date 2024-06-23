@@ -13,11 +13,17 @@ export default function Forgetpassword() {
       return;
     }
 
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      window.alert("Please enter a valid email.");
+    }
+
     axios
       .post("/api/auth/forgotpassword", { email })
       .then((res) => {
         console.log(res.data);
         window.alert(res.data.msg);
+        
       })
       .catch((err) => {
         console.log(err.response);

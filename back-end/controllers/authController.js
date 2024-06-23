@@ -22,14 +22,17 @@ const registerController = async (req, res) => {
       .status(400)
       .json({ success: false, msg: "Please enter a valid email" });
   }
-
-  if (password.length < 8) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        msg: "Password should be at least 8 characters long",
-      });
+  if (
+    password.length < 8 &&
+    ![A - Z].test(password) &&
+    ![a - z].test(password) &&
+    ![0 - 9].test(password) &&
+    !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(password)
+  ) {
+    return res.status(400).json({
+      success: false,
+      msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
+    });
   }
 
   try {
@@ -56,21 +59,19 @@ const registerController = async (req, res) => {
 
     // generated token
     const token = tokengenerator({ email: newUser.email });
-    const link = "http://" + req.hostname + ":3000/VerifyEmail?token=" + token;
+    const link = `https://byte-group-project.vercel.app/VerifyEmail?token=`+ token;
 
     const sendMail = await sendVerificationEmail(newUser.email, link);
 
     if (sendMail) {
-      return res
-        .status(201)
-        .json({
-          success: true,
-          msg: "Successfully registered. Error in sending verification email",
-        });
+      return res.status(201).json({
+        success: true,
+        msg: "Successfully registered. Error in sending verification email",
+      });
     } else {
       return res
         .status(201)
-        .json({ success: true, msg: "Successfully registered" });
+        .json({ success: true, msg: "Successfully registered Click the verify Email" });
     }
   } catch (error) {
     console.error("Error during user registration:", error);
@@ -112,6 +113,7 @@ const loginController = async (req, res) => {
   const token = tokengenerator({
     email: oldUser.email,
     firstname: oldUser.firstname,
+    lastname: oldUser.lastname,
     role: oldUser.role,
     _id: oldUser._id,
     verified: oldUser.verified,
@@ -142,7 +144,7 @@ const forgotpasswordController = async (req, res) => {
   }
 
   const token = tokengenerator({ email: oldUser.email });
-  const link = "http://" + req.hostname + ":3000/Resetpassword?token=" + token;
+  const link = "https://byte-group-project.vercel.app/Resetpassword?token=" + token;
 
   const sendMail = await sendForgotPasswordEmail(oldUser.email, link);
 
@@ -151,7 +153,7 @@ const forgotpasswordController = async (req, res) => {
       .status(201)
       .json({ success: true, msg: "Error in sending verification email" });
   } else {
-    return res.status(201).json({ success: true, msg: "Email sent" });
+    return res.status(201).json({ success: true, msg: "Reset password Email sent" });
   }
 };
 
@@ -172,8 +174,22 @@ const resetpasswordController = async (req, res) => {
   }
 
   const oldUser = await User.findOne({ email });
+
   if (!oldUser) {
     return res.status(400).json({ success: false, msg: "User not found" });
+  }
+
+  if (
+    newPassword.length < 8 &&
+    ![A - Z].test(newPassword) &&
+    ![a - z].test(newPassword) &&
+    ![0 - 9].test(newPassword) &&
+    !/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/.test(newPassword)
+  ) {
+    return res.status(400).json({
+      success: false,
+      msg: "Please enter a valid password with at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character",
+    });
   }
 
   if (newPassword !== confirmNewPassword) {
@@ -205,9 +221,23 @@ const resetpasswordController = async (req, res) => {
   }
 };
 
+const getuserdetails = async (req, res) => {
+  try {
+    const details = await User.find({});
+    const olddetails = await User.findOne({ details });
+    return res.status(200).json({ success: true, data: details });
+  } catch (error) {
+    console.error("Error during user registration:", error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   registerController,
   loginController,
   forgotpasswordController,
   resetpasswordController,
+  getuserdetails,
 };

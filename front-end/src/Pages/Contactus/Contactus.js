@@ -3,37 +3,40 @@ import "./Contactus.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
 import Lottie from "lottie-react";
-import animation from './Animation/Animation - 1709480913381.json';
+import animation from "./Animation/Animation - 1709480913381.json";
 
 export default function Contactus() {
   return (
     <div className="contact">
       <Navbar />
-      <div
-        className="login_m2"
-        style={{ backgroundColor: "#e2e0e0e9", width: "100%", height: "40px" }}
-      ></div>
       <div className="contact_h3">
         <h2>Contact us</h2>
       </div>
 
-      <div className="contact_detal_mail">
-        <img src="./contact/mail.png" alt="mail" />
-        <h3> dreamlearnacademy@gmail.com</h3>
+      <div className="contact_detail_mail">
+        <a href="mailto:dreamlearnacademy@gmail.com">
+          <img src="./contact/mail.png" alt="mail" />
+          <h3>dreamlearnacademy@gmail.com</h3>
+        </a>
       </div>
-      <div className="contact_detal_call">
-        <img src="./contact/phone.png" alt="call" />
-        <h3> +91 1234567890</h3>
+      <div className="contact_detail_call">
+        <a href="tel:+911234567890">
+          <img src="./contact/phone.png" alt="call" />
+          <h3>+91 1234567890</h3>
+        </a>
       </div>
-      <div className="contact_detal_location">
-        <img src="./Contact/map.png" alt="map" />
-        <h3>Srilanka colombo , 7 Gallroad </h3>
+      <div className="contact_detail_location">
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Srilanka+Colombo,+7+Gallroad"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="./contact/map.png" alt="map" />
+          <h3>Srilanka Colombo, 7 Gallroad</h3>
+        </a>
+      </div>
 
-       
-        
-       
-      </div>
-      <Lottie animationData={animation} className="lottie2" /> 
+      <Lottie animationData={animation} className="lottie2" />
       <h1>Our Main Branch Location</h1>
       <div className="map" style={{}}>
         <div style={{ width: "100%" }}>

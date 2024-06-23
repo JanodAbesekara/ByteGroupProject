@@ -5,7 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Aboutus from "./Pages/Aboutus/Aboutus";
 import Contactus from "./Pages/Contactus/Contactus";
-import Library from "./Pages/Library/Library";
+import KnowledgeBase from "./Pages/Library/Library";
 import Classes from "./Pages/Classes/Classes";
 import Assignments from "./Pages/TeachersPages/Assignments/Assignments";
 import TDashbord from "./Pages/TeachersPages/TDashbord/TDashbord";
@@ -39,20 +39,39 @@ import Login from "./Pages/Login/Login";
 import Enterquizes from "./Pages/TeachersPages/Quizzes/Component/Enterquizes";
 import Enrollment from "./Pages/Enrollment/Enrollment";
 import Classcontent from "./Pages/TeachersPages/TClasses/ClassContent";
+import Classcomponent from "./Pages/TeachersPages/TClasses/Classcomponent.js";
 import Chat from "./Pages/Chat/Chat";
+import Openwindow from "./Pages/TeachersPages/TDashbord/Openwindow";
+import Popupbox from "./Pages/StudentPages/SDashbord/Popupbox.js";
+import ComQuises1 from "./Pages/StudentPages/SQuizzes/ComQuises1.js";
+import Alertbox from "./Component/Alertbox/Alertbox.js";
+import Content from "./Pages/StudentPages/SSubject/Content";
+import Notifacition from "./Pages/Notifacition";
+import Quisehandle from "./Pages/TeachersPages/Quizzes/Component/Quisehandle";
+import AddingLectures from "./Pages/TeachersPages/TClasses/AddingLectures";
+import DisplayResources from "./Pages/AdminPages/Aaddresources/Displayresources.js";
+import Attendence from "./Pages/TeachersPages/Attendence/Attendence";
+import StudentCard from "./Pages/TeachersPages/Students/StudentCard";
+import StudentTable from "./Pages/TeachersPages/Students/StudentTable.js";
+import Attendance from "./Pages/TeachersPages/Attendence/Attendence";
+import SubjectCard from "./Pages/StudentPages/SDashbord/SubjectCard";
+import ProfileDisplay from "./Pages/StudentPages/SDashbord/ProfileDisplay";
+import Paycard from "./Pages/StudentPages/Payment/PayCard.js";
+import PaymentDisplay from "./Pages/StudentPages/Payment/PaymentdisplayTable.js";
+import Stupayment from "./Pages/TeachersPages/PaymentDetails/Displaypyment.js";
+import Payementmanage from "./Pages/AdminPages/Paymentmanage/PaymenetManage";
 
-   
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
-
   const navigate = useNavigate();
 
-// const logoutuser = () => {
-//   setUser(null);
-//   setIsLoggedIn(false);
-//   navigate("/Login");
-// };
+  // const logoutuser = () => {
+  //   setUser(null);
+  //   setIsLoggedIn(false);
+  //   navigate("/Login");
+  // };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -77,9 +96,9 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/abouus" element={<Aboutus />} />
+          <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/Contactus" element={<Contactus />} />
-          <Route path="/Library" element={<Library />} />
+          <Route path="/knowledgebase" element={<KnowledgeBase />} />
           <Route path="/Classes" element={<Classes />} />
           <Route
             path="/Login"
@@ -116,7 +135,27 @@ function App() {
           <Route path="/Enterquizes" element={<Enterquizes />} />
           <Route path="/Enrollment" element={<Enrollment />} />
           <Route path="/Classcontent" element={<Classcontent />} />
-          <Route path="/Chat" element={<Chat />}/>
+          <Route path="/Classcomponent" element={<Classcomponent />} />
+          <Route path="/Chat" element={<Chat />} />
+          <Route path="/Openwindow" element={<Openwindow />} />
+          <Route path="/Popupbox" element={<Popupbox />} />
+          <Route path="/ComQuises1" element={<ComQuises1 />} />
+          <Route path="/Alertbox " element={<Alertbox />} />
+          <Route path="/Content" element={<Content />} />
+          <Route path="/Notifacition" element={<Notifacition />} />
+          <Route path="/Quisehandle" element={<Quisehandle />} />
+          <Route path="/AddingLectures" element={<AddingLectures />} />
+          <Route path="/DisplayResources" element={<DisplayResources />} />
+          <Route path="/Attendence" element={<Attendence />} />
+          <Route path="/StudentCard" element={<StudentCard />} />
+          <Route path="/StudentTable" element={<StudentTable />} />
+          <Route path="/Attendance" element={<Attendance />} />
+          <Route path="/SubjectCard" element={<SubjectCard />} />
+          <Route path="/ProfileDisplay" element={<ProfileDisplay />} />
+          <Route path="/Paycard" element={<Paycard />} />
+          <Route path="/PaymentDisplay" element={<PaymentDisplay />} />
+          <Route path="/Stupayment" element={<Stupayment />} />
+          <Route path="/Payementmanage" element={<Payementmanage />} />
         </Routes>
       </div>
     </>

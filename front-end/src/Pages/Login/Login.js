@@ -13,6 +13,7 @@ import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
 import Lottie from "lottie-react";
 import animatio from "./Animation/Animation - 1709401152370.json";
+import Alert from "@mui/material/Alert";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   overflow: "hidden",
@@ -31,6 +32,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 function Login({ setUser, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
+  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,16 +49,28 @@ function Login({ setUser, setIsLoggedIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      setAlertSeverity("error");
+      setAlertMessage("Please fill in all fields.");
+
+      return;
+    }
+
     const data = {
       email,
       password,
     };
 
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setAlertSeverity("error");
+      setAlertMessage("Please enter a valid email.");
+    }
+
     axios
       .post(`/api/auth/login`, data)
       .then((response) => {
         if (response.data) {
-          window.alert(response.data.msg);
           const token = response.data.token;
           localStorage.setItem("MERN_AUTH_TOKEN", JSON.stringify(token));
           const decodedToken = jwtDecode(token);
@@ -65,15 +80,23 @@ function Login({ setUser, setIsLoggedIn }) {
           const jobRole = decodedToken.role;
           const encodedid = encodeURIComponent(decodedToken._id);
 
-          if (jobRole === "Lecturer") {
-            navigate(`/TDashbord?$phw=${encodedid}`);
-          } else if (jobRole === "Student") {
-            navigate(`/SDashbord?$phw=${encodedid}`);
+          let redirectPath;
+
+          if (jobRole === "Student") {
+            redirectPath = `/SDashbord?$phw=${encodedid}`;
+          } else if (jobRole === "Lecturer") {
+            redirectPath = `/TDashbord?$phw=${encodedid}`;
           } else {
-            navigate(`/ADashbord?$phw=${encodedid}`);
+            redirectPath = `/ADashbord?$phw=${encodedid}`;
           }
+
+          navigate(redirectPath);
+          setAlertSeverity("success"); // Set success alert on successful login
+          setAlertMessage(response.data.msg); // Set alert message from response
         } else {
           console.error("Unexpected response format:", response);
+          setAlertSeverity("error"); // Set error alert on unexpected response
+          setAlertMessage("An unexpected error occurred. Please try again.");
         }
       })
       .catch((error) => {
@@ -82,9 +105,12 @@ function Login({ setUser, setIsLoggedIn }) {
           error.response.data &&
           error.response.data.success === false
         ) {
-          window.alert(error.response.data.msg);
+          setAlertSeverity("error"); // Set error alert for failed login
+          setAlertMessage(error.response.data.msg); // Set alert message from error response
         } else {
           console.error("Unexpected error format:", error);
+          setAlertSeverity("error"); // Set error alert on unexpected error
+          setAlertMessage("An unexpected error occurred. Please try again.");
         }
       });
   };
@@ -94,92 +120,112 @@ function Login({ setUser, setIsLoggedIn }) {
       <Navbar />
       <div className="login_main">
         <div
-          className="login_m2"
           style={{
-            backgroundColor: "#e2e0e0e9",
-            width: "100%",
-            height: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {" "}
+          <Alert
+            severity={alertSeverity}
+            sx={{ width: "100%", margin: "auto", textAlign: "center" }}
+          >
+            {alertMessage}
+          </Alert>
         </div>
 
-        <div className="login_h3">
-          <h2>Login</h2>
+        {/* div1 */}
+        <div className="login_heading">
+          <h2>Welcome to Dream Learn Academy Portal</h2>
         </div>
 
+        <div className="sub_main">
+          {/* div2 */}
+          <div className="login_form">
+            <form onSubmit={handleSubmit}>
+              <div className="login_input">
+                <label htmlFor="Email ID">
+                  <span style={{ color: "red" }}>*</span>Email ID
+                </label>
+                <br></br>
+                <input
+                  className="Name"
+                  type="email"
+                  name="email"
+                  onChange={(e) => setusername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                  value={email}
+                />
+                <br></br>
+                <label htmlFor="password">
+                  <span style={{ color: "red" }}>*</span>Password
+                </label>
+                <br></br>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  required
+                  onChange={(e) => setpassword(e.target.value)}
+                  placeholder="Enter your password"
+                />
+              </div>
 
-          <Lottie
-            animationData={animatio}
-
-            className="lottie"
-          />
- 
-
-        <form className="login_label" onSubmit={handleSubmit}>
-          <label htmlFor="Username_or_Email">
-            <span style={{ color: "red" }}>*</span>Username
-          </label>
-          <br></br>
-          <input
-            className="Name"
-            type="email"
-            name="email"
-            onChange={(e) => setusername(e.target.value)}
-            placeholder="Enter your Username"
-            required
-            value={email}
-          />
-          <br></br>
-          <label htmlFor="password">
-            <span style={{ color: "red" }}>*</span>password
-          </label>
-          <br></br>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(e) => setpassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-          <div className="log_rem">
-            <button type="submit" value="Login">
-              Login
-            </button>
-            <br></br>
-            <br></br>
-            <h2>
-              Forgot password?{" "}
-              <Link variant="outlined" onClick={handleClickOpen}>
-                Click here to reset
-              </Link>
-            </h2>
-            <BootstrapDialog
-              onClose={handleClose}
-              aria-labelledby="customized-dialog-title"
-              open={open}
-            >
-              <IconButton
-                aria-label="close"
-                onClick={handleClose}
-                sx={{
-                  position: "absolute",
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-              <Forgetpassword />
-            </BootstrapDialog>
-            <br></br>
-            <h4>
-              New ?<Link to="/Registrationform">Create An Account </Link>
-            </h4>
+              <div className="login_pass">
+                <div className="login_pass_sub">
+                  <div className="login_reset">
+                    <p>
+                      <Link variant="outlined" onClick={handleClickOpen}>
+                        Forgot password?
+                      </Link>
+                    </p>
+                    <BootstrapDialog
+                      onClose={handleClose}
+                      aria-labelledby="customized-dialog-title"
+                      open={open}
+                    >
+                      <IconButton
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                          position: "absolute",
+                          right: 8,
+                          top: 8,
+                          color: (theme) => theme.palette.grey[500],
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                      <Forgetpassword />
+                    </BootstrapDialog>
+                    <br></br>
+                  </div>
+                  <div className="login_button">
+                    <button type="submit" value="Login">
+                      Login
+                    </button>
+                  </div>
+                </div>
+                <div className="new_acc_create">
+                  <p>Don't Have An Account?</p>
+                  <p className="create">
+                    <Link
+                      to="/Registrationform"
+                      style={{ color: "#fff", textDecoration: "none",fontSize:"20px", }}
+                    >
+                      Register
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+          {/* div3 */}
+          <div className="animation_lottie">
+            <Lottie animationData={animatio} className="lottie" />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

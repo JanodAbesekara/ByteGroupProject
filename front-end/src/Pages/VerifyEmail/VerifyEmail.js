@@ -16,8 +16,8 @@ export default function VerifyEmail() {
   const navigate = useNavigate();
   const token = useLocation().search.split("=").pop();
 
-  const [verified, setVerified] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  const [verified, setVerified] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -28,7 +28,7 @@ export default function VerifyEmail() {
             setVerified(true);
             console.log(token);
             navigate("/Login");
-          }, 20);
+          },5);
         })
         .catch((err) => {
           console.log(err.response);

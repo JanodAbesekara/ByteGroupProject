@@ -38,10 +38,13 @@ const Library = () => {
             videoLink: file.videoUrl,
             videoTopic: file.discriV,
             audioLink: file.audioUrl,
-            audioTopic: file.audios,
+            audioTopic: file.discriA,
             pdfSubject: file.pdfS,
             videoSubject: file.videos,
             audioSubject: file.audios,
+            pdfMedia: file.pdfmedia,
+            videomedia: file.videoMedia,
+            audiomedia: file.audioMedia,
           }))}
         />
       </div>

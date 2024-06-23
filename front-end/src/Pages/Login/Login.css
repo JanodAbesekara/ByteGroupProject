@@ -5,247 +5,309 @@
   padding: 0;
   box-sizing: border-box;
 }
-.login_m2 {
-  background-color: #e2e0e0e9;
-  width: 100%;
-  height: 40px;
-}
-
-.login_h3 {
-  position: relative;
-  text-transform: uppercase;
-  top: 60px;
-  width: 160px;
-  color: black;
-  background-color: #cabeaf;
-  height: 55px;
-  float: left;
-  margin-left: 50px;
-  text-align: center;
-  opacity: 0.5;
-  border-radius: 5px;
-}
-
-.login_h3 h2 {
+.login_main {
+  display:flex;
+  flex-direction: column;
   align-items: center;
-  font-size: 25px;
-  letter-spacing: 1px;
-  position: relative;
-  top: 12px;
-  opacity: 0.5;
+  margin: 50px 30px
+}
+.sub_main {
+  display:flex;
+  flex-direction: row;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  background-color: #f6f6f6;
+}
+.login_heading {
+  color: #20c997;
+  margin-bottom: 10px;
+}
+.sub_main .animation_lottie {
+  width:45%;
+}
+.sub_main .login_form {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
 }
 
-.login_label {
-  margin-left: 100px;
-  margin-top: 100px;
-  position: relative;
-  top: 80px;
+.login_pass {
+  margin-top: 0px;
+  margin-bottom: 90px;
 }
-.login_label label {
+
+.login_input {
+  position: relative;
+  margin: 0px 10px;
+}
+.login_input label {
   font-family: "Inter", sans-serif;
   font-weight: normal;
-  color: #1e2a79;
-  font-size: 20px;
+  color: #007bff;
+  font-size: 18px;
   padding-top: 5px;
 }
 
-.login_label input {
-  width: 500px;
+.login_input input {
+  width: 450px;
   height: 40px;
   margin-top: 5px;
   margin-bottom: 15px;
   padding: 2px 0px 2px 8px;
-  font-size: 16px;
+  font-size: 14px;
+  border: 1px solid gray;
+  border-radius: 6px;
 }
 
-.log_rem {
-  margin-top: 200px;
-  position: relative;
-  margin-bottom: 120px;
+.login_pass_sub {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.log_rem button {
+.login_button button {
   padding: 5px 10px 5px 10px;
-  float: left;
-  margin-right: 20px;
   position: relative;
-  bottom: 180px;
-  background: linear-gradient(120deg, #616fcb, #2b45eb);
-  box-shadow: 0px 1px 10px 0px black;
+  background: #2b45eb;
+  box-shadow: 0px 0px 4px 0px black;
   border: none;
-  margin-right: 40px;
   width: 120px;
   height: 40px;
   cursor: pointer;
   border-radius: 5px;
   color: white;
-  font-size: 16px;
+  font-size: 19px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-family: Inter;
 }
-
-.log_rem h2 {
-  float: right;
+.login_button button:hover {
+  transition: 0.2s;
+  opacity:80%;
+  color:#3fef59;
+}
+.login_reset p {
+  text-decoration: none;
+  color: #17a2b8;
+  border-bottom: none;
   font-size: 15px;
-  position: relative;
-  bottom: 100px;
-  margin-right: 5px;
+  font-weight: 500;
+  padding-top: 10px;
 }
-.log_rem h4 {
-  float: right;
-  margin-right: 40px;
-  position: relative;
-  bottom: 100px;
-  padding: 5px;
-  margin-right: 50px;
-  font-size: 15px;
+.new_acc_create {
+  margin-top: 10px;
 }
-
-
+.new_acc_create p {
+  color: #515050;
+}
+.new_acc_create .create {
+  margin-top: 13px;
+  padding: 5px 5px;
+  width: 90px;
+  height: 32px;
+  background-color: #20c997;
+  border: none;
+  border-radius: 4px;
+}
+.new_acc_create .create:hover{
+  color: #e2e2e2;
+  opacity: 80%;
+}
 .lottie{
   width: 450px;
   height: 450px;
   float: right;
   margin-right: 40px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
-
-
-@media (min-width: 620px) {
-  .log_rem h2 {
-    position: relative;
-    right: 50px;
+@media (min-width: 320px) and (max-width: 768px) {
+  .login_heading{
+    margin-bottom: 30px;
   }
-}
-
-@media (min-width: 553px) and (max-width: 620px) {
-  .log_rem h2 {
-    position: relative;
-    right: 50px;
-    font-size: 14px;
+  .login_heading h2{
+    font-size: 30px;
   }
-  .log_rem h4 {
-    position: relative;
-    right: 0px;
-    font-size: 14px;
-  }
-}
-
-
-@media (min-width: 403px) and (max-width: 620px) {
-  .login_label input {
-    width: 200px;
-    height: 30px;
-  }
-  .log_rem h2 {
-    position: relative;
-    left: -20px;
-    font-size: 13px;
-  }
-  .log_rem h4 {
-    font-size: 13px;
-    position: relative;
-    left: 30px;
-  }
-
-}
-
-
-
-@media (min-width: 320px) and (max-width: 403px) {
-  .login_label input {
-    width: 200px;
-    height: 40px;
-  }
-  .log_rem {
-    font-size: 12px;
-    padding-top: 10px;
-  }
-  .log_rem h2 {
-    padding-top: 10px;
-    font-size: 12px;
-    position: relative;
-    right: 10px;
-  }
-  .log_rem h4 {
-    position: relative;
-    bottom: 100px;
-    left: 40px;
-    font-size: 12px;
-  }
-
-  .lottie{
-    width: 300px;
-    height: 300px;
-    margin-top: 100px;
+  .login_main {
+    display:flex;
+    flex-direction: column;
     align-items: center;
-    margin-right: 30px;
     justify-content: center;
     align-content: center;
+  }
+  .sub_main {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f6f6;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+  }
+
+  .login_form{
+    align-items: center;
+  }
+  .animation_lottie{
+    order: -1;
+    width:270px;
+    height:270px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding-left: 240px;
+  }
+  .lottie{
+    padding-left: 60px;
+    width:230px;
+    height:230px;
+  }
+  .login_heading {
+    align-items: center;
+    font-size: 14px;
+    text-align: center;
+  }
+  .login_input input {
+    width: 100%;
+    height: 40px;
+  }
+  .login_input label {
+    font-size: 14px;
+  }
+  .login_pass_sub {
     display: flex;
+    flex-direction: column;
+  }
+  .login_pass{
+    margin: 0 10px;
+  }
+  form{
+    width:180%;
+  }
+  .login_button button {
+    padding: 5px 7px;
+    width: 100%;
+    height: 35px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .new_acc_create{
+    padding-top: 13px;
+  }
+  .new_acc_create .create {
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .new_acc_create p {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 14px;
   }
 }
 
-@media (min-width: 403px) and (max-width: 696px) {
-  .lottie{
-    width: 400px;
-    height: 400px;
-    align-items: center;
-    margin-top: 120px;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login_heading{
+    margin-bottom: 30px;
+    font-size: 20px;
   }
-}
-
-@media (min-width: 720px) and (max-width: 845px) {
-  .lottie{
-    width: 600px;
-    height: 600px;
-    align-items: center;
-    margin-top: 80px;
-    margin-bottom: -50px;
-
+  .login_form{
+    padding-left: 95px;
+    padding-top: 180px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
-}
-
-@media (min-width: 845px) and (max-width: 950px) {
-  .lottie{
-    width: 800px;
-    height: 800px;
-    align-items: center;
-    margin-top: 80px;
-    margin-bottom: -50px;
-
+  .animation_lottie{
+    width: 40%;
+    margin-left: 0px; 
+    height: 100%; 
+    margin-right: 20px;
   }
-}
-
-@media (min-width: 845px) and (max-width: 950px) {
-  .lottie{
-    width: 200px;
-    height: 200px;
-   float: right;
-    margin-top: 80px;
-    margin-bottom: -50px;
-
+  .sub_main{
+    width: 100%;
+    margin-bottom: 50px;
+    padding-bottom: 70px;
   }
+  .login_pass_sub{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+  .new_acc_create{
+    margin: 0 10px;
+  }
+  
+.login_input input {
+  width: 100%;
 }
-
-@media (min-width: 929px) and (max-width: 1024px) {
+  .login_reset {
+    width: 50%;
+  }
   .lottie{
     width: 300px;
     height: 300px;
-   float: right;
-    margin-top: 80px;
-    margin-bottom: -50px;
-
+    float: right;
+    margin-top: 120px;
+    
   }
+  
 }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1025px) {
+  .login_heading{
+    margin-bottom: 40px;
+    font-size: 24px;
+  }
+  .login_form{
+    padding-left: 125px;
+    padding-right: 5px;
+    padding-top: 170px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .animation_lottie{
+    width: 40%;
+    margin-left: 0px; 
+    height: 100%; 
+    margin-right: 40px;
+  }
+  .sub_main{
+    width: 100%;
+    margin-bottom: 50px;
+    padding-bottom: 70px;
+  }
+  .login_pass_sub{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+  .new_acc_create{
+    margin: 0 10px;
+  }
+  
+.login_input input {
+  width: 100%;
+}
+  .login_reset {
+    width: 50%;
+  }
   .lottie{
     width: 400px;
     height: 400px;
-   float: right;
-    margin-top: 60px;
-    margin-bottom: -50px;
-    margin-right: 50px;
-
+    margin-top: 120px;
+    padding-right: 40px;
+    
   }
 }

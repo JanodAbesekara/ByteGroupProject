@@ -1,0 +1,214 @@
+import React, { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+const ScrollableContent = styled("div")({
+  maxHeight: "600px",
+  overflowY: "auto",
+});
+
+function Openwindow({ open, handleClose, notifications }) {
+  const [subject, setSubject] = useState("");
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [teacherSubject, setTeacherSubject] = useState([]);
+
+  const currentDate = new Date();
+  const currentTime = currentDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const useremail = decodedToken.email;
+
+      axios
+        .get(`/api/user/getsubjectreg`, {
+          params: { email: useremail },
+        })
+        .then((response) => {
+          const filteredSubject = response.data.data;
+          setTeacherSubject(filteredSubject);
+        })
+        .catch((error) => {
+          console.error("Error fetching subject data:", error);
+        });
+    } catch (error) {
+      console.error("Invalid token", error);
+    }
+  }, []);
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+
+    if (!subject || !title || !message) {
+      window.alert("Please fill in all fields");
+      return;
+    }
+
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+
+    if (!token) {
+      window.alert("No token found");
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const useremail = decodedToken.email;
+      const role = decodedToken.role;
+
+      const data = {
+        titleofAnn: title,
+        Announcementmessage: message,
+        TeacheSubject: subject.subject,
+        postedemail: useremail,
+        date: currentDate.toISOString().split("T")[0],
+        time: currentTime,
+        jobrole: role,
+        mediua: subject.medium,
+      };
+
+      const response = await axios.post(`/api/send/notifaction`, data);
+      window.alert(response.data.message);
+      handleClose();
+    } catch (error) {
+      if (error.response && error.response.data) {
+        window.alert(error.response.data.message);
+      } else {
+        window.alert("An error occurred while sending the notification");
+      }
+    }
+  };
+  return (
+    <BootstrapDialog
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}
+    >
+      <DialogTitle sx={{ m: 0, p: 2, justifyContent:"center", fontWeight:"600", color:"#6c757d"}} id="customized-dialog-title">
+        Notifications
+      </DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <ScrollableContent>
+        {notifications
+          .slice(0)
+          .reverse()
+          .map((notification, index) => (
+            <DialogContent key={index} dividers sx={{border:"none", margin:"15px", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px", backgroundColor:"#f8f9fa"}}>
+              <p style={{ textAlign: "center", marginBottom: "10px", color:"#007bff", fontSize:"16px", fontWeight:"550" }}>
+                {notification.titleofAnn}
+              </p>
+              <p style={{ textAlign: "left", marginInline: "10px",color:"#6c757d", fontSize:"12px" }}>
+                {notification.Announcementmessage}
+              </p>
+              <br></br>
+              <span style={{ float: "right", fontSize: "12px" }}>
+                {notification.date.split("T")[0]}
+              </span>
+            </DialogContent>
+          ))}
+      </ScrollableContent>
+      <DialogActions sx={{ display: "flex" }}>
+        <div style={{ marginRight: "200px" }}>
+          <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column"}}>
+            <label htmlFor="title" style={{color:"#6c757d"}}>Title</label>
+            <input
+              type="text"
+              placeholder="Enter Title"
+              style={{ padding: "5px 10px", width:"auto", margin:"5px",borderRadius:"4px",border:"1px solid gray" }}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <label htmlFor="message" style={{color:"#6c757d"}}>Message</label>
+            <input
+              type="text"
+              placeholder="Enter Message"
+              style={{
+                height: "100px",
+                display:"flex",
+                width: "auto",
+                margin:"5px",
+                padding: "10px 10px 70px 10px",
+                borderRadius:"4px",
+                border:"1px solid gray"
+              }}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+
+            <div style={{ marginTop: "20px" }}>
+              <div>
+                <select
+                  onChange={(e) =>
+                    setSubject({
+                      subject: e.target.value.split(",")[0],
+                      medium: e.target.value.split(",")[1],
+                    })
+                  }
+                  style={{ padding: "5px 10px", marginBottom:"10px" }}
+                >
+                  <option value="">Select subject</option>
+                  {teacherSubject.map((subject) => (
+                    <option
+                      key={subject.id}
+                      value={`${subject.subject},${subject.medium}`}
+                    >
+                      {subject.subject} ({subject.medium})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <Button
+                type="submit"
+                variant="contained"
+                endIcon={<SendIcon />}
+                sx={{width:"80px", height:"25px"}}
+              >
+                Send
+              </Button>
+            </div>
+          </form>
+        </div>
+      </DialogActions>
+    </BootstrapDialog>
+  );
+}
+
+export default Openwindow;

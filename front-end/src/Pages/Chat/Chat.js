@@ -1,20 +1,25 @@
-import React from "react";
 import "./Chat.css";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+
 
 
 function Chat() {
   return (
-    <div className="Chat">
-      <div className="Left-side-chat">
-       
-        <div className="Chat-container">
-          <h2>Chats</h2>
-          <div className="Chat-list">Conversations</div>
-        </div>
-      </div>
-      <div className="Right-side-chat"></div>
-    </div>
+    <Box sx={{ flexGrow: 1, height: "100%" }}>
+      <Grid container spacing={2}>
+        <Grid item xs={4} >
+         <Box sx={{backgroundColor:"blue",height:"100%"}}>
+
+         </Box>
+        </Grid>
+        <Grid item xs={8}>
+         
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
-
 export default Chat;

@@ -15,6 +15,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "../../../firebase";
+import Alert from "@mui/material/Alert";
+import DisplayResources from "./Displayresources";
+import AlertBox from "../../../Component/Alertbox/Alertbox";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -33,33 +36,50 @@ const Aaddresources = () => {
   const [pdfS, setSubjectp] = useState("");
   const [discriP, setdiscriP] = useState("");
   const [PDF, setPDF] = useState(undefined);
+  const [pdfmedia, setpdfmedia] = useState("");
   const [doneUploadPDF, setDoneUploadPDF] = useState(false);
 
   const [videos, setSubjectv] = useState("");
   const [discriV, setdiscriV] = useState("");
   const [video, setVideo] = useState(undefined);
+  const [videoMedia, setVideoMedia] = useState("");
   const [doneUploadVideo, setDoneUploadVideo] = useState(false);
 
   const [audios, setSubjecta] = useState("");
   const [discriA, setdiscriA] = useState("");
   const [audio, setAudio] = useState(undefined);
+  const [audioMedia, setAudioMedia] = useState("");
   const [doneUploadAudio, setDoneUploadAudio] = useState(false);
-
-  // const [pdfper, setpdfper] = useState(0);
-  // const [vidper, setvidper] = useState(0);
-  // const [audper, setaudper] = useState(0);
 
   const [submitButton, setSubmitButton] = useState(false);
   const [inputs, setInputs] = useState(undefined);
+
+  const [alertSeverity, setAlertSeverity] = React.useState(""); // State for alert severity
+  const [alertMessage, setAlertMessage] = React.useState(""); // State for alert message
+
+
+  const [Alertdata, setAlertdata] = useState({
+    show: false,
+    message: "",
+    type: "",
+    description: "",
+  }); // State for alert box
+  const [triggerNotification, setTriggerNotification] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`api/auth/fileupload`, inputs);
+        setAlertSeverity("success"); // Set success alert on successful login
+        setAlertMessage(response.data.msg);
         window.alert(response.data.msg);
         window.location.reload();
       } catch (error) {
-        console.error("Error:", error);
+        window.alert(error.response.data.msg);
+        console.error("Unexpected error format:", error);
+        setAlertSeverity("error"); // Set error alert on unexpected error
+        setAlertMessage("An unexpected error occurred. Please try again.");
       }
     };
     if (submitButton === true) {
@@ -69,7 +89,7 @@ const Aaddresources = () => {
       setDoneUploadVideo(false);
       setDoneUploadAudio(false);
     }
-  }, [inputs]);
+  }, [inputs, submitButton]);
 
   useEffect(() => {
     PDF && uploadFile(PDF, "PDFurl");
@@ -105,15 +125,6 @@ const Aaddresources = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
-
-        //  if (fileType === "PDFurl") {
-        //    setpdfper(Math.round(progress));
-        //  } else if (fileType === "videoUrl") {
-        //    setvidper(Math.round(progress));
-        //  } else if (fileType === "audioUrl") {
-        //    setaudper(Math.round(progress));
-        //  }
-        //
       },
       (error) => {
         console.error("Upload error:", error);
@@ -139,6 +150,13 @@ const Aaddresources = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAlertdata({
+      show: true,
+      message: `Resource Uploded`,
+      type: "success",
+      description: `Your Uplord File to KnowdgleBase Succfully !`,
+    });
+    setTriggerNotification(true);
     setInputs({
       ...inputs,
       pdfS: pdfS,
@@ -147,9 +165,18 @@ const Aaddresources = () => {
       discriV: discriV,
       audios: audios,
       discriA: discriA,
+      pdfmedia: pdfmedia,
+      videoMedia: videoMedia,
+      audioMedia: audioMedia,
     });
     setSubmitButton(true);
   };
+
+  const resetNotification = () => {
+    setTriggerNotification(false);
+ 
+  };
+
 
   return (
     <div>
@@ -159,6 +186,13 @@ const Aaddresources = () => {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
+        {Alertdata.show && (
+          <AlertBox
+            data={Alertdata}
+            triggerNotification={triggerNotification}
+            resetNotification={resetNotification}
+          />
+        )}
           <Box sx={{ width: "100%", height: "1000px" }}>
             <h1>File upload</h1>
             <div className="Resourses">
@@ -208,6 +242,13 @@ const Aaddresources = () => {
                         <option value="Science for Technology">
                           Science for Technology
                         </option>
+                        <option value="Grade_5">Grade 5</option>
+                      </select>
+                      <h4>Medium</h4>
+                      <select onChange={(e) => setpdfmedia(e.target.value)}>
+                        <option value="">Medium</option>
+                        <option value="Sinhala">Sinhala</option>
+                        <option value="English">English</option>
                       </select>
                       <h5>Discription</h5>
                       <textarea
@@ -292,8 +333,14 @@ const Aaddresources = () => {
                         <option value="Science for Technology">
                           Science for Technology
                         </option>
+                        <option value="Grade_5">Grade 5</option>
                       </select>
-
+                      <h4>Medium</h4>
+                      <select onChange={(e) => setVideoMedia(e.target.value)}>
+                        <option value="">Medium</option>
+                        <option value="Sinhala">Sinhala</option>
+                        <option value="English">English</option>
+                      </select>
                       <h5>Discription</h5>
                       <textarea
                         placeholder="Enter some details ..."
@@ -375,8 +422,14 @@ const Aaddresources = () => {
                         <option value="Science for Technology">
                           Science for Technology
                         </option>
+                        <option value="Grade_5">Grade 5</option>
                       </select>
-
+                      <h4>Medium</h4>
+                      <select onChange={(e) => setAudioMedia(e.target.value)}>
+                        <option value="">Medium</option>
+                        <option value="Sinhala">Sinhala</option>
+                        <option value="English">English</option>
+                      </select>
                       <h5>Discription</h5>
                       <textarea
                         placeholder="Enter some details ..."
@@ -411,6 +464,7 @@ const Aaddresources = () => {
               </Grid>
             </div>
           </Box>
+          <DisplayResources />
         </Grid>
       </Grid>
       <Footer />
