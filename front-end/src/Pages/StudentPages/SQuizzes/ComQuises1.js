@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AlertBox from "../../../Component/Alertbox/Alertbox";
+
 
 function ComQuizes({ quisedata }) {
   const [answers, setAnswers] = useState([]); // State for storing selected answers
@@ -12,13 +12,7 @@ function ComQuizes({ quisedata }) {
   const [correctAnswers, setCorrectAnswers] = useState([]); // State for correct answers
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // State for tracking current question index
 
-  // const [Alertdata, setAlertdata] = useState({
-  //   show: false,
-  //   message: "",
-  //   type: "",
-  //   description: "",
-  // }); // State for alert box
-  // const [triggerNotification, setTriggerNotification] = useState(false);
+
 
   useEffect(() => {
     let timer;
@@ -54,13 +48,6 @@ function ComQuizes({ quisedata }) {
     setSubmitButton(true);
     const score = checkAnswers();
     window.alert(`Your score is ${score} %`);
-    // setAlertdata({
-    //   show: true,
-    //   message: `Quise Result`,
-    //   type: "success",
-    //   description: `Your score is ${score} %`,
-    // });
-    // setTriggerNotification(true);
     setQuizStarted(false);
     setCountdownStarted(false);
     setShowContent(false);
@@ -102,22 +89,12 @@ function ComQuizes({ quisedata }) {
 
 
   };
-    // const resetNotification = () => {
-    //   setTriggerNotification(false);
-    //   setCountdownStarted(false);
-    //   setShowContent(false);
-    // };
+ 
 
     return (
       <>
         <div>
-          {/* {Alertdata.show && (
-            <AlertBox
-              data={Alertdata}
-              triggerNotification={triggerNotification}
-              resetNotification={resetNotification}
-            /> 
-          )} */}
+        
           {!quizStarted && (
             <button
               onClick={() => setShowContent(!showContent)}
