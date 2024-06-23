@@ -50,9 +50,9 @@ function ProfileDisplay({ email, subject, medium }) {
           }}
         >
           {teacher && (
-            <Link to={teacher.profilePicUrl || defaultImage}>
+            <Link to={teacher.url || defaultImage}>
               <img
-                src={teacher.profilePicUrl || defaultImage}
+                src={teacher.url || defaultImage}
                 alt="Profile"
                 style={{ borderRadius: "90%", width: "38px", height: "38px" }}
               />
@@ -86,12 +86,13 @@ function ProfileDisplay({ email, subject, medium }) {
         <a
           style={{
             textDecoration: "none",
+            color:"gray",
             fontSize: "13px",
-            backgroundColor: "#04c935",
-            color: "#fff",
             padding: "2px",
             borderRadius: "5px",
-            fontWeight: "600",
+            fontWeight: "500",
+            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+
           }}
           href={`mailto:${teacherProfile.email}`}
         >

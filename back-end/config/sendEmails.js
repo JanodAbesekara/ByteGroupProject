@@ -20,58 +20,20 @@ const sendVerificationEmail = async (senderAddress, link) => {
       to: senderAddress,
       subject: "Verify Email",
       html: `
-      
       <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Verify your Account</title>
-    <style>
-      body {
-        background-color: rgb(193, 212, 251);
-      }
-      h1 {
-      
-        text-align: center;
-        margin-top: 50px;
-        margin-bottom: 150px;
-        font-size: 30px;
-        color: rgb(7, 84, 132);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-      }
-      p {
-        width: 1000px;
-        margin-left: 20%;
-        margin-bottom: 50px;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: rgb(32, 1, 1);
-      }
-      img {
-        width: 500px;
-        height: 300px;
-        align-items: center;
-        margin-left: 33%;
-        margin-bottom: 80px;
- 
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Please click the link to Verify your Account</h1>
-    <a href="${link}"> <img src="https://p7.hiclipart.com/preview/867/950/447/computer-icons-email-icloud-email.jpg"/> </a>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-      voluptatibus doloribus quas beatae optio quidem excepturi. Aliquam,
-      blanditiis? Eius, aliquam alias facilis illo dolorem quo ullam accusantium
-      voluptatibus impedit blanditiis?
-      <a href="${link}">Click Here</a>
-    </p>
-  </body>
-</html>
+      <html>
+        <head>
+          <title>Verify Your Account</title>
+         
+        </head>
+        <body>
+          <h2 style="text-align:center;color:blue">Click to Verify your Account</h2>
+         
+          
+           <p style="text-align:center;font-size:15px">  <a href="${link}" style="background-color:green; color:white; text-decoration:none; padding:5px 10px; border-radius:20px;  box-shadow: 1px 1px 5px 0.4px black;">
+           Verify Account</a></p> 
+        </body>
+      </html>
       `,
     });
   } catch (e) {
@@ -86,10 +48,26 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
 
   try {
     await transporter.sendMail({
-      from:  process.env.SENDeMAIL,
+      from: process.env.SENDeMAIL,
       to: senderAddress,
       subject: "Reset Password",
-      html: `Please reset your password by clicking <a href="${link}">here</a>.<br>This email is valid for two days.`,
+      html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Reset Your password</title>
+         
+        </head>
+        <body>
+          <h2 style="text-align:center;color:blue">Click to Reset your Password</h2>
+         
+          <p style="text-align:center;font-size:15px"> <a href="${link}" style="background-color:green; color:white; text-decoration:none; padding:5px 10px; border-radius:20px;  box-shadow: 1px 1px 5px 0.4px black;">
+                  Reset
+                    </a></p> 
+        
+        </body>
+      </html>
+      `,
     });
   } catch (e) {
     error = true;

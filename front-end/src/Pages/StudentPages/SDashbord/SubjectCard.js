@@ -41,6 +41,7 @@ export default function SubjectCard() {
             style={{
               paddingLeft: "5%",
               paddingRight: "5%",
+              marginBottom:"40px"
             }}
             key={subject._id}
           >
@@ -51,7 +52,7 @@ export default function SubjectCard() {
                 flexDirection: "column",
                 marginBottom: "20px",
                 marginTop: "20px",
-                backgroundColor: "#d5edd6",
+                backgroundColor: "#F0F8FF",
                 border: "none",
                 borderRadius: "10px",
               }}
@@ -59,7 +60,7 @@ export default function SubjectCard() {
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div
                   className="classcom"
-                  style={{ width: "40%", border: "none" }}
+                  style={{ width: "100%", border: "none" , display:"flex"}}
                 >
                   <Link
                     to="/SSubject"
@@ -72,18 +73,17 @@ export default function SubjectCard() {
                       style={{
                         display:"flex",
                         width: "100%",
-                        backgroundColor: "#1A8FE3",
+                        backgroundColor: "#27ae60",
                         textAlign: "center",
                         padding: "5px 3px",
                         color: "#fff",
-                        margin: "0px",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "13px",
                         fontWeight: "bold",
                       }}
                     >
-                      {subject.Ensubject}
+                      {subject.Ensubject} <span style={{paddingLeft:"20px", fontSize:"13px", fontWeight:"400"}}>({subject.Enmedium})</span>
                     </p>
                   </Link>
                 </div>
@@ -93,10 +93,9 @@ export default function SubjectCard() {
                       margin: "4px 0px",
                       color: "#F37933",
                       fontWeight: "600",
-                      marginRight: "10px",
                     }}
                   >
-                    {subject.Enmedium}
+                    
                   </p>
                 </div>
               </div>

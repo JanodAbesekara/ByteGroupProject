@@ -178,7 +178,7 @@ function UserProfile() {
         <div className="container2">
           <Sidebar />
         </div>
-        <div className="container3">
+        <div className="container3" style={{paddingRight:"20px"}}>
           <div className="container1">
             <div className="profile_pic">
               <div className="picture">
@@ -200,6 +200,11 @@ function UserProfile() {
                       fileInputRef.current.click();
                       setClicked(!clicked);
                     }}
+                    style={{
+                      backgroundColor: "#39a0ca",
+                      boxShadow: "0 1.5px 5px #2d2d2d",
+                      border: "none",
+                    }}
                   >
                     Change
                   </button>
@@ -217,7 +222,7 @@ function UserProfile() {
 
           <div className="personal_details">
             <div className="details">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"auto"}}>
                 <label htmlFor="medium">
                   <span style={{ color: "red" }}>*</span>Medium
                 </label>
@@ -225,10 +230,12 @@ function UserProfile() {
                 <select
                   style={{
                     height: "36px",
-                    width: "300px",
+                    width: "auto",
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
+                    width:"auto",
+                    display:"flex"
                   }}
                   onChange={(e) => {
                     setShowScheme(false);
@@ -253,10 +260,12 @@ function UserProfile() {
                 <select
                   style={{
                     height: "36px",
-                    width: "300px",
+                    width: "auto",
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
+                    width:"auto",
+                    display:"flex"
                   }}
                   onChange={(e) => {
                     setScheme(e.target.value);
@@ -282,10 +291,12 @@ function UserProfile() {
                 <select
                   style={{
                     height: "36px",
-                    width: "200px",
+                    width: "auto",
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
+                    width:"auto",
+                    display:"flex"
                   }}
                   onChange={(e) => {
                     setSubjectOption(false);
@@ -374,6 +385,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={degree}
                   onChange={(e) => setDegree(e.target.value)}
+                  style={{width:"auto",display:"flex"}}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
@@ -386,10 +398,11 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={experience}
                   onChange={(e) => setExperience(e.target.value)}
+                  style={{width:"auto",display:"flex"}}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
-                  <span style={{ color: "red" }}>*</span>Classfees
+                  <span style={{ color: "red" }}>*</span>Class fees
                 </label>
                 <br></br>
                 <input
@@ -398,6 +411,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={classpees}
                   onChange={(e) => setClasspees(e.target.value)}
+                  style={{width:"auto",display:"flex"}}
                 ></input>
                 <br></br>
                 <label htmlFor="aboutMe">
@@ -410,10 +424,17 @@ function UserProfile() {
                   placeholder="Add something about yourself"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
+                  style={{padding:"0", margin:"0", width:"auto",display:"flex"}}
                 ></textarea>
 
                 <div className="btn-2">
-                  <button type="submit" value="saveDetails">
+                  <button type="submit" value="saveDetails"
+                  style={{
+                    backgroundColor: "#39a0ca",
+                    boxShadow: "0 1.5px 5px #2d2d2d",
+                    border: "none",
+                  }}
+                  >
                     Save
                   </button>
                   <br />

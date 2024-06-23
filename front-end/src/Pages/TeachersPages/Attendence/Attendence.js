@@ -84,16 +84,28 @@ function Attendance() {
               variant="h4"
               align="center"
               gutterBottom
-              sx={{ color: "#116FC2", fontSize: "45px" }}
+              sx={{ color: "#116FC2", fontSize: "35px" }}
             >
               Attendance
             </Typography>
             {Object.entries(groupedData).map(([key, data]) => {
               const [subject, medium] = key.split("-");
               return (
-                <Box key={key} mb={3}>
-                  <Typography variant="h6">{`${subject} `}</Typography>
-                  <Typography variant="h10">{`(${medium} ) `}</Typography>
+                <Box
+                  key={key}
+                  mb={3}
+                  
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      backgroundColor: "#27ae60",
+                      color: "#fff",
+                      paddingLeft: "5px",
+                      borderRadius: "3px",
+                    }}
+                  >{`${subject} `}</Typography>
+                  <Typography variant="h10" sx={{color:"gray"}}>{`(${medium} ) `}</Typography>
                   <TableContainer
                     component={Paper}
                     sx={{ marginBottom: "50px", marginTop: "20px" }}
@@ -169,7 +181,8 @@ function Attendance() {
                             <TableRow key={index}>
                               <TableCell align="center">
                                 <a href={`mailto:${item.posts.studentnemail}`}>
-                                {item.posts.studentnemail}</a>
+                                  {item.posts.studentnemail}
+                                </a>
                               </TableCell>
                               <TableCell align="center">
                                 {item.posts.studentname}

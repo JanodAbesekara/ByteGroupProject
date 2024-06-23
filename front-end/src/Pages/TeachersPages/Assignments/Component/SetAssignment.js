@@ -86,22 +86,25 @@ export default function CombinedComponent({ medium, subject }) {
       <div
         style={{
           margin: "100px 30px",
-          boxShadow: "2px 2px 10px 2px #888888",
+          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           borderRadius: "5px",
           padding: "20px",
           paddingBottom: "50px",
-          backgroundColor: "#eef2ed",
+          backgroundColor: "#F0F8FF",
         }}
       >
-        <h2
+        <p
           style={{
-            textTransform: "uppercase",
-            color: "#2439bf",
-            fontSize: "25px",
+            color: "#fff",
+            backgroundColor: "#27ae60",
+            borderRadius: "5px",
+            padding: "3px 8px",
+            fontWeight:"500",
+            fontSize:"20px"
           }}
         >
           {subject}
-        </h2>
+        </p>
 
         <h2
           style={{
@@ -117,13 +120,15 @@ export default function CombinedComponent({ medium, subject }) {
 
         <hr />
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"auto"}}>
           <div style={{ marginBottom: "20px", marginTop: "20px" }}>
             <InputTimerange setTimeRange={setTimeRange} />
           </div>
           <div
             style={{
               display: "flex",
+              flexDirection:"column",
+              width:"auto"
             }}
           >
             <EnterAssignment setQuestions={setQuestions} />
@@ -137,7 +142,8 @@ export default function CombinedComponent({ medium, subject }) {
               border: "1px solid gray",
               borderRadius: "5px",
               padding: "3px",
-              boxShadow: "1px 1px 3px 1px #1a1c1b",
+              width:"80px",
+              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
             }}
           >
             Submit

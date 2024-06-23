@@ -68,7 +68,7 @@ function PayCard({ regdetal }) {
       .post(`/api/Test/poststudentpayment`, paylord)
       .then((res) => {
         window.alert("Payment done successfully");
-       window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         window.alert("Payment failed");
@@ -77,28 +77,46 @@ function PayCard({ regdetal }) {
 
   return (
     <div>
-      <div style={{paddingLeft:"10px", display:"flex"}}>
-      <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column"}}>
-        {recpec > 0 && "Uploading : " + recpec + "%"}
-        <div>
-        <lebel style={{fontSize :"14px", fontWight:"700", color:"#BDB76B"}}>PAYMENT RECEIPT : </lebel>
-        
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setPhoto(e.target.files[0])}
-          style={{
-            marginBottom: "5px",
-            color:"#999999"
-          }}
-        />
-        </div>
-        <div>
-        <button type="submit" name="submit" style={{padding:"2px",backgroundColor:"#5dbea3",color:"#fff", border:"none", borderRadius:"3px"}}>
-          Upload
-        </button>
-        </div>
-      </form>
+      <div style={{ paddingLeft: "10px", display: "flex" }}>
+        <form
+          onSubmit={handlesubmit}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          {recpec > 0 && "Uploading : " + recpec + "%"}
+          <div>
+            <lebel
+              style={{ fontSize: "14px", fontWight: "700", color: "#BDB76B" }}
+            >
+              PAYMENT RECEIPT :{" "}
+            </lebel>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setPhoto(e.target.files[0])}
+              style={{
+                marginBottom: "5px",
+                color: "#999999",
+              }}
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              name="submit"
+              style={{
+                padding: "2px",
+                backgroundColor: "#5dbea3",
+                color: "#fff",
+                border: "none",
+                borderRadius: "3px",
+                width:"auto"
+              }}
+            >
+              Upload
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

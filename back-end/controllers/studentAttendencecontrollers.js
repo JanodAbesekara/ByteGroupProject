@@ -17,6 +17,7 @@ const studentattendenceController = async (req, res) => {
       studentnemail,
       subject,
       medium,
+      teachetmail,
       // Filter by subject for subject-specific attendance
     });
 

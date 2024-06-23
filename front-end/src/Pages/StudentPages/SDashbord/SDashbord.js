@@ -97,44 +97,52 @@ function SDashbord() {
           <Ssidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
+          <Box sx={{marginLeft:"20px"}}>
            
-            <div className="containe3">
-              <div className="container1">
-                <div className="profile_pic">
-                  <div className="picture">
-                    <Avatar
-                      alt="profile_pic"
-                      src={url}
-                      sx={{ width: 90, height: 90 }}
-                    />
-                  </div>
-                </div>
-                <div className="student_info">
-                  <div className="name" style={{ marginBottom: "30px" }}>
-                    <p>{user.firstname + " " + user.lastname}</p>
-                  </div>
-                </div>
-                <div className="Notif">
-                  <React.Fragment>
-                    <Link variant="outlined" onClick={handleClickOpen}>
-                      <Box sx={{ display: "flex", gap: 2, float: "right" }}>
-                        <Badge badgeContent={notCount}>
-                          <Typography fontSize="1.4rem">🔔</Typography>
-                        </Badge>
-                      </Box>
-                    </Link>
-                    <Popupbox
-                      open={open}
-                      handleClose={handleClose}
-                      notifications={notifications}
-                    />
-                  </React.Fragment>
-                </div>
+          <div className="container3" style={{ width:"auto"}}>
+          <div className="container1" style={{display:"flex", 
+          flexDirection:"row",
+          justifyContent:"space-between",
+          width:"auto",
+          margin:"10px",
+          padding: "10px"
+          }}>
+          <div className="teacher_info" style={{display:"flex", 
+          flexDirection:"row",
+          textAlign:"center",
+          padding:"0"
+          }}>
+              <div className="picture" style={{height:"auto", width:"auto"}} >
+                <Avatar
+                  alt="profile_pic"
+                  src={url}
+                />
               </div>
-              <div />
+              <div className="name" style={{display:"flex",paddingLeft:"3px",paddingTop:"8px", fontSize:"14px"}}>
+                <p>{user.firstname + " " + user.lastname}</p>
+              </div>
+              </div>
+
+            
+              <div className="notifications_icon">
+              <React.Fragment>
+                <Link variant="outlined" onClick={handleClickOpen}>
+                  <Box>
+                    <Badge badgeContent={notCount}>
+                      <Typography fontSize="1.0rem">🔔</Typography>
+                    </Badge>
+                  </Box>
+                </Link>
+                <Popupbox
+                  open={open}
+                  handleClose={handleClose}
+                  notifications={notifications}
+                />
+              </React.Fragment>
+              
+
             </div>
-            <div>
+          </div>
                <SubjectCard />
             </div>
           </Box>

@@ -52,7 +52,7 @@ const ComAttendence = forwardRef(({ teachermail, subject, medium }, ref) => {
         <button
           type="submit"
           disabled={buttonDisabled}
-          style={{ visibility: "hidden" }}
+         style={{ visibility: "hidden" }}
         >
           Attend to lecture
         </button>
