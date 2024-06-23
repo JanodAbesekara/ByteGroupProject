@@ -59,7 +59,7 @@ export default function Quizzes() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
+          <Box sx={{marginLeft:"20px"}}>
             {quise.length > 0 &&
               quise.map((quises) => (
                 <div key={quises._id}>

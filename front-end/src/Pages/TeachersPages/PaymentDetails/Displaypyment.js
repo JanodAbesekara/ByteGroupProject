@@ -42,24 +42,73 @@ function DisplayPayment() {
   return (
     <div>
       {Object.keys(paymentData).map((subject) => (
-        <div key={subject}>
-          <h2>{subject}</h2>
+        <div key={subject} style={{ marginLeft: "20px", paddingLeft: "15px",
+        backgroundColor: "#F0F8FF",
+        boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+        paddingTop:"15px",
+        paddingBottom:"20px",
+        marginRight:"10px"
+      }}>
+          <p
+            style={{
+              backgroundColor: "#27ae60",
+              color: "#fff",
+              fontWeight: "500",
+              fontSize: "20px",
+              paddingLeft: "10px",
+              paddingTop: "4px",
+              paddingBottom: "4px",
+              borderRadius: "4px",
+              marginRight:"10px"
+            }}
+          >
+            {subject}
+          </p>
           {Object.keys(paymentData[subject]).map((medium) => (
-            <div key={medium}>
-              <h3>{medium}</h3>
+            <div key={medium} style={{marginRight:"10px"}}>
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "blue",
+                  paddingLeft: "5px",
+                  paddingTop: "5px",
+                  paddingBottom:"8px"
+                }}
+              >
+                {medium}
+              </p>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Student Email</TableCell>
-                      <TableCell>Recit</TableCell>
+                      <TableCell
+                        sx={{
+                          textAlign: "center",
+                          backgroundColor: "#317873",
+                          borderRight: "2px white solid",
+                          color: "white",
+                        }}
+                      >
+                        Student Email
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          textAlign: "center",
+                          backgroundColor: "#317873",
+                          borderRight: "2px white solid",
+                          color: "white",
+                        }}
+                      >
+                        Receipt
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {paymentData[subject][medium].map((payment, index) => (
                       <TableRow key={index}>
                         <TableCell>
-                          <a href={`mailto:${payment.stuemail}`}>
+                          <a href={`mailto:${payment.stuemail}`} 
+                          style={{textDecoration:"none"}}>
                             {payment.stuemail}
                           </a>
                         </TableCell>

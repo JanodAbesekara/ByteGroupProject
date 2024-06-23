@@ -41,21 +41,22 @@ function Enterquizes({ setQuestions }) {
 
   return (
     <div>
-      <h3
+      <h4
         style={{
           marginBottom: "6px",
           color: "#1a7873",
           textTransform: "uppercase",
         }}
       >
-        Question count
-      </h3>
+        Questions count
+      </h4>
       <input
         style={{
-          width: "50px",
+          width: "30px",
           height: "30px",
           borderRadius: "5px",
           border: "1px solid gray",
+          textAlign:"center"
         }}
         placeholder="Enter the Question count"
         type="number"
@@ -63,7 +64,7 @@ function Enterquizes({ setQuestions }) {
         onChange={handleQuestionCountChange}
       />
       {questions.map((question, index) => (
-        <div key={index} style={{ marginTop: "20px" }}>
+        <div key={index} style={{ marginTop: "20px", display:"flex", flexDirection:"column", width:"auto" }}>
           <h2
             style={{
               fontSize: "18px",
@@ -79,25 +80,24 @@ function Enterquizes({ setQuestions }) {
               height: "30px",
               padding: "10px",
               borderRadius: "5px",
-              border: "1px solid gray"
+              border: "1px solid gray",
+              display:"flex",
             }}
             placeholder="Enter the Question"
             value={question.Question}
             onChange={(e) => handleQuestionChange(index, e)}
           />
-          <h3 style={{ marginTop: "20px" }}>Answers</h3>
-          <ul>
+          <h4 style={{ marginTop: "20px" }}>Answers</h4>
+          <ul style={{display:"flex", flexDirection:"column", width:"auto"}}>
             {question.answers.map((answer, answerIndex) => (
               <li
                 key={answerIndex}
                 style={{ paddingTop: "10px", paddingBottom: "10px" }}
               >
-                <h6>{answerIndex + 1}</h6>
                 <input
-                  sx={{
-                    margin: "10px",
-                    padding: "10px",
-                    width: "400px",
+                  style={{
+                    marginRight: "10px",
+                    width: "auto",
                     height: "30px",
                     borderRadius: "5px",
                     border: "1px solid gray",

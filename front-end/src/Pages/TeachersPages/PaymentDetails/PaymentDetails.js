@@ -6,7 +6,7 @@ import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import Displaypyment from "./Displaypyment";
+import DisplayPayment from "./Displaypyment";
 
 export default function PaymentDetails() {
   const [bank, setBank] = useState("");
@@ -76,6 +76,8 @@ export default function PaymentDetails() {
                     color: "#1193C7",
                     fontWeight: "bold",
                     fontSize: "16px",
+                    paddingLeft:"5px",
+                   paddingTop:"10px"
                   }}
                 >
                   Payment Details
@@ -86,7 +88,7 @@ export default function PaymentDetails() {
               <hr />
               <br />
               <div className="details">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column", width:"auto"}}>
                   <lebel htmlFor="bankName">
                     <span style={{ color: "red" }}>*</span>Choose Your Bank
                   </lebel>
@@ -98,6 +100,7 @@ export default function PaymentDetails() {
                       borderRadius: "5px",
                       border: "0.5px solid #10155b4d",
                       color: "#969683",
+                      width:"auto"
                     }}
                     value={bank}
                     onChange={(e) => setBank(e.target.value)}
@@ -166,7 +169,7 @@ export default function PaymentDetails() {
                 )}
               </span>
             </div>
-            <Displaypyment />
+            <DisplayPayment />
           </Box>
         </Grid>
       </Grid>

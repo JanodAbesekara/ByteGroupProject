@@ -103,7 +103,7 @@ function ClassContent({ subjectData }) {
   const style = {
     padding: "4px",
     border: "none",
-    backgroundColor: "#28a745",
+    backgroundColor: "#337ab7",
     color: "#fff",
     borderRadius: "3px",
     display: "flex",
@@ -153,21 +153,25 @@ function ClassContent({ subjectData }) {
             alignContent: "center",
             display: "flex",
             backgroundColor: "#CADCD9",
-            borderRadius: "20px",
-            
+            borderRadius: "4px",
+            flexDirection:"column",
+            width:"auto",
+            padding: "0 10px"            
           }}
         >
           <div
             style={{
-              width: "90%",
               height: "300px",
-              marginTop: "50px",
-              marginBottom: "50px",
-              display: "flex"
+              marginTop: "30px",
+              marginBottom: "30px",
+              display: "flex",
+              flexDirection:"column",
+              width:"auto",
+              justifyContent:"center"
             }}
           >
-            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>
-              <label>Lecture Name</label>
+            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width:"auto"}}>
+              <label style={{paddingBottom:"8px"}}>Lecture Name</label>
               <input
                 type="text"
                 placeholder="Enter lecture name"
@@ -177,7 +181,8 @@ function ClassContent({ subjectData }) {
                   marginBottom: "5px",
                   height: "26px",
                   paddingLeft: "5px",
-                  border: "1px solid gray"
+                  border: "1px solid gray",
+                  width:"auto"
                 }}
               />
               <div style={{display: "flex", flexDirection: "column"}}>
@@ -198,7 +203,8 @@ function ClassContent({ subjectData }) {
                     marginBottom: "5px",
                     height: "26px",
                     paddingLeft: "5px",
-                    border: "1px solid gray"
+                    border: "1px solid gray",
+                    width:"auto"
                   }}
                 />
 
@@ -219,6 +225,7 @@ function ClassContent({ subjectData }) {
                   onChange={(e) => setPdf(e.target.files[0])}
                   style={{
                     marginBottom: "5px",
+                    width:"auto"
                   }}
                 />
                 
@@ -238,6 +245,7 @@ function ClassContent({ subjectData }) {
                   onChange={(e) => setVideo(e.target.files[0])}
                   style={{
                     marginBottom: "5px",
+                    width:"auto"
                   }}
                 />
                 
@@ -259,7 +267,8 @@ function ClassContent({ subjectData }) {
                     marginBottom: "10px",
                     height: "26px",
                     paddingLeft: "5px",
-                    border: "1px solid gray"
+                    border: "1px solid gray",
+                    width:"auto"
                   }}
                 />
               </div>
@@ -269,7 +278,9 @@ function ClassContent({ subjectData }) {
                         padding: "4px 0px",
                         backgroundColor: "rgb(164, 166, 179)",
                         border: "none",
-                        borderRadius: "3px"
+                        borderRadius: "3px",
+                        width:"60px",
+                        boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                       }}
               >Submit</button>
             </form>
