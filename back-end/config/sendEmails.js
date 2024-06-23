@@ -77,18 +77,18 @@ const sendForgotPasswordEmail = async (senderAddress, link) => {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Reset Your password</title>      
+          <title>Reset Your password</title>
+         
         </head>
         <body>
           <h2 style="text-align:center;color:blue">Click to Reset your Password</h2>
           <div class="HQ" style="justify-content:center; align-content:center;display:flex;">
-          <p style="text-align:center;"> Click the   <a href="${link}">
-                    <button style="color: white; background-color: green; border: none; padding: 4px 8px; box-shadow: 1px 1px 4px 0.5px black; cursor: pointer;">Reset</button>
+          <p style="text-align:center;"> Click the   <a href="${link}" style="background-color:green;color:white;text-decoration:none;padding:4px 10px">
+                  Reset
                     </a> to Reset Your password</p> 
           </div>
         </body>
       </html>
-      
       `,
     });
   } catch (e) {
