@@ -20,7 +20,6 @@ function SProfile() {
   const [mobileNo, setMobileNo] = useState("");
   const [clicked, setClicked] = useState(true); //control profile picture uploding button
 
-
   // Function to handle image upload
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
@@ -100,8 +99,27 @@ function SProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if( !name || !email || !mobileNo){
+    if (!name || !email || !mobileNo) {
       window.alert("Please fill all the required fields");
+      return;
+    }
+
+    const nameRegex = /^[a-zA-Z]+$/;
+
+    if (name.length < 3 || !nameRegex.test(name)) {
+      window.alert("Please enter a valid name");
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+
+    if (!emailRegex.test(email)) {
+      window.alert("Please enter a valid email");
+      return;
+    }
+
+    if (mobileNo.length !== 10 || isNaN(mobileNo)) {
+      window.alert("Please enter a valid mobile number");
       return;
     }
 
@@ -164,7 +182,7 @@ function SProfile() {
                   src={url}
                   sx={{ width: 90, height: 90 }}
                 />
-                 {clicked ? (
+                {clicked ? (
                   <button
                     onClick={() => {
                       fileInputRef.current.click();
@@ -186,11 +204,11 @@ function SProfile() {
           </div>
 
           <div className="personal_details">
-            <div className="details" style={{width:"auto", display:"flex"}}>
+            <div className="details" style={{ width: "auto", display: "flex" }}>
               <form onSubmit={handleSubmit}>
                 <lebel htmlFor="Parent/Guardian Full Name">
-                  <span style={{ color: "red", width:"auto"}}>*</span>Parent/Guardian Full
-                  Name
+                  <span style={{ color: "red", width: "auto" }}>*</span>
+                  Parent/Guardian Full Name
                 </lebel>
                 <br></br>
                 <input
