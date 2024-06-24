@@ -102,7 +102,7 @@ function MyAds() {
 
     const conformation = window.confirm("Are you sure to post this add?");
 
-    if (!conformation) {
+    if (conformation) {
       setInputs({
         ...inputs,
         edulevel: edulevel,
