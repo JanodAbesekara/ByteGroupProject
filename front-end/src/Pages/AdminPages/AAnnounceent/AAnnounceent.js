@@ -105,7 +105,7 @@ function AAnnounceent() {
 
   const renderAnnouncementsTable = (announcements, title) => (
     <div style={{ marginBottom: "50px" }}>
-    <a  href={`mailto:${title}`} ><h2 style={{ textAlign: "center", marginBottom: "20px" }}>{title}</h2></a>
+   <h2 style={{ textAlign: "center", marginBottom: "20px", color:"#0049B7" }}>{title}</h2>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -173,29 +173,36 @@ function AAnnounceent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
+            <div style={{marginLeft:"40px", marginRight:"20px"}}>
+          <p style={{ textAlign: "center", marginBottom: "40px", marginTop:"50px",color:"#333A73", fontWeight:"650",fontSize:"25px" }}>
+                Announcements
+              </p>
             <div
               className="Announcement"
-              style={{ border: "2px solid black", padding: "10px" }}
+              style={{boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+              padding: "10px",
+              marginLeft:"5px"
+            }}
             >
-              <form onSubmit={handleSubmit}>
-                <label>Annnouncement Title :- </label>
+              <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",width:"auto",marginBottom:"30px"}}>
+                <label style={{color:"#0049B7",fontWeight:"500"}}>Title </label>
                 <input
                   type="text"
                   placeholder="Enter Title"
-                  style={{ padding: "5px 10px 5px 2px" }}
+                  style={{ width:"auto",margin:"5px 0",height:"30px",borderRadius:"3px",border: "1px solid gray", paddingLeft:"4px" }}
                   onChange={(e) => settitleofAnn(e.target.value)}
                 />
-                <br></br>
-                <br></br>
-
-                <label>Announcement Message :- </label>
+                <label style={{color:"#0049B7",fontWeight:"500"}}>Message </label>
                 <input
                   type="text"
                   placeholder="Enter Message"
                   style={{
-                    height: "100px",
-                    width: "300px",
-                    padding: "10px 10px 70px 10px",
+                    height: "40px",
+                    width: "auto",
+                    margin:"5px 0",
+                    border: "1px solid gray",
+                    borderRadius:"4px",
+                    paddingLeft:"4px"
                   }}
                   onChange={(e) => setAnnouncementmessage(e.target.value)}
                 />
@@ -208,22 +215,21 @@ function AAnnounceent() {
                     backgroundColor: "#007FFF",
                     border: "none",
                     borderRadius: "5px",
-                    marginLeft: "10px",
+                    marginTop: "10px",
+                    width:"50px"
                   }}
                 >
-                  send
+                  SEND
                 </button>
               </form>
             </div>
 
-            <div style={{ marginTop: "150px", marginBottom: "100px" }}>
-              <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
-                Announcements
-              </h1>
+            <div style={{ marginTop: "150px", marginBottom: "80px" }}>
               {renderAnnouncementsTable(systemChanges, "System Changes")}
               {Object.keys(announcementsByEmail).map((email) =>
                 renderAnnouncementsTable(announcementsByEmail[email], email)
               )}
+            </div>
             </div>
           </Box>
         </Grid>
