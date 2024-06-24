@@ -100,6 +100,11 @@ function SProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if( !name || !email || !mobileNo){
+      window.alert("Please fill all the required fields");
+      return;
+    }
+
     const isconform = window.confirm("Are you sure you want to save?");
 
     if (!isconform) {
