@@ -92,12 +92,6 @@ function UserProfile() {
       userID = "";
     }
 
-
-    if (isNaN(classpees) || classpees < 0 || classpees === "") {
-      window.alert("Class fees must be a positive number and cannot be empty");
-      return;
-    }
-
     axios
       .get(`api/user/userProfile/${userID}`)
       .then((response) => {
@@ -124,6 +118,12 @@ function UserProfile() {
           if (!medium) {
             window.alert("You must select your medium");
             return false;
+          }
+          if (isNaN(classpees) || classpees < 0 || classpees === "") {
+            window.alert(
+              "Class fees must be a positive number and cannot be empty"
+            );
+            return;
           }
           if (!scheme) {
             window.alert("You must select your scheme");
