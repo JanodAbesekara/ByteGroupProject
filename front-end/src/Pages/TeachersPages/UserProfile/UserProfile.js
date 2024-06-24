@@ -107,12 +107,7 @@ function UserProfile() {
         window.alert("You must select your medium");
         return;
       }
-      if (isNaN(classpees) || classpees < 0 || classpees === "") {
-        window.alert(
-          "Class fees must be a positive number and cannot be empty"
-        );
-        return;
-      }
+     
       if (!scheme) {
         window.alert("You must select your scheme");
         return;
@@ -123,6 +118,12 @@ function UserProfile() {
       }
       if (!experience) {
         window.alert("You must select your experience");
+        return;
+      }
+      if (isNaN(classpees) || classpees < 0 || classpees === "") {
+        window.alert(
+          "Class fees must be a positive number and cannot be empty"
+        );
         return;
       }
       if (!aboutme) {
