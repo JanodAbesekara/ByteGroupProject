@@ -52,6 +52,10 @@ function PayCard({ regdetal }) {
   const handlesubmit = (e) => {
     e.preventDefault();
 
+    if(!resite){
+      window.alert("Please upload the payment receipt");
+      return;
+    }
     const conform = window.confirm("Are you sure to upload this receit?");
 
     if (conform) {
