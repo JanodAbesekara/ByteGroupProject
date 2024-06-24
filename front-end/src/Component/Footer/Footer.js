@@ -4,7 +4,6 @@ import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
 import Notifacition from "../../Pages/Notifacition";
 
-
 function Footer() {
   const form = useRef();
 
@@ -15,12 +14,6 @@ function Footer() {
 
     if (!message) {
       window.alert("Please fill the message field");
-      return;
-    }
-
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(user_email)) {
-      window.alert("Invalid Email");
       return;
     }
 
@@ -86,26 +79,26 @@ function Footer() {
             <h4>@ 2024 DreamLearnAcademy.lk</h4>
           </div>
           <div className="logo3">
-            < Link to="">
+            <Link to="">
               <img src="./Symbles/link.png" alt="link" target="_blank" />
-            </ Link>
-            < Link to="">
+            </Link>
+            <Link to="">
               <img
                 src="./Symbles/facebook.png"
                 alt="facebook"
                 target="_blank"
               />
-            </ Link>
-            < Link to="">
+            </Link>
+            <Link to="">
               <img
                 src="./Symbles/whatsapp.png"
                 alt="whatsapp"
                 target="_blank"
               />
-            </ Link>
-            < Link to="">
+            </Link>
+            <Link to="">
               <img src="./Symbles/youtube.png" alt="youtube" target="_blank" />
-            </ Link>
+            </Link>
           </div>
         </div>
       </div>
