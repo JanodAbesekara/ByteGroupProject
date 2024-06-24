@@ -92,18 +92,6 @@ function UserProfile() {
       userID = "";
     }
 
-    if (
-      !medium ||
-      !scheme ||
-      !degree ||
-      !experience ||
-      !aboutme ||
-      !image ||
-      !classpees
-    ) {
-      window.alert("Please fill all the fields and upload a profile picture");
-      return;
-    }
 
     if (isNaN(classpees) || classpees < 0 || classpees === "") {
       window.alert("Class fees must be a positive number and cannot be empty");
