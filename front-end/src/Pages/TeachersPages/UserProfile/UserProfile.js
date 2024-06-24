@@ -20,12 +20,12 @@ function UserProfile() {
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("");
   const [aboutme, setAboutMe] = useState("");
-  const [showChooseOption, setShowChooseOption] = useState(true); // control visibility
-  const [showScheme, setShowScheme] = useState(true); // control visibility
-  const [subjectOption, setSubjectOption] = useState(true); // control visibility
-  const [scheme, setScheme] = useState(""); // control visibility of "choose scheme"
-  const [classpees, setClasspees] = useState(""); // control visibility of "choose scheme"
-  const [clicked, setClicked] = useState(true); //control profile picture uploding button
+  const [showChooseOption, setShowChooseOption] = useState(true);
+  const [showScheme, setShowScheme] = useState(true);
+  const [subjectOption, setSubjectOption] = useState(true);
+  const [scheme, setScheme] = useState("");
+  const [classfees, setClassfees] = useState("");
+  const [clicked, setClicked] = useState(true);
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -101,82 +101,62 @@ function UserProfile() {
       .catch((error) => console.log(error));
   }, []);
 
+  const validateForm = () => {
+    if (!medium || !scheme || !degree || !experience || !aboutme || !classfees) {
+      window.alert("Please fill all the required fields");
+      return false;
+    }
+    if (isNaN(classfees) || classfees < 0) {
+      window.alert("Class fees must be a positive number and cannot be empty");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!url) {
-      window.alert("Please add profile picture first");
-    } else {
-      const token = localStorage.getItem("MERN_AUTH_TOKEN");
-      const decodedToken = jwtDecode(token);
-      const userID = decodedToken._id;
-      const userEmail = decodedToken.email;
-      setUser(decodedToken);
-
-      const validateForm = () => {
-        if (!medium || !scheme || !degree || !experience || !aboutme) {
-          if (!medium) {
-            window.alert("You must select your medium");
-            return;
-          }
-          if (isNaN(classpees) || classpees < 0 || classpees === "") {
-            window.alert(
-              "Class fees must be a positive number and cannot be empty"
-            );
-            return;
-          }
-          if (!scheme) {
-            window.alert("You must select your scheme");
-            return;
-          }
-          if (!degree) {
-            window.alert("You must select your degree");
-            return;
-          }
-          if (!experience) {
-            window.alert("You must select your experience");
-            return;
-          }
-          if (!aboutme) {
-            window.alert("You must select your aboutme");
-            return;
-          }
-
-          window.alert("Please fill all the required fields");
-          return; // Return false to indicate form validation failed
-        }
-        return true; // Return true to indicate form validation passed
-      };
-
-      if (validateForm) {
-        const updatedUser = {
-          ...user,
-          medium: medium,
-          scheme: scheme,
-          subject: subject,
-          degree: degree,
-          experience: experience,
-          aboutme: aboutme,
-          email: userEmail,
-          id: userID,
-          url: url,
-          classpees: classpees,
-        };
-
-        console.log(updatedUser);
-        axios
-          .post(`/api/user/userProfile`, updatedUser)
-          .then((response) => {
-            window.alert(response.data.msg);
-            console.log(response.data.msg);
-            window.location.reload();
-          })
-          .catch((error) => {
-            window.alert(error.response.data.msg);
-            console.log(error.response.data.msg);
-          });
-      }
+      window.alert("Please add a profile picture first");
+      return;
     }
+
+    if (!validateForm()) {
+      return;
+    }
+
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const userID = decodedToken._id;
+    const userEmail = decodedToken.email;
+    setUser(decodedToken);
+
+    const updatedUser = {
+      ...user,
+      medium: medium,
+      scheme: scheme,
+      subject: subject,
+      degree: degree,
+      experience: experience,
+      aboutme: aboutme,
+      email: userEmail,
+      id: userID,
+      url: url,
+      classfees: classfees,
+    };
+
+    console.log(updatedUser);
+    axios
+      .post(`/api/user/userProfile`, updatedUser)
+      .then((response) => {
+        window.alert(response.data.msg);
+        console.log(response.data.msg);
+        window.location.reload();
+      })
+      .catch((error) => {
+        window.alert(error.response.data.msg);
+        console.log(error.response.data.msg);
+      });
   };
 
   return (
