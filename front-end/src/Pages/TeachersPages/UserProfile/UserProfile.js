@@ -117,7 +117,7 @@ function UserProfile() {
         if (!medium || !scheme || !degree || !experience || !aboutme) {
           if (!medium) {
             window.alert("You must select your medium");
-            return false;
+            return;
           }
           if (isNaN(classpees) || classpees < 0 || classpees === "") {
             window.alert(
@@ -127,21 +127,23 @@ function UserProfile() {
           }
           if (!scheme) {
             window.alert("You must select your scheme");
-            return false;
+            return;
           }
           if (!degree) {
             window.alert("You must select your degree");
-            return false;
+            return;
           }
           if (!experience) {
             window.alert("You must select your experience");
-            return false;
+            return;
           }
           if (!aboutme) {
             window.alert("You must select your aboutme");
-            return false;
+            return;
           }
-          return false; // Return false to indicate form validation failed
+
+          window.alert("Please fill all the required fields");
+          return; // Return false to indicate form validation failed
         }
         return true; // Return true to indicate form validation passed
       };
