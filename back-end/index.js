@@ -22,6 +22,7 @@ dbConnect();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 // CORS configuration
 const corsOptions = {
   origin: 'https://byte-group-project.vercel.app',
@@ -30,6 +31,8 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+
 
 // Routes
 app.get("/", (req, res) => {

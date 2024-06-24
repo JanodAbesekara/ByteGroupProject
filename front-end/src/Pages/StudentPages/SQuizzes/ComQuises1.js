@@ -96,7 +96,7 @@ function ComQuizes({ quisedata }) {
   };
 
   const resetNotification = () => {
-    setTriggerNotification(false);
+    // setTriggerNotification(false);
     setCountdownStarted(false);
     setShowContent(false);
 
