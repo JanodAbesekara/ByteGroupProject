@@ -100,6 +100,11 @@ function MyAds() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (subject === "" || edulevel === "" || medium === "" || photos === "") {
+      window.alert("Please fill all the fields");
+      return;
+    }
+
     const conformation = window.confirm("Are you sure to post this add?");
 
     if (conformation) {
