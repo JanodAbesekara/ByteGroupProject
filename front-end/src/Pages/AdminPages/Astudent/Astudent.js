@@ -75,18 +75,24 @@ function Astudent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
+            <div style={{
+              marginLeft:"20px",
+              marginRight:"10px"
+            }}>
             <div className="StudentDetal" >
-              <h3
+              <p
                 style={{
+                  fontWeight:"600",
                   textAlign: "center",
-                  fontSize: "30px",
+                  fontSize: "28px",
                   color: "#333A73",
                   marginTop: "100px",
+                  paddingLeft:"5px"
                 }}
               >
-                <b>Student Details</b>
-              </h3>
-              <h2>Total Student count :- {totalstu}</h2>
+                Student Details
+              </p>
+              <p style={{paddingLeft:"10px", marginTop:"10px",backgroundColor:"gray",color:"#fff",width:"120px",marginLeft:"10px",paddingTop:"4px",paddingBottom:"4px",borderRadius:"4px"}}>Total Student count : {totalstu}</p>
             </div>
             {chunks.map((chunk, index) => (
               <TableContainer
@@ -139,7 +145,7 @@ function Astudent() {
                           fontSize: "18px",
                         }}
                       >
-                        Date of Join
+                        Joined Date
                       </TableCell>
                       <TableCell
                         align="center"
@@ -179,14 +185,13 @@ function Astudent() {
                               color: "White",
                               borderRadius: "5px",
                               border: "none",
-                              boxShadow: "2px 1px 10px 0.5px black",
+                              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                             }}
                             onClick={() =>
                               handleDeleteConfirmation(student.email)
                             }
                           >
                             Delete
-                            <MdDeleteOutline />
                           </button>
                         </TableCell>
                       </TableRow>
@@ -195,6 +200,7 @@ function Astudent() {
                 </Table>
               </TableContainer>
             ))}
+            </div>
           </Box>
         </Grid>
       </Grid>

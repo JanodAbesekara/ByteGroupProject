@@ -13,7 +13,6 @@ import {
   TableBody,
 } from "@mui/material";
 import Axios from "axios";
-import "./ADashbord.css";
 
 function ADashbord() {
   const [admins, setAdmins] = useState([]);
@@ -80,25 +79,29 @@ function ADashbord() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div>
-              <div className="Count_AD">
-                <h2>Admin count :- {admincount}</h2>
-              </div>
+            <div className="main_ADs" style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginTop:"10px", marginLeft:"30px"}}>
 
-              <div className="Form_Ad">
-                <h3>Create Admins</h3>
-                <form onSubmit={handleSubmit}>
-                  <label>EmailAddress : - </label>
+              <div className="Form_AD" style={{paddingTop:"10px"}}>
+                <p style={{padding:"4px 5px", backgroundColor:"green", textAlign:"center",color:"#fff",borderRadius:"3px"}}>Create Admin</p>
+                <form onSubmit={handleSubmit} style={{width:"auto", display:"flex", flexDirection:"column",paddingTop:"10px"}}>
+                  <label style={{padding:"4px",color:"blue", fontSize:"16px", fontWeight:"500", paddingBottom:"8px"}}><span style={{color:"red"}}>*</span>Email Address</label>
                   <input
                     type="email"
                     placeholder="Enter Email Address"
                     onChange={(e) => setAdmincreate(e.target.value)}
+                    style={{width:"100%", height:"30px", marginBottom:"8px"}}
                   />
-                  <br></br>
-                  <button type="submit"> Submit </button>
+                  <button type="submit" style={{width:"55px"}}> Submit </button>
                 </form>
               </div>
+              
+              <div className="Count_AD" style={{paddingLeft:"10px", paddingTop:"10px", marginRight:"10px"}}>
+                <p style={{backgroundColor:"#a28089",color:"#fff",textAlign:"center", borderRadius:"5px", padding:"4px 5px"}}>Admin count : {admincount}</p>
+              </div>
+
             </div>
+
+
             <div className="StudentDetal">
               <h3
                 style={{
@@ -107,9 +110,10 @@ function ADashbord() {
                   color: "#333A73",
                   marginTop: "100px",
                   marginBottom: "50px",
+                  fontWeight:"600"
                 }}
               >
-                <b>Admin Details</b>
+                Admin Details
               </h3>
             </div>
             <TableContainer component={Paper}>

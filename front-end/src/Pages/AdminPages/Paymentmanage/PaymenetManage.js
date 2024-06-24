@@ -82,17 +82,21 @@ function PaymenetManage() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
+            <div style={{marginLeft:"35px"}}>
             <div>
-              <h3>Remove Student</h3>
-              <form onSubmit={handelremove}>
-                <label>Student Email:</label>
+              <p style={{textAlign:"center",fontSize:"27px",color:"#333A73",fontWeight:"650",marginBottom:"15px",marginTop:"20px"}}>Remove Student</p>
+              <form onSubmit={handelremove} style={{width:"auto",display:"flex",flexDirection:"column ",color:"#0049B7",fontWeight:"500"}}>
+                <label>Student Email</label>
                 <input
                   type="text"
                   name="stuemail"
                   onChange={(e) => setStuemail(e.target.value)}
+                  placeholder="Student email"
+                  style={{marginTop:"3px",marginBottom:"10px", width:"auto",height:"30px",border:"1px solid gray",paddingLeft:"5px"}}
                 />
-                <label>Student Subject </label>
-                <select onChange={(e) => setSubject(e.target.value)}>
+                <label>Student Subject</label>
+                <select onChange={(e) => setSubject(e.target.value)}
+                style={{marginTop:"3px",marginBottom:"10px",width:"auto",height:"30px",border:"1px solid gray"}}>
                   <option value=" ">Select Subject</option>
                   <option value="Mathematics">Mathematics</option>
                   <option value="Science">Science</option>
@@ -134,7 +138,8 @@ function PaymenetManage() {
                   <option value="Japanese">Japanese</option>
                 </select>
                 <label>Student Medium</label>
-                <select onChange={(e) => setMedium(e.target.value)}>
+                <select onChange={(e) => setMedium(e.target.value)}
+                style={{marginTop:"3px",marginBottom:"10px", width:"auto",height:"30px",border:"1px solid gray"}}>
                   <option value=" ">Select medium</option>
                   <option value="English">English</option>
                   <option value="Sinhala">Sinhala</option>
@@ -144,34 +149,79 @@ function PaymenetManage() {
                 <input
                   type="email"
                   name="TeacherEmail"
+                  placeholder="Teacher email"
                   onChange={(e) => setTeacherEmail(e.target.value)}
+                  style={{marginTop:"3px",marginBottom:"10px",paddingLeft:"5px",width:"auto",height:"30px",border:"1px solid gray"}}
                 />
-                <button type="submit">Remove</button>
+                <button type="submit" style={{
+                    padding: "5px",
+                    color: "white",
+                    backgroundColor: "#007FFF",
+                    border: "none",
+                    borderRadius: "5px",
+                    marginTop: "10px",
+                    width:"65px"
+                  }}>Remove</button>
               </form>
             </div>
 
-            <h2>Payment Management</h2>
+            <p style={{textAlign:"center",fontSize:"27px",color:"#333A73",fontWeight:"650",marginBottom:"15px",marginTop:"20px"}}>Payment Management</p>
             {Object.entries(groupedPaymentData).map(
               ([teacherEmail, subjects]) => (
                 <Box key={teacherEmail} mb={4}>
-                  <h3>Teacher: {teacherEmail}</h3>
+                  <p style={{fontSize:"14px",color:"#0049B7"}}><span style={{color:"#000"}}>Teacher : </span>{teacherEmail}</p>
                   {Object.entries(subjects).map(([subject, mediums]) => (
                     <Box key={subject} mb={2}>
-                      <h4>Subject: {subject}</h4>
-                      <br></br>
+                      <p style={{fontSize:"14px",color:"#0049B7"}}><span style={{color:"#000"}}>Subject : </span>{subject}</p>
                       {Object.entries(mediums).map(([medium, payments]) => (
                         <Box key={medium} mb={1}>
-                          <h5>Medium: {medium}</h5>
+                          <p style={{fontSize:"14px",color:"#0049B7"}}><span style={{color:"#000"}}>Medium : </span>{medium}</p>
                           <TableContainer component={Paper}>
                             <Table>
                               <TableHead>
                                 <TableRow>
-                                  <TableCell>Teacher Email</TableCell>
-                                  <TableCell>Student Email</TableCell>
-                                  <TableCell>Subject</TableCell>
-                                  <TableCell>Medium</TableCell>
-                                  <TableCell>Recit</TableCell>
-                                  <TableCell>Bank name/AccountNum</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Teacher Email</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Student Email</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Subject</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Medium</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Receipt</TableCell>
+                                  <TableCell align="center"
+                        style={{
+                          color: "white",
+                          backgroundColor: "#124076",
+                          borderRight: "2px white solid",
+                          fontSize: "16px",
+                        }}>Bank name/AccountNum</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -195,7 +245,7 @@ function PaymenetManage() {
                                           <img
                                             src={payment.photourl}
                                             style={{
-                                              width: "80px",
+                                              width: "60px",
                                               height: "80px",
                                             }}
                                             alt="image_url"
@@ -214,6 +264,7 @@ function PaymenetManage() {
                 </Box>
               )
             )}
+            </div>
           </Box>
         </Grid>
       </Grid>

@@ -64,18 +64,19 @@ function Component1({ subject, teachermail, Feedmedium }) {
           Add Feedbacks
         </button>
         {clicked && (
-          <form>
-            <h2
+          <form style={{width:"70%",display:"flex",flexDirection:"column"}}>
+            <lebel
               style={{
                 color: "#000080",
-                marginBottom: "15px",
+                marginBottom: "13px",
                 marginTop: "10px",
                 fontSize: "14px",
-                textAlign:"center",
+                textAlign:"left",
+                fontWeight:"500"
               }}
             >
               Enter your feedback
-            </h2>
+            </lebel>
             <input
               type="text"
               style={{ 
@@ -83,12 +84,12 @@ function Component1({ subject, teachermail, Feedmedium }) {
                 paddingTop: "10px",
                 paddingBottom: "60px",
                 paddingLeft: "8px",
-                width: "30%",
-                display:"flex",
+                width: "auto",
+                border:"1px solid gray"
               }}
               placeholder="Type here.."
               onChange={(e) => setFeedtext(e.target.value)}
-            />
+            /> 
             <Box
               sx={{
                 "& > legend": { mt: 2 },
@@ -110,7 +111,7 @@ function Component1({ subject, teachermail, Feedmedium }) {
                 padding: "2px",
                 borderRadius: "3px",
                 border: "1px solid gray",
-                width:"auto"
+                width:"60px"
               }}
             >
               Submit

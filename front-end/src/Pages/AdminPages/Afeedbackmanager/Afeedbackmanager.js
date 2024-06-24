@@ -89,8 +89,8 @@ function Afeedbackmanager() {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box className="feedback-container">
-            <h1>Feedback Management</h1>
+          <Box className="feedback-container" sx={{marginLeft:"15px"}}>
+            <p style={{color:"#333A73",fontSize:"28px",fontWeight:"650",textAlign:"center",paddingBottom:"30px",paddingTop:"40px"}}>Feedback Management</p>
             {Object.keys(groupedFeedbackData).length > 0 ? (
               Object.keys(groupedFeedbackData).map((teacheremail) =>
                 Object.keys(groupedFeedbackData[teacheremail]).map(
@@ -98,10 +98,12 @@ function Afeedbackmanager() {
                     Object.keys(
                       groupedFeedbackData[teacheremail][feedSubject]
                     ).map((feedmedium) => (
-                      <div key={`${teacheremail}-${feedSubject}-${feedmedium}`}>
-                        <h2>
-                          {teacheremail} - {feedSubject} - {feedmedium}
-                        </h2>
+                      <div key={`${teacheremail}-${feedSubject}-${feedmedium}`} >
+                        <div style={{display:"flex",flexDirection:"column",width:"auto", backgroundColor:"#F0F8FF", padding:"10px 0", borderRadius:"5px", color:"#fff"}}>
+                          <p style={{width:"auto", display:"flex", fontSize:"14px", backgroundColor:"green", paddingTop:"4px",paddingBlock:"4px", borderRadius:"4px"}}>{teacheremail}</p>
+                          <p style={{width:"auto", display:"flex", fontSize:"13px", color:"blue"}}>{feedSubject} ({feedmedium})</p>
+                        </div>
+                        
                         <TableContainer
                           component={Paper}
                           className="table-container"
@@ -114,15 +116,15 @@ function Afeedbackmanager() {
                                   "Subject",
                                   "Medium",
                                   "Student Email",
-                                  "Feedback Text",
-                                  "Star count",
+                                  "Feedback",
+                                  "Rating",
                                   "Action",
                                 ].map((header) => (
                                   <TableCell
                                     sx={{
                                       textAlign: "center",
-                                      backgroundColor: "#0000B9",
-                                      color: "white",
+                                      backgroundColor: "#124076",
+                                      color: "#fff",
                                       borderRight: "2px solid white",
                                       fontSize: "16px",
                                     }}

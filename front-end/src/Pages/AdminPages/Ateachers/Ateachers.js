@@ -74,24 +74,25 @@ function Ateachers() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box sx={{ marginBottom: "100px" }}>
+            <div style={{marginLeft:"30px",marginRight:"5px"}}>
             <div className="StudentDetail">
               <h3
                 style={{
                   textAlign: "center",
                   fontSize: "30px",
                   color: "#333A73",
-                  marginTop: "100px",
+                  marginTop: "80px",
                 }}
               >
                 <b>Teachers Details</b>
               </h3>
-              <h3>Total Teachers Count : - {totalteachers}</h3>
+              <p style={{paddingLeft:"5px",marginTop:"30px",backgroundColor:"gray",borderRadius:"3px",color:"#fff",display:"flex",width:"130px",paddingTop:"5px", paddingBottom:"5px"}}>Total Teachers Count : {totalteachers}</p>
             </div>
             {chunks.map((chunk, index) => (
               <TableContainer
                 component={Paper}
                 key={index}
-                sx={{ marginTop: "100px" }}
+                sx={{ marginTop: "50px", marginBottom:"40px" }}
               >
                 <Table>
                   <TableHead>
@@ -105,7 +106,7 @@ function Ateachers() {
                           fontSize: "18px",
                         }}
                       >
-                        Teachers Name
+                        Teacher Name
                       </TableCell>
                       <TableCell
                         align="center"
@@ -138,7 +139,7 @@ function Ateachers() {
                           fontSize: "18px",
                         }}
                       >
-                        Date of Join
+                        Joined Date
                       </TableCell>
                       <TableCell
                         align="center"
@@ -160,7 +161,7 @@ function Ateachers() {
                           {teacher.firstname} {teacher.lastname}
                         </TableCell>
                         <TableCell align="center">
-                          <a href={`mailto:${teacher.email}`}>
+                          <a href={`mailto:${teacher.email}`} style={{textDecoration:"none"}}>
                            {teacher.email} </a></TableCell>
                         <TableCell align="center">
                           {teacher.phonenumber}
@@ -178,14 +179,13 @@ function Ateachers() {
                               color: "White",
                               borderRadius: "5px",
                               border: "none",
-                              boxShadow: "2px 1px 10px 0.5px black",
+                              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                             }}
                             onClick={() =>
                               handleDeleteConfirmation(teacher.email)
                             }
                           >
                             Delete
-                            <MdDeleteOutline />
                           </button>
                         </TableCell>
                       </TableRow>
@@ -194,6 +194,7 @@ function Ateachers() {
                 </Table>
               </TableContainer>
             ))}
+            </div>
           </Box>
         </Grid>
       </Grid>
