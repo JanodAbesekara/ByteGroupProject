@@ -48,15 +48,16 @@
   > div
   > div
   > div.contact_detail_location {
-  margin-left: 180px;
-}
+    margin-left: 50px;
+  }
+
 .contact_detal_mail h3,
 .contact_detal_call h3,
 .contact_detal_location h3 {
   position: relative;
   bottom: 25px;
   right: -35px;
-  width: 300px;
+  width: 200px;
   font-size: 14px;
   color: rgb(1, 37, 67);
 }
@@ -214,6 +215,7 @@
     align-items: center;
     position: relative;
     bottom: 30px;
+    left: 20%;
   }
 }
 
