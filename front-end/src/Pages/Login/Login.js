@@ -99,7 +99,7 @@ function Login({ setUser, setIsLoggedIn }) {
           setAlertSeverity("success"); // Set success alert on successful login
           setAlertMessage(response.data.msg); // Set alert message from response
         } else {
-          console.error("Unexpected response format:", response);
+         
           setAlertSeverity("error"); // Set error alert on unexpected response
           setAlertMessage("An unexpected error occurred. Please try again.");
         }

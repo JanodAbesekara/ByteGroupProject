@@ -24,7 +24,7 @@ function PaymentdisplayTable() {
           params: { email },
         });
         setPaymentData(response.data.data);
-        console.log("details" + response.data.data);
+       
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
       }

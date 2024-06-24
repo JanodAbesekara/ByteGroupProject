@@ -142,8 +142,7 @@ function SProfile() {
       uEmail: userEmail,
       id: userID,
     };
-    console.log("======");
-    console.log(updatedUser);
+
     axios
       .post(`/api/user/guardian`, updatedUser)
       .then((response) => {
@@ -151,11 +150,9 @@ function SProfile() {
         setEmail((pre) => (pre.length > 0 ? "" : pre));
         setMobileNo((pre) => (pre.length > 0 ? "" : pre));
         window.alert(response.data.msg);
-        console.log(response.data.msg);
       })
       .catch((error) => {
         window.alert(error.response.data.msg);
-        console.log(error.response.data.msg);
       });
   };
 

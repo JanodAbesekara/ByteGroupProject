@@ -21,12 +21,9 @@ export default function Forgetpassword() {
     axios
       .post("/api/auth/forgotpassword", { email })
       .then((res) => {
-        console.log(res.data);
         window.alert(res.data.msg);
-        
       })
       .catch((err) => {
-        console.log(err.response);
         window.alert(err.response.data.msg);
       });
   };

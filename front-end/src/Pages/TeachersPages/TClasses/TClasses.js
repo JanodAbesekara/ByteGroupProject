@@ -30,7 +30,6 @@ export default function TClasses() {
         const filterRegsubjects = response.data.data;
         setselectsubject(filterRegsubjects);
       } catch (error) {
-        console.error("Error fetching data: ", error);
         setError("Error fetching data: " + error.message);
       }
     };
@@ -46,7 +45,7 @@ export default function TClasses() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box sx={{ marginBottom: "20px", marginLeft:"40px " }}>
+          <Box sx={{ marginBottom: "20px", marginLeft: "40px " }}>
             {error && <p>{error}</p>}
             {selectsubject.map((selectsubjects) => (
               <div key={selectsubjects._id}>

@@ -202,7 +202,7 @@ function AssignmentComponent({ assignmentData }) {
       axios
         .post(`/api/assignment/grade`, mark)
         .then((response) => {
-          console.log(response.data.msg);
+         
           alert(response.data.msg);
         })
         .catch((error) => {

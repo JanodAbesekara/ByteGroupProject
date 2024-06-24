@@ -31,7 +31,6 @@ function AddingLectures({ subjectData }) {
         const filteredMaterial = response.data.data;
         setSubjectQuiz(filteredMaterial);
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError("Error fetching data: " + error.message);
       }
     };
@@ -61,7 +60,6 @@ function AddingLectures({ subjectData }) {
         window.alert("Unexpected response status: " + response.status);
       }
     } catch (error) {
-      console.error("Error deleting data:", error);
       setError("Error deleting data: " + error.message);
       window.alert("Error deleting data: " + error.message);
     }

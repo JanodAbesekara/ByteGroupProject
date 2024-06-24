@@ -47,7 +47,7 @@ function MyAds() {
         window.alert(response.data.msg);
         window.location.reload();
       } catch (error) {
-        console.log(error);
+       
         console.log(error.response.data);
       }
     };

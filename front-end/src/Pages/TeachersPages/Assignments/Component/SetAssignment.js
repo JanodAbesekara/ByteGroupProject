@@ -37,19 +37,15 @@ export default function CombinedComponent({ medium, subject }) {
       submedium: medium,
     };
 
-    console.log(assignmentDetails);
-    console.log(subject);
     const request = axios.post(
       `/api/assignment/createAssignment`,
       assignmentDetails
     );
     request.then((response) => {
-      console.log("Response:", response);
       window.alert(response.data.message);
       window.location.reload(); // refresh the window
     });
     request.catch((error) => {
-      console.error("Error:", error);
       window.alert(error.response.data.message);
     });
   };
@@ -77,7 +73,7 @@ export default function CombinedComponent({ medium, subject }) {
       };
 
       const response = await axios.post(`/api/send/notifaction`, paylod);
-      console.log(response.data.message);
+     
     } catch (error) {
       if (error.response && error.response.data) {
         window.alert(error.response.data.message);

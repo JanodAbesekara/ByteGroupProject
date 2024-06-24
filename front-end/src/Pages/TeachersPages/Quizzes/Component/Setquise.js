@@ -18,7 +18,7 @@ export default function CombinedComponent({ medium, subject }) {
     const useremail = decodedToken.email;
     sentnotifsacition();
 
-    const  conform = window.confirm("Are you sure you want to submit?");
+    const conform = window.confirm("Are you sure you want to submit?");
     if (!conform) {
       return;
     }
@@ -38,7 +38,6 @@ export default function CombinedComponent({ medium, subject }) {
       window.location.reload();
     });
     request.catch((error) => {
-      console.error("Error:", error);
       window.alert(error.response.data.message);
     });
   };
@@ -66,7 +65,6 @@ export default function CombinedComponent({ medium, subject }) {
       };
 
       const response = await axios.post(`/api/send/notifaction`, paylod);
-      console.log(response.data.message);
     } catch (error) {
       if (error.response && error.response.data) {
         window.alert(error.response.data.message);
@@ -82,16 +80,17 @@ export default function CombinedComponent({ medium, subject }) {
         style={{
           marginRight: "20px",
           marginLeft: "20px",
-          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+          boxShadow:
+            "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           borderRadius: "5px",
           padding: "10px",
           marginTop: "60px",
           paddingBottom: "50px",
           marginBottom: "60px",
           backgroundColor: "#F0F8FF",
-          displa:"flex",
-          flexDirection:"column",
-          width:"auto"
+          displa: "flex",
+          flexDirection: "column",
+          width: "auto",
         }}
       >
         <h2
@@ -103,7 +102,6 @@ export default function CombinedComponent({ medium, subject }) {
         >
           {subject}
         </h2>
-
 
         <h2
           style={{
@@ -119,9 +117,11 @@ export default function CombinedComponent({ medium, subject }) {
 
         <hr />
 
-        <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column",width:"auto"}}>
-          <div style={{ marginBottom: "20px", marginTop: "20px"
-                     }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", width: "auto" }}
+        >
+          <div style={{ marginBottom: "20px", marginTop: "20px" }}>
             <InputTimerange
               setTimeRange={setTimeRange}
               setQuizNumber={setQuizNumber}
@@ -139,7 +139,8 @@ export default function CombinedComponent({ medium, subject }) {
             style={{
               marginTop: "20px",
               padding: "4px 5px",
-              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+              boxShadow:
+                "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
               border: "none",
               borderRadius: "5px",
               fontSize: "14px",

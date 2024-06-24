@@ -30,7 +30,6 @@ function Ateachers() {
   const getTeachers = () => {
     Axios.get(`api/auth/teachermangement`)
       .then((response) => {
-        console.log(response.data.data);
         setTeachers(response?.data?.data || []);
       })
       .catch((error) => {
@@ -74,126 +73,146 @@ function Ateachers() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box sx={{ marginBottom: "100px" }}>
-            <div style={{marginLeft:"30px",marginRight:"5px"}}>
-            <div className="StudentDetail">
-              <h3
-                style={{
-                  textAlign: "center",
-                  fontSize: "30px",
-                  color: "#333A73",
-                  marginTop: "80px",
-                }}
-              >
-                <b>Teachers Details</b>
-              </h3>
-              <p style={{paddingLeft:"5px",marginTop:"30px",backgroundColor:"gray",borderRadius:"3px",color:"#fff",display:"flex",width:"130px",paddingTop:"5px", paddingBottom:"5px"}}>Total Teachers Count : {totalteachers}</p>
-            </div>
-            {chunks.map((chunk, index) => (
-              <TableContainer
-                component={Paper}
-                key={index}
-                sx={{ marginTop: "50px", marginBottom:"40px" }}
-              >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Teacher Name
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Email
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Contact No
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Joined Date
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Delete
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {chunk.map((teacher, index) => (
-                      <TableRow key={index}>
-                        <TableCell align="center">
-                          {teacher.firstname} {teacher.lastname}
+            <div style={{ marginLeft: "30px", marginRight: "5px" }}>
+              <div className="StudentDetail">
+                <h3
+                  style={{
+                    textAlign: "center",
+                    fontSize: "30px",
+                    color: "#333A73",
+                    marginTop: "80px",
+                  }}
+                >
+                  <b>Teachers Details</b>
+                </h3>
+                <p
+                  style={{
+                    paddingLeft: "5px",
+                    marginTop: "30px",
+                    backgroundColor: "gray",
+                    borderRadius: "3px",
+                    color: "#fff",
+                    display: "flex",
+                    width: "130px",
+                    paddingTop: "5px",
+                    paddingBottom: "5px",
+                  }}
+                >
+                  Total Teachers Count : {totalteachers}
+                </p>
+              </div>
+              {chunks.map((chunk, index) => (
+                <TableContainer
+                  component={Paper}
+                  key={index}
+                  sx={{ marginTop: "50px", marginBottom: "40px" }}
+                >
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Teacher Name
                         </TableCell>
-                        <TableCell align="center">
-                          <a href={`mailto:${teacher.email}`} style={{textDecoration:"none"}}>
-                           {teacher.email} </a></TableCell>
-                        <TableCell align="center">
-                          {teacher.phonenumber}
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Email
                         </TableCell>
-                        <TableCell align="center">
-                          {new Date(teacher.updatedAt).toLocaleDateString()}
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Contact No
                         </TableCell>
-                        <TableCell align="center">
-                          <button
-                            style={{
-                              padding: "2px 10px",
-                              fontSize: "15px",
-                              marginLeft: "10px",
-                              backgroundColor: "Red",
-                              color: "White",
-                              borderRadius: "5px",
-                              border: "none",
-                              boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-                            }}
-                            onClick={() =>
-                              handleDeleteConfirmation(teacher.email)
-                            }
-                          >
-                            Delete
-                          </button>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Joined Date
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Delete
                         </TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            ))}
+                    </TableHead>
+                    <TableBody>
+                      {chunk.map((teacher, index) => (
+                        <TableRow key={index}>
+                          <TableCell align="center">
+                            {teacher.firstname} {teacher.lastname}
+                          </TableCell>
+                          <TableCell align="center">
+                            <a
+                              href={`mailto:${teacher.email}`}
+                              style={{ textDecoration: "none" }}
+                            >
+                              {teacher.email}{" "}
+                            </a>
+                          </TableCell>
+                          <TableCell align="center">
+                            {teacher.phonenumber}
+                          </TableCell>
+                          <TableCell align="center">
+                            {new Date(teacher.updatedAt).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell align="center">
+                            <button
+                              style={{
+                                padding: "2px 10px",
+                                fontSize: "15px",
+                                marginLeft: "10px",
+                                backgroundColor: "Red",
+                                color: "White",
+                                borderRadius: "5px",
+                                border: "none",
+                                boxShadow:
+                                  "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                              }}
+                              onClick={() =>
+                                handleDeleteConfirmation(teacher.email)
+                              }
+                            >
+                              Delete
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ))}
             </div>
           </Box>
         </Grid>

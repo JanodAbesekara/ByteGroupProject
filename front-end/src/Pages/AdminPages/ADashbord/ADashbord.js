@@ -24,7 +24,6 @@ function ADashbord() {
       try {
         const response = await Axios.get(`/api/user/admindisplay`);
         setAdmins(response.data.data);
-        console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,7 +70,6 @@ function ADashbord() {
       window.alert("Admin created successfully");
       window.location.reload();
     } catch (error) {
-      console.error("Error creating admin:", error);
       window.alert("Error creating admin");
     }
   };

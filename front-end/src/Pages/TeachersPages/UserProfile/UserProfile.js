@@ -107,7 +107,7 @@ function UserProfile() {
         window.alert("You must select your medium");
         return;
       }
-     
+
       if (!scheme) {
         window.alert("You must select your scheme");
         return;
@@ -169,7 +169,6 @@ function UserProfile() {
         window.location.reload();
       } catch (error) {
         window.alert(error.response.data.msg);
-        console.log(error.response.data.msg);
       }
     }
   };

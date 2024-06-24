@@ -29,7 +29,7 @@ function STeachers() {
         const data = response.data.data.filter(
           (item) => item.userEmail === Stuemail
         );
-        console.log(data);
+       
         setsubjectdetal(data);
       } catch (error) {
         console.log(error);

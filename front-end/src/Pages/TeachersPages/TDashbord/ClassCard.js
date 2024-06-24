@@ -18,7 +18,7 @@ export default function ClassCard(subjectData) {
     const id = subjectData.subjectData._id;
     setSubID(id);
     setIsEditing(true);
-    console.log(subjectData);
+   
   };
 
   const handleSave = () => {
@@ -40,7 +40,7 @@ export default function ClassCard(subjectData) {
       })
       .catch((error) => {
         window.alert(error.response.data.msg);
-        console.log(error.response.data.msg);
+       
       });
   };
 
