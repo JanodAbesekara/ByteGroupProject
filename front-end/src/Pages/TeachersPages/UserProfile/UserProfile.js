@@ -101,80 +101,74 @@ function UserProfile() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    if (!medium || !scheme || !degree || !experience || !aboutme) {
+      if (!medium) {
+        window.alert("You must select your medium");
+        return;
+      }
+      if (isNaN(classpees) || classpees < 0 || classpees === "") {
+        window.alert(
+          "Class fees must be a positive number and cannot be empty"
+        );
+        return;
+      }
+      if (!scheme) {
+        window.alert("You must select your scheme");
+        return;
+      }
+      if (!degree) {
+        window.alert("You must select your degree");
+        return;
+      }
+      if (!experience) {
+        window.alert("You must select your experience");
+        return;
+      }
+      if (!aboutme) {
+        window.alert("You must select your aboutme");
+        return;
+      }
+
+      window.alert("Please fill all the required fields");
+      return; // Return false to indicate form validation failed
+    }
+    return true; // Return true to indicate form validation passed
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!url) {
       window.alert("Please add profile picture first");
-    } else {
+    } else if (validateForm()) {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
       const decodedToken = jwtDecode(token);
       const userID = decodedToken._id;
       const userEmail = decodedToken.email;
       setUser(decodedToken);
 
-      const validateForm = () => {
-        if (!medium || !scheme || !degree || !experience || !aboutme) {
-          if (!medium) {
-            window.alert("You must select your medium");
-            return;
-          }
-          if (isNaN(classpees) || classpees < 0 || classpees === "") {
-            window.alert(
-              "Class fees must be a positive number and cannot be empty"
-            );
-            return;
-          }
-          if (!scheme) {
-            window.alert("You must select your scheme");
-            return;
-          }
-          if (!degree) {
-            window.alert("You must select your degree");
-            return;
-          }
-          if (!experience) {
-            window.alert("You must select your experience");
-            return;
-          }
-          if (!aboutme) {
-            window.alert("You must select your aboutme");
-            return;
-          }
-
-          window.alert("Please fill all the required fields");
-          return; // Return false to indicate form validation failed
-        }
-        return true; // Return true to indicate form validation passed
+      const updatedUser = {
+        ...user,
+        medium: medium,
+        scheme: scheme,
+        subject: subject,
+        degree: degree,
+        experience: experience,
+        aboutme: aboutme,
+        email: userEmail,
+        id: userID,
+        url: url,
+        classpees: classpees,
       };
 
-      if (validateForm) {
-        const updatedUser = {
-          ...user,
-          medium: medium,
-          scheme: scheme,
-          subject: subject,
-          degree: degree,
-          experience: experience,
-          aboutme: aboutme,
-          email: userEmail,
-          id: userID,
-          url: url,
-          classpees: classpees,
-        };
-
-        console.log(updatedUser);
-        axios
-          .post(`/api/user/userProfile`, updatedUser)
-          .then((response) => {
-            window.alert(response.data.msg);
-            console.log(response.data.msg);
-            window.location.reload();
-          })
-          .catch((error) => {
-            window.alert(error.response.data.msg);
-            console.log(error.response.data.msg);
-          });
+      try {
+        const response = await axios.post(`/api/user/userProfile`, updatedUser);
+        window.alert(response.data.msg);
+        window.location.reload();
+      } catch (error) {
+        window.alert(error.response.data.msg);
+        console.log(error.response.data.msg);
       }
     }
   };
