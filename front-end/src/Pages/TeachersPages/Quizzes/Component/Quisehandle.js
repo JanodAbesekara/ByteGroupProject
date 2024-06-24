@@ -11,10 +11,16 @@ import {
 import axios from "axios";
 
 function Quisehandle({ subjectquise }) {
-  
   const [setsubjectquise] = useState(subjectquise);
 
   const deletebutton = async (_id) => {
+    const conformation = window.confirm(
+      "Are you sure you want to delete this Quise?"
+    );
+
+    if (!conformation) {
+      return;
+    }
     try {
       const response = await axios.post(`/api/Quise/deleteQuise`, { _id });
       if (response && response.data && response.data.message) {
@@ -26,14 +32,17 @@ function Quisehandle({ subjectquise }) {
         prevsubjectquise.filter((quise) => quise._id !== _id)
       );
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.message) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         window.alert(error.response.data.message);
       } else {
         window.alert("Deleting Successfull");
       }
     }
   };
-  
 
   return (
     <div>

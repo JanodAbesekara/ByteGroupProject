@@ -40,14 +40,20 @@ function STeachers() {
   }, []);
 
   const handleLogout = async (teacherEmail, Ensubject, Enmedium, userEmail) => {
-    try {
-      const data = { teacherEmail, Ensubject, Enmedium, userEmail };
-      const respond = await Axios.post(`/api/Enrol/logoutfromclass`, data);
-      window.alert(respond.data.msg);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error during logout:", error);
-      window.alert(error.respond.data.msg);
+    const isconform = window.confirm(
+      "Are you sure you want to logout from this class?"
+    );
+
+    if (isconform) {
+      try {
+        const data = { teacherEmail, Ensubject, Enmedium, userEmail };
+        const respond = await Axios.post(`/api/Enrol/logoutfromclass`, data);
+        window.alert(respond.data.msg);
+        window.location.reload();
+      } catch (error) {
+        console.error("Error during logout:", error);
+        window.alert(error.respond.data.msg);
+      }
     }
   };
 
@@ -60,7 +66,15 @@ function STeachers() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <h1 style={{fontSize:"30px", marginTop:"45px", paddingTop:"20px"}}>Enrolled Teachers</h1>
+            <h1
+              style={{
+                fontSize: "30px",
+                marginTop: "45px",
+                paddingTop: "20px",
+              }}
+            >
+              Enrolled Teachers
+            </h1>
             <TableContainer component={Paper} sx={{ margin: "15px 0px" }}>
               <Table>
                 <TableHead>
@@ -112,11 +126,12 @@ function STeachers() {
                     subjectdetal.map((subjectDetails, index) => (
                       <TableRow key={index}>
                         <TableCell sx={{ textAlign: "center" }}>
-
-                          <a href={`mailto:{subjectDetails.teacherEmail}`}
-                             style={{textDecoration:"none"}}>
-                          {subjectDetails.teacherEmail}</a>
-
+                          <a
+                            href={`mailto:{subjectDetails.teacherEmail}`}
+                            style={{ textDecoration: "none" }}
+                          >
+                            {subjectDetails.teacherEmail}
+                          </a>
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {subjectDetails.Ensubject}
@@ -125,19 +140,27 @@ function STeachers() {
                           {subjectDetails.Enmedium}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
-
-                          <button 
-                          onClick={() => handleLogout(subjectDetails.teacherEmail,subjectDetails.Ensubject,subjectDetails.Enmedium,subjectDetails.userEmail)}
-                          style={{
-                            backgroundColor: "red",
-                            border: "none",
-                            borderRadius: "5px",
-                            padding: "3px",
-                            color: "#fff",
-                            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-                          }}
-                          >Logout</button>
-
+                          <button
+                            onClick={() =>
+                              handleLogout(
+                                subjectDetails.teacherEmail,
+                                subjectDetails.Ensubject,
+                                subjectDetails.Enmedium,
+                                subjectDetails.userEmail
+                              )
+                            }
+                            style={{
+                              backgroundColor: "red",
+                              border: "none",
+                              borderRadius: "5px",
+                              padding: "3px",
+                              color: "#fff",
+                              boxShadow:
+                                "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                            }}
+                          >
+                            Logout
+                          </button>
                         </TableCell>
                       </TableRow>
                     ))}

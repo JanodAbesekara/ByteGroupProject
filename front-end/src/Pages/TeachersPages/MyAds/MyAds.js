@@ -99,16 +99,21 @@ function MyAds() {
   console.log(inputs);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setInputs({
-      ...inputs,
-      edulevel: edulevel,
-      subject: subject,
-      medium: medium,
-      pagelink: "/Enrollment",
-      email: useremail,
-    });
 
-    setSubmitButton(true);
+    const conformation = window.confirm("Are you sure to post this add?");
+
+    if (!conformation) {
+      setInputs({
+        ...inputs,
+        edulevel: edulevel,
+        subject: subject,
+        medium: medium,
+        pagelink: "/Enrollment",
+        email: useremail,
+      });
+
+      setSubmitButton(true);
+    }
   };
 
   return (
@@ -122,46 +127,55 @@ function MyAds() {
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
             <Grid container>
-              <Grid item md={6} sm={6} xs={12} sx={{margin:"10px", width:"auto"}}>
+              <Grid
+                item
+                md={6}
+                sm={6}
+                xs={12}
+                sx={{ margin: "10px", width: "auto" }}
+              >
                 <div
                   className="main-myadd"
                   style={{
                     display: "flex",
-                    flexDirection:"column",
+                    flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginLeft:"23px",
-                    width:"auto",
+                    marginLeft: "23px",
+                    width: "auto",
                   }}
                 >
                   <form
                     onSubmit={handleSubmit}
                     style={{
                       marginTop: "50px",
-                      display:"flex",
-                      flexDirection:"column",
-                      width:"auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "auto",
                     }}
                   >
-                    <div className="maindiv" style={{
-                      borderRadius: "5px",
-                      padding:"20px",
-                      backgroundColor: " #F0F8FF",
-                      boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-
-                    }}>
+                    <div
+                      className="maindiv"
+                      style={{
+                        borderRadius: "5px",
+                        padding: "20px",
+                        backgroundColor: " #F0F8FF",
+                        boxShadow:
+                          "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                      }}
+                    >
                       <h2
                         style={{
                           textAlign: "center",
                           marginTop: "20px",
                           marginBottom: "20px",
-                          color:"#5cb85c"
+                          color: "#5cb85c",
                         }}
                       >
                         Post New Add
                       </h2>
                       <div className="adsdetal">
-                        <h3 style={{color:"#016ecd"}}>Subject</h3>
+                        <h3 style={{ color: "#016ecd" }}>Subject</h3>
                         <select
                           name="class"
                           className="select"
@@ -206,7 +220,9 @@ function MyAds() {
                         </select>
 
                         <br></br>
-                        <h4 style={{color:"#016ecd"}}>Select Education Level</h4>
+                        <h4 style={{ color: "#016ecd" }}>
+                          Select Education Level
+                        </h4>
                         <br></br>
                         <input
                           type="radio"
@@ -215,7 +231,7 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label style={{color:"gray"}}>Grade 5</label>
+                        <label style={{ color: "gray" }}>Grade 5</label>
                         <br></br>
                         <input
                           type="radio"
@@ -224,7 +240,7 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label style={{color:"gray"}}> O/L</label>
+                        <label style={{ color: "gray" }}> O/L</label>
 
                         <br></br>
                         <input
@@ -234,11 +250,11 @@ function MyAds() {
                           onChange={(e) => setEducation(e.target.value)}
                           style={{ marginLeft: "20px", marginBottom: "10px" }}
                         />
-                        <label style={{color:"gray"}}>A/L</label>
+                        <label style={{ color: "gray" }}>A/L</label>
 
                         <br></br>
                         <br></br>
-                        <h4 style={{color:"#016ecd"}}>Medium</h4>
+                        <h4 style={{ color: "#016ecd" }}>Medium</h4>
                         <br></br>
                         <input
                           type="radio"
@@ -300,32 +316,50 @@ function MyAds() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width:"auto"
+                    width: "auto",
                   }}
                 >
-                  <div stye={{justifyContent:"center", width:"auto", display:"flex"}}>
-                    <h2 style={{ marginTop: "80px", marginBottom: "50px", width:"auto", display:"flex", textAlign:"center", paddingLeft:"40px",color:"#5cb85c"}}>
+                  <div
+                    stye={{
+                      justifyContent: "center",
+                      width: "auto",
+                      display: "flex",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        marginTop: "80px",
+                        marginBottom: "50px",
+                        width: "auto",
+                        display: "flex",
+                        textAlign: "center",
+                        paddingLeft: "40px",
+                        color: "#5cb85c",
+                      }}
+                    >
                       Instructions to add posts
                     </h2>
 
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-
-                      <span style={{color:"red"}}>*</span>. Add your most recent posts
+                      <span style={{ color: "red" }}>*</span>. Add your most
+                      recent posts
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      <span style={{color:"red"}}>*</span>. This will be your passion.
+                      <span style={{ color: "red" }}>*</span>. This will be your
+                      passion.
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      <span style={{color:"red"}}>*</span>. This post will be displayed to students and parents.
+                      <span style={{ color: "red" }}>*</span>. This post will be
+                      displayed to students and parents.
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      <span style={{color:"red"}}>*</span>. Add creative and attractive post
+                      <span style={{ color: "red" }}>*</span>. Add creative and
+                      attractive post
                     </p>
                     <p style={{ marginLeft: "50px", marginBottom: "10px" }}>
-                      <span style={{color:"red"}}>*</span>. This post will make you teaching color
-
+                      <span style={{ color: "red" }}>*</span>. This post will
+                      make you teaching color
                     </p>
-                    
                   </div>
                 </div>
               </Grid>
@@ -337,7 +371,7 @@ function MyAds() {
                   fontSize: "30px",
                   color: "#104781",
                   marginTop: "30px",
-                  paddingLeft:"15px",
+                  paddingLeft: "15px",
                 }}
               >
                 Posted Adds

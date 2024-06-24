@@ -100,6 +100,12 @@ function SProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const isconform = window.confirm("Are you sure you want to save?");
+
+    if (!isconform) {
+      return;
+    }
+
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userID = decodedToken._id;

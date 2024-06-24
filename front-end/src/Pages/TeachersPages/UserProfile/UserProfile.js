@@ -55,6 +55,24 @@ function UserProfile() {
   }, []);
 
   const handleSave = () => {
+    if (
+      !medium ||
+      !scheme ||
+      !degree ||
+      !experience ||
+      !aboutme ||
+      !image ||
+      !classpees
+    ) {
+      window.alert("Please fill all the fields and upload a profile picture");
+      return;
+    }
+
+    if (isNaN(classpees) || classpees < 0 || classpees === "") {
+      window.alert("Class fees must be a positive number and cannot be empty");
+      return;
+    }
+
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
@@ -114,7 +132,7 @@ function UserProfile() {
       setUser(decodedToken);
 
       const validateForm = () => {
-        if (!medium || !scheme || !degree || !experience || !aboutme ) {
+        if (!medium || !scheme || !degree || !experience || !aboutme) {
           if (!medium) {
             window.alert("You must select your medium");
             return false;
@@ -152,7 +170,7 @@ function UserProfile() {
           email: userEmail,
           id: userID,
           url: url,
-          classpees:classpees,
+          classpees: classpees,
         };
 
         console.log(updatedUser);
@@ -178,7 +196,7 @@ function UserProfile() {
         <div className="container2">
           <Sidebar />
         </div>
-        <div className="container3" style={{paddingRight:"20px"}}>
+        <div className="container3" style={{ paddingRight: "20px" }}>
           <div className="container1">
             <div className="profile_pic">
               <div className="picture">
@@ -222,7 +240,14 @@ function UserProfile() {
 
           <div className="personal_details">
             <div className="details">
-              <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"auto"}}>
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "auto",
+                }}
+              >
                 <label htmlFor="medium">
                   <span style={{ color: "red" }}>*</span>Medium
                 </label>
@@ -234,8 +259,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setShowScheme(false);
@@ -264,8 +289,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setScheme(e.target.value);
@@ -295,8 +320,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setSubjectOption(false);
@@ -385,7 +410,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={degree}
                   onChange={(e) => setDegree(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
@@ -398,7 +423,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={experience}
                   onChange={(e) => setExperience(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
@@ -411,7 +436,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={classpees}
                   onChange={(e) => setClasspees(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="aboutMe">
@@ -424,16 +449,23 @@ function UserProfile() {
                   placeholder="Add something about yourself"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
-                  style={{padding:"0", margin:"0", width:"auto",display:"flex"}}
+                  style={{
+                    padding: "0",
+                    margin: "0",
+                    width: "auto",
+                    display: "flex",
+                  }}
                 ></textarea>
 
                 <div className="btn-2">
-                  <button type="submit" value="saveDetails"
-                  style={{
-                    backgroundColor: "#39a0ca",
-                    boxShadow: "0 1.5px 5px #2d2d2d",
-                    border: "none",
-                  }}
+                  <button
+                    type="submit"
+                    value="saveDetails"
+                    style={{
+                      backgroundColor: "#39a0ca",
+                      boxShadow: "0 1.5px 5px #2d2d2d",
+                      border: "none",
+                    }}
                   >
                     Save
                   </button>

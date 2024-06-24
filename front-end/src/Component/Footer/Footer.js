@@ -18,6 +18,12 @@ function Footer() {
       return;
     }
 
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(user_email)) {
+      window.alert("Invalid Email");
+      return;
+    }
+
     emailjs
       .sendForm("service_1gpq132", "template_7ydso0h", form.current, {
         publicKey: "KCo3zZMarlBJtwG3E",

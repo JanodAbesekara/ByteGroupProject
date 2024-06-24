@@ -18,6 +18,10 @@ export default function CombinedComponent({ medium, subject }) {
     const useremail = decodedToken.email;
     sentnotifsacition();
 
+    const  conform = window.confirm("Are you sure you want to submit?");
+    if (!conform) {
+      return;
+    }
 
     const payload = {
       TimeRanges: timeRange,

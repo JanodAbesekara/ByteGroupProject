@@ -32,20 +32,25 @@ function Displayresources() {
   };
 
   const handleDelete = (id) => {
-    const paylord = { _id: id };
+    const isConform = window.confirm(
+      "Are you sure you want to delete this file?"
+    );
 
-    axios
+    if (isConform) {
+      const paylord = { _id: id };
 
-      .post(`/api/auth/deletefile`, paylord)
-      .then((res) => {
-        getFille();
-        window.alert("File Deleted Successfully");
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error("Error deleting data:", error);
-        window.alert("Error deleting data:", error);
-      });
+      axios
+        .post(`/api/auth/deletefile`, paylord)
+        .then((res) => {
+          getFille();
+          window.alert("File Deleted Successfully");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error deleting data:", error);
+          window.alert("Error deleting data:", error);
+        });
+    }
   };
 
   return (

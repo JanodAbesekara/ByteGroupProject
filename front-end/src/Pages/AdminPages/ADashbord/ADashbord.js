@@ -38,6 +38,12 @@ function ADashbord() {
   }, [admins.length]);
 
   const handleDelete = async (_id) => {
+    const isConform = window.confirm(
+      "Are you sure you want to Remove this Admin?"
+    );
+
+    if (!isConform) return;
+
     try {
       await Axios.post(`/api/user/admindelete`, {
         id: _id,
@@ -54,7 +60,7 @@ function ADashbord() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(admincreate === " "){
+    if (admincreate === " ") {
       window.alert("Please enter email address");
       return;
     }
@@ -79,28 +85,86 @@ function ADashbord() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div className="main_ADs" style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginTop:"10px", marginLeft:"30px"}}>
-
-              <div className="Form_AD" style={{paddingTop:"10px"}}>
-                <p style={{padding:"4px 5px", backgroundColor:"green", textAlign:"center",color:"#fff",borderRadius:"3px"}}>Create Admin</p>
-                <form onSubmit={handleSubmit} style={{width:"auto", display:"flex", flexDirection:"column",paddingTop:"10px"}}>
-                  <label style={{padding:"4px",color:"blue", fontSize:"16px", fontWeight:"500", paddingBottom:"8px"}}><span style={{color:"red"}}>*</span>Email Address</label>
+            <div
+              className="main_ADs"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: "10px",
+                marginLeft: "30px",
+              }}
+            >
+              <div className="Form_AD" style={{ paddingTop: "10px" }}>
+                <p
+                  style={{
+                    padding: "4px 5px",
+                    backgroundColor: "green",
+                    textAlign: "center",
+                    color: "#fff",
+                    borderRadius: "3px",
+                  }}
+                >
+                  Create Admin
+                </p>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{
+                    width: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingTop: "10px",
+                  }}
+                >
+                  <label
+                    style={{
+                      padding: "4px",
+                      color: "blue",
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      paddingBottom: "8px",
+                    }}
+                  >
+                    <span style={{ color: "red" }}>*</span>Email Address
+                  </label>
                   <input
                     type="email"
                     placeholder="Enter Email Address"
                     onChange={(e) => setAdmincreate(e.target.value)}
-                    style={{width:"100%", height:"30px", marginBottom:"8px"}}
+                    style={{
+                      width: "100%",
+                      height: "30px",
+                      marginBottom: "8px",
+                    }}
                   />
-                  <button type="submit" style={{width:"55px"}}> Submit </button>
+                  <button type="submit" style={{ width: "55px" }}>
+                    {" "}
+                    Submit{" "}
+                  </button>
                 </form>
               </div>
-              
-              <div className="Count_AD" style={{paddingLeft:"10px", paddingTop:"10px", marginRight:"10px"}}>
-                <p style={{backgroundColor:"#a28089",color:"#fff",textAlign:"center", borderRadius:"5px", padding:"4px 5px"}}>Admin count : {admincount}</p>
+
+              <div
+                className="Count_AD"
+                style={{
+                  paddingLeft: "10px",
+                  paddingTop: "10px",
+                  marginRight: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    backgroundColor: "#a28089",
+                    color: "#fff",
+                    textAlign: "center",
+                    borderRadius: "5px",
+                    padding: "4px 5px",
+                  }}
+                >
+                  Admin count : {admincount}
+                </p>
               </div>
-
             </div>
-
 
             <div className="StudentDetal">
               <h3
@@ -110,7 +174,7 @@ function ADashbord() {
                   color: "#333A73",
                   marginTop: "100px",
                   marginBottom: "50px",
-                  fontWeight:"600"
+                  fontWeight: "600",
                 }}
               >
                 Admin Details

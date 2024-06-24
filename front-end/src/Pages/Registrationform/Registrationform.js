@@ -16,6 +16,21 @@ export default function TeachersRegister() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
+    if(firstname === "" || lastname === "" || phonenumber === "" || email === "" || password === "" || confirmpassword === "" || role === "") {
+      window.alert("Please fill all the fields");
+      return;
+    }
+
+    const nameRegex = /^[a-zA-Z]+$/;
+
+    if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
+      window.alert(
+        "First name and Last name cannot contain numbers or special characters"
+      );
+      return;
+    }
+
     if (password === confirmpassword) {
       const data = {
         firstname,

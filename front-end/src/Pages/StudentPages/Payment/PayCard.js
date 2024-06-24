@@ -51,6 +51,11 @@ function PayCard({ regdetal }) {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+
+    const conform = window.confirm("Are you sure to upload this receit?");
+
+    if (conform) {
+
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const stuemail = decodedToken.email;
@@ -73,6 +78,7 @@ function PayCard({ regdetal }) {
       .catch((err) => {
         window.alert("Payment failed");
       });
+    }
   };
 
   return (

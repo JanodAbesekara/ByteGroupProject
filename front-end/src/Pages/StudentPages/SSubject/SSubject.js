@@ -34,10 +34,10 @@ function SSubject() {
 
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("/api/Enrol/getSubject",{
-          params:{userEmail:userEmail},
+        const response = await axios.get("/api/Enrol/getSubject", {
+          params: { userEmail: userEmail },
         });
-       
+
         const filteredSubjects = response.data.data;
 
         setSubjects(filteredSubjects);
@@ -59,7 +59,7 @@ function SSubject() {
           <Box>
             <Link to="/Enrollment">
               <BootstrapTooltip
-                title="Click to Enroll courses"
+                title="Click to See More Courses"
                 placement="bottom"
                 arrow
               >
@@ -69,11 +69,12 @@ function SSubject() {
                     marginTop: "50px",
                     marginLeft: "45px",
                     padding: "5px 10px ",
-                    border:"none",
-                    backgroundColor:"#28a745",
-                    color:"#fff",
-                    borderRadius:"3px",
-                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                    border: "none",
+                    backgroundColor: "#28a745",
+                    color: "#fff",
+                    borderRadius: "3px",
+                    boxShadow:
+                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                 >
                   More Subjects
@@ -81,16 +82,18 @@ function SSubject() {
               </BootstrapTooltip>
             </Link>
             <>
-              {subjects              
-                .map((subject) => (
-                  <div key={subject._id} style={{marginLeft:"30px", marginRight:"30px"}}>
-                    <SubjectComponenet
-                      teachermail={subject.teacherEmail}
-                      subject={subject.Ensubject}
-                      medium={subject.Enmedium}
-                    />
-                  </div>
-                ))}
+              {subjects.map((subject) => (
+                <div
+                  key={subject._id}
+                  style={{ marginLeft: "30px", marginRight: "30px" }}
+                >
+                  <SubjectComponenet
+                    teachermail={subject.teacherEmail}
+                    subject={subject.Ensubject}
+                    medium={subject.Enmedium}
+                  />
+                </div>
+              ))}
             </>
           </Box>
         </Grid>

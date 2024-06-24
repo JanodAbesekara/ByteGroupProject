@@ -55,18 +55,23 @@ function Login({ setUser, setIsLoggedIn }) {
 
       return;
     }
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setAlertSeverity("error");
+      setAlertMessage("Invalid Email.");
+
+      return;
+    }
+     
+
 
     const data = {
       email,
       password,
     };
 
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(email)) {
-      setAlertSeverity("error");
-      setAlertMessage("Please enter a valid email.");
-    }
-
+   
+  
     axios
       .post(`/api/auth/login`, data)
       .then((response) => {

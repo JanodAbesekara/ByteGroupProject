@@ -60,6 +60,14 @@ function Enrollment() {
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
 
+    const conformation = window.confirm(
+      "Are you sure you want to enroll this course?"
+    );
+
+    if (!conformation) {
+      return;
+    }
+
     const payload = {
       userEmail,
       teacherEmail: email,

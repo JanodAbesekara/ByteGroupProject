@@ -52,7 +52,7 @@ function Ateachers() {
 
   const handleDeleteConfirmation = (email) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this student?"
+      "Are you sure you want to delete this Teacher?"
     );
     if (confirmDelete) {
       deleteTeacher(email);

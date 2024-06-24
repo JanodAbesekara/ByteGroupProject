@@ -114,7 +114,6 @@ function AssignmentComponent({ assignmentData }) {
     const teacherEmail = assignmentData.TeacherEmail;
     const medium = assignmentData.submedium;
 
-
     axios
       .get(`/api/assignment/availability`, {
         params: {
@@ -122,7 +121,7 @@ function AssignmentComponent({ assignmentData }) {
           teacherEmail: teacherEmail,
           medium: medium,
           subject: subject,
-        }
+        },
       })
       .then((response) => {
         setAssignmentSubmitted(response.data.success);
@@ -133,6 +132,12 @@ function AssignmentComponent({ assignmentData }) {
   }, [subjectKey]);
 
   const startAssignment = async () => {
+    const isconform = window.confirm("Are you sure to start the assignment?");
+
+    if (!isconform) {
+      return;
+    }
+
     const time = assignmentData.TimeRanges;
     setTimeRange(time);
     const correctAnswers = assignmentData.question.map(
@@ -282,7 +287,7 @@ function AssignmentComponent({ assignmentData }) {
         </div>
       </div>
       <div>
-        { !showContent && !assignmentSubmitted && (
+        {!showContent && !assignmentSubmitted && (
           <div>
             <p
               style={{
@@ -295,7 +300,7 @@ function AssignmentComponent({ assignmentData }) {
               <span style={{ color: "red" }}>
                 {assignmentData.TimeRanges} minutes
               </span>
-            </p> 
+            </p>
             <button
               onClick={() => {
                 setShowContent(!showContent);
@@ -308,7 +313,8 @@ function AssignmentComponent({ assignmentData }) {
                 width: "auto",
                 padding: "2px",
                 cursor: "pointer",
-                boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"
+                boxShadow:
+                  "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
             >
               Show Content
@@ -422,7 +428,7 @@ function AssignmentComponent({ assignmentData }) {
                     disabled={!submitButton || remainingTime === 0}
                     onClick={handleSubmit}
                     style={{
-                      width:"auto",
+                      width: "auto",
                       margin: "3px",
                       padding: "3px",
                       border: "none",
