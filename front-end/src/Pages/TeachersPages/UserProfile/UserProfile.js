@@ -55,24 +55,6 @@ function UserProfile() {
   }, []);
 
   const handleSave = () => {
-    if (
-      !medium ||
-      !scheme ||
-      !degree ||
-      !experience ||
-      !aboutme ||
-      !image ||
-      !classpees
-    ) {
-      window.alert("Please fill all the fields and upload a profile picture");
-      return;
-    }
-
-    if (isNaN(classpees) || classpees < 0 || classpees === "") {
-      window.alert("Class fees must be a positive number and cannot be empty");
-      return;
-    }
-
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     setUser(decodedToken);
@@ -108,6 +90,24 @@ function UserProfile() {
       userID = decodedToken._id;
     } else {
       userID = "";
+    }
+
+    if (
+      !medium ||
+      !scheme ||
+      !degree ||
+      !experience ||
+      !aboutme ||
+      !image ||
+      !classpees
+    ) {
+      window.alert("Please fill all the fields and upload a profile picture");
+      return;
+    }
+
+    if (isNaN(classpees) || classpees < 0 || classpees === "") {
+      window.alert("Class fees must be a positive number and cannot be empty");
+      return;
     }
 
     axios
