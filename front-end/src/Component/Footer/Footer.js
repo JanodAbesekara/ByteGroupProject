@@ -38,24 +38,22 @@ function Footer() {
       <div className="fbox">
         <div className="rme">
           <h2>Send us a message</h2>
-          <form ref={form} onSubmit={sendEmail}>
+          <form ref={form} onSubmit={sendEmail} style={{display:"flex",flexDirection:"column",width:"auto"}}>
             <input
               className="in1"
               type="email"
               name="user_email"
               placeholder="Your email"
+              style={{marginBottom:"18px"}}
             />
-            <br />
-            <br />
             <textarea
               className="in2"
               type="text"
               name="message"
               placeholder="Type your message here"
             />
-            <br />
-            <br />
-            <button className="seb" type="submit" value="Send">
+            <button className="seb" type="submit" value="Send"
+            style={{width:"69px"}}>
               Send
             </button>
           </form>
@@ -70,7 +68,7 @@ function Footer() {
           </div>
           <div className="im2">
             <img src="./Symbles/gmail.png" alt="gmail" />
-            <h3>dreamlearnacademy@gmail.com</h3>
+            <a href={"mailto:dreamlearnacademy@gmail.com"} style={{textDecoration:"none",color:"#fff"}}><h3>dreamlearnacademy@gmail.com</h3> </a>
           </div>
         </div>
         <div className="line"></div>
