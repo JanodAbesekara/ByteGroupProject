@@ -150,26 +150,28 @@ function Openwindow({ open, handleClose, notifications }) {
       </ScrollableContent>
       <DialogActions sx={{ display: "flex" }}>
         <div style={{ marginRight: "200px" }}>
-          <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column"}}>
+          <form onSubmit={handlesubmit} >
+          <div>
             <label htmlFor="title" style={{color:"#6c757d"}}>Title</label>
+            <br></br>
             <input
               type="text"
               placeholder="Enter Title"
-              style={{ padding: "5px 10px", width:"auto", margin:"5px",borderRadius:"4px",border:"1px solid gray" }}
+              style={{ padding: "5px 10px",borderRadius:"4px" ,border:"1px solid gray" }}
               onChange={(e) => setTitle(e.target.value)}
             />
+            <br></br>
             <label htmlFor="message" style={{color:"#6c757d"}}>Message</label>
+            <br></br>
             <input
               type="text"
               placeholder="Enter Message"
               style={{
                 height: "100px",
-                display:"flex",
-                width: "auto",
-                margin:"5px",
                 padding: "10px 10px 70px 10px",
                 borderRadius:"4px",
                 border:"1px solid gray"
+               
               }}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -204,6 +206,7 @@ function Openwindow({ open, handleClose, notifications }) {
               >
                 Send
               </Button>
+            </div>
             </div>
           </form>
         </div>
