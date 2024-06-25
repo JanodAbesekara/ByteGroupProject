@@ -44,8 +44,8 @@ const TableComponent = ({ rows }) => {
     <div>
       {Object.keys(subjects).map((subject) => (
         <div key={subject}>
-          <h2 style={{ textAlign: "center", margin: "20px 0" }}>{subject}</h2>
-          <TableContainer component={Paper} sx={{marginBottom:"40px"}}>
+          <h2 style={{ textAlign: "center", margin: "30px 0" }}>{subject}</h2>
+          <TableContainer component={Paper} sx={{marginBottom: "80px",marginTop:"20px"}}>
             <Table
               sx={{
                 borderRight: "2px white solid",
