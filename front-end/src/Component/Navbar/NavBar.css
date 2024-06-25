@@ -21,7 +21,6 @@ nav a:last-child:hover {
 }
 
 nav a:hover {
-  
   color: rgb(238, 144, 37);
 }
 header .nav-btn {
@@ -42,13 +41,12 @@ header .nav-btn {
 }
 
 @media (min-width: 300px) and (max-width: 768px) {
-
   header {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
- 
+
   header .im1 {
     width: 260px;
     height: 75px;
@@ -56,7 +54,6 @@ header .nav-btn {
     margin-top: 10px;
   }
 
-  
   header nav a:last-child {
     order: -1;
     align-self: flex-end;
@@ -71,7 +68,6 @@ header .nav-btn {
     background-color: #17a2b8;
     margin-top: 10px;
     margin-bottom: 50px;
-   
   }
   header nav {
     position: fixed;
