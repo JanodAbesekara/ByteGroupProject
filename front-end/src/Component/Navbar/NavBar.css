@@ -41,7 +41,7 @@ header .nav-btn {
   font-size: 1.8rem;
 }
 
-@media (min-width: 300px) and (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 768px) {
 
   header {
     display: flex;
@@ -56,7 +56,9 @@ header .nav-btn {
     margin-top: 10px;
   }
 
-  
+  header nav a {
+    position: relative;
+  }
   header nav a:last-child {
     order: -1;
     align-self: flex-end;
@@ -68,37 +70,35 @@ header .nav-btn {
     color: #fff;
     width: 50px;
     height: 25px;
-    background-color: #17a2b8;
+    background-color: #899cff;
     margin-top: 10px;
     margin-bottom: 50px;
    
   }
   header nav {
     position: fixed;
-    padding-top: 30px;
+    top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: left;
-    justify-content: flex-start;
+    justify-content: center;
     background-color: #fff;
     gap: 1.5rem;
     transition: 0.2s;
-    transform: translateX(-210vh);
+    transform: translateY(-210vh);
     z-index: 2;
   }
 
   header nav a {
     position: relative;
-    bottom: auto;
+    bottom: 230px;
     border-bottom: 1px solid gray;
     border-width: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    text-align: left;
   }
   header .responsive_nav {
     transform: none;
@@ -109,13 +109,10 @@ header .nav-btn {
     opacity: 1;
     float: left;
     left: 0px;
-    position: fixed;
+    position: absolute;
     top: 20px;
     padding-right: 10px;
     z-index: 2;
-  }
-  body.no-scroll {
-    overflow: hidden;
   }
 }
 
