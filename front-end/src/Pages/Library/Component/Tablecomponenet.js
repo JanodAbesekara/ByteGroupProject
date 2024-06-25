@@ -44,12 +44,13 @@ const TableComponent = ({ rows }) => {
     <div>
       {Object.keys(subjects).map((subject) => (
         <div key={subject}>
-          <h2 style={{ textAlign: "center", margin: "20px 0" }}>{subject}</h2>
-          <TableContainer component={Paper}>
+          <h2 style={{ textAlign: "center", margin: "30px 0" }}>{subject}</h2>
+          <TableContainer component={Paper} sx={{marginBottom: "100px",marginTop:"20px"}}>
             <Table
               sx={{
                 borderRight: "2px white solid",
                 borderLeft: "2px white solid",
+                
               }}
             >
               <TableHead>
