@@ -11,24 +11,36 @@ const app = express();
 const server = http.createServer(app);
 
 // Use the CORS middleware
-app.use(cors({
-  origin: 'https://byte-group-project.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'https://byte-group-project.vercel.app',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true,
+// }));
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: 'https://byte-group-project.vercel.app',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true,
+//   },
+// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 const io = new Server(server, {
   cors: {
-    origin: 'https://byte-group-project.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
   },
 });
+
 
 io.on("connection", (socket) => {
   console.log("A user Connected ", socket.id);
