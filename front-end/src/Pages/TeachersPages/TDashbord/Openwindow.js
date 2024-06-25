@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
+import "./Opemwindow.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
