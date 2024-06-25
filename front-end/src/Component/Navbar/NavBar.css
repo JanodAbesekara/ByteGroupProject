@@ -109,13 +109,10 @@ header .nav-btn {
     opacity: 1;
     float: left;
     left: 0px;
-    position: fixed;
+    position: absolute;
     top: 20px;
     padding-right: 10px;
     z-index: 2;
-  }
-  body.no-scroll {
-    overflow: hidden;
   }
 }
 
