@@ -49,10 +49,10 @@ function StudentTable({ studentDetails, profilePicUrl }) {
   return (
     <TableRow>
       <TableCell align="center">
-        {parentDetails.url === "" ? "No Image" : ""}
-        <a href={parentDetails.url} target="_blank" rel="noopener noreferrer">
+        {displayPicUrl === "" ? "No Image" : ""}
+        <a href={displayPicUrl} target="_blank" rel="noopener noreferrer">
           <img
-            src={parentDetails.url}
+            src={displayPicUrl}
             alt="profile_image"
             style={{
               borderRadius: "50%",
