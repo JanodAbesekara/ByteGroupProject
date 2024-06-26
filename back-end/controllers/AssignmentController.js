@@ -188,7 +188,7 @@ const checkAvailability = async (req, res) => {
 const getgradefromteacher = async(req,res)=>{
   try{
 
-    const {email} = req.query;
+    const { email } = req.query;
 
     const subjects = await profilemodel.find({ email:email}); 
 
