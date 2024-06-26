@@ -1,7 +1,7 @@
 import { now } from "mongoose";
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
-import userProfile from "../models/UserProfileModel.js";
+import profilemodel from "../models/userProfileModel.js";
 
 const createAssignmentController = async (req, res) => {
   const { TeacherEmail, TeacherSubject, question, TimeRanges, submedium } =
@@ -190,7 +190,7 @@ const getgradefromteacher = async(req,res)=>{
 
     const {email} = req.query;
 
-    const subjects = await userProfile.find({ email:email}); 
+    const subjects = await profilemodel.find({ email:email}); 
 
   
 
