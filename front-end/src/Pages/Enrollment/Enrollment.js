@@ -87,16 +87,12 @@ function Enrollment() {
 
   return (
     <div>
-      <Link to="/SSubject">
-        <div
-          style={{ marginTop: "30px", marginLeft: "20px", cursor: "pointer" }}
-        >
-          <IoMdArrowRoundBack
-            style={{ width: "25px", height: "25px", color: "black" }}
-          />
-        </div>
-      </Link>
-      <h1>Enroll your Courses</h1>
+      
+      <p style={{fontWeight:"600",
+                  textAlign: "center",
+                  fontSize: "28px",
+                  color: "#333A73",
+                  marginTop: "70px",}}>Enroll your Courses</p>
       <div
         className="search"
         style={{
@@ -104,11 +100,12 @@ function Enrollment() {
           alignContent: "center",
           display: "flex",
           marginBottom: "50px",
+          marginTop: "60px",
         }}
       >
         <input
           className="search1"
-          placeholder="Search teacher.."
+          placeholder="Search teacher..."
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -131,7 +128,7 @@ function Enrollment() {
             padding: "5px",
             backgroundColor: "#40A2E3",
             color: "white",
-            boxShadow: "2px 1px 10px 0.5px black",
+            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           }}
         >
           Search

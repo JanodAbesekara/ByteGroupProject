@@ -80,16 +80,7 @@
   box-sizing: border-box;
   border: 0.5px solid #10155b4d;
 }
-.details textarea{
-  width: 60%;
-  max-width: 100%;
-  height: 100px;
-  left: 0;
-  border-radius: 5px;
-  resize: vertical;
-  box-sizing: border-box;
-  border: 0.5px solid rgb(16, 21, 91, 0.3);
-}
+
 .personal_details button{
   width: 50px;
   height: 22px;
@@ -128,10 +119,7 @@
   .info{
     padding: 0px;
   }
-  .details textarea{
-    width: 65%;
-    left: 0;
-  }
+  
 }
 
 
@@ -144,6 +132,9 @@
     width: 90%;
     padding-left: 90px;
   }
+  form{
+    width: 100%;
+  }
 }
 
 @media (min-width:1025px) {
@@ -153,5 +144,8 @@
   } 
   .student_info{
     padding-left: 80px;
+  }
+  form{
+    width: 100%;
   }
 }
