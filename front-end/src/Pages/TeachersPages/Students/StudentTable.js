@@ -9,7 +9,7 @@ function StudentTable({ studentDetails, profilePicUrl }) {
   const [stuDetails, setStudentDetails] = useState({});
   const [parentDetails, setParentDetails] = useState({});
 
-  const displayPicUrl = profilePicUrl || defaultProfilePicUrl;
+  const displayPicUrl = parentDetails.url || defaultProfilePicUrl;
 
   const studentEmail = studentDetails.userEmail;
  
