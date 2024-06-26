@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -194,6 +194,7 @@ const Aaddresources = () => {
           />
         )}
           <Box sx={{ width: "100%", height: "1000px" }}>
+            <div>
             <h1>File upload</h1>
             <div className="Resourses">
               <Grid container spacing={2}>
@@ -462,6 +463,7 @@ const Aaddresources = () => {
                   </form>
                 </Grid>
               </Grid>
+            </div>
             </div>
           </Box>
           <DisplayResources />

@@ -121,16 +121,9 @@ function Openwindow({ open, handleClose, notifications }) {
       aria-labelledby="customized-dialog-title"
       open={open}
     >
-      <DialogTitle
-        sx={{
-          m: 0,
-          p: 2,
-          justifyContent: "center",
-          fontWeight: "600",
-          color: "#6c757d",
-        }}
-        id="customized-dialog-title"
-      >
+
+      <DialogTitle sx={{ m: 0, p: 2, justifyContent:"center", fontWeight:"600", color:"#fff",backgroundColor:"#628078"}} id="customized-dialog-title">
+
         Notifications
       </DialogTitle>
       <IconButton
@@ -189,15 +182,12 @@ function Openwindow({ open, handleClose, notifications }) {
             </DialogContent>
           ))}
       </ScrollableContent>
-      <DialogActions sx={{ display: "flex" }}>
-        <div style={{ marginRight: "200px" }}>
-          <form
-            onSubmit={handlesubmit}
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <label htmlFor="title" style={{ color: "#6c757d" }}>
-              Title
-            </label>
+
+      <DialogActions>
+        <div>
+          <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column",width:"auto"}}>
+            <label htmlFor="title" style={{color:"#136b16",paddingLeft:"6px"}}>Title</label>
+
             <input
               type="text"
               placeholder="Enter Title"
@@ -210,9 +200,9 @@ function Openwindow({ open, handleClose, notifications }) {
               }}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <label htmlFor="message" style={{ color: "#6c757d" }}>
-              Message
-            </label>
+
+            <label htmlFor="message" style={{color:"#136b16",paddingLeft:"6px"}}>Message</label>
+
             <input
               type="text"
               placeholder="Enter Message"
@@ -237,7 +227,9 @@ function Openwindow({ open, handleClose, notifications }) {
                       medium: e.target.value.split(",")[1],
                     })
                   }
-                  style={{ padding: "5px 10px", marginBottom: "10px" }}
+
+                  style={{ padding: "5px 10px", marginBottom:"10px",width:"äuto" }}
+
                 >
                   <option value="">Select subject</option>
                   {teacherSubject.map((subject) => (
@@ -250,14 +242,16 @@ function Openwindow({ open, handleClose, notifications }) {
                   ))}
                 </select>
               </div>
-              <Button
+              <button
                 type="submit"
-                variant="contained"
-                endIcon={<SendIcon />}
-                sx={{ width: "80px", height: "25px" }}
+
+                style={{width:"80px", height:"25px",marginLeft:"5px",color:"#fff", backgroundColor:"#2175ad",borderRadius:"3px",border:"none",
+                boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+              }}
+
               >
                 Send
-              </Button>
+              </button>
             </div>
           </form>
         </div>
