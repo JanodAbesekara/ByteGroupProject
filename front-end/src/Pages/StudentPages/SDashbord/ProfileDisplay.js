@@ -78,7 +78,7 @@ function ProfileDisplay({ email, subject, medium }) {
             fontStyle: "italic",
             color: "gray",
             fontSize: "14px",
-            marginBottom: "4px",
+            marginBottom: "4px", 
           }}
         >
           {teacher.aboutme}
@@ -92,7 +92,6 @@ function ProfileDisplay({ email, subject, medium }) {
             borderRadius: "5px",
             fontWeight: "500",
             boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-
           }}
           href={`mailto:${teacherProfile.email}`}
         >

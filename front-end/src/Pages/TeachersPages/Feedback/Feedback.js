@@ -72,23 +72,23 @@ export default function Feedback() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box>
-            <h1 style={{ textAlign: "center", marginBottom: "100px" }}>
+          <Box sx={{marginLeft:"28px"}}>
+            <p style={{ textAlign: "center", marginBottom: "70px",marginTop:"40px", fontSize:"30px",fontWeight:"650",color:"#333A73" }}>
               Feedbacks
-            </h1>
+            </p>
             {Object.keys(groupedFeedback).map((subject) => (
               <div key={subject}>
-                <h2>{subject}</h2>
+                <h2 style={{color:"#1c801f"}}>{subject}</h2>
                 {Object.keys(groupedFeedback[subject]).map((medium) => (
                   <TableContainer component={Paper} key={medium} style={{ marginBottom: "20px" }}>
-                    <h3>{medium}</h3>
+                    <h3 style={{color:"#404142"}}>({medium})</h3>
                     <Table>
                       <TableHead>
                         <TableRow>
                           <TableCell
                             sx={{
                               textAlign: "center",
-                              backgroundColor: "#0000B9",
+                              backgroundColor: "#124076",
                               color: "white",
                               borderRight: "2px solid white",
                               fontSize: "16px",
@@ -99,7 +99,7 @@ export default function Feedback() {
                           <TableCell
                             sx={{
                               textAlign: "center",
-                              backgroundColor: "#0000B9",
+                              backgroundColor: "#124076",
                               color: "white",
                               borderRight: "2px solid white",
                               fontSize: "16px",
@@ -110,7 +110,7 @@ export default function Feedback() {
                           <TableCell
                             sx={{
                               textAlign: "center",
-                              backgroundColor: "#0000B9",
+                              backgroundColor: "#124076",
                               color: "white",
                               borderRight: "2px solid white",
                               fontSize: "16px",
@@ -124,7 +124,7 @@ export default function Feedback() {
                         {groupedFeedback[subject][medium].map((feedback) => (
                           <TableRow key={feedback._id}>
                             <TableCell sx={{ textAlign: "center" }}>
-                              <a href={`malito:${feedback.studentemail}`}>
+                              <a href={`malito:${feedback.studentemail}`} style={{textDecoration:"none"}}>
                               {feedback.studentemail}</a>
                             </TableCell>
                             <TableCell sx={{ textAlign: "center" }}>

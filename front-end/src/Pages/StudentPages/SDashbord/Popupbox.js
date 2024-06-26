@@ -27,8 +27,8 @@ function Popupbox({ open, handleClose, notifications }) {
       aria-labelledby="customized-dialog-title"
       open={open}
     >
-      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-        Notification Box
+      <DialogTitle sx={{ m: 0, p: 2, color: "#fff", backgroundColor:"#628078", fontWeigh:"500" }} id="customized-dialog-title">
+        Notification
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -49,21 +49,21 @@ function Popupbox({ open, handleClose, notifications }) {
           .reverse()
           .map((notification, index) => (
             <DialogContent key={index} dividers>
-              <h2 style={{ textAlign: "center" }}>
-                {notification.TeacheSubject}
-              </h2>
-              <h6 style={{ fontSize: "12px",textAlign: "center" , marginBottom: "20px" }}>({notification.mediua})</h6>
-              <h3 style={{ marginBottom: "20px" }}>
-                {notification.titleofAnn}
-              </h3>
-              <h4 style={{ textAlign: "center", marginInline: "30px" }}>
-                {notification.Announcementmessage}
+              <div style={{backgroundColor:"#F0F8FF",margin:"5px",boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+            padding:"15px", paddingBottom:"35px"}}>
+              <h4 style={{ textAlign: "center", color:"#00a0a0" ,fontSize:"18px"}}>
+                {notification.TeacheSubject} <span style={{fontSize:"12px", color:"gray"}}>({notification.mediua})</span>
               </h4>
-              <br />
-              <span style={{ float: "right", fontSize: "12px" }}>
+              <p style={{ marginBottom: "10px",marginTop:"15px", fontSize:"13px", color:"gray",fontWeight:"600" }}>
+                <span style={{color:"red"}}>*</span>{notification.titleofAnn}
+              </p>
+              <p style={{ textAlign: "left", marginTop: "15px", fontSize:"13px",marginBottom:"10px" }}>
+                {notification.Announcementmessage}
+              </p>
+              <p style={{ float: "right", fontSize: "11px",marginBottom:"10px"}}>
                 {notification.date.split("T")[0]}
-              </span>
-              <br></br>
+              </p>
+              </div>
             </DialogContent>
           ))}
       </ScrollableContent>
