@@ -141,6 +141,7 @@ function SProfile() {
       mobileNo: mobileNo,
       uEmail: userEmail,
       id: userID,
+      url: url,
     };
 
     axios

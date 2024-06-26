@@ -22,6 +22,9 @@ const studentProfileSchema = new Schema({
     id:{
         type:String
     },
+    url:{
+        type:String
+    }
 },
 {
     timestamps: true,

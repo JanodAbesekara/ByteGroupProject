@@ -112,7 +112,7 @@ const fetchPaymentDetailsController = async (req, res) => {
 };
 
 const studentParentDetailsController = async (req, res) => {
-  const { name, email, mobileNo, uEmail, id } = req.body;
+  const { name, email, mobileNo, uEmail, id,url } = req.body;
 
   if (!name || !email || !mobileNo) {
     return res
@@ -127,6 +127,7 @@ const studentParentDetailsController = async (req, res) => {
       mobileNo,
       uEmail,
       id,
+      url,
     });
     await parentDetails.save();
     return res
