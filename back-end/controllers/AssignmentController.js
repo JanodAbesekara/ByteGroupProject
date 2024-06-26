@@ -196,18 +196,18 @@ const getgradefromteacher = async(req,res)=>{
 
     // find the data email subject medium trrrow 
 
-    const geteachdataset = subjects.map((subject)=>({
-      subject: subject.subject,
-      medium: subject.medium,
-      email: subject.email,
+    const geteachdataset = subjects.map((subs)=>({
+      subject: subs.subject,
+      medium: subs.medium,
+      email: subs.email,
     }));
 
 
    const gradeget = await GradesModel.find({
-      $or: geteachdataset.map((sub)=>({
-        teacherEmail:sub.email,
-        medium :sub.medium,
-        subject : sub.subject,
+      $or: geteachdataset.map((subs)=>({
+        teacherEmail:subs.email,
+        medium :subs.medium,
+        subject : subs.subject,
       })),
    });
 
