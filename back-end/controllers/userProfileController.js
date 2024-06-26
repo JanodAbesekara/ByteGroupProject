@@ -112,7 +112,7 @@ const fetchPaymentDetailsController = async (req, res) => {
 };
 
 const studentParentDetailsController = async (req, res) => {
-  const { name, email, mobileNo, uEmail, id,url } = req.body;
+  const { name, email, mobileNo, uEmail, id, url } = req.body;
 
   if (!name || !email || !mobileNo) {
     return res
@@ -121,24 +121,35 @@ const studentParentDetailsController = async (req, res) => {
   }
 
   try {
-    const parentDetails = new studentProfileModel({
-      name,
-      email,
-      mobileNo,
-      uEmail,
-      id,
-      url,
-    });
-    await parentDetails.save();
-    return res
-      .status(200)
-      .json({ success: true, msg: "Guardian details uploaded successfully" });
+    const oldDetails = await studentProfileModel.findOne({ uEmail: uEmail });
+
+    if (oldDetails) {
+      await studentProfileModel.findOneAndUpdate(
+        { uEmail: uEmail },
+        { $set: { name, email, mobileNo, id, url } }
+      );
+      return res.json({ success: true, msg: "Fields updated successfully" });
+    } else {
+      const parentDetails = new studentProfileModel({
+        name,
+        email,
+        mobileNo,
+        uEmail,
+        id,
+        url,
+      });
+      await parentDetails.save();
+      return res
+        .status(200)
+        .json({ success: true, msg: "Guardian details uploaded successfully" });
+    }
   } catch (error) {
     return res
       .status(500)
-      .json({ success: false, msg: "Internal Sever Error" });
+      .json({ success: false, msg: "Internal Server Error" });
   }
 };
+
 
 const updateUserProfileController = async (req, res) => {
   const id = req.params.subID; // Get the ID of the profile to update
