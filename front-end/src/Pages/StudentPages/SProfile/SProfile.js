@@ -106,7 +106,7 @@ function SProfile() {
 
     const nameRegex = /^[a-zA-Z]+$/;
 
-    if (name.length < 3 || !nameRegex.test(name)) {
+    if (name.length < 3 || nameRegex.test(name)) {
       window.alert("Please enter a valid name");
       return;
     }
