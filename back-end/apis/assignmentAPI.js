@@ -7,6 +7,7 @@ import {
   getGrades,
   getStudentGrades,
   checkAvailability,
+  getgradefromteacher,
 } from "../controllers/assignmentController.js";
 
 const router = express.Router();
@@ -19,6 +20,8 @@ router.delete("/delete/:id", deleteAssignmentController); //when user click the 
 router.get("/getGrade", getGrades); //find grades by using students email and display them on student's grades page
 router.get("/getStudentGrades", getStudentGrades); // find grades relevant to the teachers email subject and medium and display them on teacher's side grades page
 router.get("/availability",checkAvailability) //to check the assignment is did or not
+
+router.get("/getgrade",getgradefromteacher);
 
 export default router;
   

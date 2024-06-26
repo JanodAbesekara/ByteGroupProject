@@ -1,6 +1,7 @@
 import { now } from "mongoose";
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
+import userProfile from "../models/UserProfileModel.js";
 
 const createAssignmentController = async (req, res) => {
   const { TeacherEmail, TeacherSubject, question, TimeRanges, submedium } =
@@ -183,6 +184,44 @@ const checkAvailability = async (req, res) => {
   }
 };
 
+
+const getgradefromteacher = async(req,res)=>{
+  try{
+
+    const {email} = req.query;
+
+    const subjects = await userProfile.find({ email:email}); 
+
+   return res.status(200).json({ success:true, data:subjects});
+
+    // find the data email subject medium trrrow 
+
+    const geteachdataset = subjects.map((subject)=>({
+      subject: subject.subject,
+      medium: subject.medium,
+      email: subject.email,
+    }));
+
+
+   const gradeget = await GradesModel.find({
+      $or: geteachdataset.map((sub)=>({
+        teacherEmail:sub.email,
+        medium :sub.medium,
+        subject : sub.subject,
+      })),
+   });
+
+  return res.status(200).json({ success:true, data:gradeget});
+
+  } catch (error) {
+    console.error("Error during user registration:", error);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+
 export {
   createAssignmentController,
   getAssignmentController,
@@ -191,4 +230,5 @@ export {
   getGrades,
   getStudentGrades,
   checkAvailability,
+  getgradefromteacher,
 };
