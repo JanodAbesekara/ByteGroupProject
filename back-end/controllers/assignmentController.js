@@ -192,7 +192,7 @@ const getgradefromteacher = async(req,res)=>{
 
     const subjects = await userProfile.find({ email:email}); 
 
-   return res.status(200).json({ success:true, data:subjects});
+  
 
     // find the data email subject medium trrrow 
 
