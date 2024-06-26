@@ -55,18 +55,23 @@ function Login({ setUser, setIsLoggedIn }) {
 
       return;
     }
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setAlertSeverity("error");
+      setAlertMessage("Invalid Email.");
+
+      return;
+    }
+     
+
 
     const data = {
       email,
       password,
     };
 
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(email)) {
-      setAlertSeverity("error");
-      setAlertMessage("Please enter a valid email.");
-    }
-
+   
+  
     axios
       .post(`/api/auth/login`, data)
       .then((response) => {
@@ -94,7 +99,7 @@ function Login({ setUser, setIsLoggedIn }) {
           setAlertSeverity("success"); // Set success alert on successful login
           setAlertMessage(response.data.msg); // Set alert message from response
         } else {
-          console.error("Unexpected response format:", response);
+         
           setAlertSeverity("error"); // Set error alert on unexpected response
           setAlertMessage("An unexpected error occurred. Please try again.");
         }

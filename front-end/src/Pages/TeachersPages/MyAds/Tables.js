@@ -45,6 +45,8 @@ function Subject({ selectedPost, setSelectedPost }) {
   };
 
   const deletePost = (photosURL) => {
+
+    
     const payload = { photosURL: photosURL };
 
     axios

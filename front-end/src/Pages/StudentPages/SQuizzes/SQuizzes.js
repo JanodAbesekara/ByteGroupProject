@@ -20,7 +20,7 @@ function SQuizzes() {
         const response = await axios.get(`/api/Test/quiseadd`, {
           params: { email: StuEmail },
         });
-        console.log(response);
+
         setData(response.data.quizzes);
       } catch (error) {
         console.log(error);
@@ -55,7 +55,8 @@ function SQuizzes() {
                     padding: "3%",
                     border: "none",
                     borderRadius: "7px",
-                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                    boxShadow:
+                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                 >
                   <div
@@ -89,7 +90,6 @@ function SQuizzes() {
                       padding: "3px 8px",
                       color: "#A9A9A9",
                       fontSize: "13px",
-                      
                     }}
                   >
                     Quiz No : {quiz.QuizeNumber}
@@ -101,7 +101,10 @@ function SQuizzes() {
                       fontSize: "13px",
                     }}
                   >
-                    Allocated Time : <span style={{color:"#FF0000"}}>{quiz.TimeRanges} minutes</span>
+                    Allocated Time :{" "}
+                    <span style={{ color: "#FF0000" }}>
+                      {quiz.TimeRanges} minutes
+                    </span>
                   </p>{" "}
                   <ComQuizes1 quisedata={quiz} />
                 </div>

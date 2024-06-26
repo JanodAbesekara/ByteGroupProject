@@ -18,7 +18,7 @@ export default function ClassCard(subjectData) {
     const id = subjectData.subjectData._id;
     setSubID(id);
     setIsEditing(true);
-    console.log(subjectData);
+   
   };
 
   const handleSave = () => {
@@ -40,7 +40,7 @@ export default function ClassCard(subjectData) {
       })
       .catch((error) => {
         window.alert(error.response.data.msg);
-        console.log(error.response.data.msg);
+       
       });
   };
 
@@ -89,11 +89,12 @@ export default function ClassCard(subjectData) {
             backgroundColor: "#F0F8FF",
             border: "none",
             borderRadius: "10px",
-            boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
           }}
         >
-          <div >
-            <div className="classcom" >
+          <div>
+            <div className="classcom">
               <Link
                 to="/TClasses"
                 style={{ textDecoration: "none", textTransform: "uppercase" }}
@@ -112,7 +113,10 @@ export default function ClassCard(subjectData) {
                     fontWeight: "500",
                   }}
                 >
-                  {subjectData.subjectData.subject} <span style={{fontSize:"12px", fontWeight:"400"}}>({subjectData.subjectData.medium})</span>
+                  {subjectData.subjectData.subject}{" "}
+                  <span style={{ fontSize: "12px", fontWeight: "400" }}>
+                    ({subjectData.subjectData.medium})
+                  </span>
                 </p>
               </Link>
             </div>
@@ -187,7 +191,7 @@ export default function ClassCard(subjectData) {
                     {editedData.experience}
                   </p>
                   <p style={{ margin: "4px 6px", fontSize: "13px" }}>
-                  Rs.{editedData.classpees}.00
+                    Rs.{editedData.classpees}.00
                   </p>
                   <p
                     style={{
@@ -234,7 +238,8 @@ export default function ClassCard(subjectData) {
                     backgroundColor: "#999999",
                     color: "#fff",
                     padding: "2px 3px",
-                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                    boxShadow:
+                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                   onClick={handleEdit}
                 >
@@ -250,7 +255,8 @@ export default function ClassCard(subjectData) {
                   backgroundColor: "red",
                   color: "#fff",
                   padding: "2px 3px",
-                  boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                  boxShadow:
+                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                 }}
               >
                 Delete

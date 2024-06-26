@@ -16,6 +16,28 @@ export default function TeachersRegister() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      phonenumber === "" ||
+      email === "" ||
+      password === "" ||
+      confirmpassword === "" ||
+      role === ""
+    ) {
+      window.alert("Please fill all the fields");
+      return;
+    }
+
+    const nameRegex = /^[a-zA-Z]+$/;
+
+    if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
+      window.alert(
+        "First name and Last name cannot contain numbers or special characters"
+      );
+      return;
+    }
+
     if (password === confirmpassword) {
       const data = {
         firstname,
@@ -77,13 +99,11 @@ export default function TeachersRegister() {
       axios
         .post(`/api/auth/register`, data)
         .then((response) => {
-          console.log(response.data);
           window.alert(response.data.msg);
           window.location.reload();
           window.location = "/login";
         })
         .catch((error) => {
-          console.log(error.response);
           if (error.response.data.success === false) {
             window.alert(error.response.data.msg);
           }

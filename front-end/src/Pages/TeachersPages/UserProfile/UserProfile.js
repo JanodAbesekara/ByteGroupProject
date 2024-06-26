@@ -101,72 +101,74 @@ function UserProfile() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    if (!medium || !scheme || !degree || !experience || !aboutme) {
+      if (!medium) {
+        window.alert("You must select your medium");
+        return;
+      }
+
+      if (!scheme) {
+        window.alert("You must select your scheme");
+        return;
+      }
+      if (!degree) {
+        window.alert("You must select your degree");
+        return;
+      }
+      if (!experience) {
+        window.alert("You must select your experience");
+        return;
+      }
+      if (isNaN(classpees) || classpees < 0 || classpees === "") {
+        window.alert(
+          "Class fees must be a positive number and cannot be empty"
+        );
+        return;
+      }
+      if (!aboutme) {
+        window.alert("You must select your aboutme");
+        return;
+      }
+
+      window.alert("Please fill all the required fields");
+      return; // Return false to indicate form validation failed
+    }
+    return true; // Return true to indicate form validation passed
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!url) {
       window.alert("Please add profile picture first");
-    } else {
+    } else if (validateForm()) {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
       const decodedToken = jwtDecode(token);
       const userID = decodedToken._id;
       const userEmail = decodedToken.email;
       setUser(decodedToken);
 
-      const validateForm = () => {
-        if (!medium || !scheme || !degree || !experience || !aboutme ) {
-          if (!medium) {
-            window.alert("You must select your medium");
-            return false;
-          }
-          if (!scheme) {
-            window.alert("You must select your scheme");
-            return false;
-          }
-          if (!degree) {
-            window.alert("You must select your degree");
-            return false;
-          }
-          if (!experience) {
-            window.alert("You must select your experience");
-            return false;
-          }
-          if (!aboutme) {
-            window.alert("You must select your aboutme");
-            return false;
-          }
-          return false; // Return false to indicate form validation failed
-        }
-        return true; // Return true to indicate form validation passed
+      const updatedUser = {
+        ...user,
+        medium: medium,
+        scheme: scheme,
+        subject: subject,
+        degree: degree,
+        experience: experience,
+        aboutme: aboutme,
+        email: userEmail,
+        id: userID,
+        url: url,
+        classpees: classpees,
       };
 
-      if (validateForm) {
-        const updatedUser = {
-          ...user,
-          medium: medium,
-          scheme: scheme,
-          subject: subject,
-          degree: degree,
-          experience: experience,
-          aboutme: aboutme,
-          email: userEmail,
-          id: userID,
-          url: url,
-          classpees:classpees,
-        };
-
-        console.log(updatedUser);
-        axios
-          .post(`/api/user/userProfile`, updatedUser)
-          .then((response) => {
-            window.alert(response.data.msg);
-            console.log(response.data.msg);
-            window.location.reload();
-          })
-          .catch((error) => {
-            window.alert(error.response.data.msg);
-            console.log(error.response.data.msg);
-          });
+      try {
+        const response = await axios.post(`/api/user/userProfile`, updatedUser);
+        window.alert(response.data.msg);
+        window.location.reload();
+      } catch (error) {
+        window.alert(error.response.data.msg);
       }
     }
   };
@@ -178,7 +180,7 @@ function UserProfile() {
         <div className="container2">
           <Sidebar />
         </div>
-        <div className="container3" style={{paddingRight:"20px"}}>
+        <div className="container3" style={{ paddingRight: "20px" }}>
           <div className="container1">
             <div className="profile_pic">
               <div className="picture">
@@ -222,7 +224,14 @@ function UserProfile() {
 
           <div className="personal_details">
             <div className="details">
-              <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"auto"}}>
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "auto",
+                }}
+              >
                 <label htmlFor="medium">
                   <span style={{ color: "red" }}>*</span>Medium
                 </label>
@@ -234,8 +243,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setShowScheme(false);
@@ -264,8 +273,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setScheme(e.target.value);
@@ -295,8 +304,8 @@ function UserProfile() {
                     borderRadius: "5px",
                     border: "0.5px solid #10155b4d",
                     cursor: "pointer",
-                    width:"auto",
-                    display:"flex"
+                    width: "auto",
+                    display: "flex",
                   }}
                   onChange={(e) => {
                     setSubjectOption(false);
@@ -385,7 +394,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={degree}
                   onChange={(e) => setDegree(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
@@ -398,7 +407,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={experience}
                   onChange={(e) => setExperience(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="experience">
@@ -411,7 +420,7 @@ function UserProfile() {
                   placeholder="Enter here"
                   value={classpees}
                   onChange={(e) => setClasspees(e.target.value)}
-                  style={{width:"auto",display:"flex"}}
+                  style={{ width: "auto", display: "flex" }}
                 ></input>
                 <br></br>
                 <label htmlFor="aboutMe">
@@ -424,16 +433,23 @@ function UserProfile() {
                   placeholder="Add something about yourself"
                   value={aboutme}
                   onChange={(e) => setAboutMe(e.target.value)}
-                  style={{padding:"0", margin:"0", width:"auto",display:"flex"}}
+                  style={{
+                    padding: "0",
+                    margin: "0",
+                    width: "auto",
+                    display: "flex",
+                  }}
                 ></textarea>
 
                 <div className="btn-2">
-                  <button type="submit" value="saveDetails"
-                  style={{
-                    backgroundColor: "#39a0ca",
-                    boxShadow: "0 1.5px 5px #2d2d2d",
-                    border: "none",
-                  }}
+                  <button
+                    type="submit"
+                    value="saveDetails"
+                    style={{
+                      backgroundColor: "#39a0ca",
+                      boxShadow: "0 1.5px 5px #2d2d2d",
+                      border: "none",
+                    }}
                   >
                     Save
                   </button>

@@ -80,6 +80,11 @@ function AAnnounceent() {
   };
 
   const deleteAnnouncement = async (id) => {
+
+    const isconform = window.confirm("Do you want to delete this announcement?");
+
+    if(!isconform) return;
+
     try {
       const response = await axios.post(`/api/delete/notifaction`, { _id: id });
       setAnnouncements(

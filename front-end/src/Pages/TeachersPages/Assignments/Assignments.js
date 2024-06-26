@@ -20,7 +20,7 @@ export default function Assignment() {
         const userEmail = decodedToken.email;
 
         const response = await axios.get(`/api/user/getsubjectreg`, {
-          params: { email: userEmail }
+          params: { email: userEmail },
         });
         const filtersubject = response.data.data;
         setAssignment(filtersubject);
@@ -31,31 +31,25 @@ export default function Assignment() {
     fetchAssignment();
   }, []);
 
+  const [createdAssignment, setCreatedAssignment] = useState([]);
 
-    const [createdAssignment, setCreatedAssignment] = useState([]);
-    
-    useEffect(() => {
-      
-      const token = localStorage.getItem("MERN_AUTH_TOKEN");
-        const decodedToken = jwtDecode(token);
-        const userEmail = decodedToken.email;
+  useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const userEmail = decodedToken.email;
 
-      axios
-          .get("/api/assignment/getAssignment")
-          .then((response) => {
-            const allAssignments = response.data.filter(
-              (eachAssignment) => eachAssignment.TeacherEmail === userEmail
-            );
-            setCreatedAssignment(allAssignments);
-            console.log(allAssignments);
-          })
-          .catch((error) => {
-            console.log("error");
-          });
-          
-    },[assignment,createdAssignment]);
-
-    
+    axios
+      .get("/api/assignment/getAssignment")
+      .then((response) => {
+        const allAssignments = response.data.filter(
+          (eachAssignment) => eachAssignment.TeacherEmail === userEmail
+        );
+        setCreatedAssignment(allAssignments);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  }, [assignment, createdAssignment]);
 
   return (
     <div>
@@ -65,7 +59,7 @@ export default function Assignment() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box sx={{marginLeft:"20px"}}>
+          <Box sx={{ marginLeft: "20px" }}>
             {assignment.length > 0 &&
               assignment.map((assignments) => (
                 <div key={assignments._id}>
@@ -75,7 +69,7 @@ export default function Assignment() {
                   />
                 </div>
               ))}
-              <AllAssignments createdAssignments={createdAssignment} />
+            <AllAssignments createdAssignments={createdAssignment} />
           </Box>
         </Grid>
       </Grid>

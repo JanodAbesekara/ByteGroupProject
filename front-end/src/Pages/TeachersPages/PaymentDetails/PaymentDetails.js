@@ -26,6 +26,26 @@ export default function PaymentDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (bank === "" || accountNo === "" || confirmAccount === "") {
+      window.alert("Please fill all the fields");
+      return;
+    }
+
+    const accountNumberRegex = /^[0-9]{10,12}$/;
+    if (!accountNumberRegex.test(accountNo)) {
+      window.alert("Invalid Account Number");
+      return;
+    }
+
+    if (accountNo === confirmAccount) {
+      window.alert("Account Numbers Does not match ");
+      return;
+    }
+
+    const conformaion = window.confirm("Are you sure you want to save ?");
+
+    if (conformaion) {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const TeacherEmail = decodedToken.email;
@@ -49,6 +69,7 @@ export default function PaymentDetails() {
     } else {
       window.alert("Account Numbers Does not match ");
     }
+  }
   };
 
   useEffect(() => {
@@ -76,8 +97,8 @@ export default function PaymentDetails() {
                     color: "#1193C7",
                     fontWeight: "bold",
                     fontSize: "16px",
-                    paddingLeft:"5px",
-                   paddingTop:"10px"
+                    paddingLeft: "5px",
+                    paddingTop: "10px",
                   }}
                 >
                   Payment Details
@@ -88,7 +109,14 @@ export default function PaymentDetails() {
               <hr />
               <br />
               <div className="details">
-                <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column", width:"auto"}}>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "auto",
+                  }}
+                >
                   <lebel htmlFor="bankName">
                     <span style={{ color: "red" }}>*</span>Choose Your Bank
                   </lebel>
@@ -100,7 +128,7 @@ export default function PaymentDetails() {
                       borderRadius: "5px",
                       border: "0.5px solid #10155b4d",
                       color: "#969683",
-                      width:"auto"
+                      width: "auto",
                     }}
                     value={bank}
                     onChange={(e) => setBank(e.target.value)}

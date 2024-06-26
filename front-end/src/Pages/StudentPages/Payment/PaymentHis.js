@@ -21,7 +21,7 @@ function PaymentHis() {
         const response = await axios.get("/api/Test/getdetails", {
           params: { email },
         });
-        console.log(response.data.data);
+
         setRegTeachers(response.data.data);
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
@@ -45,11 +45,9 @@ function PaymentHis() {
   const emailResponsiveStyle = {
     "@media (max-width: 600px)": {
       fontSize: "12px",
-      display:"flex",
-
+      display: "flex",
     },
   };
-  
 
   return (
     <div>
@@ -60,12 +58,14 @@ function PaymentHis() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div  style={{
-                    marginLeft: "20px",
-                    marginRight: "10px",
-                    marginBottom: "100px",
-                    width:"auto",
-                  }}>
+            <div
+              style={{
+                marginLeft: "20px",
+                marginRight: "10px",
+                marginBottom: "100px",
+                width: "auto",
+              }}
+            >
               {RegTeachers.map((RegT, index) => (
                 <div
                   key={index}
@@ -73,82 +73,92 @@ function PaymentHis() {
                     marginLeft: "15px",
                     marginRight: "10px",
                     marginBottom: "100px",
-                    paddingBlock:"20px",
+                    paddingBlock: "20px",
                     borderRadius: "3px",
                     backgroundColor: "#F0F8FF",
-                    width:"auto",
-                    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                    width: "auto",
+                    boxShadow:
+                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
                   }}
                 >
-                  <p style={{ textAlign:"left",
-                    marginBottom: "15px",
-                    fontSize: "20px",
-                    fontWeight: "400",
-                    padding: "3px 8px",                    
-                    color: "#fff",
-                    backgroundColor: "#27ae60",
-                    borderRadius: "4px",
-                    marginLeft:"15px",
-                    marginRight:"15px",
-
-      }}>
+                  <p
+                    style={{
+                      textAlign: "left",
+                      marginBottom: "15px",
+                      fontSize: "20px",
+                      fontWeight: "400",
+                      padding: "3px 8px",
+                      color: "#fff",
+                      backgroundColor: "#27ae60",
+                      borderRadius: "4px",
+                      marginLeft: "15px",
+                      marginRight: "15px",
+                    }}
+                  >
                     {RegT.subject}
-                    <span style={{fontSize:"13px",color:"#f9f9f9"}}>
+                    <span style={{ fontSize: "13px", color: "#f9f9f9" }}>
                       ({RegT.medium})
                     </span>
                   </p>
                   <div>
-                  <p
-                    style={{
-                      paddingBottom: "5px",
-                      paddingLeft: "10px",
-                      color: "#1193C7",
-                      fontWeight: "bold",
-                      fontSize: "15px",
-                    }}
-                  >
-                    Payment Details
-                  </p>
-                  <div
-                    style={{
-                      marginLeft: "5px",
-                      marginRight: "5px",
-                      paddingLeft: "5px",
-                      backgroundColor: "#fff",
-                      paddingTop: "8px",
-                      paddingBottom: "8px",
-                      fontSize: "13px",
-                      display:"felx",
-                      flexDirection:"column",
-                      textAlign:"left"
-                    }}
-                  >
-                    <p>
-                      <span style={menuStyle}>Teacher Email</span> :{" "}
-                      <span style={{ color: "gray" }}>
-                        <a href={`mailto:${RegT.email}`} style={{ ...emailStyle, ...emailResponsiveStyle }}>{RegT.email}</a>
+                    <p
+                      style={{
+                        paddingBottom: "5px",
+                        paddingLeft: "10px",
+                        color: "#1193C7",
+                        fontWeight: "bold",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Payment Details
+                    </p>
+                    <div
+                      style={{
+                        marginLeft: "5px",
+                        marginRight: "5px",
+                        paddingLeft: "5px",
+                        backgroundColor: "#fff",
+                        paddingTop: "8px",
+                        paddingBottom: "8px",
+                        fontSize: "13px",
+                        display: "felx",
+                        flexDirection: "column",
+                        textAlign: "left",
+                      }}
+                    >
+                      <p>
+                        <span style={menuStyle}>Teacher Email</span> :{" "}
+                        <span style={{ color: "gray" }}>
+                          <a
+                            href={`mailto:${RegT.email}`}
+                            style={{ ...emailStyle, ...emailResponsiveStyle }}
+                          >
+                            {RegT.email}
+                          </a>
                         </span>
-                    </p>
-                    <p>
-                      <span style={menuStyle}>Bank Name</span> :{" "}
-                      <span style={{ color: "gray" }}>{RegT.payment.bank}</span>
-                    </p>
-                    <p>
-                      <span style={menuStyle}>Account Number</span> :{" "}
-                      <span style={{ color: "#000", fontWeight: "500" }}>
-                        {RegT.payment.accountNo}
-                      </span>
-                    </p>
-                    <p>
-                      <span style={menuStyle}>Class fee</span> :{" "}
-                      <span style={{ color: "#dc3545", fontWeight: "500" }}>
-                        Rs.{RegT.classpees}
-                      </span>
-                    </p>
-                  </div>
-                  <div style={{width:"auto"}}>
-                    <PayCard regdetal={RegT} />
-                  </div>
+                      </p>
+                      <p>
+                        <span style={menuStyle}>Bank Name</span> :{" "}
+                        <span style={{ color: "gray" }}>
+                          {RegT.payment.bank}
+                        </span>
+                      </p>
+                      <p>
+                        <span style={menuStyle}>Account Number</span> :{" "}
+                        <span style={{ color: "#000", fontWeight: "500" }}>
+                          {RegT.payment.accountNo}
+                        </span>
+                      </p>
+                      <p>
+                        <span style={menuStyle}>Class fee</span> :{" "}
+                        <span style={{ color: "#dc3545", fontWeight: "500" }}>
+                          Rs.{RegT.classpees}
+                        </span>
+                      </p>
+                    </div>
+                    <div style={{ width: "auto" }}>
+                      <PayCard regdetal={RegT} />
+                    </div>
                   </div>
                 </div>
               ))}

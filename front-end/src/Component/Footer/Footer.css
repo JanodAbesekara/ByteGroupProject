@@ -139,6 +139,10 @@ h3 {
     cursor: pointer;
     font-size: 20px;
   }
+  
+  form{
+    width: 50%;
+  }
 }
 
 @media (min-width: 415px) and (max-width: 600px) {
@@ -246,5 +250,9 @@ h3 {
     width: 20%;
     height: 30px;
     position: relative;
+  }
+
+  form{
+    width: 50%;
   }
 }

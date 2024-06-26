@@ -72,26 +72,25 @@ function AADSmanager() {
   const renderEmailTables = () => {
     const emailGroups = getEmailGroups();
     return Object.keys(emailGroups).map((email) => (
-      <Box key={email} sx={{ marginBottom: "50px", marginLeft:"30px" }}>
-        <div style={{width:"auto", disply:"flex",paddingRight:"20px"}}>
-        <a
-          href={`mailto:${email}`}
-          style={{ color: "black", textDecoration: "none" }}
-        >
-          
-          <p
-            style={{ 
-              textAlign: "left", 
-              marginBottom: "10px", 
-              width: "auto",
-              paddingLeft:"4px",
-              color:"blue",
-              display:"flex"
-             }}
+      <Box key={email} sx={{ marginBottom: "50px", marginLeft: "30px" }}>
+        <div style={{ width: "auto", disply: "flex", paddingRight: "20px" }}>
+          <a
+            href={`mailto:${email}`}
+            style={{ color: "black", textDecoration: "none" }}
           >
-            {email}
-          </p>
-        </a>
+            <p
+              style={{
+                textAlign: "left",
+                marginBottom: "10px",
+                width: "auto",
+                paddingLeft: "4px",
+                color: "blue",
+                display: "flex",
+              }}
+            >
+              {email}
+            </p>
+          </a>
         </div>
         <TableContainer component={Paper}>
           <Table>
@@ -200,7 +199,17 @@ function AADSmanager() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box sx={{ marginBottom: "60px" }}>
-            <h2 style={{textAlign:"center", color:"#333A73",marginTop:"40px",marginBottom:"30px", fontSize:"25px"}}>Ads Manager</h2>
+            <h2
+              style={{
+                textAlign: "center",
+                color: "#333A73",
+                marginTop: "40px",
+                marginBottom: "30px",
+                fontSize: "25px",
+              }}
+            >
+              Ads Manager
+            </h2>
             {renderEmailTables()}
           </Box>
         </Grid>
