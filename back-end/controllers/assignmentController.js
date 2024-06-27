@@ -50,8 +50,6 @@ const getAssignmentController = async (req, res) => {
   try {
     const assignment = await Assignment.find();
 
-  
-
     res.status(200).json(assignment);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -171,55 +169,48 @@ const checkAvailability = async (req, res) => {
     } else {
       return res
         .status(200)
-        .json({ success: false, msg: "Requested data is not available in the server" });
+        .json({
+          success: false,
+          msg: "Requested data is not available in the server",
+        });
     }
-    
   } catch (error) {
-    return res
-      .status(404)
-      .json({
-        success: false,
-        msg: "Unexpected error occured",
-      });
+    return res.status(404).json({
+      success: false,
+      msg: "Unexpected error occured",
+    });
   }
 };
 
-
-const getgradefromteacher = async(req,res)=>{
-  try{
-
+const getgradefromteacher = async (req, res) => {
+  try {
     const { email } = req.query;
 
-    const subjects = await UserProfile.find({ email:email}); 
+    const subjects = await UserProfile.find({ email: email });
 
-  
+    // find the data email subject medium trrrow
 
-    // find the data email subject medium trrrow 
-
-    const geteachdataset = subjects.map((subs)=>({
+    const geteachdataset = subjects.map((subs) => ({
       subject: subs.subject,
       medium: subs.medium,
       email: subs.email,
     }));
 
-
-   const gradeget = await GradesModel.find({
-      $or: geteachdataset.map((subs)=>({
-        teacherEmail:subs.email,
-        medium :subs.medium,
-        subject : subs.subject,
+    const gradeget = await GradesModel.find({
+      $or: geteachdataset.map((subs) => ({
+        teacherEmail: subs.email,
+        medium: subs.medium,
+        subject: subs.subject,
       })),
-   });
+    });
 
-  return res.status(200).json({ success:true, data:gradeget});
-
+    return res.status(200).json({ success: true, data: gradeget });
   } catch (error) {
     return res
       .status(500)
       .json({ success: false, msg: "Internal Server Error" });
   }
 };
-
 
 export {
   createAssignmentController,
