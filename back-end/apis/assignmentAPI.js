@@ -8,6 +8,7 @@ import {
   getStudentGrades,
   checkAvailability,
   getgradefromteacher,
+  subjectvicestudents,
 } from "../controllers/assignmentController.js";
 
 const router = express.Router();
