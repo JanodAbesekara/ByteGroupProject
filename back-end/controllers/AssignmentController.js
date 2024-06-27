@@ -251,9 +251,15 @@ const subjectvicestudents = async (req, res) => {
       profile: profileMap[enrollment.userEmail],
     }));
 
-    return res.status(200).json({ success: true, data: combinedata });
+    const filteredData = combinedata.filter(
+      (data) => data.teacherEmail === email
+    );
+
+    return res.status(200).json({ success: true, data: filteredData });
   } catch (error) {
-    return res.status(500).json({ success: false, msg: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
   }
 };
 
