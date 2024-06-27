@@ -29,11 +29,11 @@ export default function TeachersRegister() {
       return;
     }
 
-    const nameRegex = /^[a-zA-Z]+$/;
+    const nameRegex = /^[a-zA-Z ]+$/;
 
     if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
       window.alert(
-        "First name and Last name cannot contain numbers or special characters"
+        "First name and Last name can only contain letters and spaces"
       );
       return;
     }
@@ -47,18 +47,6 @@ export default function TeachersRegister() {
         role,
         password,
       };
-
-      if (
-        firstname === "" &&
-        lastname === "" &&
-        phonenumber === "" &&
-        email === "" &&
-        password === "" &&
-        role === ""
-      ) {
-        window.alert("Please fill all the fields");
-        return;
-      }
 
       if (role === "") {
         window.alert("Please select your role");
