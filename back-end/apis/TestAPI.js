@@ -11,6 +11,7 @@ import {
   getdertailsofStu,
   displayAllpayment,
   removeStudentNotpayed,
+  getlecturefulldtails,
 } from "../controllers/Testcontroller.js";
 
 const router = express.Router();
@@ -46,4 +47,6 @@ router.get("/displayallpayment",displayAllpayment);
 // remove student payment
 router.post("/removeStudentpayment",removeStudentNotpayed);
 
+// get registed subjects 
+router.get("/getlecturefulldtails", getlecturefulldtails);
 export default router;

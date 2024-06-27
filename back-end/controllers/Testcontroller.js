@@ -308,6 +308,18 @@ const removeStudentNotpayed = async (req, res) => {
   }
 };
 
+const getlecturefulldtails = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const getallsubjects = await UserProfile.find({ email: email });
+
+    return res.status(200).json({ success: true, data: getallsubjects });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   quisecontroller,
   getlecturematerial,
@@ -321,4 +333,5 @@ export {
   getdertailsofStu,
   displayAllpayment,
   removeStudentNotpayed,
+  getlecturefulldtails,
 };
