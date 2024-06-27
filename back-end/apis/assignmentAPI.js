@@ -21,7 +21,7 @@ router.get("/getGrade", getGrades); //find grades by using students email and di
 router.get("/getStudentGrades", getStudentGrades); // find grades relevant to the teachers email subject and medium and display them on teacher's side grades page
 router.get("/availability",checkAvailability) //to check the assignment is did or not
 
-router.get("/getgrade",getgradefromteacher);
+router.get("/getgradefromteacher", getgradefromteacher);
 
 export default router;
   
