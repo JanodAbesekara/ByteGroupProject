@@ -1,6 +1,5 @@
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
-import UserProfile from "../models/userProfileModel.js";
 import userProfileModel from "../models/userProfileModel.js";
 
 const createAssignmentController = async (req, res) => {
