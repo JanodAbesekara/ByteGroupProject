@@ -8,6 +8,7 @@ import {
   getStudentGrades,
   checkAvailability,
   getgradefromteacher,
+  subjectvicestudents,
 } from "../controllers/assignmentController.js";
 
 const router = express.Router();
@@ -23,6 +24,9 @@ router.get("/availability",checkAvailability); //to check the assignment is did 
 
 // geting grades 
 router.get("/getgradefromteacher", getgradefromteacher);
+
+// get registed students for subjects
+router.get("/eachsubstudents", subjectvicestudents);
 
 
 export default router;

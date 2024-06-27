@@ -1,6 +1,8 @@
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
 import userProfileModel from "../models/userProfileModel.js";
+import Enrollment from "../models/Enrollmentmdels.js";
+import studentProfileModel from "../models/studentProfileModel.js";
 
 const createAssignmentController = async (req, res) => {
   const { TeacherEmail, TeacherSubject, question, TimeRanges, submedium } =
@@ -211,6 +213,30 @@ const getgradefromteacher = async (req, res) => {
   }
 };
 
+const subjectvicestudents = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const enroledstu = await Enrollment.find({ teacherEmail: email });
+
+    const geteachdataset = enroledstu.map((subject) => ({
+      email: subject.userEmail,
+    }));
+
+    const gradeget = await studentProfileModel.find({
+      $or: geteachdataset.map((sub) => ({
+        uEmail: sub.email,
+      })),
+    });
+
+    return res.status(200).json({ success: true, data: gradeget });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   createAssignmentController,
   getAssignmentController,
@@ -220,4 +246,5 @@ export {
   getStudentGrades,
   checkAvailability,
   getgradefromteacher,
+  subjectvicestudents,
 };

@@ -89,9 +89,8 @@ const getNotifacition = async (req, res) => {
     // Fetch enrollments for the user
     const enrollments = await Enrollment.find({ userEmail: email });
 
-     const announceme = await Announcement.find({ jobrole: "Admin" });
+    const announceme = await Announcement.find({ jobrole: "Admin" });
 
-    
     // Extract job roles from enrollments
     const uniqueJobRoles = [
       ...new Set(enrollments.map((enrollment) => enrollment.jobRole)),
@@ -163,7 +162,6 @@ const getprofile = async (req, res) => {
       return res.status(404).json({ success: false, msg: "Profile not found" });
     }
     return res.status(200).json({ success: true, data: profile });
-   
   } catch (error) {
     console.error(error);
     return res
@@ -308,6 +306,18 @@ const removeStudentNotpayed = async (req, res) => {
   }
 };
 
+const getlecturefulldtails = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const getallsubjects = await UserProfile.find({ email: email });
+
+    return res.status(200).json({ success: true, data: getallsubjects });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
 export {
   quisecontroller,
   getlecturematerial,
@@ -321,4 +331,5 @@ export {
   getdertailsofStu,
   displayAllpayment,
   removeStudentNotpayed,
+  getlecturefulldtails,
 };
