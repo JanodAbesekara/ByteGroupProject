@@ -22,7 +22,8 @@ router.get("/getStudentGrades", getStudentGrades); // find grades relevant to th
 router.get("/availability",checkAvailability); //to check the assignment is did or not
 
 // geting grades 
-router.get("/getgrade",getgradefromteacher);
+router.get("/getgradefromteacher", getgradefromteacher);
+
 
 export default router;
   
