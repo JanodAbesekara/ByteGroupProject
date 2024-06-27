@@ -23,5 +23,8 @@ router.get("/availability",checkAvailability) //to check the assignment is did o
 
 router.get("/getgradefromteacher", getgradefromteacher);
 
+// get registed students for subjects
+router.get("/eachsubstudents", subjectvicestudents);
+
 export default router;
   
