@@ -10,6 +10,7 @@ const QRCodeGenerator = ({
   degree,
   experience,
   aboutme,
+  classpees,
   
 }) => {
   const [userData, setUserData] = useState(null);
@@ -23,8 +24,9 @@ const QRCodeGenerator = ({
       degree,
       experience,
       aboutme,
+      classpees,
     });
-  }, [email, firstname, lastname, phonenumber, degree, experience, aboutme]);
+  }, [email, firstname, lastname, phonenumber, degree, experience, aboutme, classpees]);
 
   // Serialize the user data into a normal format for QR code
   const dataForQRCode = userData
@@ -36,7 +38,8 @@ const QRCodeGenerator = ({
     phonenumber :- ${userData.phonenumber}
     Degree :- ${userData.degree}
     Experience :- ${userData.experience}
-    About Me :- ${userData.aboutme}`
+    About Me :- ${userData.aboutme}
+    ClassFees :- Rs.${userData.classpees}.00`
     : "";
 
   return <div>{userData && <QRCode value={dataForQRCode} size={80} />}</div>;
