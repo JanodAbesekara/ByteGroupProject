@@ -18,7 +18,6 @@ export default function Resetpassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email } = jwtDecode(token);
-    console.log(email + ":" + passwordN + ":" + passwordC);
 
     if (
       passwordN.length < 8 &&
@@ -46,7 +45,7 @@ export default function Resetpassword() {
       })
       .then((res) => {
         window.alert(res.data.msg);
-        console.log(res.data);
+
         if (res.data.success) {
           window.close();
         } else {
@@ -55,7 +54,6 @@ export default function Resetpassword() {
       })
       .catch((err) => {
         setError(err.response?.data?.msg || "An error occurred");
-        console.log(err.response);
       });
   };
 

@@ -34,7 +34,7 @@ export default function Feedback() {
     axios
       .get(`/api/auth/feedbackget`)
       .then((response) => {
-        console.log(response.data.data);
+     
         const filteredFeedback = response.data.data.filter(
           (feedback) => feedback.teacheremail === useremail
         );

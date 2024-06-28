@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import SendIcon from "@mui/icons-material/Send";
+import "./Opemwindow.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -68,6 +69,13 @@ function Openwindow({ open, handleClose, notifications }) {
   const handlesubmit = async (e) => {
     e.preventDefault();
 
+    const conform = window.confirm(
+      "Are you sure you want to send this notification?"
+    );
+    if (!conform) {
+      return;
+    }
+
     if (!subject || !title || !message) {
       window.alert("Please fill in all fields");
       return;
@@ -113,7 +121,9 @@ function Openwindow({ open, handleClose, notifications }) {
       aria-labelledby="customized-dialog-title"
       open={open}
     >
+
       <DialogTitle sx={{ m: 0, p: 2, justifyContent:"center", fontWeight:"600", color:"#fff",backgroundColor:"#628078"}} id="customized-dialog-title">
+
         Notifications
       </DialogTitle>
       <IconButton
@@ -133,11 +143,36 @@ function Openwindow({ open, handleClose, notifications }) {
           .slice(0)
           .reverse()
           .map((notification, index) => (
-            <DialogContent key={index} dividers sx={{border:"none", margin:"15px", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px", backgroundColor:"#f8f9fa"}}>
-              <p style={{ textAlign: "center", marginBottom: "10px", color:"#007bff", fontSize:"16px", fontWeight:"550" }}>
+            <DialogContent
+              key={index}
+              dividers
+              sx={{
+                border: "none",
+                margin: "15px",
+                boxShadow:
+                  "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px",
+                backgroundColor: "#f8f9fa",
+              }}
+            >
+              <p
+                style={{
+                  textAlign: "center",
+                  marginBottom: "10px",
+                  color: "#007bff",
+                  fontSize: "16px",
+                  fontWeight: "550",
+                }}
+              >
                 {notification.titleofAnn}
               </p>
-              <p style={{ textAlign: "left", marginInline: "10px",color:"#6c757d", fontSize:"12px" }}>
+              <p
+                style={{
+                  textAlign: "left",
+                  marginInline: "10px",
+                  color: "#6c757d",
+                  fontSize: "12px",
+                }}
+              >
                 {notification.Announcementmessage}
               </p>
               <br></br>
@@ -147,28 +182,38 @@ function Openwindow({ open, handleClose, notifications }) {
             </DialogContent>
           ))}
       </ScrollableContent>
+
       <DialogActions>
         <div>
           <form onSubmit={handlesubmit} style={{display:"flex", flexDirection:"column",width:"auto"}}>
             <label htmlFor="title" style={{color:"#136b16",paddingLeft:"6px"}}>Title</label>
+
             <input
               type="text"
               placeholder="Enter Title"
-              style={{ padding: "5px 10px", width:"auto", margin:"5px",borderRadius:"4px",border:"1px solid gray" }}
+              style={{
+                padding: "5px 10px",
+                width: "auto",
+                margin: "5px",
+                borderRadius: "4px",
+                border: "1px solid gray",
+              }}
               onChange={(e) => setTitle(e.target.value)}
             />
+
             <label htmlFor="message" style={{color:"#136b16",paddingLeft:"6px"}}>Message</label>
+
             <input
               type="text"
               placeholder="Enter Message"
               style={{
                 height: "100px",
-                display:"flex",
+                display: "flex",
                 width: "auto",
-                margin:"5px",
+                margin: "5px",
                 padding: "10px 10px 70px 10px",
-                borderRadius:"4px",
-                border:"1px solid gray"
+                borderRadius: "4px",
+                border: "1px solid gray",
               }}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -182,7 +227,9 @@ function Openwindow({ open, handleClose, notifications }) {
                       medium: e.target.value.split(",")[1],
                     })
                   }
+
                   style={{ padding: "5px 10px", marginBottom:"10px",width:"äuto" }}
+
                 >
                   <option value="">Select subject</option>
                   {teacherSubject.map((subject) => (
@@ -197,9 +244,11 @@ function Openwindow({ open, handleClose, notifications }) {
               </div>
               <button
                 type="submit"
+
                 style={{width:"80px", height:"25px",marginLeft:"5px",color:"#fff", backgroundColor:"#2175ad",borderRadius:"3px",border:"none",
                 boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
               }}
+
               >
                 Send
               </button>

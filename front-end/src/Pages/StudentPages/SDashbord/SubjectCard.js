@@ -28,7 +28,7 @@ export default function SubjectCard() {
     fetchSubjects();
   }, []);
 
-  console.log(Subjects);
+ 
 
   return (
     <div>

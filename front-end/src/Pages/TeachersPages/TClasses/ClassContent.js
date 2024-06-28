@@ -12,7 +12,6 @@ import {
 import app from "../../../firebase";
 import axios from "axios";
 
-
 function ClassContent({ subjectData }) {
   const [subjectdata] = useState(subjectData);
 
@@ -73,6 +72,14 @@ function ClassContent({ subjectData }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const conformation = window.confirm(
+      "Are you sure you want to add this lecture?"
+    );
+
+    if (!conformation) {
+      return;
+    }
+
     sentnotifsacition();
     const paylord = {
       TeacherEmail: subjectData.email,
@@ -107,11 +114,10 @@ function ClassContent({ subjectData }) {
     color: "#fff",
     borderRadius: "3px",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   };
 
   const sentnotifsacition = async (e) => {
-
     const currentDate = new Date();
     const currentTime = currentDate.toLocaleTimeString([], {
       hour: "2-digit",
@@ -141,11 +147,17 @@ function ClassContent({ subjectData }) {
     }
   };
 
-
   return (
     <>
-      {!showForm ?
-      <button onClick={ClicktoShow} style={style}>Click to Add</button> : <button onClick={ClicktoHide} style={style}>Hide</button> }
+      {!showForm ? (
+        <button onClick={ClicktoShow} style={style}>
+          Click to Add
+        </button>
+      ) : (
+        <button onClick={ClicktoHide} style={style}>
+          Hide
+        </button>
+      )}
       {showForm && (
         <div
           style={{
@@ -154,9 +166,9 @@ function ClassContent({ subjectData }) {
             display: "flex",
             backgroundColor: "#CADCD9",
             borderRadius: "4px",
-            flexDirection:"column",
-            width:"auto",
-            padding: "0 10px"            
+            flexDirection: "column",
+            width: "auto",
+            padding: "0 10px",
           }}
         >
           <div
@@ -165,13 +177,20 @@ function ClassContent({ subjectData }) {
               marginTop: "30px",
               marginBottom: "30px",
               display: "flex",
-              flexDirection:"column",
-              width:"auto",
-              justifyContent:"center"
+              flexDirection: "column",
+              width: "auto",
+              justifyContent: "center",
             }}
           >
-            <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width:"auto"}}>
-              <label style={{paddingBottom:"8px"}}>Lecture Name</label>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "auto",
+              }}
+            >
+              <label style={{ paddingBottom: "8px" }}>Lecture Name</label>
               <input
                 type="text"
                 placeholder="Enter lecture name"
@@ -182,10 +201,10 @@ function ClassContent({ subjectData }) {
                   height: "26px",
                   paddingLeft: "5px",
                   border: "1px solid gray",
-                  width:"auto"
+                  width: "auto",
                 }}
               />
-              <div style={{display: "flex", flexDirection: "column"}}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 <BiLogoZoom
                   style={{
                     color: "#2A629A",
@@ -204,11 +223,10 @@ function ClassContent({ subjectData }) {
                     height: "26px",
                     paddingLeft: "5px",
                     border: "1px solid gray",
-                    width:"auto"
+                    width: "auto",
                   }}
                 />
 
-                
                 <FaFilePdf
                   style={{
                     color: "#FF0000",
@@ -225,10 +243,10 @@ function ClassContent({ subjectData }) {
                   onChange={(e) => setPdf(e.target.files[0])}
                   style={{
                     marginBottom: "5px",
-                    width:"auto"
+                    width: "auto",
                   }}
                 />
-                
+
                 <PiVideoFill
                   style={{
                     color: "Blue",
@@ -245,10 +263,10 @@ function ClassContent({ subjectData }) {
                   onChange={(e) => setVideo(e.target.files[0])}
                   style={{
                     marginBottom: "5px",
-                    width:"auto"
+                    width: "auto",
                   }}
                 />
-                
+
                 <SiMaterialdesignicons
                   style={{
                     color: "Blue",
@@ -268,21 +286,25 @@ function ClassContent({ subjectData }) {
                     height: "26px",
                     paddingLeft: "5px",
                     border: "1px solid gray",
-                    width:"auto"
+                    width: "auto",
                   }}
                 />
               </div>
-              <button type="submit"
-                      style={{
-                        color: "#fff",
-                        padding: "4px 0px",
-                        backgroundColor: "rgb(164, 166, 179)",
-                        border: "none",
-                        borderRadius: "3px",
-                        width:"60px",
-                        boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-                      }}
-              >Submit</button>
+              <button
+                type="submit"
+                style={{
+                  color: "#fff",
+                  padding: "4px 0px",
+                  backgroundColor: "rgb(164, 166, 179)",
+                  border: "none",
+                  borderRadius: "3px",
+                  width: "60px",
+                  boxShadow:
+                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                }}
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>

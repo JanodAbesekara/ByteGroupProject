@@ -145,6 +145,10 @@ input,textarea  {
     font-size: 14px;
     margin-left: 1px;
   }
+  
+  form{
+    width: 50%;
+  }
 }
 
 

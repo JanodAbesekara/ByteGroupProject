@@ -192,9 +192,6 @@
   }
 } */
 
-
-
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
 
 * {
@@ -210,8 +207,10 @@
 #root
   > div
   > div
-  > div.head
-  > div.container3
+  > div.MuiGrid-root.MuiGrid-container.css-1d3bbye
+  > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-9\.8.MuiGrid-grid-sm-10\.5.MuiGrid-grid-md-11\.25.css-1arou7t
+  > div
+  > div
   > div.container1
   > div.notifications_icon
   > a
@@ -245,7 +244,6 @@
   text-transform: uppercase;
 }
 
-
 @media only screen and (min-width: 300px) and (max-width: 768px) {
   .name p {
     font-size: 18px;
@@ -253,11 +251,7 @@
 }
 
 @media screen and (min-width: 769px) {
-
   .notifications_icon {
     float: right;
   }
 }
-
-
-

@@ -31,7 +31,6 @@ function AddingLectures({ subjectData }) {
         const filteredMaterial = response.data.data;
         setSubjectQuiz(filteredMaterial);
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError("Error fetching data: " + error.message);
       }
     };
@@ -40,6 +39,13 @@ function AddingLectures({ subjectData }) {
   }, [subjectData]);
 
   const handleDelete = async (_id) => {
+    const conform = window.confirm(
+      "Are you sure you want to delete this lecture material?"
+    );
+    if (!conform) {
+      return;
+    }
+
     try {
       const response = await axios.post(`/api/Quise/deletelecturematerial`, {
         _id,
@@ -54,7 +60,6 @@ function AddingLectures({ subjectData }) {
         window.alert("Unexpected response status: " + response.status);
       }
     } catch (error) {
-      console.error("Error deleting data:", error);
       setError("Error deleting data: " + error.message);
       window.alert("Error deleting data: " + error.message);
     }
@@ -74,15 +79,22 @@ function AddingLectures({ subjectData }) {
     border: "none",
     borderRadius: "5px",
     marginLeft: "20px",
-    marginBottom:"15px"
-  }
+    marginBottom: "15px",
+  };
 
   return (
     <div>
       {error && <p>{error}</p>}
 
-      {!showForm ? 
-      <button onClick={HandleShow} style={style}>Added Contents</button> : <button onClick={HandleHide} style={style}>Hide Contents</button> }
+      {!showForm ? (
+        <button onClick={HandleShow} style={style}>
+          Added Contents
+        </button>
+      ) : (
+        <button onClick={HandleHide} style={style}>
+          Hide Contents
+        </button>
+      )}
       {showForm && (
         <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
           <Table>

@@ -33,6 +33,8 @@ function Classcomponent({ subjectData }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+
     const data = {
       leccount: lectureCount,
       teacheremail: jwtDecode(localStorage.getItem("MERN_AUTH_TOKEN")).email, // Safer access

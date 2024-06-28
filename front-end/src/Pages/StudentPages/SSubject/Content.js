@@ -46,7 +46,6 @@ function Content({ teachermail, subject, medium }) {
         teachetmail: teachermail,
         medium: medium,
       });
-      console.log(response.data.msg);
     } catch (error) {
       window.alert(error.response.data.msg);
     } finally {

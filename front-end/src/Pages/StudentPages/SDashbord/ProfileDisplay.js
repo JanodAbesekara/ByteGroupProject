@@ -26,14 +26,14 @@ function ProfileDisplay({ email, subject, medium }) {
       .get(`/api/user/name/${email}`)
       .then((response) => {
         setTeacherProfile(response.data.data);
-        console.log(response.data.data);
+       
       })
       .catch((error) => {
         console.log(error.response.data.msg);
       });
   }, [email]);
 
-  console.log(teacherProfile);
+ 
   const defaultImage =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 

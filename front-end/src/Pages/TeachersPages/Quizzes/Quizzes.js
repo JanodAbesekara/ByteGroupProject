@@ -20,7 +20,7 @@ export default function Quizzes() {
       const userEmail = decodedToken.email;
 
       const response = await axios.get(`/api/user/getsubjectreg`, {
-        params: { email: userEmail }
+        params: { email: userEmail },
       });
       const filtersubject = response.data.data;
       setquise(filtersubject);
@@ -42,7 +42,6 @@ export default function Quizzes() {
           (quessubject) => quessubject.TeacherEmail === userEmail
         );
         setsubjectquise(filterquise);
-        console.log(subjectquise);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -59,7 +58,7 @@ export default function Quizzes() {
           <Sidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box sx={{marginLeft:"20px"}}>
+          <Box sx={{ marginLeft: "20px" }}>
             {quise.length > 0 &&
               quise.map((quises) => (
                 <div key={quises._id}>

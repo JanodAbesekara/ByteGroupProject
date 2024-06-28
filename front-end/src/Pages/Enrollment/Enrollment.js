@@ -29,7 +29,6 @@ function Enrollment() {
       try {
         const response = await axios.get("/api/Enrol/enrolement");
         setPostData(response.data.data);
-        console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -59,6 +58,14 @@ function Enrollment() {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");
     const decodedToken = jwtDecode(token);
     const userEmail = decodedToken.email;
+
+    const conformation = window.confirm(
+      "Are you sure you want to enroll this course?"
+    );
+
+    if (!conformation) {
+      return;
+    }
 
     const payload = {
       userEmail,

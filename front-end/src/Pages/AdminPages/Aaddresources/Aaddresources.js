@@ -77,7 +77,7 @@ const Aaddresources = () => {
         window.location.reload();
       } catch (error) {
         window.alert(error.response.data.msg);
-        console.error("Unexpected error format:", error);
+        
         setAlertSeverity("error"); // Set error alert on unexpected error
         setAlertMessage("An unexpected error occurred. Please try again.");
       }

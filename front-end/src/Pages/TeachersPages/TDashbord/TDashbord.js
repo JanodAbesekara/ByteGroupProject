@@ -73,7 +73,6 @@ export default function Dashbord() {
           const announcements = response.data.announcements;
           setNotification(announcements);
           setNotCount(announcements.length);
-          console.log(announcements);
         })
         .catch((error) => console.log(error));
     };
@@ -111,31 +110,46 @@ export default function Dashbord() {
           <Sidebar />
         </div>
         <div className="container3">
-          <div className="container1" style={{display:"flex", 
-          flexDirection:"row",
-          justifyContent:"space-between",
-          width:"auto",
-          margin:"10px",
-          padding: "10px"
-          }}>
-          <div className="teacher_info" style={{display:"flex", 
-          flexDirection:"row",
-          textAlign:"center",
-          padding:"0"
-          }}>
-              <div className="picture" style={{height:"auto", width:"auto"}} >
-                <Avatar
-                  alt="profile_pic"
-                  src={url}
-                />
+          <div
+            className="container1"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "auto",
+              margin: "10px",
+              padding: "10px",
+            }}
+          >
+            <div
+              className="teacher_info"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                textAlign: "center",
+                padding: "0",
+              }}
+            >
+              <div
+                className="picture"
+                style={{ height: "auto", width: "auto" }}
+              >
+                <Avatar alt="profile_pic" src={url} />
               </div>
-              <div className="name" style={{display:"flex",paddingLeft:"3px",paddingTop:"10px", fontSize:"14px"}}>
+              <div
+                className="name"
+                style={{
+                  display: "flex",
+                  paddingLeft: "3px",
+                  paddingTop: "10px",
+                  fontSize: "14px",
+                }}
+              >
                 <p>{user.firstname + " " + user.lastname}</p>
               </div>
-              </div>
+            </div>
 
-            
-              <div className="notifications_icon">
+            <div className="notifications_icon">
               <React.Fragment>
                 <Link variant="outlined" onClick={handleClickOpen}>
                   <Box>
@@ -150,8 +164,6 @@ export default function Dashbord() {
                   notifications={notifaication}
                 />
               </React.Fragment>
-              
-
             </div>
           </div>
 

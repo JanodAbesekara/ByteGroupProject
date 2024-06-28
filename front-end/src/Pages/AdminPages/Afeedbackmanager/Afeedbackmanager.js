@@ -57,6 +57,13 @@ function Afeedbackmanager() {
   };
 
   const handleDelete = async (_id) => {
+
+    const isconform = window.confirm(
+      "Do you want to delete this FeedBack?"
+    );
+
+    if (!isconform) return;
+
     try {
       await axios.post(`/api/auth/deletefeedback`, { _id });
       setGroupedFeedbackData((prevGroupedData) => {
@@ -89,8 +96,19 @@ function Afeedbackmanager() {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box className="feedback-container" sx={{marginLeft:"15px"}}>
-            <p style={{color:"#333A73",fontSize:"28px",fontWeight:"650",textAlign:"center",paddingBottom:"30px",paddingTop:"40px"}}>Feedback Management</p>
+          <Box className="feedback-container" sx={{ marginLeft: "15px" }}>
+            <p
+              style={{
+                color: "#333A73",
+                fontSize: "28px",
+                fontWeight: "650",
+                textAlign: "center",
+                paddingBottom: "30px",
+                paddingTop: "40px",
+              }}
+            >
+              Feedback Management
+            </p>
             {Object.keys(groupedFeedbackData).length > 0 ? (
               Object.keys(groupedFeedbackData).map((teacheremail) =>
                 Object.keys(groupedFeedbackData[teacheremail]).map(
@@ -98,12 +116,43 @@ function Afeedbackmanager() {
                     Object.keys(
                       groupedFeedbackData[teacheremail][feedSubject]
                     ).map((feedmedium) => (
-                      <div key={`${teacheremail}-${feedSubject}-${feedmedium}`} >
-                        <div style={{display:"flex",flexDirection:"column",width:"auto", backgroundColor:"#F0F8FF", padding:"10px 0", borderRadius:"5px", color:"#fff"}}>
-                          <p style={{width:"auto", display:"flex", fontSize:"14px", backgroundColor:"green", paddingTop:"4px",paddingBlock:"4px", borderRadius:"4px"}}>{teacheremail}</p>
-                          <p style={{width:"auto", display:"flex", fontSize:"13px", color:"blue"}}>{feedSubject} ({feedmedium})</p>
+                      <div key={`${teacheremail}-${feedSubject}-${feedmedium}`}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "auto",
+                            backgroundColor: "#F0F8FF",
+                            padding: "10px 0",
+                            borderRadius: "5px",
+                            color: "#fff",
+                          }}
+                        >
+                          <p
+                            style={{
+                              width: "auto",
+                              display: "flex",
+                              fontSize: "14px",
+                              backgroundColor: "green",
+                              paddingTop: "4px",
+                              paddingBlock: "4px",
+                              borderRadius: "4px",
+                            }}
+                          >
+                            {teacheremail}
+                          </p>
+                          <p
+                            style={{
+                              width: "auto",
+                              display: "flex",
+                              fontSize: "13px",
+                              color: "blue",
+                            }}
+                          >
+                            {feedSubject} ({feedmedium})
+                          </p>
                         </div>
-                        
+
                         <TableContainer
                           component={Paper}
                           className="table-container"
@@ -140,11 +189,21 @@ function Afeedbackmanager() {
                                 feedmedium
                               ].map((row) => (
                                 <TableRow key={row._id}>
-                                  <TableCell sx={{ textAlign: "center" }}>{row.teacheremail}</TableCell>
-                                  <TableCell sx={{ textAlign: "center" }}>{row.feedSubject}</TableCell>
-                                  <TableCell sx={{ textAlign: "center" }}>{row.feedmedium}</TableCell>
-                                  <TableCell sx={{ textAlign: "center" }}>{row.studentemail}</TableCell>
-                                  <TableCell sx={{ textAlign: "center" }}>{row.feedtext}</TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    {row.teacheremail}
+                                  </TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    {row.feedSubject}
+                                  </TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    {row.feedmedium}
+                                  </TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    {row.studentemail}
+                                  </TableCell>
+                                  <TableCell sx={{ textAlign: "center" }}>
+                                    {row.feedtext}
+                                  </TableCell>
                                   <TableCell sx={{ textAlign: "center" }}>
                                     <Rating
                                       name="simple-controlled"

@@ -12,7 +12,7 @@ function StudentTable({ studentDetails, profilePicUrl }) {
   const displayPicUrl = profilePicUrl || defaultProfilePicUrl;
 
   const studentEmail = studentDetails.userEmail;
-  console.log(studentEmail);
+ 
 
   useEffect(() => {
     const fetchStudentDetails = async () => {
@@ -20,7 +20,7 @@ function StudentTable({ studentDetails, profilePicUrl }) {
         const response = await axios.get(`/api/user/name/${studentEmail}`);
         if (response.data.success) {
           setStudentDetails(response.data.data); // Store the first item in the array
-          console.log(parentDetails);
+         
         } else {
           console.error("Failed to fetch student details");
         }
