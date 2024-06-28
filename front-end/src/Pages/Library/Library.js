@@ -28,7 +28,7 @@ const Library = () => {
     <div>
       <Navbar />
       <div className="L_label">
-        <h2>Knowledge on your fingertips </h2>
+        <h2>Knowledge on your Fingertips </h2>
       </div>
       <div className="sb1">
         <TableComponent

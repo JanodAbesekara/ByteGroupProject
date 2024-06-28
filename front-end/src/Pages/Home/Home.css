@@ -8,32 +8,30 @@
 
 
 .main_img{
-    background-image: url("./images/wall.jpg");
+    background-image: url("./images/3.jpg");
     box-shadow: inset 0 0 0 2000px #21202098;
     background-size: cover;
-    height: 120vh;
-    width: auto;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
     text-align: center;
-    animation: bgchange 40s infinite;
+    animation: bgchange 20s infinite;
 }
 @keyframes bgchange{
     0%{
-        background-image: url('images/image1.jpg');
+        background-image: url('images/1.jpg');
     }
-    20%{
-        background-image: url('images/image2.jpg');
+    33.33%{
+        background-image: url('images/2.webp');
     }
-    40%{
-        background-image: url('images/image3.jpg');
-    }
-    60%{
-        background-image: url('images/image4.jpg');
-    }
-    80%{
-        background-image: url('images/image5.jpg');
+    
+    66.67% {
+        background-image: url('images/4.webp');
     }
     100%{
-        background-image: url('images/wall.jpg');
+        background-image: url('images/3.jpg');
     }
 
 }
@@ -79,8 +77,53 @@
   width: 160px;
   height: 138px;
 }
+.textEffect {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  position: relative;
+  cursor: pointer;
+}
+.text {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top:60px;
+  opacity: 0;
+  transition: top 0.8s;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  z-index: 2;
+}
+.default{
+  text-align: center;
+  color: #fff;
+  align-items: center;
+  padding-top: 60px;
+  font-size: 14px;
+}
+.textEffect:hover .text {
+  top: 50%;
+  text-align: center;
+  opacity: 1;
+  color: #000;
+  font-weight: 500;
+}
+.textEffect:hover .default {
+    opacity: 0;
+}
+.textEffects {
+  justify-content: center;
+  align-items: center;
+}
+.upper_side, .down_side {
+  display: flex;
+  flex-direction: row;
+}
 
-@media (min-width: 320px) and (max-width: 576px) {
+@media (min-width: 300px) and (max-width: 768px) {
   .main_img h2 {
     font-size: 60px;
     color: rgb(250, 250, 250);
@@ -93,5 +136,20 @@
     line-height: 22px;
     color: #c8d0e5;
     padding: 0 20px;
+  }
+  .textEffects{
+    display: flex;
+    flex-direction: column;
+  }
+  .upper_side, .down_side {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width:769px) {
+  .textEffects {
+    display: flex;
+    flex-direction: column;
   }
 }

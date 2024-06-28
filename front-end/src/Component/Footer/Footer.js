@@ -37,7 +37,7 @@ function Footer() {
     <div className="Footer">
       <div className="fbox">
         <div className="rme">
-          <h2>Send us a message</h2>
+          <h2>Send us a Message</h2>
           <form ref={form} onSubmit={sendEmail} style={{display:"flex",flexDirection:"column",width:"auto"}}>
             <input
               className="in1"
