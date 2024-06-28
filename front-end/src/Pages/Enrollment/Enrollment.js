@@ -230,7 +230,7 @@ function Enrollment() {
                     {item.posts.firstname} {item.posts.lastname}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {item.posts.email}
+                    <a href= {`mailto:{item.posts.email}`}>{item.posts.email}</a>
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {profileItem.subject}
