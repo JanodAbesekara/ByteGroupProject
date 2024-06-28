@@ -38,15 +38,20 @@ h3 {
 }
 
 .rme button {
-  background: linear-gradient(120deg, #616fcb, #2b45eb);
+  background: #156EFF;
   border: none;
-  box-shadow: 0px 1px 5px 0px black;
+  box-shadow: 0px 1px 3px 0px black;
   cursor: pointer;
+  margin-left: 9px;
 }
 .rme button:hover{
   color:#fff;
   opacity: 0.7;
 }
+input,textarea  {
+  border: none;
+}
+
 
 @media (min-width: 300px) and (max-width: 650px) {
   .fbox {
@@ -133,11 +138,12 @@ h3 {
   }
 
   .rme button {
-    background: linear-gradient(120deg, #616fcb, #2b45eb);
+    background: #156EFF;
     border: none;
     box-shadow: 0px 1px 5px 0px black;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 14px;
+    margin-left: 1px;
   }
   
   form{
@@ -145,12 +151,6 @@ h3 {
   }
 }
 
-@media (min-width: 415px) and (max-width: 600px) {
-  .rme .in2 {
-    position: relative;
-    left: -8px;
-  }
-}
 
 @media (min-width: 651px) {
   .Footer {
@@ -181,6 +181,9 @@ h3 {
     position: relative;
     left: 0px;
   }
+  .rme button{
+    margin-left: 18px;
+  }
   .seb {
     color: #fff;
     border-radius: 5px;
@@ -196,6 +199,7 @@ h3 {
     margin: 20px;
     float: right;
     bottom: 255px;
+    padding-top: 28px;
     padding-right: 80px;
   }
   .lme h2 {
@@ -240,19 +244,3 @@ h3 {
   }
 }
 
-@media (min-width: 320px) and (max-width: 576px) {
-  .seb {
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 3px 10px 3px 10px;
-    margin-left: 0px;
-    width: 20%;
-    height: 30px;
-    position: relative;
-  }
-
-  form{
-    width: 50%;
-  }
-}
