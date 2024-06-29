@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./Home.css";
 import Navbar from "../../Component/Navbar/Navbar";
 import Footer from "../../Component/Footer/Footer";
@@ -7,6 +7,9 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { SiGoogleclassroom } from "react-icons/si";
 import { IoTimeOutline } from "react-icons/io5";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import feedback1 from './images/feedback1.png';
+import feedback2 from './images/feedback2.png';
+import feedback3 from './images/feedback3.png';
 
 export default function Home() {
   const [text] = useTypewriter({
@@ -14,6 +17,20 @@ export default function Home() {
     loop: true,
     typeSpeed: 100,
   });
+
+  const feedbackImages = [
+    feedback1,
+    feedback2,
+    feedback3,
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % feedbackImages.length);
+        }, 3000); // Change image every 0.5 seconds
+        return () => clearInterval(interval);
+    }, []);
 
   return (
     <div>
@@ -139,6 +156,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="feedbacks">
+      <img src={feedbackImages[currentIndex]} alt="Feedback" />
+        </div>
       <Footer />
     </div>
   );

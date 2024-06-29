@@ -14,6 +14,7 @@ import { jwtDecode } from "jwt-decode";
 import Alert from "@mui/material/Alert";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Navbar from "../../Component/Navbar/Navbar";
 
 function Enrollment() {
   const [postdata, setPostData] = useState([]);
@@ -94,6 +95,7 @@ function Enrollment() {
 
   return (
     <div>
+      <Navbar />
       
       <p style={{fontWeight:"600",
                   textAlign: "center",
@@ -157,7 +159,7 @@ function Enrollment() {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#201658", marginTop: "50px" }}>
+            <TableRow sx={{ backgroundColor: "#124076", marginTop: "50px" }}>
               <TableCell
                 sx={{
                   color: "white",
