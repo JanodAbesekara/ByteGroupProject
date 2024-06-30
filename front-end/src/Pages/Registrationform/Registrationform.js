@@ -108,11 +108,10 @@ export default function TeachersRegister() {
         <h2>Registration Form</h2>
 
         <div className="form_contents">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",width:"auto"}}>
             <label>
               <span style={{ color: "red" }}>* </span>Name
             </label>
-            <br></br>
             <input
               type="text"
               placeholder="First Name"
@@ -140,15 +139,13 @@ export default function TeachersRegister() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
+                marginBottom:"25px"
               }}
             />
-            <br></br>
-            <br></br>
 
             <label>
               <span style={{ color: "red" }}>* </span>Phone Number
             </label>
-            <br></br>
             <input
               type="tel"
               placeholder="Phone Number"
@@ -163,15 +160,13 @@ export default function TeachersRegister() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
+                marginBottom:"25px"
               }}
             />
-            <br></br>
-            <br></br>
 
             <label>
               <span style={{ color: "red" }}>* </span>Email
             </label>
-            <br></br>
 
             <input
               type="email"
@@ -185,42 +180,39 @@ export default function TeachersRegister() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
+                marginBottom:"25px"
               }}
             />
-            <br></br>
-            <br></br>
 
             <label>
-              <span style={{ color: "red" }}>* </span>Are you a...
+              <span style={{ color: "red" }}>* </span>Register as
             </label>
 
-            <div className="radio">
+            <div className="radio" style={{marginBottom:"20px"}}>
               <input
                 type="radio"
                 name="role"
                 value="Lecturer"
                 required
                 onChange={(e) => setrole(e.target.value)}
-              />{" "}
-              Lecturer
-              <br></br>
-              <input
+                style={{marginRight:"5px"}}
+              />
+              Teacher
+                <input
                 type="radio"
                 name="role"
                 value="Student"
                 required
                 onChange={(e) => setrole(e.target.value)}
-              />{" "}
+                style={{marginRight:"5px"}}
+              />
               Student
             </div>
 
-            <br></br>
-            <br></br>
 
             <label>
               <span style={{ color: "red" }}>* </span>Password
             </label>
-            <br></br>
             <input
               type="password"
               value={password}
@@ -233,16 +225,14 @@ export default function TeachersRegister() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
+                marginBottom:"25px"
               }}
             />
 
-            <br></br>
-            <br></br>
 
             <label>
               <span style={{ color: "red" }}>* </span>Confirm Password
             </label>
-            <br></br>
 
             <input
               type="password"
@@ -256,12 +246,10 @@ export default function TeachersRegister() {
                 height: "40px",
                 marginTop: "10px",
                 fontSize: "15px",
+                marginBottom:"25px"
               }}
             />
 
-            <br></br>
-            <br></br>
-            <br></br>
 
             <button type="submit" value="Register" className="submit">
               Register

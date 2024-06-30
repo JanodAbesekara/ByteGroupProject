@@ -14,6 +14,7 @@ import { jwtDecode } from "jwt-decode";
 import Alert from "@mui/material/Alert";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Navbar from "../../Component/Navbar/Navbar";
 
 function Enrollment() {
   const [postdata, setPostData] = useState([]);
@@ -94,17 +95,15 @@ function Enrollment() {
 
   return (
     <div>
-      <p
-        style={{
-          fontWeight: "600",
-          textAlign: "center",
-          fontSize: "28px",
-          color: "#333A73",
-          marginTop: "70px",
-        }}
-      >
-        Enroll your Courses
-      </p>
+
+      <Navbar />
+      
+      <p style={{fontWeight:"600",
+                  textAlign: "center",
+                  fontSize: "28px",
+                  color: "#333A73",
+                  marginTop: "70px",}}>Enroll your Courses</p>
+
       <div
         className="search"
         style={{
@@ -163,7 +162,7 @@ function Enrollment() {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#201658", marginTop: "50px" }}>
+            <TableRow sx={{ backgroundColor: "#124076", marginTop: "50px" }}>
               <TableCell
                 sx={{
                   color: "white",
