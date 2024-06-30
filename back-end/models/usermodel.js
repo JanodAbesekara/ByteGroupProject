@@ -48,7 +48,7 @@ const userSchema = new Schema(
   }
 );
 
-cron.schedule('*/30 * * * *', async () => {  
+cron.schedule('*/30 * * * *', async () => {
   const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
   await User.deleteMany({ verified: false, createdAt: { $lt: thirtyMinutesAgo } });
   console.log('Deleted unverified users older than 30 minutes');
