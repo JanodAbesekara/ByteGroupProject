@@ -28,9 +28,9 @@ const removeStudent = async (req, res) => {
   try {
     const data = req.body;
     const email = data.email;
-    await usermodel.deleteOne({ email: email});
+    await usermodel.deleteOne({ email: email });
     await Enrollment.deleteOne({ userEmail: email });
-    await studentprofile.deleteOne({ email : email});
+    await studentprofile.deleteOne({ email: email });
     return res
       .status(200)
       .json({ success: true, msg: "Student deleted successfully" });
