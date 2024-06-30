@@ -182,7 +182,12 @@ function Ateachers() {
                             </a>
                           </TableCell>
                           <TableCell align="center">
-                            {teacher.phonenumber}
+                            <a
+                              href={`tel : ${teacher.phonenumber}`}
+                              style={{ textDecoration: "none" }}
+                            >
+                              {teacher.phonenumber}
+                            </a>
                           </TableCell>
                           <TableCell align="center">
                             {new Date(teacher.updatedAt).toLocaleDateString()}

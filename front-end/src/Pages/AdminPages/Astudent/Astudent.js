@@ -193,7 +193,9 @@ function Astudent() {
                             </a>
                           </TableCell>
                           <TableCell align="center">
-                            {student.phonenumber}
+                            <a href={`tel : ${student.phonenumber}`}>
+                              {student.phonenumber}
+                            </a>
                           </TableCell>
                           <TableCell align="center">
                             {new Date(student.updatedAt).toLocaleDateString()}
