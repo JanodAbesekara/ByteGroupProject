@@ -48,9 +48,8 @@ const userSchema = new Schema(
   }
 );
 
-export default mongoose.model("users", userSchema);
-cron.schedule("0 0 * * *", async () => {
-  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-  await User.deleteMany({ verified: false, createdAt: { $lt: oneDayAgo } });
-  console.log("Deleted unverified users older than 1 day");
+cron.schedule('*/30 * * * *', async () => {  
+  const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+  await User.deleteMany({ verified: false, createdAt: { $lt: thirtyMinutesAgo } });
+  console.log('Deleted unverified users older than 30 minutes');
 });
