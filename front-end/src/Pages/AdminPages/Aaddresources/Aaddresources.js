@@ -193,7 +193,7 @@ const Aaddresources = () => {
             resetNotification={resetNotification}
           />
         )}
-          <Box sx={{ width: "100%", height: "1000px" }}>
+          <Box sx={{marginBottom:"100px"}}>
             <div>
             <h1>File upload</h1>
             <div className="Resourses">

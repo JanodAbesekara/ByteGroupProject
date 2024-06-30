@@ -172,7 +172,17 @@ function Displayresources() {
                     {file.audioMedia}
                   </TableCell>
                   <TableCell align="center">
-                    <button onClick={() => handleDelete(file._id)}>
+                    <button onClick={() => handleDelete(file._id)}
+                    style={{
+                      backgroundColor: "red",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    
+                    }}
+                    >
                       Remove
                     </button>
                   </TableCell>
