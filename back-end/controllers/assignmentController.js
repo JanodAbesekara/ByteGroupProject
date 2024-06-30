@@ -1,6 +1,8 @@
-import { now } from "mongoose";
+import Enrollment from "../models/Enrollmentmdels.js";
 import Assignment from "../models/Assignmentmodel.js";
 import GradesModel from "../models/marksModel.js";
+import UserProfile from "../models/userProfileModel.js";
+import studentProfileModel from "../models/studentProfileModel.js";
 
 const createAssignmentController = async (req, res) => {
   const { TeacherEmail, TeacherSubject, question, TimeRanges, submedium } =
@@ -48,8 +50,6 @@ const createAssignmentController = async (req, res) => {
 const getAssignmentController = async (req, res) => {
   try {
     const assignment = await Assignment.find();
-
-  
 
     res.status(200).json(assignment);
   } catch (error) {
@@ -170,16 +170,96 @@ const checkAvailability = async (req, res) => {
     } else {
       return res
         .status(200)
-        .json({ success: false, msg: "Requested data is not available in the server" });
+        .json({
+          success: false,
+          msg: "Requested data is not available in the server",
+        });
     }
-    
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      msg: "Unexpected error occured",
+    });
+  }
+};
+
+const getgradefromteacher = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const subjects = await UserProfile.find({ email: email });
+
+    // find the data email subject medium trrrow
+
+    const geteachdataset = subjects.map((subs) => ({
+      subject: subs.subject,
+      medium: subs.medium,
+      email: subs.email,
+    }));
+
+    const gradeget = await GradesModel.find({
+      $or: geteachdataset.map((subs) => ({
+        teacherEmail: subs.email,
+        medium: subs.medium,
+        subject: subs.subject,
+      })),
+    });
+
+    return res.status(200).json({ success: true, data: gradeget });
   } catch (error) {
     return res
-      .status(404)
-      .json({
-        success: false,
-        msg: "Unexpected error occured",
-      });
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
+  }
+};
+
+const subjectvicestudents = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    // Fetch all enrolled students with the given teacher email
+    const enroledstu = await Enrollment.find({ teacherEmail: email });
+
+    // Extract unique user emails
+    const geteachdataset = enroledstu.map((subject) => ({
+      email: subject.userEmail,
+    }));
+
+    // Fetch student profiles based on user emails
+    const gradeget = await studentProfileModel.find({
+      $or: geteachdataset.map((sub) => ({
+        uEmail: sub.email,
+      })),
+    });
+
+    // Fetch enrolled subjects based on user emails
+    const enroledsubjects = await Enrollment.find({
+      $or: geteachdataset.map((sub) => ({
+        userEmail: sub.email,
+      })),
+    });
+
+    // Create a map of email to student profile for quick lookup
+    const profileMap = gradeget.reduce((acc, profile) => {
+      acc[profile.uEmail] = profile;
+      return acc;
+    }, {});
+
+    // Combine each enrolled subject with the corresponding student profile
+    const combinedata = enroledsubjects.map((enrollment) => ({
+      ...enrollment._doc,
+      profile: profileMap[enrollment.userEmail],
+    }));
+
+    const filteredData = combinedata.filter(
+      (data) => data.teacherEmail === email
+    );
+
+    return res.status(200).json({ success: true, data: filteredData });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, msg: "Internal Server Error" });
   }
 };
 
@@ -191,4 +271,6 @@ export {
   getGrades,
   getStudentGrades,
   checkAvailability,
+  getgradefromteacher,
+  subjectvicestudents,
 };

@@ -9,7 +9,7 @@ function StudentTable({ studentDetails, profilePicUrl }) {
   const [stuDetails, setStudentDetails] = useState({});
   const [parentDetails, setParentDetails] = useState({});
 
-  const displayPicUrl = profilePicUrl || defaultProfilePicUrl;
+  const displayPicUrl = parentDetails.url || defaultProfilePicUrl;
 
   const studentEmail = studentDetails.userEmail;
  
@@ -49,7 +49,7 @@ function StudentTable({ studentDetails, profilePicUrl }) {
   return (
     <TableRow>
       <TableCell align="center">
-        {profilePicUrl === "" ? "No Image" : ""}
+        {displayPicUrl === "" ? "No Image" : ""}
         <a href={displayPicUrl} target="_blank" rel="noopener noreferrer">
           <img
             src={displayPicUrl}

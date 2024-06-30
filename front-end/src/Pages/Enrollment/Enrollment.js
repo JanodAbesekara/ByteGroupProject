@@ -95,6 +95,7 @@ function Enrollment() {
 
   return (
     <div>
+
       <Navbar />
       
       <p style={{fontWeight:"600",
@@ -102,6 +103,7 @@ function Enrollment() {
                   fontSize: "28px",
                   color: "#333A73",
                   marginTop: "70px",}}>Enroll your Courses</p>
+
       <div
         className="search"
         style={{
@@ -137,7 +139,8 @@ function Enrollment() {
             padding: "5px",
             backgroundColor: "#40A2E3",
             color: "white",
-            boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+            boxShadow:
+              "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
           }}
         >
           Search
@@ -195,7 +198,7 @@ function Enrollment() {
                   textAlign: "center",
                 }}
               >
-                Medium
+                Class Fees
               </TableCell>
               <TableCell
                 sx={{
@@ -226,13 +229,14 @@ function Enrollment() {
                     {item.posts.firstname} {item.posts.lastname}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {item.posts.email}
+                    <a href= {`mailto:{item.posts.email}`}>{item.posts.email}</a>
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {profileItem.subject}
+                    <br></br>( {profileItem.medium})
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {profileItem.medium}
+                   Rs. {profileItem.classpees}.00
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     <QRCodeGenerator
@@ -243,6 +247,7 @@ function Enrollment() {
                       degree={profileItem.degree}
                       experience={profileItem.experience}
                       aboutme={profileItem.aboutme}
+                      classpees={profileItem.classpees}
                     />
                   </TableCell>
                   <TableCell
