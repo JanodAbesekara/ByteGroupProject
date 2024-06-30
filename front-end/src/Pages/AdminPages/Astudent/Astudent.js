@@ -188,12 +188,12 @@ function Astudent() {
                             {student.firstname} {student.lastname}
                           </TableCell>
                           <TableCell align="center">
-                            <a href={`mailto:${student.email}`}>
+                            <a href="mailto:${student.email}">
                               {student.email}
                             </a>
                           </TableCell>
                           <TableCell align="center">
-                            <a href={`tel : ${student.phonenumber}`}>
+                            <a href="tel : ${student.phonenumber}">
                               {student.phonenumber}
                             </a>
                           </TableCell>

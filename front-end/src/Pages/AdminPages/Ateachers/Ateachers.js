@@ -175,7 +175,7 @@ function Ateachers() {
                           </TableCell>
                           <TableCell align="center">
                             <a
-                              href={`mailto:${teacher.email}`}
+                              href="mailto:${teacher.email}"
                               style={{ textDecoration: "none" }}
                             >
                               {teacher.email}{" "}
@@ -183,7 +183,7 @@ function Ateachers() {
                           </TableCell>
                           <TableCell align="center">
                             <a
-                              href={`tel : ${teacher.phonenumber}`}
+                              href="tel : ${teacher.phonenumber}"
                               style={{ textDecoration: "none" }}
                             >
                               {teacher.phonenumber}
