@@ -8,7 +8,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     // const socket = io("http://localhost:6000");
-    const socket = io("https://bytegroupproject.onrender.com");
+    const socket = io("https://byte-group-project-7p46.vercel.app");
 
     setSocket(socket);
   }, []);
