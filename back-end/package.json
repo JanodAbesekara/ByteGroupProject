@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "npm i"
+    "build": "npm build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
