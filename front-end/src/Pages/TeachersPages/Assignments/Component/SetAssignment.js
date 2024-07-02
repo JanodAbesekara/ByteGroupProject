@@ -63,7 +63,7 @@ export default function CombinedComponent({ medium, subject }) {
     try {
       const paylod = {
         titleofAnn: `Assignment Avilable for you`,
-        Announcementmessage: "You have new Assignment to solve",
+        Announcementmessage: "You have new Assignment ready for your brilliant mind to unravel.",
         postedemail: useremail,
         TeacheSubject: subject,
         mediua: medium,

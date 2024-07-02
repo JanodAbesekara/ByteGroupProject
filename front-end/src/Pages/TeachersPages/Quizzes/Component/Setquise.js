@@ -55,7 +55,7 @@ export default function CombinedComponent({ medium, subject }) {
     try {
       const paylod = {
         titleofAnn: `New Quise Number ${quizNumber} `,
-        Announcementmessage: "You have new Quise to solve",
+        Announcementmessage: "You have new Quise ready for your brilliant mind to unravel.",
         postedemail: useremail,
         TeacheSubject: subject,
         mediua: medium,

@@ -126,8 +126,8 @@ function ClassContent({ subjectData }) {
 
     try {
       const paylod = {
-        titleofAnn: `New Lecture material `,
-        Announcementmessage: `You have new lecture material ${subjectData.subject}  in ${subjectData.medium} solve`,
+        titleofAnn: `New Lecture material in ${lesson} `,
+        Announcementmessage: ` Dive into your new lecture material on ${subjectData.subject}, now available in ${subjectData.medium}. Happy learning!`,
         postedemail: subjectData.email,
         TeacheSubject: subjectData.subject,
         mediua: subjectData.medium,
