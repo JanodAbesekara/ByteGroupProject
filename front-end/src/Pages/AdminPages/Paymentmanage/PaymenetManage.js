@@ -61,7 +61,6 @@ function PaymenetManage() {
     );
 
     if (isConform) {
-
       const paylord = {
         teacherEmail: teacherEmail,
         Ensubject: subjects,
@@ -315,7 +314,7 @@ function PaymenetManage() {
                                         fontSize: "16px",
                                       }}
                                     >
-                                      Receipt
+                                      Bank name/AccountNum
                                     </TableCell>
                                     <TableCell
                                       align="center"
@@ -326,7 +325,7 @@ function PaymenetManage() {
                                         fontSize: "16px",
                                       }}
                                     >
-                                      Bank name/AccountNum
+                                      Receipt
                                     </TableCell>
                                   </TableRow>
                                 </TableHead>
@@ -348,7 +347,7 @@ function PaymenetManage() {
                                           {payment.Bankname} <br /> (
                                           {payment.AccountNum})
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell align="center">
                                           <a href={payment.photourl}>
                                             <img
                                               src={payment.photourl}
