@@ -112,7 +112,7 @@ function DisplayPayment() {
                             {payment.stuemail}
                           </a>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                           <a href={payment.photourl}>
                             <img
                               src={payment.photourl}
