@@ -67,7 +67,7 @@ function Astudent() {
 
   // Divide students into chunks of 10
   const chunks = [];
-  for (let i = 0; i < students.length; i += 40) {
+  for (let i = 0; i < students.length; i += 10) {
     chunks.push(students.slice(i, i + 40));
   }
 

@@ -60,7 +60,7 @@ function Ateachers() {
 
   // Divide Teachers into chunks of 10
   const chunks = [];
-  for (let i = 0; i < teachers.length; i += 5) {
+  for (let i = 0; i < teachers.length; i += 10) {
     chunks.push(teachers.slice(i, i + 5));
   }
 
