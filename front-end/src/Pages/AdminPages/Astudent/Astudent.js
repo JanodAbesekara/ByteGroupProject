@@ -119,7 +119,7 @@ function Astudent() {
                 <TableContainer
                   key={index}
                   component={Paper}
-                  sx={{ marginTop: "100px" , marginBottom: "100px"}}
+                  sx={{ marginTop: "100px", marginBottom: "100px" }}
                 >
                   <Table>
                     <TableHead>
@@ -182,46 +182,49 @@ function Astudent() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {chunk.map((student) => (
-                        <TableRow key={student.id}>
-                          <TableCell align="center">
-                            {student.firstname} {student.lastname}
-                          </TableCell>
-                          <TableCell align="center">
-                            <a href="mailto:${student.email}">
-                              {student.email}
-                            </a>
-                          </TableCell>
-                          <TableCell align="center">
-                            <a href="tel : ${student.phonenumber}">
-                              {student.phonenumber}
-                            </a>
-                          </TableCell>
-                          <TableCell align="center">
-                            {new Date(student.updatedAt).toLocaleDateString()}
-                          </TableCell>
-                          <TableCell align="center">
-                            <button
-                              style={{
-                                padding: "2px 10px",
-                                fontSize: "15px",
-                                marginLeft: "10px",
-                                backgroundColor: "Red",
-                                color: "White",
-                                borderRadius: "5px",
-                                border: "none",
-                                boxShadow:
-                                  "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-                              }}
-                              onClick={() =>
-                                handleDeleteConfirmation(student.email)
-                              }
-                            >
-                              Delete
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {chunk
+                        .slice(0)
+                        .reverse()
+                        .map((student) => (
+                          <TableRow key={student.id}>
+                            <TableCell align="center">
+                              {student.firstname} {student.lastname}
+                            </TableCell>
+                            <TableCell align="center">
+                              <a href="mailto:${student.email}">
+                                {student.email}
+                              </a>
+                            </TableCell>
+                            <TableCell align="center">
+                              <a href="tel : ${student.phonenumber}">
+                                {student.phonenumber}
+                              </a>
+                            </TableCell>
+                            <TableCell align="center">
+                              {new Date(student.updatedAt).toLocaleDateString()}
+                            </TableCell>
+                            <TableCell align="center">
+                              <button
+                                style={{
+                                  padding: "2px 10px",
+                                  fontSize: "15px",
+                                  marginLeft: "10px",
+                                  backgroundColor: "Red",
+                                  color: "White",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  boxShadow:
+                                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                                }}
+                                onClick={() =>
+                                  handleDeleteConfirmation(student.email)
+                                }
+                              >
+                                Delete
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
                     </TableBody>
                   </Table>
                 </TableContainer>

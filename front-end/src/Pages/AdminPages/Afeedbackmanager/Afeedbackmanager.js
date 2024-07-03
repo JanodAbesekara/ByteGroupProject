@@ -57,10 +57,7 @@ function Afeedbackmanager() {
   };
 
   const handleDelete = async (_id) => {
-
-    const isconform = window.confirm(
-      "Do you want to delete this FeedBack?"
-    );
+    const isconform = window.confirm("Do you want to delete this FeedBack?");
 
     if (!isconform) return;
 
@@ -111,8 +108,10 @@ function Afeedbackmanager() {
             </p>
             {Object.keys(groupedFeedbackData).length > 0 ? (
               Object.keys(groupedFeedbackData).map((teacheremail) =>
-                Object.keys(groupedFeedbackData[teacheremail]).map(
-                  (feedSubject) =>
+                Object.keys(groupedFeedbackData[teacheremail])
+                  .slice(0)
+                  .reverse()
+                  .map((feedSubject) =>
                     Object.keys(
                       groupedFeedbackData[teacheremail][feedSubject]
                     ).map((feedmedium) => (
@@ -226,7 +225,7 @@ function Afeedbackmanager() {
                         </TableContainer>
                       </div>
                     ))
-                )
+                  )
               )
             ) : (
               <p>No feedbacks available</p>
