@@ -86,7 +86,7 @@ function App() {
       if (currentPath !== "/VerifyEmail" && currentPath !== "/Resetpassword") {
         setUser(null);
         setIsLoggedIn(false);
-        navigate("/Login");
+        navigate("/");
       }
     }
   }, []);
