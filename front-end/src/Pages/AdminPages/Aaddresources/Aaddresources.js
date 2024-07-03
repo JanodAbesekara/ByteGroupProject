@@ -71,15 +71,15 @@ const Aaddresources = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(`api/auth/fileupload`, inputs);
-        setAlertSeverity("success"); // Set success alert on successful login
-        setAlertMessage(response.data.msg);
+       // setAlertSeverity("success"); // Set success alert on successful login
+        //setAlertMessage(response.data.msg);
         window.alert(response.data.msg);
         window.location.reload();
       } catch (error) {
         window.alert(error.response.data.msg);
         
-        setAlertSeverity("error"); // Set error alert on unexpected error
-        setAlertMessage("An unexpected error occurred. Please try again.");
+        //setAlertSeverity("error"); // Set error alert on unexpected error
+       // setAlertMessage("An unexpected error occurred. Please try again.");
       }
     };
     if (submitButton === true) {
