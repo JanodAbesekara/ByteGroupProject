@@ -101,77 +101,77 @@ function Ateachers() {
                   Total Teachers Count : {totalteachers}
                 </p>
               </div>
-              {chunks
-                .slice(0)
-                .reverse()
-                .map((chunk, index) => (
-                  <TableContainer
-                    component={Paper}
-                    key={index}
-                    sx={{ marginTop: "50px", marginBottom: "40px" }}
-                  >
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell
-                            align="center"
-                            style={{
-                              color: "white",
-                              backgroundColor: "#124076",
-                              borderRight: "2px white solid",
-                              fontSize: "18px",
-                            }}
-                          >
-                            Teacher Name
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{
-                              color: "white",
-                              backgroundColor: "#124076",
-                              borderRight: "2px white solid",
-                              fontSize: "18px",
-                            }}
-                          >
-                            Email
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{
-                              color: "white",
-                              backgroundColor: "#124076",
-                              borderRight: "2px white solid",
-                              fontSize: "18px",
-                            }}
-                          >
-                            Contact No
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{
-                              color: "white",
-                              backgroundColor: "#124076",
-                              borderRight: "2px white solid",
-                              fontSize: "18px",
-                            }}
-                          >
-                            Joined Date
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{
-                              color: "white",
-                              backgroundColor: "#124076",
-                              borderRight: "2px white solid",
-                              fontSize: "18px",
-                            }}
-                          >
-                            Delete
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {chunk.map((teacher, index) => (
+              {chunks.map((chunk, index) => (
+                <TableContainer
+                  component={Paper}
+                  key={index}
+                  sx={{ marginTop: "50px", marginBottom: "40px" }}
+                >
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Teacher Name
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Email
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Contact No
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Joined Date
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={{
+                            color: "white",
+                            backgroundColor: "#124076",
+                            borderRight: "2px white solid",
+                            fontSize: "18px",
+                          }}
+                        >
+                          Delete
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {chunk
+                        .slice(0)
+                        .reverse()
+                        .map((teacher, index) => (
                           <TableRow key={index}>
                             <TableCell align="center">
                               {teacher.firstname} {teacher.lastname}
@@ -217,10 +217,10 @@ function Ateachers() {
                             </TableCell>
                           </TableRow>
                         ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ))}
             </div>
           </Box>
         </Grid>
