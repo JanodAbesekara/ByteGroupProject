@@ -119,7 +119,7 @@ function Astudent() {
                 <TableContainer
                   key={index}
                   component={Paper}
-                  sx={{ marginTop: "100px" }}
+                  sx={{ marginTop: "100px" , marginBottom: "100px"}}
                 >
                   <Table>
                     <TableHead>
