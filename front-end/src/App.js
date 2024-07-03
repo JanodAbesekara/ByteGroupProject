@@ -61,17 +61,11 @@ import PaymentDisplay from "./Pages/StudentPages/Payment/PaymentdisplayTable.js"
 import Stupayment from "./Pages/TeachersPages/PaymentDetails/Displaypyment.js";
 import Payementmanage from "./Pages/AdminPages/Paymentmanage/PaymenetManage";
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState();
   const navigate = useNavigate();
 
-  // const logoutuser = () => {
-  //   setUser(null);
-  //   setIsLoggedIn(false);
-  //   navigate("/Login");
-  // };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
@@ -86,7 +80,7 @@ function App() {
       if (currentPath !== "/VerifyEmail" && currentPath !== "/Resetpassword") {
         setUser(null);
         setIsLoggedIn(false);
-        navigate("/Login");
+        navigate("/");
       }
     }
   }, []);
