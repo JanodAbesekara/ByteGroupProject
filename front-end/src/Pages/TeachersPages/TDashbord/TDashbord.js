@@ -65,20 +65,18 @@ export default function Dashbord() {
     checkImageExists();
   }, []);
 
-  useEffect(() => {
-    const featchNotification = () => {
-      axios
-        .get("/api/get/Notifactions")
-        .then((response) => {
-          const announcements = response.data.announcements;
-          setNotification(announcements);
-          setNotCount(announcements.length);
-        })
-        .catch((error) => console.log(error));
-    };
+  const featchNotification = () => {
+    axios
+      .get("/api/get/Notifactions")
+      .then((response) => {
+        const announcements = response.data.announcements;
+        setNotification(announcements);
+        setNotCount(announcements.length);
+      })
+      .catch((error) => console.log(error));
+  };
 
-    featchNotification();
-  }, []);
+  featchNotification();
 
   useEffect(() => {
     const token = localStorage.getItem("MERN_AUTH_TOKEN");

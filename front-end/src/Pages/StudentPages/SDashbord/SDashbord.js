@@ -67,27 +67,25 @@ function SDashbord() {
     checkImageExists();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("MERN_AUTH_TOKEN");
-      const decodedToken = jwtDecode(token);
-      const Stuemail = decodedToken.email;
+  const fetchData = async () => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const Stuemail = decodedToken.email;
 
-      try {
-        const notificationResponse = await axios.get(`/api/get/notifaction`, {
-          params: { email: Stuemail },
-        });
-        const { announcements, announceme } = notificationResponse.data;
+    try {
+      const notificationResponse = await axios.get(`/api/get/notifaction`, {
+        params: { email: Stuemail },
+      });
+      const { announcements, announceme } = notificationResponse.data;
 
-        setNotifications([...announceme, ...announcements]);
-        setNotCount(announcements.length + announceme.length);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      setNotifications([...announceme, ...announcements]);
+      setNotCount(announcements.length + announceme.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchData();
 
   return (
     <div>
@@ -97,53 +95,65 @@ function SDashbord() {
           <Ssidebar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-          <Box sx={{marginLeft:"20px"}}>
-           
-          <div className="container3" style={{ width:"auto"}}>
-          <div className="container1" style={{display:"flex", 
-          flexDirection:"row",
-          justifyContent:"space-between",
-          width:"auto",
-          margin:"10px",
-          padding: "10px"
-          }}>
-          <div className="teacher_info" style={{display:"flex", 
-          flexDirection:"row",
-          textAlign:"center",
-          padding:"0"
-          }}>
-              <div className="picture" style={{height:"auto", width:"auto"}} >
-                <Avatar
-                  alt="profile_pic"
-                  src={url}
-                />
-              </div>
-              <div className="name" style={{display:"flex",paddingLeft:"3px",paddingTop:"8px", fontSize:"14px"}}>
-                <p>{user.firstname + " " + user.lastname}</p>
-              </div>
-              </div>
+          <Box sx={{ marginLeft: "20px" }}>
+            <div className="container3" style={{ width: "auto" }}>
+              <div
+                className="container1"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "auto",
+                  margin: "10px",
+                  padding: "10px",
+                }}
+              >
+                <div
+                  className="teacher_info"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    textAlign: "center",
+                    padding: "0",
+                  }}
+                >
+                  <div
+                    className="picture"
+                    style={{ height: "auto", width: "auto" }}
+                  >
+                    <Avatar alt="profile_pic" src={url} />
+                  </div>
+                  <div
+                    className="name"
+                    style={{
+                      display: "flex",
+                      paddingLeft: "3px",
+                      paddingTop: "8px",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <p>{user.firstname + " " + user.lastname}</p>
+                  </div>
+                </div>
 
-            
-              <div className="notifications_icon">
-              <React.Fragment>
-                <Link variant="outlined" onClick={handleClickOpen}>
-                  <Box>
-                    <Badge badgeContent={notCount}>
-                      <Typography fontSize="1.0rem">🔔</Typography>
-                    </Badge>
-                  </Box>
-                </Link>
-                <Popupbox
-                  open={open}
-                  handleClose={handleClose}
-                  notifications={notifications}
-                />
-              </React.Fragment>
-              
-
-            </div>
-          </div>
-               <SubjectCard />
+                <div className="notifications_icon">
+                  <React.Fragment>
+                    <Link variant="outlined" onClick={handleClickOpen}>
+                      <Box>
+                        <Badge badgeContent={notCount}>
+                          <Typography fontSize="1.0rem">🔔</Typography>
+                        </Badge>
+                      </Box>
+                    </Link>
+                    <Popupbox
+                      open={open}
+                      handleClose={handleClose}
+                      notifications={notifications}
+                    />
+                  </React.Fragment>
+                </div>
+              </div>
+              <SubjectCard />
             </div>
           </Box>
         </Grid>
