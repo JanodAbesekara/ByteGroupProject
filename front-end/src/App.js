@@ -67,11 +67,6 @@ function App() {
   const [user, setUser] = React.useState();
   const navigate = useNavigate();
 
-  // const logoutuser = () => {
-  //   setUser(null);
-  //   setIsLoggedIn(false);
-  //   navigate("/Login");
-  // };
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
 
