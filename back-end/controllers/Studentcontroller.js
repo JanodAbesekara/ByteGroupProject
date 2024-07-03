@@ -9,7 +9,7 @@ import quisemodel from "../models/Quizzesmodels.js";
 import teacherlecturecount from "../models/TeacherLecturecountmodel.js";
 import Enrollment from "../models/Enrollmentmdels.js";
 import studentprofile from "../models/studentProfileModel.js";
-import paymentmodel from "../models/paymentmodel.js";
+import paymentmodel from "../models/paymentModel.js";
 
 const studentdetails = async (req, res) => {
   try {
