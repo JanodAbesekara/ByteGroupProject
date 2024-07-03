@@ -115,120 +115,125 @@ function Astudent() {
                   Total Student count : {totalstu}
                 </p>
               </div>
-              {chunks.map((chunk, index) => (
-                <TableContainer
-                  key={index}
-                  component={Paper}
-                  sx={{ marginTop: "100px", marginBottom: "100px" }}
-                >
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell
-                          align="center"
-                          style={{
-                            color: "white",
-                            backgroundColor: "#124076",
-                            borderRight: "2px white solid",
-                            fontSize: "18px",
-                          }}
-                        >
-                          Student Name
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          style={{
-                            color: "white",
-                            backgroundColor: "#124076",
-                            borderRight: "2px white solid",
-                            fontSize: "18px",
-                          }}
-                        >
-                          Email
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          style={{
-                            color: "white",
-                            backgroundColor: "#124076",
-                            borderRight: "2px white solid",
-                            fontSize: "18px",
-                          }}
-                        >
-                          Contact No
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          style={{
-                            color: "white",
-                            backgroundColor: "#124076",
-                            borderRight: "2px white solid",
-                            fontSize: "18px",
-                          }}
-                        >
-                          Joined Date
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          style={{
-                            color: "white",
-                            backgroundColor: "#124076",
-                            borderRight: "2px white solid",
-                            fontSize: "18px",
-                          }}
-                        >
-                          Delete
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {chunk
-                        .slice(0)
-                        .reverse()
-                        .map((student) => (
-                          <TableRow key={student.id}>
-                            <TableCell align="center">
-                              {student.firstname} {student.lastname}
-                            </TableCell>
-                            <TableCell align="center">
-                              <a href="mailto:${student.email}">
-                                {student.email}
-                              </a>
-                            </TableCell>
-                            <TableCell align="center">
-                              <a href="tel : ${student.phonenumber}">
-                                {student.phonenumber}
-                              </a>
-                            </TableCell>
-                            <TableCell align="center">
-                              {new Date(student.updatedAt).toLocaleDateString()}
-                            </TableCell>
-                            <TableCell align="center">
-                              <button
-                                style={{
-                                  padding: "2px 10px",
-                                  fontSize: "15px",
-                                  marginLeft: "10px",
-                                  backgroundColor: "Red",
-                                  color: "White",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  boxShadow:
-                                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-                                }}
-                                onClick={() =>
-                                  handleDeleteConfirmation(student.email)
-                                }
-                              >
-                                Delete
-                              </button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              ))}
+              {chunks
+                .slice(0)
+                .reverse()
+                .map((chunk, index) => (
+                  <TableContainer
+                    key={index}
+                    component={Paper}
+                    sx={{ marginTop: "100px", marginBottom: "100px" }}
+                  >
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Student Name
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Email
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Contact No
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Joined Date
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Delete
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {chunk
+                          .slice(0)
+                          .reverse()
+                          .map((student) => (
+                            <TableRow key={student.id}>
+                              <TableCell align="center">
+                                {student.firstname} {student.lastname}
+                              </TableCell>
+                              <TableCell align="center">
+                                <a href="mailto:${student.email}">
+                                  {student.email}
+                                </a>
+                              </TableCell>
+                              <TableCell align="center">
+                                <a href="tel : ${student.phonenumber}">
+                                  {student.phonenumber}
+                                </a>
+                              </TableCell>
+                              <TableCell align="center">
+                                {new Date(
+                                  student.updatedAt
+                                ).toLocaleDateString()}
+                              </TableCell>
+                              <TableCell align="center">
+                                <button
+                                  style={{
+                                    padding: "2px 10px",
+                                    fontSize: "15px",
+                                    marginLeft: "10px",
+                                    backgroundColor: "Red",
+                                    color: "White",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    boxShadow:
+                                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                                  }}
+                                  onClick={() =>
+                                    handleDeleteConfirmation(student.email)
+                                  }
+                                >
+                                  Delete
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ))}
             </div>
           </Box>
         </Grid>
