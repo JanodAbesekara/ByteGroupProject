@@ -1,4 +1,6 @@
 import "./App.css";
+import React, { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Aboutus from "./Pages/Aboutus/Aboutus";
@@ -59,7 +61,36 @@ import PaymentDisplay from "./Pages/StudentPages/Payment/PaymentdisplayTable.js"
 import Stupayment from "./Pages/TeachersPages/PaymentDetails/Displaypyment.js";
 import Payementmanage from "./Pages/AdminPages/Paymentmanage/PaymenetManage";
 
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState();
+  const navigate = useNavigate();
+
+  // const logoutuser = () => {
+  //   setUser(null);
+  //   setIsLoggedIn(false);
+  //   navigate("/Login");
+  // };
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("MERN_AUTH_TOKEN"));
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.exp * 100 > Date.now()) {
+        setUser(decodedToken);
+        setIsLoggedIn(true);
+      }
+    } else {
+      const currentPath = window.location.pathname;
+      if (currentPath !== "/VerifyEmail" && currentPath !== "/Resetpassword") {
+        setUser(null);
+        setIsLoggedIn(false);
+        navigate("/Login");
+      }
+    }
+  }, []);
+
   return (
     <>
       <div>
@@ -69,7 +100,10 @@ function App() {
           <Route path="/Contactus" element={<Contactus />} />
           <Route path="/knowledgebase" element={<KnowledgeBase />} />
           <Route path="/Classes" element={<Classes />} />
-          <Route path="/Login" element={<Login />} />
+          <Route
+            path="/Login"
+            element={<Login setUser={setUser} setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/Registrationform" element={<Registrationform />} />
           <Route path="/Assignments" element={<Assignments />} />
           <Route path="/Resetpassword" element={<Resetpassword />} />
