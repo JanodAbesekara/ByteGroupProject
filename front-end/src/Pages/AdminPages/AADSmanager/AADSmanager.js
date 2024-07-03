@@ -71,123 +71,129 @@ function AADSmanager() {
   // Render tables for each email group
   const renderEmailTables = () => {
     const emailGroups = getEmailGroups();
-    return Object.keys(emailGroups).map((email) => (
-      <Box key={email} sx={{ marginBottom: "50px", marginLeft: "30px" }}>
-        <div style={{ width: "auto", disply: "flex", paddingRight: "20px" }}>
-          <a
-            href={`mailto:${email}`}
-            style={{ color: "black", textDecoration: "none" }}
-          >
-            <p
-              style={{
-                textAlign: "left",
-                marginBottom: "10px",
-                width: "auto",
-                paddingLeft: "4px",
-                color: "blue",
-                display: "flex",
-              }}
+    return Object.keys(emailGroups)
+      .slice(0)
+      .reverse()
+      .map((email) => (
+        <Box key={email} sx={{ marginBottom: "50px", marginLeft: "30px" }}>
+          <div style={{ width: "auto", disply: "flex", paddingRight: "20px" }}>
+            <a
+              href={`mailto:${email}`}
+              style={{ color: "black", textDecoration: "none" }}
             >
-              {email}
-            </p>
-          </a>
-        </div>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    backgroundColor: "#124076",
-                    color: "white",
-                    borderRight: "2px solid white",
-                    fontSize: "16px",
-                  }}
-                >
-                  Subject
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    backgroundColor: "#124076",
-                    color: "white",
-                    borderRight: "2px solid white",
-                    fontSize: "16px",
-                  }}
-                >
-                  Medium
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    backgroundColor: "#124076",
-                    color: "white",
-                    borderRight: "2px solid white",
-                    fontSize: "16px",
-                  }}
-                >
-                  Posted Ads
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    backgroundColor: "#124076",
-                    color: "white",
-                    borderRight: "2px solid white",
-                    fontSize: "16px",
-                  }}
-                >
-                  Delete
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {emailGroups[email].map((ad) => (
-                <TableRow key={ad.id}>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {ad.subject}
+              <p
+                style={{
+                  textAlign: "left",
+                  marginBottom: "10px",
+                  width: "auto",
+                  paddingLeft: "4px",
+                  color: "blue",
+                  display: "flex",
+                }}
+              >
+                {email}
+              </p>
+            </a>
+          </div>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "#124076",
+                      color: "white",
+                      borderRight: "2px solid white",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Subject
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {ad.medium}
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "#124076",
+                      color: "white",
+                      borderRight: "2px solid white",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Medium
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <Link to={ad.photosURL}>
-                      <img
-                        src={ad.photosURL}
-                        alt="This is a post add"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </Link>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "#124076",
+                      color: "white",
+                      borderRight: "2px solid white",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Posted Ads
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <button
-                      style={{
-                        padding: "2px 10px",
-                        fontSize: "15px",
-                        marginLeft: "10px",
-                        backgroundColor: "Red",
-                        color: "White",
-                        borderRadius: "5px",
-                        border: "none",
-                        boxShadow: "2px 1px 10px 0.5px black",
-                      }}
-                      onClick={() => handleDeleteConfirmation(ad.photosURL)}
-                    >
-                      Delete
-                    </button>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      backgroundColor: "#124076",
+                      color: "white",
+                      borderRight: "2px solid white",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Delete
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    ));
+              </TableHead>
+              <TableBody>
+                {emailGroups[email]
+                  .slice(0)
+                  .reverse()
+                  .map((ad) => (
+                    <TableRow key={ad.id}>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {ad.subject}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {ad.medium}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        <Link to={ad.photosURL}>
+                          <img
+                            src={ad.photosURL}
+                            alt="This is a post add"
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              cursor: "pointer",
+                            }}
+                          />
+                        </Link>
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        <button
+                          style={{
+                            padding: "2px 10px",
+                            fontSize: "15px",
+                            marginLeft: "10px",
+                            backgroundColor: "Red",
+                            color: "White",
+                            borderRadius: "5px",
+                            border: "none",
+                            boxShadow: "2px 1px 10px 0.5px black",
+                          }}
+                          onClick={() => handleDeleteConfirmation(ad.photosURL)}
+                        >
+                          Delete
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      ));
   };
 
   return (

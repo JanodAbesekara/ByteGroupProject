@@ -245,129 +245,143 @@ function PaymenetManage() {
                       <span style={{ color: "#000" }}>Teacher : </span>
                       {teacherEmail}
                     </p>
-                    {Object.entries(subjects).map(([subject, mediums]) => (
-                      <Box key={subject} mb={2}>
-                        <p style={{ fontSize: "14px", color: "#0049B7" }}>
-                          <span style={{ color: "#000" }}>Subject : </span>
-                          {subject}
-                        </p>
-                        {Object.entries(mediums).map(([medium, payments]) => (
-                          <Box key={medium} mb={1}>
-                            <p style={{ fontSize: "14px", color: "#0049B7" }}>
-                              <span style={{ color: "#000" }}>Medium : </span>
-                              {medium}
-                            </p>
-                            <TableContainer component={Paper}>
-                              <Table>
-                                <TableHead>
-                                  <TableRow>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Teacher Email
-                                    </TableCell>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Student Email
-                                    </TableCell>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Subject
-                                    </TableCell>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Medium
-                                    </TableCell>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Bank name/AccountNum
-                                    </TableCell>
-                                    <TableCell
-                                      align="center"
-                                      style={{
-                                        color: "white",
-                                        backgroundColor: "#124076",
-                                        borderRight: "2px white solid",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      Receipt
-                                    </TableCell>
-                                  </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                  {payments
-                                    .slice(0)
-                                    .reverse()
-                                    .map((payment, index) => (
-                                      <TableRow key={index}>
-                                        <TableCell>
-                                          {payment.TeacherEmail}
+                    {Object.entries(subjects)
+                      .slice(0)
+                      .reverse()
+                      .map(([subject, mediums]) => (
+                        <Box key={subject} mb={2}>
+                          <p style={{ fontSize: "14px", color: "#0049B7" }}>
+                            <span style={{ color: "#000" }}>Subject : </span>
+                            {subject}
+                          </p>
+                          {Object.entries(mediums)
+                            .slice(0)
+                            .reverse()
+                            .map(([medium, payments]) => (
+                              <Box key={medium} mb={1}>
+                                <p
+                                  style={{ fontSize: "14px", color: "#0049B7" }}
+                                >
+                                  <span style={{ color: "#000" }}>
+                                    Medium :{" "}
+                                  </span>
+                                  {medium}
+                                </p>
+                                <TableContainer component={Paper}>
+                                  <Table>
+                                    <TableHead>
+                                      <TableRow>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Teacher Email
                                         </TableCell>
-                                        <TableCell>
-                                          {payment.stuemail}
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Student Email
                                         </TableCell>
-                                        <TableCell>{payment.Subject}</TableCell>
-                                        <TableCell>{payment.medium}</TableCell>
-                                        <TableCell>
-                                          {payment.Bankname} <br /> (
-                                          {payment.AccountNum})
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Subject
                                         </TableCell>
-                                        <TableCell align="center">
-                                          <a href={payment.photourl}>
-                                            <img
-                                              src={payment.photourl}
-                                              style={{
-                                                width: "60px",
-                                                height: "80px",
-                                              }}
-                                              alt="image_url"
-                                            />
-                                          </a>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Medium
+                                        </TableCell>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Bank name/AccountNum
+                                        </TableCell>
+                                        <TableCell
+                                          align="center"
+                                          style={{
+                                            color: "white",
+                                            backgroundColor: "#124076",
+                                            borderRight: "2px white solid",
+                                            fontSize: "16px",
+                                          }}
+                                        >
+                                          Receipt
                                         </TableCell>
                                       </TableRow>
-                                    ))}
-                                </TableBody>
-                              </Table>
-                            </TableContainer>
-                          </Box>
-                        ))}
-                      </Box>
-                    ))}
+                                    </TableHead>
+                                    <TableBody>
+                                      {payments
+                                        .slice(0)
+                                        .reverse()
+                                        .map((payment, index) => (
+                                          <TableRow key={index}>
+                                            <TableCell>
+                                              {payment.TeacherEmail}
+                                            </TableCell>
+                                            <TableCell>
+                                              {payment.stuemail}
+                                            </TableCell>
+                                            <TableCell>
+                                              {payment.Subject}
+                                            </TableCell>
+                                            <TableCell>
+                                              {payment.medium}
+                                            </TableCell>
+                                            <TableCell>
+                                              {payment.Bankname} <br /> (
+                                              {payment.AccountNum})
+                                            </TableCell>
+                                            <TableCell align="center">
+                                              <a href={payment.photourl}>
+                                                <img
+                                                  src={payment.photourl}
+                                                  style={{
+                                                    width: "60px",
+                                                    height: "80px",
+                                                  }}
+                                                  alt="image_url"
+                                                />
+                                              </a>
+                                            </TableCell>
+                                          </TableRow>
+                                        ))}
+                                    </TableBody>
+                                  </Table>
+                                </TableContainer>
+                              </Box>
+                            ))}
+                        </Box>
+                      ))}
                   </Box>
                 )
               )}

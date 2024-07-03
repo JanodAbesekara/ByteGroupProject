@@ -229,32 +229,37 @@ function ADashbord() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {admins.map((Admin) => (
-                    <TableRow key={Admin._id}>
-                      <TableCell align="center">
-                        {Admin.firstname} {Admin.lastname}
-                      </TableCell>
-                      <TableCell align="center">{Admin.email}</TableCell>
-                      <TableCell align="center">{Admin.phonenumber}</TableCell>
-                      <TableCell align="center">
-                        <button
-                          style={{
-                            padding: "2px 10px",
-                            fontSize: "15px",
-                            marginLeft: "10px",
-                            backgroundColor: "Red",
-                            color: "White",
-                            borderRadius: "5px",
-                            border: "none",
-                            boxShadow: "2px 1px 10px 0.5px black",
-                          }}
-                          onClick={() => handleDelete(Admin._id)}
-                        >
-                          Delete
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {admins
+                    .slice(0)
+                    .reverse()
+                    .map((Admin) => (
+                      <TableRow key={Admin._id}>
+                        <TableCell align="center">
+                          {Admin.firstname} {Admin.lastname}
+                        </TableCell>
+                        <TableCell align="center">{Admin.email}</TableCell>
+                        <TableCell align="center">
+                          {Admin.phonenumber}
+                        </TableCell>
+                        <TableCell align="center">
+                          <button
+                            style={{
+                              padding: "2px 10px",
+                              fontSize: "15px",
+                              marginLeft: "10px",
+                              backgroundColor: "Red",
+                              color: "White",
+                              borderRadius: "5px",
+                              border: "none",
+                              boxShadow: "2px 1px 10px 0.5px black",
+                            }}
+                            onClick={() => handleDelete(Admin._id)}
+                          >
+                            Delete
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
