@@ -53,3 +53,5 @@ cron.schedule('*/30 * * * *', async () => {
   await User.deleteMany({ verified: false, createdAt: { $lt: thirtyMinutesAgo } });
   console.log('Deleted unverified users older than 30 minutes');
 });
+
+export default mongoose.model("User", userSchema);
