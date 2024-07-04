@@ -1,4 +1,4 @@
-@media screen and (max-width: 494px) and (min-width: 413px) {
+/* @media screen and (max-width: 494px) and (min-width: 413px) {
   form {
     width: 100%;
     height: 100%;
@@ -71,4 +71,14 @@
       form input{
         width: 100%;
       }
+} */
+
+@media screen and (min-width:769px){
+   .FMnotify{
+    position: relative;
+    right: 50%;
+   }
+   .FMnotify input{
+    width: 180%;
+   }
 }
