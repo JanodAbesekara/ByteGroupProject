@@ -1,9 +1,11 @@
 import express from "express";
-import { createVideo } from "../controllers/video.js";
+import { getNotification, markAnnouncementAsViewed ,getNotificationT } from  "../controllers/AnnounceNECON.js";
 
 const router = express.Router();
 
-// Endpoint for creating a video
-router.post("/videos", createVideo);
+router.get("/getNotification", getNotification);
+router.post("/markAnnouncementAsViewed", markAnnouncementAsViewed);
+router.get("/getNotificationTh", getNotificationT);
+
 
 export default router;

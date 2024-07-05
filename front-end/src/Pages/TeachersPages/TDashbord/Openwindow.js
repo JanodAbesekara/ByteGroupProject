@@ -115,6 +115,23 @@ function Openwindow({ open, handleClose, notifications }) {
       }
     }
   };
+
+  const handleClick = async (announcementId) => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken.email;
+
+    try {
+      await axios.post(`/api/video/markAnnouncementAsViewed`, {
+        announcementId: announcementId,
+        email: useremail,
+      });
+      console.log("clicked");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <BootstrapDialog
       onClose={handleClose}
@@ -183,6 +200,9 @@ function Openwindow({ open, handleClose, notifications }) {
               >
                 {notification.Announcementmessage}
               </p>
+              <button onClick={() => handleClick(notification._id)}>
+                Click
+              </button>
               <br></br>
               <span style={{ float: "right", fontSize: "12px" }}>
                 {notification.date.split("T")[0]}
@@ -193,7 +213,10 @@ function Openwindow({ open, handleClose, notifications }) {
 
       <DialogActions>
         <form onSubmit={handlesubmit} className="FMnotify">
-          <label htmlFor="title" style={{ color: "#136b16" ,marginLeft: "5px",}}>
+          <label
+            htmlFor="title"
+            style={{ color: "#136b16", marginLeft: "5px" }}
+          >
             Title
           </label>
           <br></br>
@@ -210,7 +233,10 @@ function Openwindow({ open, handleClose, notifications }) {
             onChange={(e) => setTitle(e.target.value)}
           />
           <br></br>
-          <label htmlFor="message" style={{ color: "#136b16",marginLeft: "5px", }}>
+          <label
+            htmlFor="message"
+            style={{ color: "#136b16", marginLeft: "5px" }}
+          >
             Message
           </label>
           <br></br>
@@ -225,7 +251,6 @@ function Openwindow({ open, handleClose, notifications }) {
               padding: "10px 10px 70px 10px",
               borderRadius: "4px",
               border: "1px solid gray",
-
             }}
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -241,8 +266,8 @@ function Openwindow({ open, handleClose, notifications }) {
                 }
                 style={{
                   width: "90%",
-                  marginBottom:"10px",
-                  height:"30px",
+                  marginBottom: "10px",
+                  height: "30px",
                   marginLeft: "5px",
                 }}
               >

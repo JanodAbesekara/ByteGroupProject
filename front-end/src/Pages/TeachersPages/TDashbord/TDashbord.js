@@ -67,9 +67,12 @@ export default function Dashbord() {
   }, []);
 
   useEffect(() => {
+    const token = localStorage.getItem("MERN_AUTH_TOKEN");
+    const decodedToken = jwtDecode(token);
+    const useremail = decodedToken;
     const featchNotification = () => {
       axios
-        .get("/api/get/Notifactions")
+        .get("/api/video/getNotificationTh",{params:{email:useremail}})
         .then((response) => {
           const announcements = response.data.announcements;
           setNotification(announcements);

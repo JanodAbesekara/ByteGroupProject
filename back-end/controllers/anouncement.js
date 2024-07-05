@@ -1,6 +1,6 @@
 import Announcement from "../models/Announcementmodel.js";
 import EnrollmentSchema from "../models/Enrollmentmdels.js";
-import AllNotifacitionmodel from "../models/AllNotifacitionmodel.js";
+import AnnouncementNC from "../models/AnnnounceNE.js";
 
 const postanouncement = async (req, res) => {
   const {
@@ -26,7 +26,7 @@ const postanouncement = async (req, res) => {
         .status(400)
         .json({ success: false, message: "All fields are required" });
     } else {
-      const newannouncement = new Announcement({
+      const newannouncement = new AnnouncementNC({
         postedemail,
         TeacheSubject,
         Announcementmessage,
@@ -37,29 +37,6 @@ const postanouncement = async (req, res) => {
         mediua,
       });
       await newannouncement.save();
-
-      if (
-        jobrole != null ||
-        postedemail != null ||
-        TeacheSubject != null ||
-        mediua != null ||
-        Announcementmessage != null ||
-        titleofAnn != null ||
-        date != null
-      ) {
-        const AllNoti = new AllNotifacitionmodel({
-          jobrole: jobrole,
-          postedemail: postedemail,
-          TeacheSubject: TeacheSubject,
-          mediua: mediua,
-          Announcementmessage: Announcementmessage,
-          titleofAnn: titleofAnn,
-          date: date,
-        });
-
-        await AllNoti.save();
-      }
-
       return res
         .status(200)
         .json({ success: true, message: "Announcement posted successfully" });
