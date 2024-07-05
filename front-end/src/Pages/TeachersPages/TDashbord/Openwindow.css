@@ -74,7 +74,7 @@
 } */
 
 @media screen and (min-width:769px){
-   .FMnotify{
+   .FMnotify{ 
     position: relative;
     right: 50%;
    }
