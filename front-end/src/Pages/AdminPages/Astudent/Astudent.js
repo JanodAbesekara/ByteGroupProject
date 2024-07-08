@@ -25,8 +25,7 @@ function Astudent() {
     for (let i = 0; i < students.length; i++) {
       settotalstu(students.length);
     }
-
-  }, [ students.length ]);
+  }, [students.length]);
 
   const getStudents = () => {
     Axios.get(`api/auth/studentget`)
@@ -39,15 +38,21 @@ function Astudent() {
   };
 
   const deleteStudent = (email) => {
-    const payload = { email: email };
+    const isconform = window.confirm(
+      "Do you want to delete this announcement?"
+    );
 
-    Axios.post(`api/auth/studentpost`, payload)
-      .then(() => {
-        getStudents();
-      })
-      .catch((error) => {
-        console.log("Axios Error :", error);
-      });
+    if (isconform) {
+      const payload = { email: email };
+
+      Axios.post(`api/auth/studentpost`, payload)
+        .then(() => {
+          getStudents();
+        })
+        .catch((error) => {
+          console.log("Axios Error :", error);
+        });
+    }
   };
 
   const handleDeleteConfirmation = (email) => {
@@ -62,8 +67,8 @@ function Astudent() {
 
   // Divide students into chunks of 10
   const chunks = [];
-  for (let i = 0; i < students.length; i += 40) {
-    chunks.push(students.slice(i, i + 40));
+  for (let i = 0; i < students.length; i += 10) {
+    chunks.push(students.slice(i, i + 10));
   }
 
   return (
@@ -75,126 +80,161 @@ function Astudent() {
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
           <Box>
-            <div className="StudentDetal" >
-              <h3
-                style={{
-                  textAlign: "center",
-                  fontSize: "30px",
-                  color: "#333A73",
-                  marginTop: "100px",
-                }}
-              >
-                <b>Student Details</b>
-              </h3>
-              <h2>Total Student count :- {totalstu}</h2>
-            </div>
-            {chunks.map((chunk, index) => (
-              <TableContainer
-                key={index}
-                component={Paper}
-                sx={{ marginTop: "100px" }}
-              >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Student Name
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Email
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Contact No
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Date of Join
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{
-                          color: "white",
-                          backgroundColor: "#124076",
-                          borderRight: "2px white solid",
-                          fontSize: "18px",
-                        }}
-                      >
-                        Delete
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {chunk.map((student) => (
-                      <TableRow key={student.id}>
-                        <TableCell align="center">
-                          {student.firstname} {student.lastname}
-                        </TableCell>
-                        <TableCell align="center">
-                          <a href={`mailto:${student.email}`}>
-                          {student.email}</a></TableCell>
-                        <TableCell align="center">
-                          {student.phonenumber}
-                        </TableCell>
-                        <TableCell align="center">
-                          {new Date(student.updatedAt).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell align="center">
-                          <button
+            <div
+              style={{
+                marginLeft: "20px",
+                marginRight: "10px",
+              }}
+            >
+              <div className="StudentDetal">
+                <p
+                  style={{
+                    fontWeight: "600",
+                    textAlign: "center",
+                    fontSize: "28px",
+                    color: "#333A73",
+                    marginTop: "100px",
+                    paddingLeft: "5px",
+                  }}
+                >
+                  Student Details
+                </p>
+                <p
+                  style={{
+                    paddingLeft: "10px",
+                    marginTop: "10px",
+                    backgroundColor: "gray",
+                    color: "#fff",
+                    width: "120px",
+                    marginLeft: "10px",
+                    paddingTop: "4px",
+                    paddingBottom: "4px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Total Student count : {totalstu}
+                </p>
+              </div>
+              {chunks
+                .slice(0)
+                .reverse()
+                .map((chunk, index) => (
+                  <TableContainer
+                    key={index}
+                    component={Paper}
+                    sx={{ marginTop: "100px", marginBottom: "100px" }}
+                  >
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell
+                            align="center"
                             style={{
-                              padding: "2px 10px",
-                              fontSize: "15px",
-                              marginLeft: "10px",
-                              backgroundColor: "Red",
-                              color: "White",
-                              borderRadius: "5px",
-                              border: "none",
-                              boxShadow: "2px 1px 10px 0.5px black",
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
                             }}
-                            onClick={() =>
-                              handleDeleteConfirmation(student.email)
-                            }
+                          >
+                            Student Name
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Email
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Contact No
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Joined Date
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={{
+                              color: "white",
+                              backgroundColor: "#124076",
+                              borderRight: "2px white solid",
+                              fontSize: "18px",
+                            }}
                           >
                             Delete
-                            <MdDeleteOutline />
-                          </button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            ))}
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {chunk
+                          .slice(0)
+                          .reverse()
+                          .map((student) => (
+                            <TableRow key={student.id}>
+                              <TableCell align="center">
+                                {student.firstname} {student.lastname}
+                              </TableCell>
+                              <TableCell align="center">
+                                <a href="mailto:${student.email}">
+                                  {student.email}
+                                </a>
+                              </TableCell>
+                              <TableCell align="center">
+                                <a href="tel : ${student.phonenumber}">
+                                  {student.phonenumber}
+                                </a>
+                              </TableCell>
+                              <TableCell align="center">
+                                {new Date(
+                                  student.updatedAt
+                                ).toLocaleDateString()}
+                              </TableCell>
+                              <TableCell align="center">
+                                <button
+                                  style={{
+                                    padding: "2px 10px",
+                                    fontSize: "15px",
+                                    marginLeft: "10px",
+                                    backgroundColor: "Red",
+                                    color: "White",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    boxShadow:
+                                      "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+                                  }}
+                                  onClick={() =>
+                                    handleDeleteConfirmation(student.email)
+                                  }
+                                >
+                                  Delete
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ))}
+            </div>
           </Box>
         </Grid>
       </Grid>
