@@ -152,7 +152,7 @@ function PaymentHis() {
                       <p>
                         <span style={menuStyle}>Class fee</span> :{" "}
                         <span style={{ color: "#dc3545", fontWeight: "500" }}>
-                          Rs.{RegT.classfees}
+                          Rs.{RegT.classpees}.00
                         </span>
                       </p>
                     </div>
