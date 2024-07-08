@@ -17,23 +17,27 @@ function DisplayPayment() {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("MERN_AUTH_TOKEN");
-      const decodedToken = jwtDecode(token);
-      const email = decodedToken.email;
-      try {
-        const response = await axios.get("/api/Test/getpayeddertails", {
-          params: { email },
-        });
-        const data = response.data.data;
-        const groupedData = data.reduce((acc, payment) => {
-          const { Subject, medium } = payment;
-          if (!acc[Subject]) acc[Subject] = {};
-          if (!acc[Subject][medium]) acc[Subject][medium] = [];
-          acc[Subject][medium].push(payment);
-          return acc;
-        }, {});
-        setPaymentData(groupedData);
-      } catch (error) {
-        window.alert(error.response ? error.response.data.msg : error.message);
+      if (token) {
+        try {
+          const decodedToken = jwtDecode(token);
+          const email = decodedToken.email;
+          const response = await axios.get("/api/Test/getpayeddertails", {
+            params: { email },
+          });
+          const data = response.data.data;
+          const groupedData = data.reduce((acc, payment) => {
+            const { Subject, medium } = payment;
+            if (!acc[Subject]) acc[Subject] = {};
+            if (!acc[Subject][medium]) acc[Subject][medium] = [];
+            acc[Subject][medium].push(payment);
+            return acc;
+          }, {});
+          setPaymentData(groupedData);
+        } catch (error) {
+          window.alert(error.response ? error.response.data.msg : error.message);
+        }
+      } else {
+        window.alert("Token not found in localStorage");
       }
     };
     fetchData();
@@ -42,13 +46,19 @@ function DisplayPayment() {
   return (
     <div>
       {Object.keys(paymentData).map((subject) => (
-        <div key={subject} style={{ marginLeft: "20px", paddingLeft: "15px",
-        backgroundColor: "#F0F8FF",
-        boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-        paddingTop:"15px",
-        paddingBottom:"20px",
-        marginRight:"10px"
-      }}>
+        <div
+          key={subject}
+          style={{
+            marginLeft: "20px",
+            paddingLeft: "15px",
+            backgroundColor: "#F0F8FF",
+            boxShadow:
+              "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+            paddingTop: "15px",
+            paddingBottom: "20px",
+            marginRight: "10px",
+          }}
+        >
           <p
             style={{
               backgroundColor: "#27ae60",
@@ -59,20 +69,20 @@ function DisplayPayment() {
               paddingTop: "4px",
               paddingBottom: "4px",
               borderRadius: "4px",
-              marginRight:"10px"
+              marginRight: "10px",
             }}
           >
             {subject}
           </p>
           {Object.keys(paymentData[subject]).map((medium) => (
-            <div key={medium} style={{marginRight:"10px"}}>
+            <div key={medium} style={{ marginRight: "10px" }}>
               <p
                 style={{
                   fontSize: "15px",
                   color: "blue",
                   paddingLeft: "5px",
                   paddingTop: "5px",
-                  paddingBottom:"8px"
+                  paddingBottom: "8px",
                 }}
               >
                 {medium}
@@ -107,8 +117,7 @@ function DisplayPayment() {
                     {paymentData[subject][medium].map((payment, index) => (
                       <TableRow key={index}>
                         <TableCell>
-                          <a href={`mailto:${payment.stuemail}`} 
-                          style={{textDecoration:"none"}}>
+                          <a href={`mailto:${payment.stuemail}`} style={{ textDecoration: "none" }}>
                             {payment.stuemail}
                           </a>
                         </TableCell>
