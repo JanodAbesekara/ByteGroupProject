@@ -10,7 +10,7 @@ import teacherlecturecount from "../models/TeacherLecturecountmodel.js";
 import Enrollment from "../models/Enrollmentmdels.js";
 import studentprofile from "../models/studentProfileModel.js";
 import paymentmodel from "../models/paymentModel.js";
-import studentAttendence from "../models/studentAttendence.js";
+import studentAttendence from "../models/studentAttendesmodel.js";
 
 const studentdetails = async (req, res) => {
   try {
