@@ -42,7 +42,7 @@ function Astudent() {
       "Do you want to delete this announcement?"
     );
 
-    if (!isconform) {
+    if (isconform) {
       const payload = { email: email };
 
       Axios.post(`api/auth/studentpost`, payload)
