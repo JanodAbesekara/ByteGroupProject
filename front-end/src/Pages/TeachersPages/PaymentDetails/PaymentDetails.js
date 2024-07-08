@@ -37,12 +37,11 @@ export default function PaymentDetails() {
       window.alert("Invalid Account Number");
       return;
     }
-
-    if (accountNo === confirmAccount) {
-      window.alert("Account Numbers Does not match ");
+    if (accountNo !== confirmAccount) {
+      window.alert("Account numbers do not match.");
       return;
     }
-
+    
     const conformaion = window.confirm("Are you sure you want to save ?");
 
     if (conformaion) {
