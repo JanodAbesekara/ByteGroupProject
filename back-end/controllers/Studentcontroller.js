@@ -69,6 +69,7 @@ const removeteacher = async (req, res) => {
     await Announcement.deleteOne({ postedemail: email });
     await profile.deleteOne({ email: email });
     await paymentmodel.deleteOne({ TeacherEmail: email });
+    await Enrollment.deleteOne({ teacherEmail: email });
     return res
       .status(200)
       .json({ success: true, msg: "Teacher deleted successfully" });
