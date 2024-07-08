@@ -15,20 +15,20 @@ function PaymentHis() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("MERN_AUTH_TOKEN");
-        const decodedToken = jwtDecode(token);
+        const decodedToken =  jwtDecode(token);
         const email = decodedToken.email;
 
         const response = await axios.get("/api/Test/getdetails", {
           params: { email },
         });
-
+        console.log(response.data.data);
         setRegTeachers(response.data.data);
       } catch (error) {
         window.alert(error.response ? error.response.data.msg : error.message);
       }
     };
 
-    fetchData(); // Call the function
+    fetchData();
   }, []);
 
   const menuStyle = {
@@ -121,7 +121,7 @@ function PaymentHis() {
                         paddingTop: "8px",
                         paddingBottom: "8px",
                         fontSize: "13px",
-                        display: "felx",
+                        display: "flex",
                         flexDirection: "column",
                         textAlign: "left",
                       }}
@@ -140,19 +140,19 @@ function PaymentHis() {
                       <p>
                         <span style={menuStyle}>Bank Name</span> :{" "}
                         <span style={{ color: "gray" }}>
-                          {RegT.payment.bank}
+                          {RegT.payment ? RegT.payment.bank : "N/A"}
                         </span>
                       </p>
                       <p>
                         <span style={menuStyle}>Account Number</span> :{" "}
                         <span style={{ color: "#000", fontWeight: "500" }}>
-                          {RegT.payment.accountNo}
+                          {RegT.payment ? RegT.payment.accountNo : "N/A"}
                         </span>
                       </p>
                       <p>
                         <span style={menuStyle}>Class fee</span> :{" "}
                         <span style={{ color: "#dc3545", fontWeight: "500" }}>
-                          Rs.{RegT.classpees}
+                          Rs.{RegT.classfees}
                         </span>
                       </p>
                     </div>
