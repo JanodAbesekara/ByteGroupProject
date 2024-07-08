@@ -10,6 +10,7 @@ import teacherlecturecount from "../models/TeacherLecturecountmodel.js";
 import Enrollment from "../models/Enrollmentmdels.js";
 import studentprofile from "../models/studentProfileModel.js";
 import paymentmodel from "../models/paymentModel.js";
+import studentAttendence from "../models/studentAttendence.js";
 
 const studentdetails = async (req, res) => {
   try {
@@ -70,6 +71,7 @@ const removeteacher = async (req, res) => {
     await profile.deleteOne({ email: email });
     await paymentmodel.deleteOne({ TeacherEmail: email });
     await Enrollment.deleteOne({ teacherEmail: email });
+    await studentAttendence.deleteOne({ teachetmail: email });
     return res
       .status(200)
       .json({ success: true, msg: "Teacher deleted successfully" });
