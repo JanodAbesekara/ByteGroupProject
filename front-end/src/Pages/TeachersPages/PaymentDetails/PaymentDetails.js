@@ -32,7 +32,7 @@ export default function PaymentDetails() {
       return;
     }
 
-    const accountNumberRegex = /^[0-9]{10,12}$/;
+    const accountNumberRegex = /^[0-9]{8,12}$/;
     if (!accountNumberRegex.test(accountNo)) {
       window.alert("Invalid Account Number");
       return;
