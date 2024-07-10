@@ -120,11 +120,9 @@ function UserProfile() {
         window.alert("You must select your experience");
         return;
       }
-      if (isNaN(classpees) && classpees < 0 && classpees === "") {
-        window.alert(
-          "Class fees must be a positive number and cannot be empty"
-        );
-        return;
+      if (classpees === "" && Number(classpees) && Number(classpees) < 0 ) {
+        window.alert("Class fees must be a number between 0 and 9 and cannot be empty");
+        return false;
       }
 
       if (!aboutme) {
