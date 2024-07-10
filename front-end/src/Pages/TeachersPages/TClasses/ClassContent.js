@@ -25,6 +25,7 @@ function ClassContent({ subjectData }) {
   const [pdfUrl, setPdfUrl] = useState(""); // State to store PDF URL
   const [videoUrl, setVideoUrl] = useState(""); // State to store video URL
   const [showForm, setShowForm] = useState(false); // State to toggle form visibility
+  const [full, setfull] = useState(""); // State to store full data
 
   useEffect(() => {
     if (video) {
@@ -290,6 +291,11 @@ function ClassContent({ subjectData }) {
                   }}
                 />
               </div>
+              <input 
+               type="text"
+              onChange={(e) => setfull(e.target.value)}
+               style={{ visibility: "hidden" }}
+              />
               <button
                 type="submit"
                 style={{
