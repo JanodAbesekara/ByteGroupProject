@@ -1,0 +1,9 @@
+@media screen and (min-width:769px){
+    .FMnotify{
+     position: relative;
+     right: 50%;
+    }
+    .FMnotify input{
+     width: 180%;
+    }
+ }
