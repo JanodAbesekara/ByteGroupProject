@@ -59,7 +59,7 @@
 // File path: models/User.js
 
 import mongoose from "mongoose";
-import cron from "node-cron";
+//import cron from "node-cron";
 
 const { Schema } = mongoose;
 
@@ -111,17 +111,17 @@ const userSchema = new Schema(
 
 const User = mongoose.model("User", userSchema);
 
-cron.schedule("*/30 * * * *", async () => {
-  const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
-  try {
-    await User.deleteMany({
-      verified: false,
-      createdAt: { $lt: thirtyMinutesAgo },
-    });
-    console.log("Deleted unverified users older than 30 minutes");
-  } catch (error) {
-    console.error("Error deleting unverified users:", error);
-  }
-});
+// cron.schedule("*/30 * * * *", async () => {
+//   const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+//   try {
+//     await User.deleteMany({
+//       verified: false,
+//       createdAt: { $lt: thirtyMinutesAgo },
+//     });
+//     console.log("Deleted unverified users older than 30 minutes");
+//   } catch (error) {
+//     console.error("Error deleting unverified users:", error);
+//   }
+// });
 
 export default User;

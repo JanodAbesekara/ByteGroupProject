@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { SocketContextProvider } from "./Contex/SocketContex";
 import axios from 'axios';
 
-axios.defaults.baseURL = "https://bytegroupproject.onrender.com";
+//axios.defaults.baseURL = "https://bytegroupproject.onrender.com";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
