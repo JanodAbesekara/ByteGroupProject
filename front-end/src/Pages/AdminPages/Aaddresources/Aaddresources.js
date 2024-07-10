@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 import Navbar from "../../../Component/Navbar/Navbar";
 import Footer from "../../../Component/Footer/Footer";
@@ -186,13 +186,13 @@ const Aaddresources = () => {
           <ASideBar />
         </Grid>
         <Grid item md={11.25} sm={10.5} xs={9.8}>
-        {Alertdata.show && (
+        {/* {Alertdata.show && (
           <AlertBox
             data={Alertdata}
             triggerNotification={triggerNotification}
             resetNotification={resetNotification}
           />
-        )}
+        )} */}
           <Box sx={{marginBottom:"100px"}}>
             <div>
             <h1>File upload</h1>
