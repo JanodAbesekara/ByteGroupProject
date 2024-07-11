@@ -8,7 +8,8 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     // const socket = io("http://localhost:6000");
-    const socket = io("https://bytegroupproject.onrender.com");
+    //const socket = io("https://bytegroupproject.onrender.com");
+    const socket = io("https://dreamlearn.azurewebsites.net/");
 
     setSocket(socket);
   }, []);
