@@ -11,6 +11,8 @@ import Enrollment from "../models/Enrollmentmdels.js";
 import studentprofile from "../models/studentProfileModel.js";
 import paymentmodel from "../models/paymentModel.js";
 import studentAttendence from "../models/studentAttendesmodel.js";
+import StudentpayemtStates from "../models/StudentpayemtStates.js";
+import marksModel from "../models/marksModel.js";
 
 const studentdetails = async (req, res) => {
   try {
@@ -30,8 +32,8 @@ const removeStudent = async (req, res) => {
     const data = req.body;
     const email = data.email;
     await usermodel.deleteOne({ email: email });
-    await Enrollment.deleteOne({ userEmail: email });
-    await studentprofile.deleteOne({ email: email });
+    await Enrollment.delete({ userEmail: email });
+    await studentprofile.delete({ email: email });
     return res
       .status(200)
       .json({ success: true, msg: "Student deleted successfully" });
@@ -61,17 +63,19 @@ const removeteacher = async (req, res) => {
     const data = req.body;
     const email = data.email;
     await usermodel.deleteOne({ email: email });
-    await teacherlecturecount.deleteOne({ teacheremail: email });
-    await quisemodel.deleteOne({ TeacherEmail: email });
-    await postmodels.deleteOne({ email: email });
-    await Assignment.deleteOne({ TeacherEmail: email });
-    await Lecturematerial.deleteOne({ TeacherEmail: email });
-    await Getfeedbacksmodel.deleteOne({ teacheremail: email });
-    await Announcement.deleteOne({ postedemail: email });
-    await profile.deleteOne({ email: email });
-    await paymentmodel.deleteOne({ TeacherEmail: email });
-    await Enrollment.deleteOne({ teacherEmail: email });
-    await studentAttendence.deleteOne({ teachetmail: email });
+    await teacherlecturecount.delete({ teacheremail: email });
+    await quisemodel.delete({ TeacherEmail: email });
+    await postmodels.delete({ email: email });
+    await Assignment.delete({ TeacherEmail: email });
+    await Lecturematerial.delete({ TeacherEmail: email });
+    await Getfeedbacksmodel.delete({ teacheremail: email });
+    await Announcement.delete({ postedemail: email });
+    await profile.delete({ email: email });
+    await paymentmodel.delete({ TeacherEmail: email });
+    await Enrollment.delete({ teacherEmail: email });
+    await studentAttendence.delete({ teachetmail: email });
+    await StudentpayemtStates.delete({ TeacherEmail: email });
+    await marksModel.delete({  teacherEmail: email });
     return res
       .status(200)
       .json({ success: true, msg: "Teacher deleted successfully" });
