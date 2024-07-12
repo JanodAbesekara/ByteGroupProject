@@ -55,6 +55,7 @@ function Ateachers() {
     );
     if (confirmDelete) {
       deleteTeacher(email);
+      window.location.reload();
     }
   };
 

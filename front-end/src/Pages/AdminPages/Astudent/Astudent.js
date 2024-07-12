@@ -62,6 +62,7 @@ function Astudent() {
 
     if (confirmDelete) {
       deleteStudent(email);
+      window.location.reload();
     }
   };
 
