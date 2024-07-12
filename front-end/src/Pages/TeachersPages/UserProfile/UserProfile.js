@@ -415,7 +415,7 @@ function UserProfile() {
                 </label>
                 <br></br>
                 <input
-                  type="text"
+                  type="number"
                   className="exp"
                   placeholder="Enter here"
                   value={classpees}
