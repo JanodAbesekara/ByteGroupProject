@@ -32,8 +32,8 @@ const removeStudent = async (req, res) => {
     const data = req.body;
     const email = data.email;
     await usermodel.deleteOne({ email: email });
-    await Enrollment.delete({ userEmail: email });
-    await studentprofile.delete({ email: email });
+    await Enrollment.deleteMany({ userEmail: email });
+    await studentprofile.deleteMany({ email: email });
     return res
       .status(200)
       .json({ success: true, msg: "Student deleted successfully" });
@@ -63,19 +63,19 @@ const removeteacher = async (req, res) => {
     const data = req.body;
     const email = data.email;
     await usermodel.deleteOne({ email: email });
-    await teacherlecturecount.delete({ teacheremail: email });
-    await quisemodel.delete({ TeacherEmail: email });
-    await postmodels.delete({ email: email });
-    await Assignment.delete({ TeacherEmail: email });
-    await Lecturematerial.delete({ TeacherEmail: email });
-    await Getfeedbacksmodel.delete({ teacheremail: email });
-    await Announcement.delete({ postedemail: email });
-    await profile.delete({ email: email });
-    await paymentmodel.delete({ TeacherEmail: email });
-    await Enrollment.delete({ teacherEmail: email });
-    await studentAttendence.delete({ teachetmail: email });
-    await StudentpayemtStates.delete({ TeacherEmail: email });
-    await marksModel.delete({  teacherEmail: email });
+    await teacherlecturecount.deleteMany({ teacheremail: email });
+    await quisemodel.deleteMany({ TeacherEmail: email });
+    await postmodels.deleteMany({ email: email });
+    await Assignment.deleteMany({ TeacherEmail: email });
+    await Lecturematerial.deleteMany({ TeacherEmail: email });
+    await Getfeedbacksmodel.deleteMany({ teacheremail: email });
+    await Announcement.deleteMany({ postedemail: email });
+    await profile.deleteMany({ email: email });
+    await paymentmodel.deleteMany({ TeacherEmail: email });
+    await Enrollment.deleteMany({ teacherEmail: email });
+    await studentAttendence.deleteMany({ teachetmail: email });
+    await StudentpayemtStates.deleteMany({ TeacherEmail: email });
+    await marksModel.deleteMany({  teacherEmail: email });
     return res
       .status(200)
       .json({ success: true, msg: "Teacher deleted successfully" });
